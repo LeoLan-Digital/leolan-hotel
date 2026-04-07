@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Concierge & Room Service für Hotels | LeoLan Digital</title>
+<style>
+  :root {
+    --black: #000;
+    --gray-1: #1c1c1e;
+    --gray-2: #2c2c2e;
+    --text-primary: #f5f5f7;
+    --text-secondary: rgba(245,245,247,0.6);
+    --text-tertiary: rgba(245,245,247,0.35);
+    --accent: #0071e3;
+    --accent-light: #2997ff;
+    --gold: #f5c842;
+    --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); background: var(--black); color: var(--text-primary); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; background: rgba(0,0,0,0.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-logo img { width: 120px; height: auto; display: block; }
+  .nav-logo { text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta { font-size: 13px; color: var(--accent-light); text-decoration: none; font-weight: 500; }
+  @media (max-width: 768px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 130px 24px 80px; background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(245,200,66,0.08), transparent 70%); }
+  .hero-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(44px, 8vw, 92px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; max-width: 900px; margin-bottom: 24px; background: linear-gradient(180deg, #f5f5f7 50%, rgba(245,245,247,0.25)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub { font-size: clamp(18px, 2.5vw, 22px); color: var(--text-secondary); max-width: 600px; line-height: 1.6; margin-bottom: 44px; }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .btn-primary { display: inline-block; background: var(--accent); color: #fff; padding: 15px 32px; border-radius: 980px; font-size: 17px; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+  .btn-primary:hover { background: #0077ed; transform: scale(1.02); }
+  .btn-secondary { display: inline-block; color: var(--accent-light); padding: 15px 32px; border-radius: 980px; font-size: 17px; font-weight: 500; text-decoration: none; }
+  .hero-trust { font-size: 13px; color: var(--text-tertiary); margin-bottom: 60px; }
+  .hero-img-wrap { width: 100%; max-width: 1100px; border-radius: 20px; overflow: hidden; box-shadow: 0 50px 140px rgba(0,0,0,0.85); }
+  .hero-img-wrap img { width: 100%; height: 480px; object-fit: cover; display: block; filter: brightness(0.75); }
+  @media (max-width: 768px) { .hero-img-wrap img { height: 240px; } }
+
+  /* SECTION BASE */
+  .section-tag { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 16px; }
+  .section-tag.gold { color: var(--gold); }
+  .section-title { font-size: clamp(30px, 4vw, 52px); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 16px; }
+  .section-sub { font-size: 18px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* STORY */
+  .story { padding: 100px 24px; border-top: 1px solid rgba(255,255,255,0.07); }
+  .story-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+  .story-quote { font-size: clamp(22px, 3vw, 34px); font-weight: 600; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 24px; position: relative; }
+  .story-quote::before { content: '"'; font-size: 80px; color: rgba(245,200,66,0.15); position: absolute; top: -20px; left: -10px; font-family: Georgia, serif; line-height: 1; }
+  .story-body { font-size: 17px; color: var(--text-secondary); line-height: 1.7; max-width: 680px; margin: 0 auto; }
+
+  /* PAIN */
+  .pain { padding: 100px 24px; background: var(--gray-1); border-top: 1px solid rgba(255,255,255,0.06); }
+  .pain-grid { max-width: 1000px; margin: 56px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; overflow: hidden; }
+  @media (max-width: 700px) { .pain-grid { grid-template-columns: 1fr; } }
+  .pain-item { background: var(--black); padding: 36px 28px; }
+  .pain-icon { font-size: 28px; margin-bottom: 16px; }
+  .pain-item h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
+  .pain-item p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* STATS */
+  .stats { padding: 80px 24px; }
+  .stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; }
+  @media (max-width: 600px) { .stats-inner { grid-template-columns: 1fr; } }
+  .stat-num { font-size: clamp(40px, 6vw, 64px); font-weight: 700; letter-spacing: -0.03em; color: var(--gold); }
+  .stat-label { font-size: 14px; color: var(--text-secondary); margin-top: 8px; line-height: 1.4; }
+
+  /* BEFORE/AFTER */
+  .compare { padding: 100px 24px; background: var(--gray-1); border-top: 1px solid rgba(255,255,255,0.06); }
+  .compare-grid { max-width: 960px; margin: 56px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; overflow: hidden; }
+  @media (max-width: 640px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-col { padding: 44px 36px; }
+  .compare-col.before { background: var(--black); }
+  .compare-col.after { background: rgba(245,200,66,0.06); border: 1px solid rgba(245,200,66,0.15); }
+  .compare-label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px; }
+  .compare-col.before .compare-label { color: rgba(245,245,247,0.4); }
+  .compare-col.after .compare-label { color: var(--gold); }
+  .compare-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .compare-list li { font-size: 15px; color: var(--text-secondary); display: flex; gap: 12px; align-items: flex-start; line-height: 1.5; }
+  .compare-col.before .compare-list li::before { content: '✗'; color: rgba(255,80,80,0.7); font-weight: 700; flex-shrink: 0; }
+  .compare-col.after .compare-list li::before { content: '✓'; color: #34c759; font-weight: 700; flex-shrink: 0; }
+  .compare-col.after .compare-list li { color: rgba(245,245,247,0.85); }
+
+  /* FEATURES */
+  .feature { padding: 100px 24px; border-top: 1px solid rgba(255,255,255,0.07); }
+  .feature-inner { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .feature-inner.reverse { direction: rtl; }
+  .feature-inner.reverse > * { direction: ltr; }
+  @media (max-width: 860px) { .feature-inner, .feature-inner.reverse { grid-template-columns: 1fr; direction: ltr; gap: 44px; } }
+  .feature-tag { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .feature h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 16px; }
+  .feature p { font-size: 17px; line-height: 1.65; color: var(--text-secondary); margin-bottom: 24px; }
+  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-secondary); line-height: 1.5; }
+  .feature-list li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 13px; margin-top: 2px; flex-shrink: 0; }
+  .feature-img { border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.7); }
+  .feature-img img { width: 100%; height: 380px; object-fit: cover; display: block; filter: brightness(0.8); transition: transform 0.6s, filter 0.4s; }
+  .feature-img:hover img { transform: scale(1.03); filter: brightness(0.9); }
+  .feature-stat { margin-top: 28px; display: inline-flex; align-items: center; gap: 16px; background: var(--gray-1); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px 20px; }
+  .feature-stat-num { font-size: 32px; font-weight: 700; color: var(--gold); letter-spacing: -0.02em; }
+  .feature-stat-label { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+  /* CONCIERGE DEMO */
+  .concierge-demo { padding: 100px 24px; background: var(--gray-1); border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+  .chat-mockup { max-width: 480px; margin: 56px auto 0; background: #1a1a1a; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+  .chat-header { background: #2c2c2e; padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+  .chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .chat-name { font-size: 14px; font-weight: 600; }
+  .chat-status { font-size: 11px; color: #34c759; }
+  .chat-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .msg { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.5; text-align: left; }
+  .msg.guest { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .msg.ai { background: #2c2c2e; color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .msg-time { font-size: 11px; opacity: 0.5; margin-top: 4px; }
+
+  /* PRICING */
+  .pricing { padding: 100px 24px; border-top: 1px solid rgba(255,255,255,0.07); }
+  .pricing-grid { max-width: 940px; margin: 56px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; }
+  @media (max-width: 720px) { .pricing-grid { grid-template-columns: 1fr; } }
+  .price-card { background: var(--gray-1); padding: 44px 32px; display: flex; flex-direction: column; }
+  .price-card.featured { background: rgba(245,200,66,0.1); border: 1px solid rgba(245,200,66,0.25); }
+  .price-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--gold); color: #000; border-radius: 6px; padding: 4px 10px; margin-bottom: 16px; }
+  .price-tier { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; }
+  .price-amount { font-size: 44px; font-weight: 700; letter-spacing: -0.03em; margin: 4px 0; }
+  .price-period { font-size: 13px; color: var(--text-secondary); margin-bottom: 28px; }
+  .price-features { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .price-features li { font-size: 14px; color: var(--text-secondary); display: flex; gap: 10px; align-items: flex-start; line-height: 1.4; }
+  .price-features li::before { content: '—'; color: var(--text-tertiary); flex-shrink: 0; }
+  .price-btn { display: block; text-align: center; margin-top: 28px; padding: 13px 24px; border-radius: 980px; font-size: 15px; font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
+  .price-btn-outline { border: 1px solid rgba(255,255,255,0.2); color: var(--accent-light); }
+  .price-btn-outline:hover { background: rgba(255,255,255,0.05); }
+  .price-btn-gold { background: var(--gold); color: #000; font-weight: 600; }
+  .price-btn-gold:hover { opacity: 0.9; }
+
+  /* FAQ */
+  .faq { padding: 100px 24px; background: var(--gray-1); border-top: 1px solid rgba(255,255,255,0.06); }
+  .faq-list { max-width: 760px; margin: 56px auto 0; display: flex; flex-direction: column; gap: 2px; }
+  .faq-item { background: var(--black); }
+  .faq-item:first-child { border-radius: 14px 14px 0 0; }
+  .faq-item:last-child { border-radius: 0 0 14px 14px; }
+  .faq-q { width: 100%; background: none; border: none; padding: 22px 24px; text-align: left; font-size: 16px; font-weight: 600; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: var(--font); }
+  .faq-q span { font-size: 20px; color: var(--gold); flex-shrink: 0; transition: transform 0.3s; }
+  .faq-q.open span { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .faq-a.open { max-height: 300px; }
+  .faq-a p { padding: 0 24px 22px; font-size: 15px; color: var(--text-secondary); line-height: 1.65; }
+
+  /* CTA */
+  .cta-section { padding: 140px 24px; text-align: center; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(245,200,66,0.08), transparent 70%); border-top: 1px solid rgba(255,255,255,0.07); }
+  .cta-section h2 { font-size: clamp(36px, 5.5vw, 68px); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; max-width: 700px; margin: 0 auto 20px; }
+  .cta-section > p { font-size: 18px; color: var(--text-secondary); max-width: 480px; margin: 0 auto 40px; line-height: 1.55; }
+  .contact-info-strip { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-bottom: 48px; }
+  .contact-info-strip a { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none; font-size: 15px; transition: color 0.2s; }
+  .contact-info-strip a:hover { color: var(--text-primary); }
+  .contact-form { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; text-align: left; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+  .contact-form input, .contact-form textarea, .contact-form select { width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 14px 18px; font-size: 15px; color: var(--text-primary); font-family: var(--font); outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--text-tertiary); }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--gold); }
+  .contact-form textarea { resize: vertical; min-height: 110px; }
+  .contact-form select option { background: #1c1c1e; }
+  .form-submit { width: 100%; background: var(--gold); color: #000; border: none; border-radius: 980px; padding: 17px 32px; font-size: 17px; font-weight: 700; font-family: var(--font); cursor: pointer; transition: opacity 0.2s, transform 0.15s; }
+  .form-submit:hover { opacity: 0.9; transform: scale(1.02); }
+  .form-success { display: none; text-align: center; padding: 32px; font-size: 18px; color: var(--gold); }
+
+  /* FOOTER */
+  footer { padding: 48px 24px 32px; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; }
+  .footer-logo { margin-bottom: 24px; }
+  .footer-logo img { width: 280px; max-width: 75vw; height: auto; }
+  .social-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
+  .social-links a { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 16px; text-decoration: none; transition: transform 0.2s, opacity 0.2s; overflow: hidden; }
+  .social-links a:hover { transform: scale(1.1); }
+  .social-links a svg { width: 56px; height: 56px; display: block; }
+  footer p { font-size: 12px; color: var(--text-tertiary); line-height: 1.9; }
+  footer a { color: var(--text-tertiary); text-decoration: none; }
+  footer a:hover { color: var(--text-secondary); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo"><img src="logo.svg" alt="LeoLan Digital"></a>
+  <ul class="nav-links">
+    <li><a href="#probleme">Probleme</a></li>
+    <li><a href="#concierge">Concierge</a></li>
+    <li><a href="#preise">Preise</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="/">Restaurants →</a></li>
+  </ul>
+  <a href="#kontakt" class="nav-cta">Kostenlos anfragen ›</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow reveal">KI-Concierge & Room Service für Hotels</p>
+  <h1 class="reveal reveal-delay-1">Dein Hotel.<br>Deine Gäste.<br>Kein Stress mehr.</h1>
+  <p class="hero-sub reveal reveal-delay-2">Zimmerservice per Chat bestellen. In jeder Sprache. Ohne Telefonieren. Ohne Missverständnisse. Dein Team wird entlastet — deine Gäste begeistert.</p>
+  <div class="hero-btns reveal reveal-delay-3">
+    <a href="#kontakt" class="btn-primary">Kostenloses Erstgespräch →</a>
+    <a href="#concierge" class="btn-secondary">So funktioniert es ›</a>
+  </div>
+  <p class="hero-trust reveal reveal-delay-3">✓ Kein Vertrag &nbsp;·&nbsp; ✓ Live in 5 Tagen &nbsp;·&nbsp; ✓ Monatlich kündbar</p>
+  <div class="hero-img-wrap reveal reveal-delay-3">
+    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1400&q=80&auto=format&fit=crop" alt="Hotel KI-Concierge">
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="story-inner">
+    <p class="section-tag gold reveal" style="text-align:center">Die Geschichte dahinter</p>
+    <div class="story-quote reveal reveal-delay-1">
+      Im Urlaub, Kinder schlafen im Zimmer. Zimmerservice bestellen — unmöglich. Man kann nicht telefonieren, nicht rausgehen, muss leise sein. Und dann noch Sprachbarriere on top.
+    </div>
+    <p class="story-body reveal reveal-delay-2">
+      Man ist nicht bereit, eine halbe Stunde zu diskutieren, um zu erklären dass man keine normale Decke will, sondern eine leichte. Im Urlaub will man keinen Stress. Man will einfach zeigen was man braucht — oder es in der eigenen Sprache schreiben. <strong style="color:#f5f5f7;">Genau das haben wir gebaut.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain" id="probleme">
+  <div style="text-align:center; max-width:700px; margin:0 auto">
+    <p class="section-tag reveal">Erkennst du das?</p>
+    <h2 class="section-title reveal reveal-delay-1">Was Hotels täglich Zeit und Geld kostet.</h2>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-item reveal">
+      <div class="pain-icon">📞</div>
+      <h3>Telefon-Chaos</h3>
+      <p>Rezeption überlastet mit Anrufen für Kleinigkeiten. Extra Handtuch, Zimmerservice, Weckruf — alles per Telefon, alles kostet Zeit.</p>
+    </div>
+    <div class="pain-item reveal reveal-delay-1">
+      <div class="pain-icon">🗣️</div>
+      <h3>Sprachbarriere</h3>
+      <p>Internationale Gäste verstehen schlecht, werden schlecht verstanden. Frustration auf beiden Seiten. Bewertung sinkt.</p>
+    </div>
+    <div class="pain-item reveal reveal-delay-2">
+      <div class="pain-icon">🌙</div>
+      <h3>Nacht-Chaos</h3>
+      <p>Gast klopft nachts an — Kinder schlafen, niemand da, Rezeption überlastet. Beschwerden am nächsten Morgen guaranteed.</p>
+    </div>
+    <div class="pain-item reveal">
+      <div class="pain-icon">⭐</div>
+      <h3>Schlechte Bewertungen</h3>
+      <p>94% der Reisenden lesen Bewertungen vor der Buchung. Unbeantwortete Kritik kostet Buchungen — jeden Tag.</p>
+    </div>
+    <div class="pain-item reveal reveal-delay-1">
+      <div class="pain-icon">👥</div>
+      <h3>Personalmangel</h3>
+      <p>Zu wenig Personal für zu viele Gästeanfragen. KI kann 80% der Standardanfragen automatisch beantworten.</p>
+    </div>
+    <div class="pain-item reveal reveal-delay-2">
+      <div class="pain-icon">💸</div>
+      <h3>Verpasstes Upselling</h3>
+      <p>Jede Gästeinteraktion ist eine Chance. Frühstück, Spa, Upgrade — ohne System läuft das an dir vorbei.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="reveal">
+      <div class="stat-num">80<span style="font-size:0.6em">%</span></div>
+      <div class="stat-label">der Gästeanfragen automatisch beantwortbar</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="stat-num">94<span style="font-size:0.6em">%</span></div>
+      <div class="stat-label">lesen Bewertungen vor der Buchung</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="stat-num">40<span style="font-size:0.6em">%</span></div>
+      <div class="stat-label">weniger Rezeptionsaufwand</div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE/AFTER -->
+<section class="compare">
+  <div style="text-align:center; max-width:700px; margin:0 auto">
+    <p class="section-tag reveal">Vorher vs. Nachher</p>
+    <h2 class="section-title reveal reveal-delay-1">Was sich wirklich ändert.</h2>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-col before reveal">
+      <div class="compare-label">Ohne LeoLan Digital</div>
+      <ul class="compare-list">
+        <li>Zimmerservice nur per Telefon — Sprachbarriere, Missverständnisse</li>
+        <li>Gäste warten, bis jemand abnimmt</li>
+        <li>Rezeption überschwemmt mit Kleinstanfragen</li>
+        <li>Internationale Gäste fühlen sich unverstanden</li>
+        <li>Bewertungen bleiben unbeantwortet</li>
+        <li>Upselling passiert zufällig oder gar nicht</li>
+      </ul>
+    </div>
+    <div class="compare-col after reveal reveal-delay-1">
+      <div class="compare-label">Mit LeoLan Digital</div>
+      <ul class="compare-list">
+        <li>Gast schreibt in seiner Sprache — KI übersetzt für dein Team</li>
+        <li>Foto hochladen — KI versteht sofort was gebraucht wird</li>
+        <li>80% der Anfragen automatisch bearbeitet</li>
+        <li>Rezeption konzentriert sich auf das Wesentliche</li>
+        <li>Automatische KI-Antworten auf Bewertungen</li>
+        <li>Personalisiertes Upselling bei jeder Interaktion</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE: CONCIERGE -->
+<section class="feature" id="concierge">
+  <div class="feature-inner">
+    <div class="reveal">
+      <div class="feature-tag">Digitaler Concierge</div>
+      <h2>Zeig einfach drauf.<br>Oder schreib in deiner Sprache.</h2>
+      <p>Gast schreibt auf Deutsch, Türkisch, Arabisch oder Russisch — die KI versteht es und leitet die Anfrage direkt an dein Team weiter. Mit Zimmernummer, Uhrzeit und allem was nötig ist.</p>
+      <ul class="feature-list">
+        <li>Foto hochladen → KI erkennt was gebraucht wird</li>
+        <li>Jede Sprache → automatische Übersetzung für die Rezeption</li>
+        <li>Weiterleitung: Zimmer + Anfrage + Uhrzeit an dein Team</li>
+        <li>Kein Telefonieren, kein Klopfen, kein Stress</li>
+        <li>Lieferoption: klopfen / klingeln / Push-Notification</li>
+      </ul>
+      <div class="feature-stat">
+        <div class="feature-stat-num">24/7</div>
+        <div class="feature-stat-label">erreichbar — auch wenn<br>die Rezeption schläft</div>
+      </div>
+    </div>
+    <div class="feature-img reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1551882547-ff40c4a49f3d?w=900&q=80&auto=format&fit=crop" alt="Hotel Concierge KI">
+    </div>
+  </div>
+</section>
+
+<!-- CHAT DEMO -->
+<section class="concierge-demo">
+  <p class="section-tag gold reveal">Live-Demo</p>
+  <h2 class="section-title reveal reveal-delay-1">So einfach ist es für deinen Gast.</h2>
+  <div class="chat-mockup reveal reveal-delay-2">
+    <div class="chat-header">
+      <div class="chat-avatar">🏨</div>
+      <div>
+        <div class="chat-name">Hotel Concierge</div>
+        <div class="chat-status">● Online</div>
+      </div>
+    </div>
+    <div class="chat-body">
+      <div class="msg guest">Merhaba, 304 numaralı odaya ince bir battaniye getirebilir misiniz? Çocuklar uyuyor ve çok sıcak. 🙏<div class="msg-time">22:14</div></div>
+      <div class="msg ai">Hallo! 😊 Kein Problem — wir bringen Ihnen sofort eine leichte Decke auf Zimmer 304. Sollen wir leise klopfen oder eine Push-Nachricht schicken wenn wir da sind?<div class="msg-time">22:14</div></div>
+      <div class="msg guest">Push bitte, Kinder schlafen 🙏<div class="msg-time">22:15</div></div>
+      <div class="msg ai">✅ Perfekt. Ihre leichte Decke ist in ca. 10 Minuten da. Gute Nacht! 🌙<div class="msg-time">22:15</div></div>
+    </div>
+  </div>
+  <p style="font-size:13px; color:var(--text-tertiary); margin-top:20px;">Gast schreibt Türkisch → KI antwortet Deutsch → Rezeption bekommt: "Zimmer 304 – leichte Decke – Push-Notification"</p>
+</section>
+
+<!-- FEATURE: ROOM SERVICE -->
+<section class="feature">
+  <div class="feature-inner reverse">
+    <div class="reveal">
+      <div class="feature-tag">Digitaler Room Service</div>
+      <h2>Bestellen ohne<br>Telefon. Bezahlen<br>ohne Schlange.</h2>
+      <p>QR-Code im Zimmer öffnen — Menü anzeigen, auswählen, bestellen, online bezahlen. Bestellung landet direkt in der Küche. Keine Missverständnisse. Kein Wartemusik.</p>
+      <ul class="feature-list">
+        <li>Digitales Menü per QR-Code im Zimmer</li>
+        <li>Mehrsprachig — automatisch in Gastsprache</li>
+        <li>Online-Zahlung direkt integriert</li>
+        <li>KI empfiehlt Ergänzungen (Upselling)</li>
+        <li>Bestellstatus in Echtzeit</li>
+      </ul>
+      <div class="feature-stat">
+        <div class="feature-stat-num">↑30%</div>
+        <div class="feature-stat-label">mehr Room Service Umsatz<br>durch digitales Bestellen</div>
+      </div>
+    </div>
+    <div class="feature-img reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&q=80&auto=format&fit=crop" alt="Hotel Room Service Digital">
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE: BEWERTUNGEN -->
+<section class="feature">
+  <div class="feature-inner">
+    <div class="reveal">
+      <div class="feature-tag">Bewertungsmanagement</div>
+      <h2>Mehr Sterne.<br>Mehr Buchungen.</h2>
+      <p>94% der Reisenden lesen Antworten auf Bewertungen. Unsere KI antwortet automatisch auf jede neue Google- und TripAdvisor-Bewertung — individuell, professionell, in der Sprache des Gastes.</p>
+      <ul class="feature-list">
+        <li>Monitoring aller neuen Bewertungen täglich</li>
+        <li>KI-Antwort in der Sprache des Gastes</li>
+        <li>Automatische Bewertungsanfrage nach Check-out</li>
+        <li>Google Business immer aktuell</li>
+      </ul>
+      <div class="feature-stat">
+        <div class="feature-stat-num">58%</div>
+        <div class="feature-stat-label">zahlen mehr bei Hotels<br>mit Top-Bewertungen</div>
+      </div>
+    </div>
+    <div class="feature-img reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80&auto=format&fit=crop" alt="Hotel Bewertungen">
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="preise">
+  <div style="text-align:center">
+    <p class="section-tag reveal">Preise</p>
+    <h2 class="section-title reveal reveal-delay-1">Einfach. Transparent. Kündbar.</h2>
+    <p class="section-sub reveal reveal-delay-2" style="max-width:560px; margin:0 auto">Keine versteckten Kosten. Kein langer Vertrag. Monatlich kündbar.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="price-tier">Starter</div>
+      <div class="price-amount">249 €</div>
+      <div class="price-period">pro Monat, zzgl. MwSt.</div>
+      <ul class="price-features">
+        <li>Digitaler Concierge (WhatsApp)</li>
+        <li>Mehrsprachig (10+ Sprachen)</li>
+        <li>Foto-Uploads für Anfragen</li>
+        <li>Digitales Room-Service-Menü</li>
+        <li>Push-Notification Lieferung</li>
+        <li>E-Mail-Support</li>
+      </ul>
+      <a href="#kontakt" class="price-btn price-btn-outline">Jetzt anfragen</a>
+    </div>
+    <div class="price-card featured reveal reveal-delay-1">
+      <div class="price-badge">Empfohlen</div>
+      <div class="price-tier">Pro</div>
+      <div class="price-amount">449 €</div>
+      <div class="price-period">pro Monat, zzgl. MwSt.</div>
+      <ul class="price-features">
+        <li>Alles aus Starter</li>
+        <li>Online-Zahlung (Room Service)</li>
+        <li>KI Upselling (Spa, Upgrade, Frühstück)</li>
+        <li>Bewertungsmanagement automatisch</li>
+        <li>Google & TripAdvisor Monitoring</li>
+        <li>Automatische Bewertungsanfragen</li>
+        <li>Telefonischer Support</li>
+      </ul>
+      <a href="#kontakt" class="price-btn price-btn-gold">Jetzt anfragen</a>
+    </div>
+    <div class="price-card reveal reveal-delay-2">
+      <div class="price-tier">Enterprise</div>
+      <div class="price-amount">Individuell</div>
+      <div class="price-period">auf Anfrage</div>
+      <ul class="price-features">
+        <li>Alles aus Pro</li>
+        <li>PMS-Integration (Hotelsystem)</li>
+        <li>Mehrere Standorte / Häuser</li>
+        <li>Voice-Assistent im Zimmer</li>
+        <li>Dedicated Account Manager</li>
+        <li>SLA & Priority Support</li>
+      </ul>
+      <a href="#kontakt" class="price-btn price-btn-outline">Jetzt anfragen</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div style="text-align:center">
+    <p class="section-tag reveal">FAQ</p>
+    <h2 class="section-title reveal reveal-delay-1">Häufige Fragen.</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">Welche Sprachen unterstützt der KI-Concierge? <span>+</span></button>
+      <div class="faq-a"><p>Über 50 Sprachen — darunter Deutsch, Englisch, Türkisch, Arabisch, Russisch, Französisch, Spanisch, Chinesisch und viele mehr. Die KI erkennt die Sprache automatisch und übersetzt für dein Team.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">Können Gäste wirklich Fotos schicken? <span>+</span></button>
+      <div class="faq-a"><p>Ja. Gast schickt ein Foto (z.B. von der Decke oder einem kaputten Gerät) — die KI analysiert das Bild, versteht was gebraucht wird und leitet die Anfrage mit allen Details ans Team weiter.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">Muss ich mein Hotelsystem (PMS) anpassen? <span>+</span></button>
+      <div class="faq-a"><p>Nein — für Starter und Pro nicht. Anfragen werden per WhatsApp oder E-Mail ans Team weitergeleitet. Im Enterprise-Paket können wir auf Wunsch direkt ins Hotelsystem integrieren.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">Wie kommen Gäste zum Concierge-Chat? <span>+</span></button>
+      <div class="faq-a"><p>Per QR-Code im Zimmer (Aufkleber, Karte, Fernseher) oder direkt über WhatsApp. Wir liefern den QR-Code druckfertig mit — kein App-Download für den Gast nötig.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">Kann ich monatlich kündigen? <span>+</span></button>
+      <div class="faq-a"><p>Ja. Alle Pakete sind monatlich kündbar mit 30 Tagen Frist. Kein Risiko, kein langer Vertrag.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="kontakt">
+  <h2 class="reveal">Bereit für das<br>smarte Hotel?</h2>
+  <p class="reveal reveal-delay-1">Kostenloses Erstgespräch — 30 Minuten. Wir schauen gemeinsam was für dein Haus sinnvoll ist.</p>
+  <div class="contact-info-strip reveal reveal-delay-2">
+    <a href="tel:+493521788680">📞 0351 21788680</a>
+    <a href="https://wa.me/4915678483700" target="_blank">💬 +49 15678 483700</a>
+    <a href="mailto:info@leolan.net">✉️ info@leolan.net</a>
+  </div>
+  <form class="contact-form reveal reveal-delay-2" action="https://formspree.io/f/xgopdnll" method="POST" id="contactForm">
+    <div class="form-row">
+      <input type="text" name="name" placeholder="Dein Name" required>
+      <input type="text" name="hotel" placeholder="Hotel / Betrieb">
+    </div>
+    <input type="tel" name="phone" placeholder="Telefon / WhatsApp" required>
+    <input type="email" name="email" placeholder="E-Mail-Adresse">
+    <select name="paket">
+      <option value="" disabled selected>Welches Paket interessiert dich?</option>
+      <option value="starter">Starter — 249 €/Monat</option>
+      <option value="pro">Pro — 449 €/Monat</option>
+      <option value="enterprise">Enterprise — Individuell</option>
+      <option value="beratung">Erstmal beraten lassen</option>
+    </select>
+    <textarea name="message" placeholder="Wie viele Zimmer hat dein Hotel? Was ist dein größtes Problem gerade?"></textarea>
+    <button type="submit" class="form-submit">Kostenlos anfragen →</button>
+  </form>
+  <div class="form-success" id="formSuccess">✅ Danke! Wir melden uns innerhalb von 24 Stunden.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="logo.svg" alt="LeoLan Digital"></div>
+  <div class="social-links">
+    <a href="https://instagram.com/leo_lan.de" target="_blank" title="Instagram">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ig2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#ig2)"/><rect x="13" y="13" width="22" height="22" rx="6" fill="none" stroke="white" stroke-width="2.2"/><circle cx="24" cy="24" r="5.5" fill="none" stroke="white" stroke-width="2.2"/><circle cx="31.5" cy="16.5" r="1.5" fill="white"/></svg>
+    </a>
+    <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" title="Facebook">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#1877F2"/><path d="M31 24h-4v14h-6V24h-3v-5h3v-3c0-4 2-6 6-6h4v5h-2c-1.5 0-2 .5-2 2v2h4l-0.5 5z" fill="white"/></svg>
+    </a>
+    <a href="https://wa.me/4915678483700" target="_blank" title="WhatsApp">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#25D366"/><path d="M24 10C16.27 10 10 16.27 10 24c0 2.47.67 4.79 1.84 6.78L10 38l7.43-1.81A13.94 13.94 0 0024 38c7.73 0 14-6.27 14-14S31.73 10 24 10zm6.9 18.1c-.3.84-1.76 1.61-2.42 1.71-.62.1-1.4.14-2.26-.14-.52-.17-1.19-.39-2.04-.76-3.59-1.55-5.94-5.17-6.12-5.41-.18-.24-1.47-1.96-1.47-3.74s.93-2.65 1.26-3.01c.33-.36.72-.45.96-.45h.69c.22 0 .52-.08.81.62.3.72 1.02 2.5 1.11 2.68.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.38-.16.74.21.36.93 1.53 2 2.48 1.37 1.22 2.53 1.6 2.89 1.78.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.81-.18.33.12 2.1.99 2.46 1.17.36.18.6.27.69.42.09.15.09.87-.21 1.71z" fill="white"/></svg>
+    </a>
+    <a href="mailto:info@leolan.net" title="E-Mail">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#444"/><path d="M10 15h28v18H10z" fill="none" stroke="white" stroke-width="2"/><path d="M10 15l14 11 14-11" fill="none" stroke="white" stroke-width="2"/></svg>
+    </a>
+  </div>
+  <p>
+    © 2026 LeoLan Digital · Kamaleddin Nazari · Reickerstr. 132, 01237 Dresden<br>
+    <a href="mailto:info@leolan.net">info@leolan.net</a> · <a href="tel:+493521788680">0351 21788680</a><br>
+    <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a> · <a href="/agb.html">AGB</a> · <a href="/">Restaurants →</a>
+  </p>
+</footer>
+
+<script>
+  function toggleFaq(btn){var a=btn.nextElementSibling;var o=a.classList.contains('open');document.querySelectorAll('.faq-a.open').forEach(function(e){e.classList.remove('open');});document.querySelectorAll('.faq-q.open').forEach(function(e){e.classList.remove('open');});if(!o){a.classList.add('open');btn.classList.add('open');}}
+  var form=document.getElementById('contactForm');var success=document.getElementById('formSuccess');
+  if(form){form.addEventListener('submit',async function(e){e.preventDefault();var data=new FormData(form);var res=await fetch(form.action,{method:'POST',body:data,headers:{Accept:'application/json'}});if(res.ok){form.style.display='none';success.style.display='block';}});}
+  var revealEls=document.querySelectorAll('.reveal');
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+  revealEls.forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.hero .reveal').forEach(function(el){setTimeout(function(){el.classList.add('visible');},100);});
+</script>
+</body>
+</html>

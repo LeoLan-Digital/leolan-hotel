@@ -33,9 +33,9 @@
 
   /* HERO */
   .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 130px 24px 80px; background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(245,200,66,0.08), transparent 70%); }
-  .hero-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
-  .hero h1 { font-size: clamp(44px, 8vw, 92px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; max-width: 900px; margin-bottom: 24px; background: linear-gradient(180deg, #f5f5f7 50%, rgba(245,245,247,0.25)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero-sub { font-size: clamp(18px, 2.5vw, 22px); color: var(--text-secondary); max-width: 600px; line-height: 1.6; margin-bottom: 44px; }
+  .hero-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin: 0 auto 20px; text-align: center; }
+  .hero h1 { font-size: clamp(44px, 8vw, 92px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; max-width: 900px; margin: 0 auto 24px; text-align: center; background: linear-gradient(180deg, #f5f5f7 50%, rgba(245,245,247,0.25)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub { font-size: clamp(18px, 2.5vw, 22px); color: var(--text-secondary); max-width: 600px; line-height: 1.6; margin: 0 auto 44px; text-align: center; }
   .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
   .btn-primary { display: inline-block; background: var(--accent); color: #fff; padding: 15px 32px; border-radius: 980px; font-size: 17px; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s; }
   .btn-primary:hover { background: #0077ed; transform: scale(1.02); }
@@ -205,6 +205,32 @@
 </style>
 </head>
 <body>
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#1c1c1e; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+  <p style="font-size:13px; color:rgba(245,245,247,0.7); max-width:680px; line-height:1.5; margin:0;">Wir verwenden Cookies (Google Analytics, Meta Pixel) zur Verbesserung unserer Website und für relevante Werbung. <a href="/datenschutz.html" style="color:#2997ff;">Mehr erfahren</a></p>
+  <div style="display:flex; gap:10px; flex-shrink:0;">
+    <button onclick="rejectCookies()" style="padding:10px 20px; border-radius:980px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:rgba(245,245,247,0.7); font-size:13px; cursor:pointer; font-family:inherit;">Ablehnen</button>
+    <button onclick="acceptCookies()" style="padding:10px 20px; border-radius:980px; border:none; background:#0071e3; color:#fff; font-size:13px; font-weight:500; cursor:pointer; font-family:inherit;">Akzeptieren</button>
+  </div>
+</div>
+<script>
+  function setCookie(n,v,d){var e=new Date();e.setTime(e.getTime()+d*864e5);document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/';}
+  function getCookie(n){var v=document.cookie.match('(^|;) ?'+n+'=([^;]*)(;|$)');return v?v[2]:null;}
+  function loadTracking(){
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-25WZQPJ5F3';document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','G-25WZQPJ5F3');
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','584799746334676');fbq('track','PageView');
+  }
+  function acceptCookies(){setCookie('cookie_consent','accepted',365);document.getElementById('cookieBanner').style.display='none';loadTracking();}
+  function rejectCookies(){setCookie('cookie_consent','rejected',365);document.getElementById('cookieBanner').style.display='none';}
+  window.addEventListener('DOMContentLoaded',function(){
+    var c=getCookie('cookie_consent');
+    if(!c){document.getElementById('cookieBanner').style.display='flex';}
+    else if(c==='accepted'){loadTracking();}
+  });
+</script>
+
 
 <!-- NAV -->
 <nav>
@@ -599,7 +625,7 @@
 <footer>
   <div class="footer-logo"><img src="logo.svg" alt="LeoLan Digital"></div>
   <div class="social-links">
-    <a href="https://instagram.com/leo_lan.de" target="_blank" title="Instagram">
+    <a href="https://instagram.com/leolan_digital" target="_blank" title="Instagram">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ig2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#ig2)"/><rect x="13" y="13" width="22" height="22" rx="6" fill="none" stroke="white" stroke-width="2.2"/><circle cx="24" cy="24" r="5.5" fill="none" stroke="white" stroke-width="2.2"/><circle cx="31.5" cy="16.5" r="1.5" fill="white"/></svg>
     </a>
     <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" title="Facebook">

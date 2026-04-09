@@ -1,866 +1,625 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Guest Experience for Boutique Hotels Worldwide | LeoLan Digital</title>
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/LeoLan-Digital/leolan-ki/main/logo_extract2/leolan%20logo-01.png">
-<style>
-  :root {
-    --navy: #1a2744;
-    --navy-2: #22345c;
-    --gold: #f5a623;
-    --gold-soft: rgba(245, 166, 35, 0.14);
-    --bg: #09111f;
-    --surface: #101b31;
-    --surface-2: #13213c;
-    --line: rgba(255,255,255,0.08);
-    --text: #f5f7fb;
-    --muted: rgba(245,247,251,0.72);
-    --soft: rgba(245,247,251,0.48);
-    --success: #34d399;
-    --shadow: 0 28px 70px rgba(0,0,0,0.34);
-    --radius: 24px;
-    --font: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeoLan Digital | AI Hotel Automation</title>
+  <meta name="description" content="AI-powered guest experience platform for hotels worldwide. Automate reservations, social media, reviews, and guest communication.">
+  <meta name="theme-color" content="#1a2744">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/LeoLan-Digital/leolan-ki/main/logo_extract2/leolan%20logo-01.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--font);
-    color: var(--text);
-    background:
-      radial-gradient(circle at top right, rgba(245,166,35,0.14), transparent 26%),
-      radial-gradient(circle at top left, rgba(26,39,68,0.55), transparent 30%),
-      linear-gradient(180deg, #07101d 0%, #0b1424 100%);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-25WZQPJ5F3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-25WZQPJ5F3');
+  </script>
 
-  a { color: inherit; }
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '584799746334676');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=584799746334676&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 
-  nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 1000;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    background: rgba(7,16,29,0.72);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-logo img { width: 132px; display: block; }
-  .nav-logo { text-decoration: none; }
-  .nav-links { display: flex; list-style: none; gap: 28px; }
-  .nav-links a {
-    text-decoration: none;
-    color: var(--muted);
-    font-size: 14px;
-    transition: color 0.2s ease;
-  }
-  .nav-links a:hover, .nav-cta:hover { color: #fff; }
-  .nav-cta {
-    text-decoration: none;
-    color: var(--gold);
-    font-weight: 700;
-    font-size: 14px;
-  }
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 10px;
-    cursor: pointer;
-  }
-  .hamburger span { width: 20px; height: 2px; background: #fff; display: block; }
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 72px;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    background: rgba(7,16,29,0.96);
-    border-bottom: 1px solid var(--line);
-    backdrop-filter: blur(18px);
-    flex-direction: column;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    padding: 16px 24px;
-    text-decoration: none;
-    color: var(--muted);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .section-shell { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-  .section-tag {
-    display: inline-block;
-    color: var(--gold);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 18px;
-  }
-  .section-title {
-    font-size: clamp(32px, 4.8vw, 60px);
-    line-height: 1.04;
-    letter-spacing: -0.03em;
-    margin-bottom: 16px;
-  }
-  .section-sub {
-    max-width: 720px;
-    color: var(--muted);
-    font-size: 18px;
-    line-height: 1.7;
-  }
-
-  .hero {
-    padding: 148px 24px 88px;
-  }
-  .hero-grid {
-    max-width: 1260px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 32px;
-    align-items: center;
-  }
-  .eyebrow-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 14px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(245,166,35,0.24);
-    color: #ffd58a;
-    margin-bottom: 20px;
-    font-size: 13px;
-    font-weight: 700;
-  }
-  .hero h1 {
-    font-size: clamp(42px, 7vw, 86px);
-    line-height: 0.98;
-    letter-spacing: -0.05em;
-    margin-bottom: 22px;
-  }
-  .hero p {
-    color: var(--muted);
-    font-size: 19px;
-    line-height: 1.75;
-    max-width: 700px;
-  }
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin: 34px 0 22px;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 26px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 16px;
-    transition: transform 0.18s ease, opacity 0.18s ease, background 0.2s ease;
-  }
-  .btn:hover { transform: translateY(-1px); }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--gold), #ffbf57);
-    color: #1a2744;
-    box-shadow: 0 16px 32px rgba(245,166,35,0.22);
-  }
-  .btn-secondary {
-    border: 1px solid rgba(255,255,255,0.14);
-    color: #fff;
-    background: rgba(255,255,255,0.04);
-  }
-  .hero-trust {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    color: var(--soft);
-    font-size: 14px;
-  }
-  .hero-card {
-    background: linear-gradient(180deg, rgba(18,30,54,0.96), rgba(11,20,36,0.96));
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-  .hero-image {
-    width: 100%;
-    height: 340px;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.8);
-  }
-  .hero-card-content {
-    padding: 24px;
-    display: grid;
-    gap: 16px;
-  }
-  .hero-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .metric {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 18px;
-    padding: 16px;
-  }
-  .metric strong { display: block; color: var(--gold); font-size: 28px; margin-bottom: 6px; }
-  .metric span { color: var(--muted); font-size: 13px; line-height: 1.45; }
-
-  .brands,
-  .features,
-  .pricing,
-  .faq,
-  .cta,
-  .testimonials,
-  .difference {
-    padding: 100px 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .brands-grid, .feature-grid, .pricing-grid, .testimonial-grid, .difference-grid, .stats-grid {
-    display: grid;
-    gap: 18px;
-  }
-  .brands-grid {
-    margin-top: 34px;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .brand-card, .feature-card, .price-card, .testimonial-card, .difference-card, .stat-card, .faq-item {
-    background: linear-gradient(180deg, rgba(16,27,49,0.92), rgba(11,20,36,0.96));
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px;
-    box-shadow: var(--shadow);
-  }
-  .brand-card {
-    padding: 22px;
-    text-align: center;
-  }
-  .brand-card strong { display: block; font-size: 18px; margin-bottom: 6px; }
-  .brand-card span { color: var(--muted); font-size: 14px; }
-
-  .stats-grid {
-    margin-top: 34px;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .stat-card { padding: 26px; }
-  .stat-card strong {
-    display: block;
-    font-size: clamp(34px, 5vw, 54px);
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 10px;
-  }
-  .stat-card span { color: var(--muted); line-height: 1.55; }
-
-  .feature-grid {
-    margin-top: 42px;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .feature-card { padding: 28px; }
-  .feature-icon {
-    width: 56px;
-    height: 56px;
-    display: grid;
-    place-items: center;
-    border-radius: 16px;
-    background: var(--gold-soft);
-    font-size: 26px;
-    margin-bottom: 18px;
-  }
-  .feature-card h3 { font-size: 25px; margin-bottom: 12px; }
-  .feature-card p { color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
-  .feature-list {
-    list-style: none;
-    display: grid;
-    gap: 10px;
-  }
-  .feature-list li {
-    display: flex;
-    gap: 10px;
-    color: var(--text);
-    line-height: 1.55;
-  }
-  .feature-list li::before { content: "✓"; color: var(--success); font-weight: 800; }
-
-  .difference-grid {
-    margin-top: 42px;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .difference-card { padding: 30px; }
-  .difference-card h3 { font-size: 24px; margin-bottom: 14px; }
-  .difference-card ul {
-    list-style: none;
-    display: grid;
-    gap: 12px;
-  }
-  .difference-card li {
-    display: flex;
-    gap: 10px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .difference-card.before li::before { content: "✕"; color: #ff8f8f; font-weight: 800; }
-  .difference-card.after li::before { content: "✓"; color: var(--success); font-weight: 800; }
-
-  .pricing-grid {
-    margin-top: 42px;
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .price-card {
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-  }
-  .price-card.featured {
-    border-color: rgba(245,166,35,0.34);
-    background: linear-gradient(180deg, rgba(245,166,35,0.12), rgba(16,27,49,0.96));
-  }
-  .price-badge {
-    display: inline-block;
-    padding: 7px 12px;
-    border-radius: 999px;
-    background: rgba(245,166,35,0.16);
-    color: #ffd58a;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .price-tier {
-    color: var(--soft);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .price-amount {
-    font-size: 52px;
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    margin-bottom: 8px;
-  }
-  .price-period { color: var(--muted); margin-bottom: 18px; }
-  .price-card p { color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
-  .price-list {
-    list-style: none;
-    display: grid;
-    gap: 10px;
-    margin-bottom: 24px;
-    flex: 1;
-  }
-  .price-list li {
-    display: flex;
-    gap: 10px;
-    color: var(--text);
-    line-height: 1.55;
-  }
-  .price-list li::before { content: "•"; color: var(--gold); }
-
-  .testimonial-grid {
-    margin-top: 42px;
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .testimonial-card { padding: 28px; }
-  .testimonial-card .stars { color: var(--gold); margin-bottom: 16px; letter-spacing: 2px; }
-  .testimonial-card blockquote {
-    color: var(--text);
-    line-height: 1.75;
-    margin-bottom: 18px;
-  }
-  .testimonial-card cite {
-    color: var(--muted);
-    font-style: normal;
-    line-height: 1.6;
-  }
-
-  .faq-list {
-    max-width: 900px;
-    margin: 42px auto 0;
-    display: grid;
-    gap: 14px;
-  }
-  .faq-item { overflow: hidden; }
-  .faq-q {
-    width: 100%;
-    background: transparent;
-    border: none;
-    color: var(--text);
-    padding: 22px 24px;
-    text-align: left;
-    font: inherit;
-    font-size: 18px;
-    font-weight: 700;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    cursor: pointer;
-  }
-  .faq-q span { color: var(--gold); font-size: 28px; line-height: 1; }
-  .faq-a {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-  .faq-a p {
-    padding: 0 24px 24px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-  .faq-item.open .faq-a { max-height: 220px; }
-  .faq-item.open .faq-q span { transform: rotate(45deg); }
-
-  .cta-wrap {
-    max-width: 980px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 42px;
-    border-radius: 30px;
-    background: linear-gradient(135deg, rgba(26,39,68,0.95), rgba(15,26,45,0.98));
-    border: 1px solid rgba(245,166,35,0.22);
-    box-shadow: var(--shadow);
-  }
-  .cta-wrap p { max-width: 680px; margin: 0 auto 28px; color: var(--muted); line-height: 1.75; font-size: 18px; }
-  .cta-meta {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    color: var(--soft);
-    font-size: 14px;
-    margin-top: 20px;
-  }
-
-  .crosslink {
-    padding: 0 0 100px;
-  }
-  .crosslink-card {
-    max-width: 720px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 32px;
-    border-radius: 26px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-  .crosslink-card p { color: var(--muted); margin: 10px 0 20px; line-height: 1.7; }
-
-  footer {
-    padding: 42px 24px 30px;
-    border-top: 1px solid var(--line);
-    text-align: center;
-  }
-  .footer-logo img { width: 220px; margin-bottom: 22px; }
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 18px;
-  }
-  .footer-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 14px;
-  }
-  .footer-links a:hover { color: #fff; }
-  footer p {
-    color: var(--soft);
-    font-size: 13px;
-    line-height: 1.8;
-  }
-
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.08s; }
-  .reveal-delay-2 { transition-delay: 0.16s; }
-  .reveal-delay-3 { transition-delay: 0.24s; }
-
-  @media (max-width: 1040px) {
-    .hero-grid,
-    .feature-grid,
-    .pricing-grid,
-    .testimonial-grid,
-    .brands-grid,
-    .stats-grid,
-    .difference-grid {
-      grid-template-columns: 1fr 1fr;
+  <style>
+    :root {
+      --navy: #1a2744;
+      --navy-soft: #22345a;
+      --gold: #f5a623;
+      --gold-dark: #de931f;
+      --cream: #f8f5ef;
+      --white: #ffffff;
+      --text: #162033;
+      --muted: #61708f;
+      --line: rgba(26, 39, 68, 0.12);
+      --shadow: 0 24px 70px rgba(16, 29, 56, 0.16);
+      --radius: 24px;
+      --max: 1200px;
     }
-    .hero-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 768px) {
-    nav { height: 64px; padding: 0 18px; }
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    .mobile-menu { top: 64px; }
-    .hero { padding-top: 116px; }
-    .hero-metrics,
-    .feature-grid,
-    .pricing-grid,
-    .testimonial-grid,
-    .brands-grid,
-    .stats-grid,
-    .difference-grid { grid-template-columns: 1fr; }
-    .cta-wrap { padding: 32px 24px; }
-  }
-</style>
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(245,166,35,0.16), transparent 30%),
+        linear-gradient(180deg, #fbfaf7 0%, #f7f3eb 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      background: rgba(245,166,35,0.14); color: var(--navy);
+      font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .section { padding: 88px 0; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      margin: 18px 0 16px;
+    }
+    .section-copy {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 720px;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(248,245,239,0.82);
+      border-bottom: 1px solid rgba(26,39,68,0.08);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; padding: 16px 0;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px; font-weight: 800; color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+    .brand-badge {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--navy), #304772);
+      display: grid; place-items: center; box-shadow: 0 12px 30px rgba(26,39,68,0.22);
+      overflow: hidden;
+    }
+    .brand-badge img { width: 28px; height: 28px; object-fit: contain; }
+    .nav-links {
+      display: flex; align-items: center; gap: 24px; color: var(--navy);
+      font-weight: 600; font-size: 0.96rem;
+    }
+    .nav-links a:hover { color: var(--gold-dark); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 15px 22px; border-radius: 999px; border: 0; cursor: pointer;
+      font-weight: 700; transition: 0.22s ease; font-size: 0.98rem;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #ffbf52);
+      color: var(--navy); box-shadow: 0 16px 32px rgba(245,166,35,0.28);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 36px rgba(245,166,35,0.34); }
+    .btn-secondary {
+      background: rgba(26,39,68,0.07); color: var(--navy);
+      border: 1px solid rgba(26,39,68,0.1);
+    }
+    .btn-secondary:hover { background: rgba(26,39,68,0.1); }
+
+    .hero { padding: 52px 0 48px; }
+    .hero-grid {
+      display: grid; gap: 32px; align-items: center;
+      grid-template-columns: 1.08fr 0.92fr;
+    }
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.72));
+      border: 1px solid rgba(255,255,255,0.75);
+      border-radius: calc(var(--radius) + 8px);
+      padding: clamp(28px, 4vw, 52px);
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 7vw, 5.4rem);
+      line-height: 0.96; letter-spacing: -0.04em;
+      color: var(--navy); margin: 18px 0;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.8; color: var(--muted);
+      max-width: 640px; margin-bottom: 28px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px;
+      margin-top: 34px;
+    }
+    .stat {
+      background: rgba(26,39,68,0.04);
+      border: 1px solid rgba(26,39,68,0.08);
+      padding: 18px; border-radius: 20px;
+    }
+    .stat strong { display: block; font-size: 1.4rem; color: var(--navy); }
+    .stat span { color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+
+    .showcase {
+      position: relative; overflow: hidden;
+      background: linear-gradient(180deg, var(--navy) 0%, #22345d 100%);
+      color: var(--white); border-radius: 32px; padding: 28px; box-shadow: var(--shadow);
+    }
+    .showcase::before {
+      content: ""; position: absolute; inset: auto -50px -50px auto; width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(245,166,35,0.32), transparent 70%);
+    }
+    .device {
+      position: relative; border-radius: 26px; padding: 22px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12); min-height: 100%;
+    }
+    .device-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .pill {
+      display: inline-flex; padding: 8px 12px; border-radius: 999px;
+      background: rgba(245,166,35,0.18); color: #ffd898; font-size: 0.82rem; font-weight: 700;
+    }
+    .chat, .metric, .timeline-item {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px; padding: 14px; margin-top: 12px;
+    }
+    .chat strong, .metric strong, .timeline-item strong { display: block; margin-bottom: 6px; }
+    .showcase-grid {
+      display: grid; gap: 16px; grid-template-columns: 1.1fr 0.9fr;
+    }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    .features-grid {
+      display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0,1fr));
+      margin-top: 38px;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.86); border: 1px solid var(--line);
+      border-radius: 24px; padding: 26px; box-shadow: 0 16px 40px rgba(24,36,68,0.06);
+    }
+    .feature-icon {
+      width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center;
+      background: linear-gradient(135deg, rgba(245,166,35,0.18), rgba(245,166,35,0.28));
+      color: var(--navy); font-size: 1.45rem; margin-bottom: 18px;
+    }
+    .feature-card h3 { margin: 0 0 10px; color: var(--navy); font-size: 1.18rem; }
+    .feature-card p { margin: 0; color: var(--muted); line-height: 1.75; }
+
+    .pricing-wrap {
+      display: grid; gap: 28px; grid-template-columns: 0.95fr 1.05fr; align-items: start;
+      margin-top: 38px;
+    }
+    .pricing-panel, .annual-panel, .about-card, .cross-sell, .legal-card {
+      background: rgba(255,255,255,0.88); border: 1px solid var(--line);
+      border-radius: 28px; padding: 28px; box-shadow: 0 16px 44px rgba(24,36,68,0.07);
+    }
+    .pricing-list { display: grid; gap: 14px; }
+    .price-item {
+      display: flex; justify-content: space-between; gap: 16px; align-items: start;
+      padding: 16px 0; border-bottom: 1px solid rgba(26,39,68,0.08);
+    }
+    .price-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .price-item h4 { margin: 0 0 6px; color: var(--navy); font-size: 1rem; }
+    .price-item p { margin: 0; color: var(--muted); font-size: 0.94rem; line-height: 1.6; }
+    .price-tag { font-weight: 800; color: var(--navy); white-space: nowrap; }
+    .annual-badge {
+      display: inline-flex; margin-top: 18px; padding: 10px 14px; border-radius: 999px;
+      background: rgba(245,166,35,0.16); color: var(--navy); font-weight: 800;
+    }
+
+    .testimonials-grid {
+      display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0,1fr)); margin-top: 38px;
+    }
+    .testimonial {
+      background: linear-gradient(180deg, rgba(26,39,68,0.98), rgba(35,52,91,0.98));
+      color: var(--white); border-radius: 26px; padding: 28px; box-shadow: var(--shadow);
+    }
+    .testimonial p { margin: 0 0 18px; line-height: 1.85; color: rgba(255,255,255,0.92); }
+    .testimonial strong { display: block; color: #ffd898; }
+
+    .about-grid {
+      display: grid; gap: 22px; grid-template-columns: 1fr 1fr; margin-top: 38px;
+    }
+    .about-card h3, .cross-sell h3, .legal-card h3 { margin-top: 0; color: var(--navy); }
+    .about-list { display: grid; gap: 14px; padding: 0; margin: 20px 0 0; list-style: none; }
+    .about-list li {
+      display: flex; gap: 12px; align-items: start; color: var(--muted); line-height: 1.7;
+    }
+    .check {
+      width: 24px; height: 24px; flex: 0 0 24px; border-radius: 999px;
+      background: rgba(245,166,35,0.18); color: var(--navy);
+      display: grid; place-items: center; font-size: 0.86rem; font-weight: 800;
+    }
+
+    .legal-grid {
+      display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0,1fr)); margin-top: 38px;
+    }
+    .legal-card p { color: var(--muted); line-height: 1.8; }
+
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.88); padding: 34px 0 42px; margin-top: 84px;
+    }
+    .footer-top {
+      display: flex; gap: 18px; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      padding-bottom: 22px; border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .footer-links {
+      display: flex; flex-wrap: wrap; gap: 16px 18px; font-weight: 600;
+    }
+    .footer-links a:hover { color: #ffd898; }
+    .footer-meta { display: grid; gap: 8px; padding-top: 22px; color: rgba(255,255,255,0.74); }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .pricing-wrap, .about-grid, .showcase-grid { grid-template-columns: 1fr; }
+      .features-grid, .testimonials-grid, .legal-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .section { padding: 72px 0; }
+      .nav { flex-wrap: wrap; }
+      .nav-links { width: 100%; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 0.92rem; }
+      .hero { padding-top: 34px; }
+      .hero-stats, .metric-grid, .features-grid, .testimonials-grid, .legal-grid { grid-template-columns: 1fr; }
+      .price-item { flex-direction: column; }
+      .footer-top { align-items: flex-start; }
+    }
+
+    @media (max-width: 520px) {
+      .container { width: min(calc(100% - 22px), var(--max)); }
+      .hero-card, .feature-card, .pricing-panel, .annual-panel, .about-card, .cross-sell, .legal-card, .testimonial { padding: 22px; }
+      .nav-links { gap: 12px; }
+      .btn { width: 100%; }
+      .hero-actions { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
-<div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#101b31; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
-  <p style="font-size:13px; color:rgba(245,247,251,0.74); max-width:760px; line-height:1.6; margin:0;">We use cookies and tracking technologies (Google Analytics and Meta Pixel) to improve this website and measure campaign performance. <a href="/datenschutz.html" style="color:#f5a623;">Learn more</a></p>
-  <div style="display:flex; gap:10px; flex-shrink:0;">
-    <button onclick="rejectCookies()" style="padding:10px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background:transparent; color:rgba(245,247,251,0.72); font-size:13px; cursor:pointer; font-family:inherit;">Decline</button>
-    <button onclick="acceptCookies()" style="padding:10px 18px; border-radius:999px; border:none; background:#f5a623; color:#1a2744; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit;">Accept</button>
-  </div>
-</div>
-<script>
-  function setCookie(n,v,d){var e=new Date();e.setTime(e.getTime()+d*864e5);document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/';}
-  function getCookie(n){var v=document.cookie.match('(^|;) ?'+n+'=([^;]*)(;|$)');return v?v[2]:null;}
-  function loadTracking(){
-    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-25WZQPJ5F3';document.head.appendChild(s);
-    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','G-25WZQPJ5F3',{linker:{accept_incoming:false}});
-    var u=new URL(window.location.href);['_gl','_ga','fbclid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(p){u.searchParams.delete(p);});if(u.href!==window.location.href){history.replaceState(null,'',u.href);}
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','584799746334676');fbq('track','PageView');
-  }
-  function acceptCookies(){setCookie('cookie_consent','accepted',365);document.getElementById('cookieBanner').style.display='none';loadTracking();}
-  function rejectCookies(){setCookie('cookie_consent','rejected',365);document.getElementById('cookieBanner').style.display='none';}
-  window.addEventListener('DOMContentLoaded',function(){
-    var c=getCookie('cookie_consent');
-    if(!c){document.getElementById('cookieBanner').style.display='flex';}
-    else if(c==='accepted'){loadTracking();}
-  });
-</script>
-
-<nav>
-  <a href="/" class="nav-logo"><img src="logo.svg" alt="LeoLan Digital"></a>
-  <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#difference">Why LeoLan</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="/ueber-uns.html">About</a></li>
-  </ul>
-  <a href="https://onboarding.leolan.net" class="nav-cta">Start Free Trial →</a>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#features" onclick="closeMenu()">Features</a>
-  <a href="#difference" onclick="closeMenu()">Why LeoLan</a>
-  <a href="#pricing" onclick="closeMenu()">Pricing</a>
-  <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <a href="/ueber-uns.html" onclick="closeMenu()">About</a>
-  <a href="https://onboarding.leolan.net" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Start Free Trial →</a>
-</div>
-
-<section class="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="eyebrow-pill reveal">Boutique hotel automation for Bali, Thailand, Maldives & Europe</div>
-      <h1 class="reveal reveal-delay-1">AI-Powered Guest Experience for Hotels Worldwide</h1>
-      <p class="reveal reveal-delay-2">Turn WhatsApp, reviews, guest communication and social media into a luxury service layer that works 24/7. LeoLan Digital helps boutique hotels deliver faster replies, smoother upselling and a more premium guest journey without adding more manual workload.</p>
-      <div class="hero-actions reveal reveal-delay-3">
-        <a href="https://onboarding.leolan.net" class="btn btn-primary">Start Free Trial</a>
-        <a href="#features" class="btn btn-secondary">Explore Features</a>
-      </div>
-      <div class="hero-trust reveal reveal-delay-3">
-        <span>✓ Launch-ready in days</span>
-        <span>✓ Monthly plans in USD</span>
-        <span>✓ Built for international guests</span>
-      </div>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="LeoLan Digital home">
+        <span class="brand-badge"><img src="https://raw.githubusercontent.com/LeoLan-Digital/leolan-ki/main/logo_extract2/leolan%20logo-01.png" alt="LeoLan Digital logo"></span>
+        <span>LeoLan Digital</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a class="btn btn-primary" href="https://onboarding.leolan.net" target="_blank" rel="noopener">Start Free Trial</a>
+      </nav>
     </div>
-    <div class="hero-card reveal reveal-delay-2">
-      <img class="hero-image" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80&auto=format&fit=crop" alt="Luxury boutique hotel lobby">
-      <div class="hero-card-content">
-        <div style="color:#fff; font-size:20px; font-weight:800;">Deliver a five-star digital experience before, during and after every stay.</div>
-        <div style="color:var(--muted); line-height:1.7;">Guests get instant answers, your team handles fewer repetitive requests, and your property keeps a premium brand presence across every touchpoint.</div>
-        <div class="hero-metrics">
-          <div class="metric"><strong>24/7</strong><span>guest messaging across time zones</span></div>
-          <div class="metric"><strong>+30%</strong><span>more upsell potential from automated guest flows</span></div>
-          <div class="metric"><strong>80%</strong><span>of repetitive guest questions handled automatically</span></div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <span class="eyebrow">Luxury Hospitality Automation</span>
+          <h1>AI-Powered Guest Experience for Hotels Worldwide</h1>
+          <p>Automate reservations, social media, and guest communication with a premium AI system built for international hotels, resorts, villas, and boutique properties.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://onboarding.leolan.net" target="_blank" rel="noopener">Start Free Trial</a>
+            <a class="btn btn-secondary" href="#pricing">Explore Pricing</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>24/7</strong>
+              <span>Guest support across WhatsApp, email, and review channels.</span>
+            </div>
+            <div class="stat">
+              <strong>80%</strong>
+              <span>Typical reduction in repetitive guest inquiries through automation.</span>
+            </div>
+            <div class="stat">
+              <strong>340%</strong>
+              <span>Higher engagement potential with consistent AI social media output.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase" aria-label="Platform preview">
+          <div class="showcase-grid">
+            <div class="device">
+              <div class="device-top">
+                <strong>WhatsApp Concierge</strong>
+                <span class="pill">Live</span>
+              </div>
+              <div class="chat">
+                <strong>Guest Request</strong>
+                <span>Can I arrange airport transfer and a vegan dinner for tonight?</span>
+              </div>
+              <div class="chat">
+                <strong>AI Reply</strong>
+                <span>Absolutely. Your transfer is scheduled for 18:30, and the kitchen has prepared vegan menu recommendations for your arrival.</span>
+              </div>
+              <div class="chat">
+                <strong>Upsell Prompt</strong>
+                <span>Would you like a late checkout package and in-room spa treatment added to your stay?</span>
+              </div>
+            </div>
+            <div class="device">
+              <div class="device-top">
+                <strong>Hotel Performance</strong>
+                <span class="pill">Today</span>
+              </div>
+              <div class="metric-grid">
+                <div class="metric">
+                  <strong>92%</strong>
+                  <span>Inquiry response rate</span>
+                </div>
+                <div class="metric">
+                  <strong>4.8</strong>
+                  <span>Average review score</span>
+                </div>
+                <div class="metric">
+                  <strong>126</strong>
+                  <span>Guest conversations handled</span>
+                </div>
+                <div class="metric">
+                  <strong>$3.9k</strong>
+                  <span>Upsell revenue influenced</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <strong>Automation Flow</strong>
+                <span>Pre-arrival email → concierge support → review follow-up → loyalty re-engagement</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="brands">
-  <div class="section-shell">
-    <span class="section-tag reveal">Designed for global hospitality</span>
-    <h2 class="section-title reveal reveal-delay-1">Built for independent hotels, villas and resort-style boutique properties.</h2>
-    <p class="section-sub reveal reveal-delay-2">From tropical destinations to urban boutique stays, the platform is designed for multilingual guest communication, premium service positioning and lean operations.</p>
-    <div class="brands-grid">
-      <div class="brand-card reveal"><strong>Bali</strong><span>Villa collections, wellness stays, design resorts</span></div>
-      <div class="brand-card reveal reveal-delay-1"><strong>Thailand</strong><span>Beachfront hotels, lifestyle properties, retreats</span></div>
-      <div class="brand-card reveal reveal-delay-2"><strong>Maldives</strong><span>Luxury villas, water villas, private island concepts</span></div>
-      <div class="brand-card reveal reveal-delay-3"><strong>Europe</strong><span>Boutique city hotels, alpine lodges, coastal escapes</span></div>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-card reveal"><strong>50+</strong><span>languages understood for guest communication</span></div>
-      <div class="stat-card reveal reveal-delay-1"><strong>1 inbox</strong><span>for service requests, guest follow-ups and automation</span></div>
-      <div class="stat-card reveal reveal-delay-2"><strong>Faster</strong><span>responses on WhatsApp than traditional front-desk workflows</span></div>
-      <div class="stat-card reveal reveal-delay-3"><strong>Premium</strong><span>brand presentation across guest touchpoints</span></div>
-    </div>
-  </div>
-</section>
+    <section class="section" id="features">
+      <div class="container">
+        <span class="eyebrow">Features</span>
+        <h2 class="section-title">Built for modern hotels that want premium service at scale</h2>
+        <p class="section-copy">Every module is designed to reduce operational pressure, increase direct engagement, and create a seamless guest journey from the first inquiry to the post-stay review.</p>
 
-<section class="features" id="features">
-  <div class="section-shell">
-    <span class="section-tag reveal">Core modules</span>
-    <h2 class="section-title reveal reveal-delay-1">Four automation layers that elevate guest service and save staff time.</h2>
-    <p class="section-sub reveal reveal-delay-2">Pick a single module or combine multiple services. Every package is modular, hotel-friendly and designed to support real-world guest operations.</p>
-    <div class="feature-grid">
-      <article class="feature-card reveal">
-        <div class="feature-icon">💬</div>
-        <h3>WhatsApp Concierge Bot</h3>
-        <p>Offer multilingual guest support through the channel travelers already use. Handle housekeeping requests, check-in questions, room service prompts and concierge needs instantly.</p>
-        <ul class="feature-list">
-          <li>Multilingual chat for international guests</li>
-          <li>Automated FAQs, requests and upsell prompts</li>
-          <li>Room-specific service workflows for your team</li>
-          <li>Luxury tone tailored to your property</li>
-        </ul>
-      </article>
-      <article class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon">📱</div>
-        <h3>Auto Social Media</h3>
-        <p>Keep your brand active on Instagram and Facebook without chasing daily content production. Promote offers, experiences, F&amp;B moments and destination storytelling automatically.</p>
-        <ul class="feature-list">
-          <li>Scheduled content generation for your hotel brand</li>
-          <li>Seasonal and destination-focused post ideas</li>
-          <li>Consistent luxury positioning across channels</li>
-          <li>Less manual coordination for your team</li>
-        </ul>
-      </article>
-      <article class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon">⭐</div>
-        <h3>Review Management</h3>
-        <p>Respond to reviews faster and more professionally. Build trust with future guests while protecting your reputation across key review platforms.</p>
-        <ul class="feature-list">
-          <li>AI-assisted replies tailored to each review</li>
-          <li>Faster turnaround for positive and critical feedback</li>
-          <li>Stronger online reputation across markets</li>
-          <li>More consistent management visibility</li>
-        </ul>
-      </article>
-      <article class="feature-card reveal reveal-delay-3">
-        <div class="feature-icon">✉️</div>
-        <h3>Guest Email Automation</h3>
-        <p>Automate the guest lifecycle from pre-arrival to post-stay follow-up. Stay polished, proactive and on-brand without extra admin hours.</p>
-        <ul class="feature-list">
-          <li>Pre-arrival emails with upsell opportunities</li>
-          <li>Stay support and itinerary follow-ups</li>
-          <li>Post-stay review and return-guest flows</li>
-          <li>Less repetitive front-office communication</li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="difference" id="difference">
-  <div class="section-shell">
-    <span class="section-tag reveal">Before vs. after</span>
-    <h2 class="section-title reveal reveal-delay-1">What changes once guest communication stops depending on manual replies.</h2>
-    <div class="difference-grid">
-      <div class="difference-card before reveal">
-        <h3>Without LeoLan Digital</h3>
-        <ul>
-          <li>Front desk spends hours answering repetitive questions</li>
-          <li>International guests face language friction during service requests</li>
-          <li>Social media and follow-up emails get postponed</li>
-          <li>Review replies are inconsistent or delayed</li>
-          <li>Upsell opportunities are missed between booking and stay</li>
-        </ul>
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3>WhatsApp Concierge Bot</h3>
+            <p>Deliver 24/7 guest support with instant answers for room service, property information, local recommendations, transfer requests, and common stay questions.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Social Media Automation</h3>
+            <p>Publish daily AI-generated content for Instagram and Facebook to keep your property visible, aspirational, and active without constant manual work.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">⭐</div>
+            <h3>Review Management</h3>
+            <p>Respond faster to TripAdvisor and Google reviews with polished AI-generated replies that protect brand reputation and support stronger ratings.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">✉️</div>
+            <h3>Guest Email Automation</h3>
+            <p>Automate pre-arrival instructions, welcome sequences, stay updates, and post-stay follow-ups to improve guest communication and repeat bookings.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">🛎️</div>
+            <h3>Booking Assistant</h3>
+            <p>Handle reservations via WhatsApp with a conversational AI assistant that answers availability questions, collects booking details, and drives direct inquiries.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Analytics Dashboard</h3>
+            <p>Track real-time KPIs across inquiries, reviews, social engagement, response speed, and automation performance from one elegant dashboard.</p>
+          </article>
+        </div>
       </div>
-      <div class="difference-card after reveal reveal-delay-1">
-        <h3>With LeoLan Digital</h3>
-        <ul>
-          <li>Guests receive fast, premium communication around the clock</li>
-          <li>Your team handles exceptions instead of answering the same questions all day</li>
-          <li>Automations support reputation, retention and revenue</li>
-          <li>Brand messaging stays polished across every channel</li>
-          <li>Service feels more luxurious without increasing headcount</li>
-        </ul>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <span class="eyebrow">Modular Pricing</span>
+        <h2 class="section-title">Choose the hotel automation stack that fits your property</h2>
+        <p class="section-copy">Start with one service or combine multiple modules for a complete guest experience platform. All pricing is in USD and designed for flexible rollout.</p>
+
+        <div class="pricing-wrap">
+          <div class="pricing-panel">
+            <h3>Monthly Modules</h3>
+            <div class="pricing-list">
+              <div class="price-item">
+                <div>
+                  <h4>WhatsApp Concierge Bot</h4>
+                  <p>Round-the-clock guest communication and service coordination.</p>
+                </div>
+                <span class="price-tag">$79/month</span>
+              </div>
+              <div class="price-item">
+                <div>
+                  <h4>Instagram + Facebook Posts</h4>
+                  <p>Daily AI content for stronger reach and brand consistency.</p>
+                </div>
+                <span class="price-tag">$59/month</span>
+              </div>
+              <div class="price-item">
+                <div>
+                  <h4>Review Management</h4>
+                  <p>AI-assisted replies for Google and TripAdvisor reviews.</p>
+                </div>
+                <span class="price-tag">$59/month</span>
+              </div>
+              <div class="price-item">
+                <div>
+                  <h4>Guest Email Automation</h4>
+                  <p>Pre-arrival, post-stay, and lifecycle email sequences.</p>
+                </div>
+                <span class="price-tag">$49/month</span>
+              </div>
+              <div class="price-item">
+                <div>
+                  <h4>Booking Assistant</h4>
+                  <p>WhatsApp-based reservation handling and direct booking support.</p>
+                </div>
+                <span class="price-tag">$79/month</span>
+              </div>
+              <div class="price-item">
+                <div>
+                  <h4>Analytics Dashboard</h4>
+                  <p>Real-time performance reporting for teams and owners.</p>
+                </div>
+                <span class="price-tag">$29/month</span>
+              </div>
+              <div class="price-item">
+                <div>
+                  <h4>AI Reels &amp; Video Content</h4>
+                  <p>Short-form visuals and promotional video assets for social campaigns.</p>
+                </div>
+                <span class="price-tag">$89/month</span>
+              </div>
+              <div class="price-item">
+                <div>
+                  <h4>Setup Fee</h4>
+                  <p>One-time onboarding, integration, branding, and launch configuration.</p>
+                </div>
+                <span class="price-tag">$349 one-time</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="annual-panel">
+            <h3>Annual Advantage</h3>
+            <p class="section-copy" style="max-width:none; margin-top: 0;">Properties that commit annually receive a 26% discount across their selected monthly modules, making it easier to scale automation across front office, marketing, and guest communication.</p>
+            <div class="annual-badge">Save 26% with annual billing</div>
+            <div style="margin-top: 26px; display:grid; gap:14px;">
+              <div class="timeline-item" style="background: rgba(26,39,68,0.04); border-color: rgba(26,39,68,0.08); color: var(--text);">
+                <strong>Ideal for:</strong>
+                <span>Boutique hotels, resorts, villa groups, city hotels, and hospitality brands with international guests.</span>
+              </div>
+              <div class="timeline-item" style="background: rgba(26,39,68,0.04); border-color: rgba(26,39,68,0.08); color: var(--text);">
+                <strong>Launch path:</strong>
+                <span>Start with concierge and reviews, then expand into bookings, email automation, and social content.</span>
+              </div>
+              <div class="timeline-item" style="background: rgba(26,39,68,0.04); border-color: rgba(26,39,68,0.08); color: var(--text);">
+                <strong>Primary CTA:</strong>
+                <span><a href="https://onboarding.leolan.net" target="_blank" rel="noopener" style="color: var(--navy); font-weight: 800;">Start your free trial and configure your hotel stack</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Testimonials</span>
+        <h2 class="section-title">Trusted by hospitality brands in high-expectation destinations</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial">
+            <p>“The WhatsApp bot handles 80% of guest inquiries.”</p>
+            <strong>The Sunset Villa, Bali</strong>
+          </article>
+          <article class="testimonial">
+            <p>“Google rating improved from 4.2 to 4.8 in 3 months.”</p>
+            <strong>Mango Bay Resort, Thailand</strong>
+          </article>
+          <article class="testimonial">
+            <p>“Instagram engagement up 340%.”</p>
+            <strong>Azure Hotel, Maldives</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <span class="eyebrow">About LeoLan Digital</span>
+        <h2 class="section-title">Hotel growth, brand control, and guest communication in one premium system</h2>
+        <div class="about-grid">
+          <article class="about-card">
+            <h3>Why hotels choose LeoLan Digital</h3>
+            <p class="section-copy" style="max-width:none; margin-top:0;">LeoLan Digital helps international hospitality brands automate guest-facing operations without sacrificing tone, elegance, or speed. The platform is built to support global properties that need better response times, stronger reviews, and more consistent social visibility.</p>
+            <ul class="about-list">
+              <li><span class="check">✓</span><span>Premium messaging flows for reservations, service requests, and guest communication.</span></li>
+              <li><span class="check">✓</span><span>Luxury-first design language that fits boutique, resort, and upscale hotel brands.</span></li>
+              <li><span class="check">✓</span><span>Flexible modular pricing that lets each property build the right automation stack.</span></li>
+            </ul>
+          </article>
+          <aside class="cross-sell">
+            <h3>Looking for restaurant automation?</h3>
+            <p class="section-copy" style="max-width:none; margin-top:0;">LeoLan Digital also offers AI systems for restaurants that want to automate reservations, guest messaging, marketing content, and digital operations.</p>
+            <a class="btn btn-primary" href="https://ki.leolan.net" target="_blank" rel="noopener">Visit Restaurant Page</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="legal">
+      <div class="container">
+        <span class="eyebrow">Legal</span>
+        <h2 class="section-title">Imprint, Privacy Policy, and Terms</h2>
+        <div class="legal-grid">
+          <article class="legal-card" id="imprint">
+            <h3>Imprint</h3>
+            <p>Provider: LeoLan Digital, represented by Kamaleddin Nazari, Reickerstr. 132, 01237 Dresden, Germany.</p>
+            <p>Contact: info@leolan.net · +49 3521 788680</p>
+            <p>Responsible for content on this website: Kamaleddin Nazari. This website presents digital automation services for hotels and hospitality businesses.</p>
+          </article>
+          <article class="legal-card" id="privacy">
+            <h3>Privacy Policy</h3>
+            <p>This website may process technical usage data required for secure delivery and analytics measurement. Google Analytics 4 and Meta Pixel are used to understand website performance and campaign effectiveness.</p>
+            <p>Data may include pages viewed, device information, and interaction events. By using this website, visitors acknowledge that these tools may collect information in accordance with their respective policies.</p>
+            <p>For privacy-related requests or data inquiries, contact info@leolan.net.</p>
+          </article>
+          <article class="legal-card" id="terms">
+            <h3>Terms</h3>
+            <p>All services are offered subject to individual onboarding, technical review, and commercial agreement. Published prices are indicative modular rates in USD and may be adapted for scope, integrations, or multi-property deployments.</p>
+            <p>LeoLan Digital does not guarantee specific revenue outcomes, occupancy changes, or review improvements. Service delivery timelines and onboarding details are confirmed during the sales process.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="brand" style="color:#fff;">
+          <span class="brand-badge"><img src="https://raw.githubusercontent.com/LeoLan-Digital/leolan-ki/main/logo_extract2/leolan%20logo-01.png" alt="LeoLan Digital logo"></span>
+          <span>LeoLan Digital</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://onboarding.leolan.net" target="_blank" rel="noopener">Start Free Trial</a>
+          <a href="#features">Hotel Solutions</a>
+          <a href="https://ki.leolan.net" target="_blank" rel="noopener">Restaurant Solutions</a>
+          <a href="#about">About</a>
+          <a href="#imprint">Imprint</a>
+          <a href="#privacy">Privacy Policy</a>
+          <a href="#terms">Terms</a>
+        </nav>
+      </div>
+      <div class="footer-meta">
+        <span>© 2026 LeoLan Digital · Kamaleddin Nazari · Reickerstr. 132, 01237 Dresden, Germany</span>
+        <span>info@leolan.net · +49 3521 788680</span>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="pricing" id="pricing">
-  <div class="section-shell">
-    <span class="section-tag reveal">Modular pricing</span>
-    <h2 class="section-title reveal reveal-delay-1">Start with one module. Expand as your hotel grows.</h2>
-    <p class="section-sub reveal reveal-delay-2">Flexible monthly pricing in USD. Combine services based on your current priorities and guest journey gaps.</p>
-    <div class="pricing-grid">
-      <article class="price-card reveal">
-        <div class="price-tier">Single Module</div>
-        <div class="price-amount">$49</div>
-        <div class="price-period">/ month</div>
-        <p>Best for hotels testing one workflow first.</p>
-        <ul class="price-list">
-          <li>Choose one automation module</li>
-          <li>Basic setup and deployment</li>
-          <li>Monthly optimization support</li>
-          <li>Ideal for pilot properties</li>
-        </ul>
-        <a href="https://onboarding.leolan.net" class="btn btn-secondary">Start Free Trial</a>
-      </article>
-      <article class="price-card featured reveal reveal-delay-1">
-        <div class="price-badge">Most Popular</div>
-        <div class="price-tier">Guest Experience Suite</div>
-        <div class="price-amount">$79</div>
-        <div class="price-period">/ month</div>
-        <p>Our recommended package for boutique hotels that want visible impact fast.</p>
-        <ul class="price-list">
-          <li>WhatsApp Concierge Bot</li>
-          <li>Review Management</li>
-          <li>Guest Email Automation</li>
-          <li>Priority onboarding assistance</li>
-        </ul>
-        <a href="https://onboarding.leolan.net" class="btn btn-primary">Start Free Trial</a>
-      </article>
-      <article class="price-card reveal reveal-delay-2">
-        <div class="price-tier">Full Brand & Service Stack</div>
-        <div class="price-amount">Custom</div>
-        <div class="price-period">for multi-property or advanced needs</div>
-        <p>For hotels that want social, messaging, reviews and custom workflows combined.</p>
-        <ul class="price-list">
-          <li>All guest communication modules</li>
-          <li>Auto Social Media included</li>
-          <li>Multi-property support available</li>
-          <li>Custom integrations and reporting</li>
-        </ul>
-        <a href="https://onboarding.leolan.net" class="btn btn-secondary">Talk to Sales</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="testimonials">
-  <div class="section-shell">
-    <span class="section-tag reveal">Testimonials placeholder</span>
-    <h2 class="section-title reveal reveal-delay-1">Social proof ready for properties across different markets.</h2>
-    <p class="section-sub reveal reveal-delay-2">Placeholder testimonials below can be replaced with real client quotes as new hotel case studies go live.</p>
-    <div class="testimonial-grid">
-      <article class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <blockquote>“Perfect placeholder for a Bali boutique resort case study: guest messaging became faster, more premium and much easier for the front office team.”</blockquote>
-        <cite><strong>Boutique Resort, Bali</strong><br>Guest Experience Director</cite>
-      </article>
-      <article class="testimonial-card reveal reveal-delay-1">
-        <div class="stars">★★★★★</div>
-        <blockquote>“Ideal placeholder for a Thailand property: LeoLan Digital helped us streamline guest requests and maintain a more polished brand presence online.”</blockquote>
-        <cite><strong>Design Hotel, Thailand</strong><br>Operations Manager</cite>
-      </article>
-      <article class="testimonial-card reveal reveal-delay-2">
-        <div class="stars">★★★★★</div>
-        <blockquote>“Placeholder for a European or Maldives property: review replies, email automation and concierge messaging all felt far more consistent.”</blockquote>
-        <cite><strong>Luxury Boutique Hotel, Europe / Maldives</strong><br>General Manager</cite>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="faq" id="faq">
-  <div class="section-shell" style="text-align:center;">
-    <span class="section-tag reveal">FAQ</span>
-    <h2 class="section-title reveal reveal-delay-1">Answers for hotel owners and operators.</h2>
-    <div class="faq-list">
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">Can this work for international guests from different countries?<span>+</span></button>
-        <div class="faq-a"><p>Yes. The setup is designed for global hospitality and multilingual guest communication, making it a strong fit for international boutique hotels and destination properties.</p></div>
-      </div>
-      <div class="faq-item reveal reveal-delay-1">
-        <button class="faq-q" onclick="toggleFaq(this)">Do we need a large team or technical department?<span>+</span></button>
-        <div class="faq-a"><p>No. LeoLan Digital is meant to reduce operational pressure, not create more complexity. We keep onboarding lean and the workflows hotel-friendly.</p></div>
-      </div>
-      <div class="faq-item reveal reveal-delay-2">
-        <button class="faq-q" onclick="toggleFaq(this)">Can we start with one module only?<span>+</span></button>
-        <div class="faq-a"><p>Absolutely. Many properties begin with WhatsApp concierge or review management, then add more modules once they see traction and team relief.</p></div>
-      </div>
-      <div class="faq-item reveal reveal-delay-3">
-        <button class="faq-q" onclick="toggleFaq(this)">What is the main business impact?<span>+</span></button>
-        <div class="faq-a"><p>Hotels usually benefit from faster response times, stronger reputation management, a smoother guest journey and more opportunities for automated upselling.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta" id="contact">
-  <div class="section-shell">
-    <div class="cta-wrap reveal">
-      <span class="section-tag" style="margin-bottom:14px;">Start now</span>
-      <h2 class="section-title" style="margin-bottom:18px;">Launch a smarter guest experience without rebuilding your operations.</h2>
-      <p>See how LeoLan Digital can help your boutique hotel deliver faster replies, better reviews and more premium guest communication from the very first interaction.</p>
-      <a href="https://onboarding.leolan.net" class="btn btn-primary">Start Free Trial</a>
-      <div class="cta-meta">
-        <span>WhatsApp-ready</span>
-        <span>Review automation</span>
-        <span>Email flows</span>
-        <span>Luxury brand positioning</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="crosslink">
-  <div class="section-shell">
-    <div class="crosslink-card reveal">
-      <span class="section-tag" style="margin-bottom:10px;">Also for hotels</span>
-      <h3 style="font-size:28px; margin-bottom:10px;">Looking for restaurant automation instead?</h3>
-      <p>LeoLan Digital also offers AI-powered WhatsApp bots, review management and social media automation for restaurants and cafés in Germany.</p>
-      <a href="https://ki.leolan.net" class="btn btn-secondary">Visit Restaurant Page</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo"><img src="logo.svg" alt="LeoLan Digital"></div>
-  <div class="footer-links">
-    <a href="https://onboarding.leolan.net">Start Free Trial</a>
-    <a href="https://ki.leolan.net">Hotel Solutions</a>
-    <a href="/ueber-uns.html">About</a>
-    <a href="/impressum.html">Imprint</a>
-    <a href="/datenschutz.html">Privacy</a>
-    <a href="/agb.html">Terms</a>
-  </div>
-  <p>
-    © 2026 LeoLan Digital · Kamaleddin Nazari · Reickerstr. 132, 01237 Dresden<br>
-    <a href="mailto:info@leolan.net">info@leolan.net</a> · <a href="tel:+493521788680">+49 3521 788680</a>
-  </p>
-</footer>
-
-<script>
-  function toggleFaq(btn){var item=btn.parentElement;item.classList.toggle('open');}
-  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
-  function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
-  document.addEventListener('click',function(e){var m=document.getElementById('mobileMenu');if(m&&m.classList.contains('open')&&!m.contains(e.target)&&!e.target.closest('.hamburger')){m.classList.remove('open');}});
-  var revealEls=document.querySelectorAll('.reveal');
-  var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target);}});},{threshold:0.12});
-  revealEls.forEach(function(el){io.observe(el);});
-  document.querySelectorAll('.hero .reveal').forEach(function(el){setTimeout(function(){el.classList.add('visible');},100);});
-</script>
+  </footer>
 </body>
 </html>

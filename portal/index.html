@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Kunden-Portal | LeoLan Digital</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root {
+      --bg: #07101d;
+      --bg-2: #0d1a30;
+      --panel: rgba(16, 27, 49, 0.92);
+      --panel-2: rgba(11, 20, 36, 0.96);
+      --border: rgba(255,255,255,0.09);
+      --text: #f5f7fb;
+      --muted: rgba(245,247,251,0.68);
+      --accent: #f5a623;
+      --accent-2: #ffbf57;
+      --success: #34d399;
+      --danger: #ff6b76;
+      --shadow: 0 28px 70px rgba(0,0,0,0.34);
+      --radius: 24px;
+      --font: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(245,166,35,0.14), transparent 26%),
+        radial-gradient(circle at top left, rgba(26,39,68,0.55), transparent 30%),
+        linear-gradient(180deg, #07101d 0%, #0b1424 100%);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,p { margin: 0; }
+    .shell { width: min(1220px, calc(100% - 24px)); margin: 0 auto; padding: 22px 0 72px; }
+    .card, .hero, .login-card, .chat-panel {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .login-screen { min-height: 100vh; display: grid; place-items: center; padding: 20px; }
+    .login-card { width: min(470px, 100%); padding: 32px; border-radius: 30px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px;
+      background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.24); color: #ffd58a;
+      font-size: .84rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    }
+    .badge-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px rgba(245,166,35,0.14); }
+    .login-card h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin: 18px 0 10px; }
+    .login-card p { color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .stack { display: grid; gap: 14px; }
+    .row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    .input, .textarea, .select, .button, .ghost {
+      width: 100%; font: inherit; border-radius: 16px; transition: .2s ease; outline: none;
+    }
+    .input, .textarea, .select {
+      border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text);
+      padding: 15px 16px;
+    }
+    .textarea { min-height: 120px; resize: vertical; }
+    .input:focus, .textarea:focus, .select:focus {
+      border-color: rgba(245,166,35,0.8); box-shadow: 0 0 0 4px rgba(245,166,35,0.12);
+    }
+    .button, .ghost { border: none; cursor: pointer; font-weight: 800; padding: 15px 18px; }
+    .button { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #1e1300; }
+    .ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid rgba(255,255,255,0.09); }
+    .button:hover, .ghost:hover { transform: translateY(-1px); }
+    .button:disabled, .ghost:disabled { opacity: .65; cursor: wait; }
+    .hint, .status, .error { font-size: .94rem; min-height: 20px; }
+    .hint, .status { color: var(--muted); }
+    .error { color: var(--danger); }
+    .success { color: var(--success); }
+    .app { display: none; }
+    .app.visible { display: block; }
+    .hero {
+      border-radius: 30px; padding: 30px; display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(245,166,35,0.14), rgba(16,27,49,0.95) 42%, rgba(11,20,36,0.98) 100%);
+    }
+    .hero p { color: var(--muted); line-height: 1.75; margin-top: 10px; max-width: 760px; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 999px;
+      background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid rgba(255,255,255,0.08);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--success); }
+    .card { border-radius: var(--radius); padding: 22px; overflow: hidden; }
+    .card h2 { font-size: 1.15rem; margin-bottom: 6px; }
+    .card .sub { color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+    .metric { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 900; color: var(--accent-2); }
+    .label { color: var(--muted); margin-top: 8px; line-height: 1.6; }
+    .dropzone {
+      border: 1.5px dashed rgba(245,166,35,0.34); border-radius: 20px; padding: 22px; background: rgba(245,166,35,0.05);
+      text-align: center; color: var(--muted);
+    }
+    .dropzone.dragover { background: rgba(245,166,35,0.1); border-color: rgba(245,166,35,0.7); color: var(--text); }
+    .file-list { display: grid; gap: 10px; margin-top: 14px; }
+    .file-item {
+      padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted); font-size: .93rem;
+    }
+    .hours-grid { display: grid; grid-template-columns: 150px repeat(2, 1fr); gap: 10px; margin-bottom: 10px; }
+    .card-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .chat-widget { position: fixed; right: 18px; bottom: 18px; z-index: 30; }
+    .chat-toggle {
+      width: 64px; height: 64px; border-radius: 999px; border: none; cursor: pointer; color: #201400;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 20px 45px rgba(245,166,35,0.32); font-size: 24px; font-weight: 900;
+    }
+    .chat-panel {
+      position: absolute; right: 0; bottom: 80px; width: min(390px, calc(100vw - 24px)); border-radius: 24px; overflow: hidden; display: none;
+    }
+    .chat-panel.open { display: block; }
+    .chat-head {
+      padding: 16px 18px; display: flex; justify-content: space-between; gap: 12px; align-items: center; border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+    .chat-head small { color: var(--muted); display: block; margin-top: 4px; }
+    .chat-body { max-height: 360px; overflow: auto; padding: 16px; display: grid; gap: 12px; }
+    .chat-empty { color: var(--muted); font-size: .94rem; line-height: 1.6; }
+    .bubble {
+      max-width: 85%; padding: 12px 14px; border-radius: 18px; line-height: 1.5; font-size: .95rem; white-space: pre-wrap; word-break: break-word;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .bubble.customer { margin-left: auto; background: rgba(245,166,35,0.16); color: #fff3dd; border-color: rgba(245,166,35,0.2); }
+    .bubble.admin { background: rgba(255,255,255,0.06); color: var(--text); }
+    .bubble-meta { margin-top: 6px; font-size: .76rem; color: rgba(255,255,255,0.52); }
+    .chat-compose { padding: 16px; border-top: 1px solid var(--border); display: grid; gap: 10px; }
+    .mini-grid { display:grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+    @media (max-width: 980px) {
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+    }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 18px, 1220px); }
+      .hero { flex-direction: column; align-items: stretch; }
+      .hero-actions > * { width: 100%; }
+      .hours-grid, .mini-grid { grid-template-columns: 1fr; }
+      .card-actions .button, .card-actions .ghost { width: 100%; }
+      .chat-panel { width: min(100vw - 18px, 390px); }
+    }
+  </style>
+</head>
+<body>
+  <section class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="badge"><span class="badge-dot"></span> LeoLan Digital · Hotel-Portal</div>
+      <h1>Hotel-Inhalte selbst verwalten</h1>
+      <p>Zimmerservice-Menü, Hotelfotos, Öffnungszeiten, Preislisten und Defekte direkt an LeoLan senden — ohne Hin-und-her per WhatsApp.</p>
+      <div class="stack">
+        <input class="input" id="codeInput" type="text" placeholder="Kundencode, z. B. HOTEL01" maxlength="16" autocomplete="one-time-code" />
+        <button class="button" id="loginButton" type="button">Einloggen</button>
+        <div class="hint">Der Zugangscode wird nach dem Onboarding vergeben.</div>
+        <div class="error" id="loginError"></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="app" id="app">
+    <div class="shell">
+      <section class="hero">
+        <div>
+          <div class="badge"><span class="badge-dot"></span> Self-Service für Hotels</div>
+          <h1 id="welcomeTitle" style="margin-top:16px;font-size:clamp(2rem,4vw,3.2rem)">Willkommen</h1>
+          <p>Pflegen Sie Roomservice, Bildmaterial, Öffnungszeiten, Preislisten und technische Meldungen an einem Ort. Alle Daten landen direkt im LeoLan-System.</p>
+        </div>
+        <div class="hero-actions">
+          <div class="pill"><span class="dot"></span><span id="authStatus">Angemeldet</span></div>
+          <button class="ghost" id="logoutButton" type="button">Logout</button>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card span-4">
+          <h2>Hotelkonto</h2>
+          <p class="sub">Aktive Portal-Zuordnung.</p>
+          <div class="metric" id="hotelName">—</div>
+          <div class="label">Slug: <span id="hotelSlug">—</span></div>
+        </article>
+
+        <article class="card span-4">
+          <h2>Aktionen</h2>
+          <p class="sub">Uploads und Formulare in dieser Sitzung.</p>
+          <div class="metric" id="uploadMetric">0</div>
+          <div class="label">gesendete Vorgänge</div>
+        </article>
+
+        <article class="card span-4">
+          <h2>Support-Chat</h2>
+          <p class="sub">Unten rechts erreichbar. Verlauf bleibt lokal sichtbar.</p>
+          <div class="metric" id="chatMetric">0</div>
+          <div class="label">Nachrichten lokal gespeichert</div>
+        </article>
+
+        <article class="card span-12" id="upgradeSection">
+          <h2>Pakete upgraden</h2>
+          <p class="sub">Gleiche Stripe-Upgrade-Logik wie im Restaurant-Portal — direkt aus dem Kundenbereich.</p>
+          <div class="grid" style="gap:14px">
+            <div class="card span-4" style="padding:18px;background:rgba(255,255,255,0.03)">
+              <div class="label">Aktueller Plan</div>
+              <div class="metric" id="planMetric">—</div>
+            </div>
+            <div class="card span-4" style="padding:18px;background:rgba(255,255,255,0.03)">
+              <div class="label">Verbrauch diese Woche</div>
+              <div class="metric" id="weekUsageMetric">—</div>
+            </div>
+            <div class="card span-4" style="padding:18px;background:rgba(255,255,255,0.03)">
+              <div class="label">Verbrauch diesen Monat</div>
+              <div class="metric" id="monthUsageMetric">—</div>
+            </div>
+          </div>
+          <div class="grid" id="upgradeCards" style="margin-top:16px"></div>
+          <div class="status" id="upgradeStatus"></div>
+        </article>
+
+        <article class="card span-6">
+          <h2>Zimmerservice-Menü hochladen</h2>
+          <p class="sub">PDF oder Bilddatei, maximal 10 MB.</p>
+          <div class="stack">
+            <div class="dropzone" id="roomserviceMenuDropzone">
+              Datei hier hineinziehen oder unten auswählen.
+              <div style="margin-top:12px"><input class="input" id="roomserviceMenuFile" type="file" accept=".pdf,image/*" /></div>
+            </div>
+            <div class="file-list" id="roomserviceMenuPreview"></div>
+            <div class="card-actions">
+              <button class="button" id="roomserviceMenuUploadButton" type="button">Menü senden</button>
+            </div>
+            <div class="status" id="roomserviceMenuStatus"></div>
+          </div>
+        </article>
+
+        <article class="card span-6">
+          <h2>Hotelfotos hochladen</h2>
+          <p class="sub">Lobby, Zimmer, Spa, Pool oder Restaurant. Bis zu 10 Bilder pro Upload.</p>
+          <div class="stack">
+            <div class="dropzone" id="hotelPhotosDropzone">
+              Bilder hier hineinziehen.
+              <div style="margin-top:12px"><input class="input" id="hotelPhotosFile" type="file" accept="image/*" multiple /></div>
+            </div>
+            <div class="file-list" id="hotelPhotosPreview"></div>
+            <div class="card-actions">
+              <button class="button" id="hotelPhotosUploadButton" type="button">Fotos senden</button>
+            </div>
+            <div class="status" id="hotelPhotosStatus"></div>
+          </div>
+        </article>
+
+        <article class="card span-7">
+          <h2>Öffnungszeiten</h2>
+          <p class="sub">Für Restaurant, Pool, Spa und Rezeption.</p>
+          <div class="stack" id="hoursForm"></div>
+          <div class="card-actions">
+            <button class="button" id="hoursSaveButton" type="button">Öffnungszeiten speichern</button>
+          </div>
+          <div class="status" id="hoursStatus"></div>
+        </article>
+
+        <article class="card span-5">
+          <h2>Defekt melden</h2>
+          <p class="sub">Wird direkt mit Zimmer, Kategorie und Priorität übermittelt.</p>
+          <div class="stack">
+            <input class="input" id="issueRoom" type="text" placeholder="Zimmer / Bereich, z. B. 204 oder Spa" />
+            <select class="select" id="issueType">
+              <option value="">Art des Defekts wählen</option>
+              <option>Klimaanlage</option>
+              <option>TV / Internet</option>
+              <option>Sanitär</option>
+              <option>Elektrik</option>
+              <option>Möbel / Ausstattung</option>
+              <option>Sonstiges</option>
+            </select>
+            <select class="select" id="issuePriority">
+              <option value="mittel">Dringlichkeit: mittel</option>
+              <option value="hoch">Dringlichkeit: hoch</option>
+              <option value="kritisch">Dringlichkeit: kritisch</option>
+              <option value="niedrig">Dringlichkeit: niedrig</option>
+            </select>
+            <textarea class="textarea" id="issueDescription" placeholder="Bitte Defekt kurz beschreiben"></textarea>
+            <button class="button" id="issueSendButton" type="button">Defekt melden</button>
+            <div class="status" id="issueStatus"></div>
+          </div>
+        </article>
+
+        <article class="card span-6">
+          <h2>Preisliste</h2>
+          <p class="sub">Zum Beispiel Roomservice, Minibar, Spa oder Zusatzleistungen.</p>
+          <div class="stack">
+            <div class="dropzone" id="priceListDropzone">
+              Datei hier hineinziehen oder auswählen.
+              <div style="margin-top:12px"><input class="input" id="priceListFile" type="file" accept=".pdf,image/*,.csv,.xlsx,.xls,.doc,.docx,.txt,.json" /></div>
+            </div>
+            <div class="file-list" id="priceListPreview"></div>
+            <div class="card-actions">
+              <button class="button" id="priceListUploadButton" type="button">Preisliste senden</button>
+            </div>
+            <div class="status" id="priceListStatus"></div>
+          </div>
+        </article>
+
+        <article class="card span-6">
+          <h2>Hinweis für Ihr Team</h2>
+          <p class="sub">Das Portal ist für schnelle Aktualisierungen gedacht. Größere Umbauten oder neue Automationen bitte weiterhin direkt mit LeoLan abstimmen.</p>
+          <div class="stack">
+            <div class="file-item">✓ Uploads landen strukturiert auf dem NAS.</div>
+            <div class="file-item">✓ Jede Aktion erzeugt eine Benachrichtigung an business@leolan.net.</div>
+            <div class="file-item">✓ Hotel-spezifische Pfade: <code>/home/Kunden-Uploads/Hotels/{slug}/…</code></div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <div class="chat-widget">
+    <button class="chat-toggle" id="chatToggle" type="button">💬</button>
+    <section class="chat-panel" id="chatPanel">
+      <div class="chat-head">
+        <div>
+          <strong>Chat mit LeoLan Support</strong>
+          <small>Schnell für Rückfragen und Freigaben.</small>
+        </div>
+        <button class="ghost" id="chatClose" type="button" style="width:auto;padding:10px 12px">✕</button>
+      </div>
+      <div class="chat-body" id="chatBody"></div>
+      <div class="chat-compose">
+        <input class="input" id="chatEmail" type="email" placeholder="E-Mail für Antworten" />
+        <textarea class="textarea" id="chatMessage" placeholder="Ihre Nachricht an LeoLan Digital"></textarea>
+        <button class="button" id="chatSend" type="button">Nachricht senden</button>
+        <div class="status" id="chatStatus"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const AUTH_URL = 'https://n8n.leolan.net/webhook/hotel-portal-auth';
+    const UPLOAD_URL = 'https://n8n.leolan.net/webhook/hotel-portal-upload';
+    const CHAT_URL = 'https://n8n.leolan.net/webhook/hotel-portal-chat';
+    const CHAT_HISTORY_URL = 'https://n8n.leolan.net/webhook/hotel-portal-chat-history';
+    const UPGRADE_URL = 'https://n8n.leolan.net/webhook/hotel-portal-upgrade';
+    const UPGRADE_STATUS_URL = 'https://n8n.leolan.net/webhook/hotel-portal-upgrade-status';
+    const AUTH_KEY = 'leolan-hotel-portal-auth-v1';
+    const CHAT_CACHE_PREFIX = 'leolan-hotel-portal-chat-';
+    const HOURS_SECTIONS = ['Restaurant', 'Pool', 'Spa', 'Rezeption'];
+
+    const loginScreen = document.getElementById('loginScreen');
+    const app = document.getElementById('app');
+    const codeInput = document.getElementById('codeInput');
+    const loginButton = document.getElementById('loginButton');
+    const loginError = document.getElementById('loginError');
+    const logoutButton = document.getElementById('logoutButton');
+    const welcomeTitle = document.getElementById('welcomeTitle');
+    const hotelName = document.getElementById('hotelName');
+    const hotelSlug = document.getElementById('hotelSlug');
+    const authStatus = document.getElementById('authStatus');
+    const uploadMetric = document.getElementById('uploadMetric');
+    const chatMetric = document.getElementById('chatMetric');
+    const planMetric = document.getElementById('planMetric');
+    const weekUsageMetric = document.getElementById('weekUsageMetric');
+    const monthUsageMetric = document.getElementById('monthUsageMetric');
+    const upgradeCards = document.getElementById('upgradeCards');
+    const upgradeStatus = document.getElementById('upgradeStatus');
+
+    const roomserviceMenuFile = document.getElementById('roomserviceMenuFile');
+    const hotelPhotosFile = document.getElementById('hotelPhotosFile');
+    const priceListFile = document.getElementById('priceListFile');
+    const roomserviceMenuPreview = document.getElementById('roomserviceMenuPreview');
+    const hotelPhotosPreview = document.getElementById('hotelPhotosPreview');
+    const priceListPreview = document.getElementById('priceListPreview');
+    const roomserviceMenuUploadButton = document.getElementById('roomserviceMenuUploadButton');
+    const hotelPhotosUploadButton = document.getElementById('hotelPhotosUploadButton');
+    const priceListUploadButton = document.getElementById('priceListUploadButton');
+    const roomserviceMenuStatus = document.getElementById('roomserviceMenuStatus');
+    const hotelPhotosStatus = document.getElementById('hotelPhotosStatus');
+    const priceListStatus = document.getElementById('priceListStatus');
+    const hoursForm = document.getElementById('hoursForm');
+    const hoursSaveButton = document.getElementById('hoursSaveButton');
+    const hoursStatus = document.getElementById('hoursStatus');
+
+    const issueRoom = document.getElementById('issueRoom');
+    const issueType = document.getElementById('issueType');
+    const issuePriority = document.getElementById('issuePriority');
+    const issueDescription = document.getElementById('issueDescription');
+    const issueSendButton = document.getElementById('issueSendButton');
+    const issueStatus = document.getElementById('issueStatus');
+
+    const chatToggle = document.getElementById('chatToggle');
+    const chatPanel = document.getElementById('chatPanel');
+    const chatClose = document.getElementById('chatClose');
+    const chatBody = document.getElementById('chatBody');
+    const chatEmail = document.getElementById('chatEmail');
+    const chatMessage = document.getElementById('chatMessage');
+    const chatSend = document.getElementById('chatSend');
+    const chatStatus = document.getElementById('chatStatus');
+
+    let auth = null;
+    let sessionUploads = 0;
+    let selectedRoomserviceMenu = null;
+    let selectedHotelPhotos = [];
+    let selectedPriceList = null;
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+    function getStoredAuth() { try { return JSON.parse(localStorage.getItem(AUTH_KEY) || 'null'); } catch { return null; } }
+    function setStoredAuth(value) { localStorage.setItem(AUTH_KEY, JSON.stringify(value)); }
+    function clearStoredAuth() { localStorage.removeItem(AUTH_KEY); }
+    function getChatCacheKey() { return auth?.slug ? `${CHAT_CACHE_PREFIX}${auth.slug}` : null; }
+    function getLocalMessages() { const key = getChatCacheKey(); if (!key) return []; try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } }
+    function setLocalMessages(messages) { const key = getChatCacheKey(); if (!key) return; localStorage.setItem(key, JSON.stringify(messages)); updateMetrics(); }
+    function addLocalMessage(message) { const all = getLocalMessages(); all.push(message); setLocalMessages(all); renderChat(); }
+    function updateMetrics() { uploadMetric.textContent = String(sessionUploads); chatMetric.textContent = String(getLocalMessages().length); }
+    function showApp() { loginScreen.style.display = 'none'; app.classList.add('visible'); }
+    function showLogin() { app.classList.remove('visible'); loginScreen.style.display = 'grid'; codeInput.focus(); }
+    function setStatus(element, text, type = 'muted') { element.className = 'status'; if (type === 'success') element.classList.add('success'); if (type === 'error') element.classList.add('error'); element.textContent = text; }
+    function formatBytes(bytes) { if (bytes < 1024) return `${bytes} B`; if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`; return `${(bytes / (1024 * 1024)).toFixed(1)} MB`; }
+    function renderFileList(target, files) {
+      target.innerHTML = files.length
+        ? files.map(file => `<div class="file-item">${escapeHtml(file.name)} · ${formatBytes(file.size)}</div>`).join('')
+        : '<div class="file-item">Noch keine Datei ausgewählt.</div>';
+    }
+    function buildHoursForm() {
+      hoursForm.innerHTML = HOURS_SECTIONS.map((section, index) => `
+        <div class="hours-grid">
+          <div class="file-item" style="display:flex;align-items:center;font-weight:700;color:var(--text)">${escapeHtml(section)}</div>
+          <input class="input" type="text" data-hours-open="${index}" placeholder="z. B. 08:00" />
+          <input class="input" type="text" data-hours-close="${index}" placeholder="z. B. 22:00 oder geschlossen" />
+        </div>
+      `).join('');
+    }
+    function getHoursPayload() {
+      return HOURS_SECTIONS.reduce((acc, section, index) => {
+        acc[section] = {
+          open: document.querySelector(`[data-hours-open="${index}"]`)?.value.trim() || '',
+          close: document.querySelector(`[data-hours-close="${index}"]`)?.value.trim() || ''
+        };
+        return acc;
+      }, {});
+    }
+    async function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ''));
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+    function validateSingleFile(file, kind = 'generic') {
+      if (!file) throw new Error('Bitte zuerst eine Datei auswählen.');
+      if (file.size > 10 * 1024 * 1024) throw new Error('Datei ist größer als 10 MB.');
+      if (kind === 'image' && !file.type.startsWith('image/')) throw new Error('Nur Bilddateien erlaubt.');
+    }
+    function validatePhotos(files) {
+      if (!files.length) throw new Error('Bitte mindestens ein Foto auswählen.');
+      if (files.length > 10) throw new Error('Maximal 10 Fotos erlaubt.');
+      files.forEach(file => validateSingleFile(file, 'image'));
+    }
+    async function apiJson(url, options = {}) {
+      const response = await fetch(url, options);
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.success === false) throw new Error(data.error || `HTTP ${response.status}`);
+      return data;
+    }
+    async function login() {
+      const code = codeInput.value.trim().toUpperCase();
+      loginError.textContent = '';
+      if (!code) return void (loginError.textContent = 'Bitte Kundencode eingeben.');
+      loginButton.disabled = true;
+      try {
+        const data = await apiJson(AUTH_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code })
+        });
+        auth = {
+          code,
+          token: data.token || code,
+          hotelName: data.hotelName || data.name,
+          name: data.name || data.hotelName,
+          slug: data.slug,
+          customerEmail: data.customerEmail || ''
+        };
+        setStoredAuth(auth);
+        hydrateApp();
+        showApp();
+        await Promise.all([syncChatHistory(), loadUpgradeStatus()]);
+      } catch (error) {
+        loginError.textContent = error.message || 'Login fehlgeschlagen.';
+      } finally {
+        loginButton.disabled = false;
+      }
+    }
+    function hydrateApp() {
+      welcomeTitle.textContent = `Willkommen ${auth.hotelName}`;
+      hotelName.textContent = auth.hotelName;
+      hotelSlug.textContent = auth.slug;
+      authStatus.textContent = `Angemeldet als ${auth.code}`;
+      chatEmail.value = auth.customerEmail || '';
+      updateMetrics();
+      renderChat();
+      loadUpgradeStatus();
+    }
+    function logout() {
+      auth = null;
+      sessionUploads = 0;
+      selectedRoomserviceMenu = null;
+      selectedHotelPhotos = [];
+      selectedPriceList = null;
+      roomserviceMenuFile.value = '';
+      hotelPhotosFile.value = '';
+      priceListFile.value = '';
+      renderFileList(roomserviceMenuPreview, []);
+      renderFileList(hotelPhotosPreview, []);
+      renderFileList(priceListPreview, []);
+      [roomserviceMenuStatus, hotelPhotosStatus, priceListStatus, hoursStatus, issueStatus, chatStatus, upgradeStatus].forEach(el => setStatus(el, ''));
+      clearStoredAuth();
+      updateMetrics();
+      showLogin();
+    }
+    async function loadUpgradeStatus() {
+      if (!auth) return;
+      try {
+        const data = await apiJson(`${UPGRADE_STATUS_URL}?code=${encodeURIComponent(auth.code)}`, { method: 'GET' });
+        planMetric.textContent = String(data.plan || 'starter').toUpperCase();
+        weekUsageMetric.textContent = `${data.weekUsage || 0}`;
+        monthUsageMetric.textContent = `${data.monthUsage || 0} / ${data.msgLimit || 0}`;
+        const currentPlan = String(data.plan || 'starter');
+        const cards = [
+          currentPlan === 'starter' ? { key: 'pro', title: 'Upgrade auf Pro', price: '349€/Monat', text: 'Mehr Leistung und höheres Kontingent für Hotelkommunikation.' } : null,
+          { key: 'msg_s', title: 'Nachrichten-Upgrade S', price: '+499€/Monat', text: '1.000 Nachrichten pro Monat.' },
+          { key: 'msg_m', title: 'Nachrichten-Upgrade M', price: '+599€/Monat', text: '2.000 Nachrichten pro Monat.' },
+          { key: 'msg_l', title: 'Nachrichten-Upgrade L', price: '+699€/Monat', text: 'Bis zu 20.000 Nachrichten pro Monat.' },
+        ].filter(Boolean);
+        upgradeCards.innerHTML = cards.map(card => `
+          <article class="card span-6" style="padding:18px;background:rgba(255,255,255,0.03)">
+            <h3 style="margin-bottom:8px">${escapeHtml(card.title)}</h3>
+            <div style="font-size:1.4rem;font-weight:900;color:var(--accent-2);margin-bottom:8px">${escapeHtml(card.price)}</div>
+            <p class="sub" style="margin-bottom:14px">${escapeHtml(card.text)}</p>
+            <button class="button" type="button" data-upgrade="${escapeHtml(card.key)}">Jetzt upgraden</button>
+          </article>
+        `).join('');
+        upgradeCards.querySelectorAll('[data-upgrade]').forEach(button => button.addEventListener('click', () => startUpgrade(button.dataset.upgrade, button)));
+      } catch (error) {
+        setStatus(upgradeStatus, error.message || 'Upgrade-Status konnte nicht geladen werden.', 'error');
+      }
+    }
+    async function startUpgrade(upgradeType, button) {
+      const original = button.textContent;
+      button.disabled = true;
+      try {
+        setStatus(upgradeStatus, 'Stripe Checkout wird vorbereitet…');
+        const data = await apiJson(UPGRADE_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: auth.code, upgradeType })
+        });
+        if (!data.checkoutUrl) throw new Error('Keine Checkout-URL erhalten.');
+        window.location.href = data.checkoutUrl;
+      } catch (error) {
+        button.disabled = false;
+        button.textContent = original;
+        setStatus(upgradeStatus, error.message || 'Upgrade konnte nicht gestartet werden.', 'error');
+      }
+    }
+    async function uploadSingle(type, file, button, statusElement, successText) {
+      try {
+        validateSingleFile(file);
+        button.disabled = true;
+        setStatus(statusElement, 'Datei wird hochgeladen…');
+        const data = await fileToDataUrl(file);
+        await apiJson(UPLOAD_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: auth.code, token: auth.token, type, filename: file.name, data })
+        });
+        sessionUploads += 1;
+        updateMetrics();
+        setStatus(statusElement, successText, 'success');
+      } catch (error) {
+        setStatus(statusElement, error.message || 'Upload fehlgeschlagen.', 'error');
+      } finally {
+        button.disabled = false;
+      }
+    }
+    async function uploadRoomserviceMenu() { return uploadSingle('roomservice-menu', selectedRoomserviceMenu, roomserviceMenuUploadButton, roomserviceMenuStatus, 'Roomservice-Menü erfolgreich gesendet.'); }
+    async function uploadPriceList() { return uploadSingle('price-list', selectedPriceList, priceListUploadButton, priceListStatus, 'Preisliste erfolgreich gesendet.'); }
+    async function uploadHotelPhotos() {
+      try {
+        validatePhotos(selectedHotelPhotos);
+        hotelPhotosUploadButton.disabled = true;
+        setStatus(hotelPhotosStatus, 'Hotelfotos werden hochgeladen…');
+        const files = await Promise.all(selectedHotelPhotos.map(async file => ({ filename: file.name, data: await fileToDataUrl(file) })));
+        await apiJson(UPLOAD_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: auth.code, token: auth.token, type: 'hotel-photos', files })
+        });
+        sessionUploads += selectedHotelPhotos.length;
+        updateMetrics();
+        setStatus(hotelPhotosStatus, `${selectedHotelPhotos.length} Foto(s) erfolgreich gesendet.`, 'success');
+      } catch (error) {
+        setStatus(hotelPhotosStatus, error.message || 'Foto-Upload fehlgeschlagen.', 'error');
+      } finally {
+        hotelPhotosUploadButton.disabled = false;
+      }
+    }
+    async function saveHours() {
+      hoursSaveButton.disabled = true;
+      try {
+        setStatus(hoursStatus, 'Öffnungszeiten werden gespeichert…');
+        await apiJson(UPLOAD_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: auth.code, token: auth.token, type: 'opening-hours', hours: getHoursPayload() })
+        });
+        sessionUploads += 1; updateMetrics();
+        setStatus(hoursStatus, 'Öffnungszeiten erfolgreich gespeichert.', 'success');
+      } catch (error) {
+        setStatus(hoursStatus, error.message || 'Speichern fehlgeschlagen.', 'error');
+      } finally {
+        hoursSaveButton.disabled = false;
+      }
+    }
+    async function sendIssue() {
+      const room = issueRoom.value.trim();
+      const category = issueType.value.trim();
+      const priority = issuePriority.value.trim();
+      const description = issueDescription.value.trim();
+      if (!room || !category || !description) return setStatus(issueStatus, 'Bitte Zimmer/Bereich, Art und Beschreibung ausfüllen.', 'error');
+      issueSendButton.disabled = true;
+      try {
+        setStatus(issueStatus, 'Defektmeldung wird gesendet…');
+        await apiJson(UPLOAD_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: auth.code, token: auth.token, type: 'issue-report', issue: { room, category, priority, description, reportedAt: new Date().toISOString() } })
+        });
+        sessionUploads += 1; updateMetrics();
+        issueRoom.value = ''; issueType.value = ''; issuePriority.value = 'mittel'; issueDescription.value = '';
+        setStatus(issueStatus, 'Defekt erfolgreich gemeldet.', 'success');
+      } catch (error) {
+        setStatus(issueStatus, error.message || 'Defektmeldung fehlgeschlagen.', 'error');
+      } finally {
+        issueSendButton.disabled = false;
+      }
+    }
+    function renderChat() {
+      const messages = getLocalMessages();
+      if (!messages.length) return void (chatBody.innerHTML = '<div class="chat-empty">Noch keine Nachrichten. Schreiben Sie uns direkt hier.</div>');
+      chatBody.innerHTML = messages.map(item => `
+        <div class="bubble ${item.from === 'customer' ? 'customer' : 'admin'}">
+          ${escapeHtml(item.message)}
+          <div class="bubble-meta">${item.from === 'customer' ? 'Sie' : 'LeoLan'} · ${new Date(item.timestamp).toLocaleString('de-DE')}</div>
+        </div>
+      `).join('');
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    async function syncChatHistory() {
+      if (!auth) return;
+      try {
+        const data = await apiJson(`${CHAT_HISTORY_URL}?code=${encodeURIComponent(auth.code)}`, { method: 'GET' });
+        if (Array.isArray(data.messages)) {
+          const normalized = data.messages.map(item => ({ from: item.from === 'admin' ? 'admin' : 'customer', message: item.message, timestamp: item.timestamp || new Date().toISOString() }));
+          setLocalMessages(normalized); renderChat();
+        }
+      } catch (error) { console.error('chat history sync failed', error); }
+    }
+    async function sendChatMessage() {
+      const message = chatMessage.value.trim();
+      const email = chatEmail.value.trim();
+      if (!message) return setStatus(chatStatus, 'Bitte Nachricht eingeben.', 'error');
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setStatus(chatStatus, 'Bitte gültige E-Mail eintragen.', 'error');
+      chatSend.disabled = true;
+      try {
+        setStatus(chatStatus, 'Nachricht wird gesendet…');
+        await apiJson(CHAT_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: auth.code, type: 'customer_to_admin', message, customerEmail: email, hotelName: auth.hotelName, slug: auth.slug })
+        });
+        addLocalMessage({ from: 'customer', message, timestamp: new Date().toISOString() });
+        chatMessage.value = ''; auth.customerEmail = email; setStoredAuth(auth);
+        setStatus(chatStatus, 'Nachricht gesendet.', 'success');
+      } catch (error) {
+        setStatus(chatStatus, error.message || 'Nachricht konnte nicht gesendet werden.', 'error');
+      } finally { chatSend.disabled = false; }
+    }
+    function bindDropzone(zone, input, onFiles) {
+      ['dragenter','dragover'].forEach(evt => zone.addEventListener(evt, event => { event.preventDefault(); zone.classList.add('dragover'); }));
+      ['dragleave','drop'].forEach(evt => zone.addEventListener(evt, event => { event.preventDefault(); zone.classList.remove('dragover'); }));
+      zone.addEventListener('drop', event => onFiles([...event.dataTransfer.files]));
+      input.addEventListener('change', () => onFiles([...input.files]));
+    }
+
+    loginButton.addEventListener('click', login);
+    codeInput.addEventListener('keydown', event => { if (event.key === 'Enter') login(); });
+    logoutButton.addEventListener('click', logout);
+    roomserviceMenuUploadButton.addEventListener('click', uploadRoomserviceMenu);
+    hotelPhotosUploadButton.addEventListener('click', uploadHotelPhotos);
+    priceListUploadButton.addEventListener('click', uploadPriceList);
+    hoursSaveButton.addEventListener('click', saveHours);
+    issueSendButton.addEventListener('click', sendIssue);
+
+    bindDropzone(document.getElementById('roomserviceMenuDropzone'), roomserviceMenuFile, files => {
+      selectedRoomserviceMenu = files[0] || null; renderFileList(roomserviceMenuPreview, selectedRoomserviceMenu ? [selectedRoomserviceMenu] : []);
+    });
+    bindDropzone(document.getElementById('hotelPhotosDropzone'), hotelPhotosFile, files => {
+      selectedHotelPhotos = files.slice(0, 10); renderFileList(hotelPhotosPreview, selectedHotelPhotos);
+    });
+    bindDropzone(document.getElementById('priceListDropzone'), priceListFile, files => {
+      selectedPriceList = files[0] || null; renderFileList(priceListPreview, selectedPriceList ? [selectedPriceList] : []);
+    });
+
+    chatToggle.addEventListener('click', async () => { chatPanel.classList.toggle('open'); if (chatPanel.classList.contains('open')) await syncChatHistory(); });
+    chatClose.addEventListener('click', () => chatPanel.classList.remove('open'));
+    chatSend.addEventListener('click', sendChatMessage);
+
+    buildHoursForm();
+    renderFileList(roomserviceMenuPreview, []);
+    renderFileList(hotelPhotosPreview, []);
+    renderFileList(priceListPreview, []);
+
+    const storedAuth = getStoredAuth();
+    if (storedAuth?.code && storedAuth?.slug) {
+      auth = storedAuth; hydrateApp(); showApp(); Promise.all([syncChatHistory(), loadUpgradeStatus()]);
+    } else showLogin();
+  </script>
+</body>
+</html>

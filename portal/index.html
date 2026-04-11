@@ -137,6 +137,10 @@
     .bubble-meta { margin-top: 6px; font-size: .76rem; color: rgba(255,255,255,0.52); }
     .chat-compose { padding: 16px; border-top: 1px solid var(--border); display: grid; gap: 10px; }
     .mini-grid { display:grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+    .feed-list { display: grid; gap: 14px; }
+    .feed-row { padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+    .feed-row-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .feed-row-title { font-weight: 800; }
     @media (max-width: 980px) {
       .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
     }
@@ -306,6 +310,19 @@
           </div>
         </article>
 
+        <article class="card span-12">
+          <h2>🔗 Kalender-Verbindungen</h2>
+          <p class="sub">Verbinden Sie Booking.com-, Airbnb- und weitere iCal-Feeds, damit externe Buchungen stündlich in die Zimmerverfügbarkeit einfließen.</p>
+          <div class="stack">
+            <div class="feed-list" id="icalFeedsList"></div>
+            <div class="card-actions">
+              <button class="ghost" id="addIcalFeedButton" type="button">Weiteren Feed hinzufügen</button>
+              <button class="button" id="saveIcalConfigButton" type="button">Kalender-Verbindungen speichern</button>
+            </div>
+            <div class="status" id="icalConfigStatus"></div>
+          </div>
+        </article>
+
         <article class="card span-6">
           <h2>Hinweis für Ihr Team</h2>
           <p class="sub">Das Portal ist für schnelle Aktualisierungen gedacht. Größere Umbauten oder neue Automationen bitte weiterhin direkt mit LeoLan abstimmen.</p>
@@ -346,6 +363,7 @@
     const CHAT_HISTORY_URL = 'https://n8n.leolan.net/webhook/hotel-portal-chat-history';
     const UPGRADE_URL = 'https://n8n.leolan.net/webhook/hotel-portal-upgrade';
     const UPGRADE_STATUS_URL = 'https://n8n.leolan.net/webhook/hotel-portal-upgrade-status';
+    const ICAL_CONFIG_URL = 'https://n8n.leolan.net/webhook/hotel-ical-config';
     const AUTH_KEY = 'leolan-hotel-portal-auth-v1';
     const CHAT_CACHE_PREFIX = 'leolan-hotel-portal-chat-';
     const HOURS_SECTIONS = ['Restaurant', 'Pool', 'Spa', 'Rezeption'];
@@ -383,6 +401,10 @@
     const hoursForm = document.getElementById('hoursForm');
     const hoursSaveButton = document.getElementById('hoursSaveButton');
     const hoursStatus = document.getElementById('hoursStatus');
+    const icalFeedsList = document.getElementById('icalFeedsList');
+    const addIcalFeedButton = document.getElementById('addIcalFeedButton');
+    const saveIcalConfigButton = document.getElementById('saveIcalConfigButton');
+    const icalConfigStatus = document.getElementById('icalConfigStatus');
 
     const issueRoom = document.getElementById('issueRoom');
     const issueType = document.getElementById('issueType');
@@ -405,6 +427,7 @@
     let selectedRoomserviceMenu = null;
     let selectedHotelPhotos = [];
     let selectedPriceList = null;
+    let icalFeeds = [];
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -430,6 +453,12 @@
       target.innerHTML = files.length
         ? files.map(file => `<div class="file-item">${escapeHtml(file.name)} · ${formatBytes(file.size)}</div>`).join('')
         : '<div class="file-item">Noch keine Datei ausgewählt.</div>';
+    }
+    function getDefaultIcalFeeds() {
+      return [
+        { source: 'Booking.com', roomType: 'standard', url: '' },
+        { source: 'Airbnb', roomType: 'suite', url: '' }
+      ];
     }
     function buildHoursForm() {
       hoursForm.innerHTML = HOURS_SECTIONS.map((section, index) => `
@@ -473,6 +502,98 @@
       if (!response.ok || data.success === false) throw new Error(data.error || `HTTP ${response.status}`);
       return data;
     }
+    function renderIcalFeeds() {
+      if (!icalFeedsList) return;
+      if (!icalFeeds.length) icalFeeds = getDefaultIcalFeeds();
+      icalFeedsList.innerHTML = icalFeeds.map((feed, index) => `
+        <div class="feed-row">
+          <div class="feed-row-head">
+            <div class="feed-row-title">Feed ${index + 1}</div>
+            <button class="ghost" type="button" data-remove-ical="${index}" style="width:auto;padding:10px 12px">Entfernen</button>
+          </div>
+          <div class="grid" style="gap:12px">
+            <div class="span-3">
+              <input class="input" type="text" data-ical-source="${index}" placeholder="Quelle, z. B. Booking.com" value="${escapeHtml(feed.source || '')}" />
+            </div>
+            <div class="span-3">
+              <select class="select" data-ical-room="${index}">
+                ${['standard','superior','suite'].map(option => `<option value="${option}" ${option === (feed.roomType || 'standard') ? 'selected' : ''}>${option}</option>`).join('')}
+              </select>
+            </div>
+            <div class="span-6">
+              <input class="input" type="url" data-ical-url="${index}" placeholder="https://.../calendar.ics" value="${escapeHtml(feed.url || '')}" />
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="button" type="button" data-test-ical="${index}">Verbindung testen</button>
+          </div>
+        </div>
+      `).join('');
+      icalFeedsList.querySelectorAll('[data-remove-ical]').forEach(button => button.addEventListener('click', () => {
+        icalFeeds.splice(Number(button.dataset.removeIcal), 1);
+        renderIcalFeeds();
+      }));
+      icalFeedsList.querySelectorAll('[data-test-ical]').forEach(button => button.addEventListener('click', () => testIcalConnection(Number(button.dataset.testIcal), button)));
+    }
+    function collectIcalFeeds() {
+      if (!icalFeedsList) return [];
+      const feeds = [...icalFeedsList.querySelectorAll('.feed-row')].map((row, index) => ({
+        source: row.querySelector(`[data-ical-source="${index}"]`)?.value.trim() || 'iCal',
+        roomType: row.querySelector(`[data-ical-room="${index}"]`)?.value.trim() || 'standard',
+        url: row.querySelector(`[data-ical-url="${index}"]`)?.value.trim() || ''
+      })).filter(feed => feed.url);
+      icalFeeds = feeds.length ? feeds : getDefaultIcalFeeds();
+      return feeds;
+    }
+    async function loadIcalConfig() {
+      if (!auth) return;
+      try {
+        const data = await apiJson(`${ICAL_CONFIG_URL}?code=${encodeURIComponent(auth.code)}`, { method: 'GET' });
+        icalFeeds = Array.isArray(data.feeds) && data.feeds.length ? data.feeds : getDefaultIcalFeeds();
+        renderIcalFeeds();
+      } catch (error) {
+        icalFeeds = getDefaultIcalFeeds();
+        renderIcalFeeds();
+        setStatus(icalConfigStatus, error.message || 'iCal-Konfiguration konnte nicht geladen werden.', 'error');
+      }
+    }
+    async function testIcalConnection(index, button) {
+      const row = icalFeedsList.querySelectorAll('.feed-row')[index];
+      if (!row) return;
+      const feed = {
+        source: row.querySelector(`[data-ical-source="${index}"]`)?.value.trim() || 'iCal',
+        roomType: row.querySelector(`[data-ical-room="${index}"]`)?.value.trim() || 'standard',
+        url: row.querySelector(`[data-ical-url="${index}"]`)?.value.trim() || ''
+      };
+      if (!feed.url) return setStatus(icalConfigStatus, 'Bitte zuerst eine iCal-URL eintragen.', 'error');
+      button.disabled = true;
+      try {
+        setStatus(icalConfigStatus, 'iCal-Feed wird getestet…');
+        const data = await apiJson(ICAL_CONFIG_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: auth.code, action: 'test', feed })
+        });
+        setStatus(icalConfigStatus, `Verbindung ok: ${data.eventCount || 0} Buchung(en) erkannt.`, 'success');
+      } catch (error) {
+        setStatus(icalConfigStatus, error.message || 'Verbindungstest fehlgeschlagen.', 'error');
+      } finally {
+        button.disabled = false;
+      }
+    }
+    async function saveIcalConfig() {
+      const feeds = collectIcalFeeds();
+      saveIcalConfigButton.disabled = true;
+      try {
+        setStatus(icalConfigStatus, 'Kalender-Verbindungen werden gespeichert…');
+        await apiJson(ICAL_CONFIG_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: auth.code, feeds })
+        });
+        setStatus(icalConfigStatus, `${feeds.length} Kalender-Verbindung(en) gespeichert.`, 'success');
+      } catch (error) {
+        setStatus(icalConfigStatus, error.message || 'Speichern der iCal-Konfiguration fehlgeschlagen.', 'error');
+      } finally {
+        saveIcalConfigButton.disabled = false;
+      }
+    }
     async function login() {
       const code = codeInput.value.trim().toUpperCase();
       loginError.textContent = '';
@@ -493,7 +614,7 @@
         setStoredAuth(auth);
         hydrateApp();
         showApp();
-        await Promise.all([syncChatHistory(), loadUpgradeStatus()]);
+        await Promise.all([syncChatHistory(), loadUpgradeStatus(), loadIcalConfig()]);
       } catch (error) {
         loginError.textContent = error.message || 'Login fehlgeschlagen.';
       } finally {
@@ -509,6 +630,7 @@
       updateMetrics();
       renderChat();
       loadUpgradeStatus();
+      loadIcalConfig();
     }
     function logout() {
       auth = null;
@@ -522,7 +644,7 @@
       renderFileList(roomserviceMenuPreview, []);
       renderFileList(hotelPhotosPreview, []);
       renderFileList(priceListPreview, []);
-      [roomserviceMenuStatus, hotelPhotosStatus, priceListStatus, hoursStatus, issueStatus, chatStatus, upgradeStatus].forEach(el => setStatus(el, ''));
+      [roomserviceMenuStatus, hotelPhotosStatus, priceListStatus, hoursStatus, issueStatus, chatStatus, upgradeStatus, icalConfigStatus].forEach(el => setStatus(el, ''));
       clearStoredAuth();
       updateMetrics();
       showLogin();
@@ -702,6 +824,8 @@
     priceListUploadButton.addEventListener('click', uploadPriceList);
     hoursSaveButton.addEventListener('click', saveHours);
     issueSendButton.addEventListener('click', sendIssue);
+    addIcalFeedButton.addEventListener('click', () => { icalFeeds.push({ source: '', roomType: 'standard', url: '' }); renderIcalFeeds(); });
+    saveIcalConfigButton.addEventListener('click', saveIcalConfig);
 
     bindDropzone(document.getElementById('roomserviceMenuDropzone'), roomserviceMenuFile, files => {
       selectedRoomserviceMenu = files[0] || null; renderFileList(roomserviceMenuPreview, selectedRoomserviceMenu ? [selectedRoomserviceMenu] : []);
@@ -718,6 +842,7 @@
     chatSend.addEventListener('click', sendChatMessage);
 
     buildHoursForm();
+    renderIcalFeeds();
     renderFileList(roomserviceMenuPreview, []);
     renderFileList(hotelPhotosPreview, []);
     renderFileList(priceListPreview, []);

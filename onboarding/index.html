@@ -200,7 +200,7 @@
               <div class="error">Bitte Name oder Hotelname eingeben.</div>
             </div>
             <div class="field" data-field="registerPhone">
-              <label for="registerPhone">Telefon <span class="req">*</span></label>
+              <label for="registerPhone">Telefon <span style="color:var(--muted);font-size:12px">(optional)</span></label>
               <input type="tel" id="registerPhone" placeholder="+49 ..." autocomplete="tel">
               <div class="error">Bitte eine Telefonnummer eingeben.</div>
             </div>
@@ -458,7 +458,7 @@
     }
 
     function validateStep(stepIndex) {
-      if (stepIndex === 0) return Boolean(authState.customerCode && authState.token);
+      if (stepIndex === 0) return Boolean(authState.customerCode);
       if (stepIndex === 1) return validateHotelDetails();
       if (stepIndex === 2) return validateWhatsappStep();
       return true;
@@ -528,7 +528,7 @@
         const result = await response.json().catch(() => ({}));
         const customerCode = result.customerCode || result.code || result.customer_code || result.data?.customerCode || '';
         const token = result.token || result.data?.token || '';
-        if (!customerCode || !token) throw new Error('Keine gültigen Zugangsdaten vom Server erhalten.');
+        const effectiveToken = token || customerCode; if (!customerCode) throw new Error('Keine gültigen Zugangsdaten vom Server erhalten.'); const finalToken = effectiveToken;
 
         authState = { customerCode, token };
         if (!document.getElementById('hotelName').value.trim()) {

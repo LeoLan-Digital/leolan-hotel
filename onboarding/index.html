@@ -517,7 +517,8 @@
           password: document.getElementById('registerPassword').value,
           name: document.getElementById('registerName').value.trim(),
           phone: document.getElementById('registerPhone').value.trim(),
-          sector: 'hotel'
+          sector: 'hotel',
+          paket: 'starter'
         };
         const response = await fetch(REGISTER_WEBHOOK_URL, {
           method: 'POST',

@@ -818,8 +818,8 @@
         <div class="modal-title-wrap">
           <div class="modal-title-icon">🧾</div>
           <div>
-            <h2 id="bookingTitle">Ihr Enterprise-Paket</h2>
-            <p>Direkt bezahlen und Stripe Checkout öffnen.</p>
+            <h2 id="bookingTitle">Your Hotel Package</h2>
+            <p>Pay directly via Stripe Checkout.</p>
           </div>
         </div>
         <button class="close-btn" type="button" data-close="bookingModal">×</button>
@@ -828,12 +828,12 @@
         <div class="field-grid">
           <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px">Account</h4>
           <div class="field full">
-            <label for="customerName">Vorname + Nachname *</label>
-            <input id="customerName" type="text" autocomplete="name" placeholder="Max Mustermann" required />
+            <label for="customerName">First + Last Name *</label>
+            <input id="customerName" type="text" autocomplete="name" placeholder="John Smith" required />
           </div>
           <div class="field full">
-            <label for="customerEmail">E-Mail (für Account) *</label>
-            <input id="customerEmail" type="email" autocomplete="email" placeholder="name@firma.de" required />
+            <label for="customerEmail">Email *</label>
+            <input id="customerEmail" type="email" autocomplete="email" placeholder="name@hotel.com" required />
           </div>
           <div class="field full">
             <label for="customerPassword">Password for Manager App *</label>
@@ -855,33 +855,33 @@
         <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:16px 0 12px">Billing Details</h4>
           <div class="field full">
             <label for="companyName">Hotel / Company Name *</label>
-            <input id="companyName" type="text" placeholder="Muster Restaurant GmbH" required />
+            <input id="companyName" type="text" placeholder="Grand Hotel Berlin" required />
           </div>
           <div class="field full">
-            <label for="companyStreet">Straße + Hausnummer *</label>
-            <input id="companyStreet" type="text" placeholder="Musterstraße 1" required />
+            <label for="companyStreet">Street + Number *</label>
+            <input id="companyStreet" type="text" placeholder="123 Main Street" required />
           </div>
           <div class="field" style="display:grid;grid-template-columns:1fr 2fr;gap:10px">
             <div>
-              <label for="companyZip">PLZ *</label>
-              <input id="companyZip" type="text" placeholder="01234" required />
+              <label for="companyZip">ZIP *</label>
+              <input id="companyZip" type="text" placeholder="10001" required />
             </div>
             <div>
-              <label for="companyCity">Stadt *</label>
-              <input id="companyCity" type="text" placeholder="Dresden" required />
+              <label for="companyCity">City *</label>
+              <input id="companyCity" type="text" placeholder="New York" required />
             </div>
           </div>
           <div class="field full">
             <label for="companyPhone">WhatsApp Number for AI Bot *</label>
-            <input id="companyPhone" type="tel" placeholder="+49 151 23456789" required />
+            <input id="companyPhone" type="tel" placeholder="+1 234 567 8900" required />
             <small style="color:#484f58;font-size:12px;margin-top:4px;display:block">This number will be used for your Hotel AI Bot</small>
           </div>
           <div class="field full">
-            <label for="companyVatId">USt-ID (optional, für Reverse Charge)</label>
+            <label for="companyVatId">VAT ID (optional, Reverse Charge)</label>
             <input id="companyVatId" type="text" placeholder="DE123456789" oninput="this.value=this.value.toUpperCase();if(typeof updateBookingSummary==='function')updateBookingSummary()" />
           </div>
         <div class="summary-box">
-          <h4>Zusammenfassung</h4>
+          <h4>Order Summary</h4>
           <div class="summary-modules" id="bookingModules"></div>
           <div class="summary-list-rows">
             <div class="summary-row"><strong>Monatlich</strong><span id="bookingMonthly">0€</span></div>

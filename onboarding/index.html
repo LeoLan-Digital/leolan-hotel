@@ -168,6 +168,20 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
       <h3>💰 Price Summary</h3>
       <div id="sumPrice"></div>
     </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+        <input type="checkbox" id="chkAgb" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">I accept the <a href="https://ki.leolan.net/agb/" target="_blank" style="color:#f5a623">Terms & Conditions</a> *</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+        <input type="checkbox" id="chkPrivacy" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">I have read the <a href="https://ki.leolan.net/datenschutz/" target="_blank" style="color:#f5a623">Privacy Policy</a> *</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+        <input type="checkbox" id="chkAbo" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">I agree to the subscription (cancel anytime) *</span>
+      </label>
+    </div>
     <button class="btn btn-primary" id="payBtn" onclick="doCheckout()">💳 Pay Now</button>
     <div class="status" id="status"></div>
     <div class="note">After payment you will receive your customer code by email.<br>Use this code to log in to the LeoLan Manager App.</div>
@@ -258,6 +272,9 @@ function show(n){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 async function doCheckout(){
+  if(!document.getElementById('chkAgb').checked||!document.getElementById('chkPrivacy').checked||!document.getElementById('chkAbo').checked){
+    alert('Please accept all terms to continue.');return;
+  }
   var btn=document.getElementById('payBtn');
   btn.disabled=true;btn.textContent='Processing...';
   var s=document.getElementById('status');s.className='status';s.textContent='';

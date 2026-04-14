@@ -880,6 +880,25 @@
             <label for="companyVatId">VAT ID (optional, Reverse Charge)</label>
             <input id="companyVatId" type="text" placeholder="DE123456789" oninput="this.value=this.value.toUpperCase();if(typeof updateBookingSummary==='function')updateBookingSummary()" />
           </div>
+          <div class="field">
+            <label for="companyCountry">Country *</label>
+            <select id="companyCountry" onchange="autoDetectEUEnt()" style="background:#161b22;border:1px solid #30363d;color:#fff;border-radius:10px;padding:10px 14px;font-size:15px;outline:none;width:100%">
+              <option value="">Select country...</option>
+              <optgroup label="EU"><option value="DE">Germany</option><option value="AT">Austria</option><option value="FR">France</option><option value="IT">Italy</option><option value="ES">Spain</option><option value="NL">Netherlands</option><option value="BE">Belgium</option><option value="PL">Poland</option><option value="SE">Sweden</option><option value="DK">Denmark</option></optgroup>
+              <optgroup label="Non-EU Europe"><option value="GB">United Kingdom</option><option value="CH">Switzerland</option><option value="TR">Turkey</option></optgroup>
+              <optgroup label="Middle East & Asia"><option value="AE">UAE (Dubai)</option><option value="ID">Indonesia</option><option value="TH">Thailand</option><option value="SG">Singapore</option><option value="JP">Japan</option><option value="IN">India</option></optgroup>
+              <optgroup label="Americas"><option value="US">United States</option><option value="CA">Canada</option></optgroup>
+              <optgroup label="Other"><option value="AU">Australia</option><option value="other">Other</option></optgroup>
+            </select>
+          </div>
+          <div class="field">
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+              <input type="checkbox" id="nonEUEnt" onchange="if(typeof updateBookingSummary==='function')updateBookingSummary()" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
+              <span style="color:#8b949e;font-size:13px;line-height:1.5">My hotel is <strong style="color:#f0f6fc">outside the EU</strong> — <strong style="color:#4cd97b">0% VAT</strong></span>
+            </label>
+          </div>
+          <div class="field" style="display:none">
+          </div>
         <div class="summary-box">
           <h4>Order Summary</h4>
           <div class="summary-modules" id="bookingModules"></div>
@@ -1160,7 +1179,7 @@
     function refreshBookingSummary() {
       const modules = getSelectedModuleObjects();
       const monthlyTotal = getMonthlyTotal();
-      const reverseCharge = (document.getElementById('companyVatId')?.value.trim() || '').length > 3;
+      const reverseCharge = (document.getElementById('companyVatId')?.value.trim() || '').length > 3 || document.getElementById('nonEUEnt')?.checked;
       const subtotal = monthlyTotal + SETUP_FEE;
       const vat = reverseCharge ? 0 : Math.round(subtotal * VAT_RATE * 100) / 100;
       const grossTotal = subtotal + vat;
@@ -1208,7 +1227,7 @@
       const modules = getSelectedModuleObjects();
       const selectedIds = modules.map((module) => module.id);
       const monthlyTotal = getMonthlyTotal();
-      const reverseCharge = (document.getElementById('companyVatId')?.value.trim() || '').length > 3;
+      const reverseCharge = (document.getElementById('companyVatId')?.value.trim() || '').length > 3 || document.getElementById('nonEUEnt')?.checked;
       const customerCode = generateCustomerCode();
       const subtotal = monthlyTotal + SETUP_FEE;
       const grossTotal = subtotal + (reverseCharge ? 0 : Math.round(subtotal * 0.19 * 100) / 100);
@@ -1352,6 +1371,21 @@
     renderModules();
     refreshModuleSelectionState();
     updateBookingButtonState();
-  </script>
+  
+function autoDetectEUEnterprise(){
+  var euC=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','NO','PT','IE','GR','CZ','SK','HU','RO','BG','HR','SI','LT','LV','EE','LU','MT','CY'];
+  var country=document.getElementById('companyCountry')?.value||'';
+  var chk=document.getElementById('nonEUEnterprise');
+  if(chk&&country){chk.checked=!euC.includes(country);}
+}
+
+function autoDetectEUEnt(){
+  var eu=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','PT','IE','GR','CZ','HU','RO','BG','LU','MT','CY'];
+  var v=document.getElementById('companyCountry')?.value||'';
+  var chk=document.getElementById('nonEUEnt');
+  if(chk&&v)chk.checked=!eu.includes(v);
+  if(typeof updateBookingSummary==='function')updateBookingSummary();
+}
+</script>
 </body>
 </html>

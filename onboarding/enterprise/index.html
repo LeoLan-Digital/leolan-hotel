@@ -1173,10 +1173,12 @@
       updateBookingButtonState();
       refreshBookingSummary();
       openModal(bookingModal);
+      refreshBookingSummary();
       setTimeout(() => customerName.focus(), 60);
     }
 
-    function refreshBookingSummary() {
+    function updateBookingSummary()
+function refreshBookingSummary() {
       const modules = getSelectedModuleObjects();
       const monthlyTotal = getMonthlyTotal();
       const reverseCharge = !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || !!(document.getElementById('companyVatId') && document.getElementById('companyVatId').value.trim().length > 3);

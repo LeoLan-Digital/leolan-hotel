@@ -745,7 +745,7 @@
   <main class="page">
     <section class="hero">
       <div class="brand"><span class="brand-dot"></span> LeoLan Digital · Enterprise</div>
-      <h1>Hotel KI-System konfigurieren</h1>
+      <h1>Configure Your Hotel AI System</h1>
       <p class="subtitle">Wählen Sie Module, informieren Sie sich per KI-Chat, buchen Sie direkt.</p>
       <div class="hero-pills">
         <div class="pill">8 Module frei kombinierbar</div>
@@ -764,7 +764,7 @@
       <strong id="stickyHeadline">0 Module gewählt · 0€/Monat + 349€ Setup</strong>
       <span id="stickySubline">Wählen Sie mindestens ein Modul aus, um direkt zu buchen.</span>
     </div>
-    <button class="btn btn-book" id="bookBtn" type="button">Jetzt buchen →</button>
+    <button class="btn btn-book" id="bookBtn" type="button">Book Now →</button>
   </div>
 
   <div class="modal-overlay" id="infoModal" aria-hidden="true">
@@ -826,39 +826,39 @@
       </div>
       <div class="modal-body">
         <div class="field-grid">
-          <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px">Kundenkonto</h4>
+          <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px">Account Details</h4>
           <div class="field full">
             <label for="customerName">Vorname + Nachname *</label>
             <input id="customerName" type="text" autocomplete="name" placeholder="Max Mustermann" required />
           </div>
           <div class="field full">
-            <label for="customerEmail">E-Mail (für Kundenkonto) *</label>
+            <label for="customerEmail">E-Mail (für Account Details) *</label>
             <input id="customerEmail" type="email" autocomplete="email" placeholder="name@firma.de" required />
           </div>
           <div class="field full">
-            <label for="customerPassword">Passwort für Manager App *</label>
+            <label for="customerPassword">Password for Manager App *</label>
             <div class="password-wrap">
-              <input id="customerPassword" type="password" autocomplete="new-password" placeholder="Mindestens 8 Zeichen" required />
+              <input id="customerPassword" type="password" autocomplete="new-password" placeholder="At least 8 characters" required />
               <button class="eye-btn" id="togglePasswordBtn" type="button" aria-label="Passwort anzeigen">👁️</button>
             </div>
           </div>
           <div class="field full">
-            <label for="customerPasswordConfirm">Passwort bestätigen *</label>
+            <label for="customerPasswordConfirm">Confirm Password *</label>
             <div class="password-wrap">
-              <input id="customerPasswordConfirm" type="password" autocomplete="new-password" placeholder="Passwort wiederholen" required />
+              <input id="customerPasswordConfirm" type="password" autocomplete="new-password" placeholder="Repeat password" required />
               <button class="eye-btn" type="button" onclick="var i=document.getElementById('customerPasswordConfirm');i.type=i.type==='password'?'text':'password'" aria-label="Passwort anzeigen">👁️</button>
             </div>
           </div>
           
         </div>
 
-        <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:16px 0 12px">Rechnungsdaten</h4>
+        <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:16px 0 12px">Billing Details</h4>
           <div class="field full">
-            <label for="companyName">Firmenname / Restaurant *</label>
+            <label for="companyName">Hotel / Company Name *</label>
             <input id="companyName" type="text" placeholder="Muster Restaurant GmbH" required />
           </div>
           <div class="field full">
-            <label for="companyStreet">Straße + Hausnummer *</label>
+            <label for="companyStreet">Street + Number *</label>
             <input id="companyStreet" type="text" placeholder="Musterstraße 1" required />
           </div>
           <div class="field" style="display:grid;grid-template-columns:1fr 2fr;gap:10px">
@@ -867,24 +867,24 @@
               <input id="companyZip" type="text" placeholder="01234" required />
             </div>
             <div>
-              <label for="companyCity">Stadt *</label>
+              <label for="companyCity">City *</label>
               <input id="companyCity" type="text" placeholder="Dresden" required />
             </div>
           </div>
           <div class="field full">
-            <label for="companyPhone">WhatsApp-Nummer für KI-Chatbot *</label>
+            <label for="companyPhone">WhatsApp Number for AI Bot *</label>
             <input id="companyPhone" type="tel" placeholder="+49 151 23456789" required />
-            <small style="color:#484f58;font-size:12px;margin-top:4px;display:block">Diese Nummer wird für Ihren Hotel WhatsApp Gäste-Bot verwendet</small>
+            <small style="color:#484f58;font-size:12px;margin-top:4px;display:block">This number will be used for your Hotel WhatsApp Guest Bot</small>
           </div>
           <div class="field full">
-            <label for="companyVatId">USt-ID (optional, für Reverse Charge)</label>
+            <label for="companyVatId">VAT ID (optional, for Reverse Charge)</label>
             <input id="companyVatId" type="text" placeholder="DE123456789" oninput="this.value=this.value.toUpperCase();if(typeof updateBookingSummary==='function')updateBookingSummary()" />
           </div>
         <div class="summary-box">
           <h4>Zusammenfassung</h4>
           <div class="summary-modules" id="bookingModules"></div>
           <div class="summary-list-rows">
-            <div class="summary-row"><strong>Monatlich</strong><span id="bookingMonthly">0€</span></div>
+            <div class="summary-row"><strong>Monthly</strong><span id="bookingMonthly">0€</span></div>
             <div class="summary-row"><strong>Setup</strong><span>349€</span></div>
             <div class="summary-row"><strong>MwSt.</strong><span id="bookingTax">19%</span></div>
             <div class="summary-row total"><span>Gesamt heute</span><span id="bookingTotal">0€</span></div>
@@ -894,21 +894,21 @@
         <div class="legal-checks">
           <label class="legal-check">
             <input type="checkbox" id="checkAgb" required>
-            <span>Ich akzeptiere die <a href="https://ki.leolan.net/agb/" target="_blank">AGB</a> *</span>
+            <span>I accept the <a href="https://ki.leolan.net/agb/" target="_blank">AGB</a> *</span>
           </label>
           <label class="legal-check">
             <input type="checkbox" id="checkDatenschutz" required>
-            <span>Ich habe die <a href="https://ki.leolan.net/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und akzeptiere sie *</span>
+            <span>I have read the <a href="https://ki.leolan.net/datenschutz/" target="_blank">Privacy Policy</a> gelesen und akzeptiere sie *</span>
           </label>
           <label class="legal-check">
             <input type="checkbox" id="checkAbo" required>
-            <span>Ich stimme dem Abonnement zu (monatlich kündbar) *</span>
+            <span>I agree to the subscription (cancel anytime) *</span>
           </label>
         </div>
 
         <div class="error" id="bookingError"></div>
         <div class="success-message" id="bookingSuccess"></div>
-        <button class="submit-btn" id="submitBookingBtn" type="button" disabled>Jetzt kostenpflichtig bestellen</button>
+        <button class="submit-btn" id="submitBookingBtn" type="button" disabled>Proceed to Payment</button>
       </div>
     </div>
   </div>
@@ -1190,7 +1190,7 @@
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Bitte eine gültige E-Mail eingeben.';
       if (password.length < 8) return 'Bitte ein Passwort mit mindestens 8 Zeichen eingeben.';
       if (selectedModules.size === 0) return 'Bitte zuerst mindestens ein Modul auswählen.';
-      if (!legalChecksAccepted()) return 'Bitte akzeptieren Sie alle Bedingungen';
+      if (!legalChecksAccepted()) return 'Please accept all terms';
       return '';
     }
 
@@ -1312,7 +1312,7 @@
     legalCheckboxIds.forEach((id) => {
       const checkbox = document.getElementById(id);
       checkbox?.addEventListener('change', () => {
-        if (legalChecksAccepted() && bookingError.textContent === 'Bitte akzeptieren Sie alle Bedingungen') {
+        if (legalChecksAccepted() && bookingError.textContent === 'Please accept all terms') {
           bookingError.textContent = '';
         }
         updateBookingButtonState();

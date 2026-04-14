@@ -814,20 +814,43 @@
 
 <section class="cta" id="contact">
   <div class="section-shell">
-    <div class="cta-wrap reveal">
-      <span class="section-tag" style="margin-bottom:14px;">Start now</span>
-      <h2 class="section-title" style="margin-bottom:18px;">Launch a smarter guest experience without rebuilding your operations.</h2>
-      <p>See how LeoLan Digital can help your boutique hotel deliver faster replies, better reviews and more premium guest communication from the very first interaction.</p>
-      <a href="/onboarding/" class="btn btn-primary">Start Free Trial</a>
-      <div class="cta-meta">
-        <span>WhatsApp-ready</span>
-        <span>Review automation</span>
-        <span>Email flows</span>
-        <span>Luxury brand positioning</span>
-      </div>
+    <div class="cta-wrap reveal" style="max-width:620px">
+      <span class="section-tag" style="margin-bottom:14px;">Talk to Sales</span>
+      <h2 class="section-title" style="margin-bottom:12px;">Let's talk about your hotel.</h2>
+      <p style="margin-bottom:32px;">Tell us about your property and we'll get back to you within 24 hours with a custom proposal.</p>
+      <form id="contactForm" style="display:flex;flex-direction:column;gap:14px;text-align:left">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <input type="text" id="cf_name" placeholder="Your Name *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+          <input type="email" id="cf_email" placeholder="Email *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+        </div>
+        <input type="text" id="cf_hotel" placeholder="Hotel Name & Location *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+        <input type="tel" id="cf_phone" placeholder="WhatsApp / Phone Number" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+        <textarea id="cf_msg" placeholder="Tell us about your needs (optional)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
+        <button type="submit" class="btn btn-primary" style="font-size:16px">Send Message →</button>
+        <p id="cf_status" style="color:#4cd97b;font-size:14px;margin:0;display:none">✓ Thank you! We'll be in touch within 24 hours.</p>
+      </form>
     </div>
   </div>
 </section>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const data = {
+    name: document.getElementById('cf_name').value,
+    email: document.getElementById('cf_email').value,
+    hotel: document.getElementById('cf_hotel').value,
+    phone: document.getElementById('cf_phone').value,
+    message: document.getElementById('cf_msg').value,
+    source: 'hotel.leolan.net'
+  };
+  try {
+    await fetch('https://n8n.leolan.net/webhook/hotel-contact', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  } catch(e) {}
+  // n8n webhook handles email notification
+  document.getElementById('cf_status').style.display = 'block';
+  this.reset();
+});
+</script>
 
 <section class="crosslink">
   <div class="section-shell">

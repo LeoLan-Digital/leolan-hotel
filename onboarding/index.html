@@ -291,17 +291,19 @@ async function autoDetectEU(){
   var euCountries=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','NO','PT','IE','GR','CZ','SK','HU','RO','BG','HR','SI','LT','LV','EE','LU','MT','CY'];
   var country=document.getElementById('country')?.value||'';
   var nonEUchk=document.getElementById('nonEU');
-  if(nonEUchk&&country&&!euCountries.includes(country)){
-    nonEUchk.checked=true;
-  } else if(nonEUchk&&euCountries.includes(country)){
-    nonEUchk.checked=false;
+  if(nonEUchk&&country){
+    if(!euCountries.includes(country)){
+      nonEUchk.checked=true;
+    } else {
+      nonEUchk.checked=false;
+    }
   }
   if(typeof updateSum==='function')updateSum();
 }
 
 function doCheckout(){
   var btn=document.getElementById('payBtn');
-  btn.disabled=true;btn.textContent='Wird verarbeitet...';
+  btn.disabled=true;btn.textContent='Processing...';
   var s=document.getElementById('status');s.className='status';s.textContent='';
   try{
     // Save registration data for after payment

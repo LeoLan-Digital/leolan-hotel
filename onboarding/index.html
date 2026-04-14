@@ -40,7 +40,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 .pkgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:480px){.pkgs{grid-template-columns:1fr}}
 .pkg{border:2px solid #30363d;border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;background:#0d1117;position:relative;user-select:none;-webkit-user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-.pkg:hover{border-color:#f5a623}
+.pkg:hover{border-color:#f5a623}.pkg:active{transform:scale(0.98);border-color:#f5a623;background:rgba(245,166,35,.1)}
 .pkg.on{border-color:#f5a623;background:rgba(245,166,35,.07)}
 .pkg-badge{display:inline-block;background:#f5a623;color:#000;font-size:.65rem;font-weight:800;padding:2px 7px;border-radius:999px;margin-bottom:6px}
 .pkg-name{font-weight:800;color:#f0f6fc;font-size:1rem;margin-bottom:3px}
@@ -207,7 +207,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
   </div>
 </div>
 <script>
-var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';document.addEventListener('DOMContentLoaded',function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'All prices excl. VAT · + 349€ one-time setup fee':'All prices excl. VAT · 12 months minimum · + 349€ one-time setup fee';spkg(pkg);});
+var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';window.onload=function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'All prices excl. VAT · + 349€ one-time setup fee':'All prices excl. VAT · 12 months minimum · + 349€ one-time setup fee';spkg(pkg);};
 var fdata={};
 function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Show';}}
 function spkg(p){pkg=p;document.querySelectorAll('.pkg').forEach(function(c){c.classList.remove('on');var note=document.getElementById('legalNote');if(note){note.textContent=p==='pro'?'All prices excl. VAT · + 349€ one-time setup fee':'All prices excl. VAT · 12 months minimum · + 349€ one-time setup fee';}});document.querySelector('[data-pkg="'+p+'"]').classList.add('on');}

@@ -233,7 +233,10 @@ function go1(){
   setErr('street',!street);if(!street)ok=false;
   setErr('zip',!zip);if(!zip)ok=false;
   setErr('city',!city);if(!city)ok=false;
+  var country=document.getElementById('country')?.value||'';
   setErr('whatsapp',!wa);if(!wa)ok=false;
+  if(!country){var cel=document.getElementById('fe-country');if(cel)cel.querySelector('.err').style.display='block';ok=false;}
+  else{var cel=document.getElementById('fe-country');if(cel)cel.querySelector('.err').style.display='none';}
   if(!ok){window.scrollTo({top:0,behavior:'smooth'});return;}
   fdata={
     email:email,name:name,password:pw,
@@ -242,7 +245,8 @@ function go1(){
     address:street+', '+zip+' '+city,
     vatId:document.getElementById('vatId').value.trim(),
     website:document.getElementById('website').value.trim(),
-    whatsappNumber:wa,phone:wa
+    whatsappNumber:wa,phone:wa,
+    country:document.getElementById('country')?.value||''
   };
   // Build summary
   var vatId=fdata.vatId;
@@ -255,6 +259,7 @@ function go1(){
     ['E-Mail',fdata.email],['Name',fdata.name],
     ['Hotel',fdata.companyName],
     ['Address',fdata.street+', '+fdata.zipCode+' '+fdata.city],
+    ['Country',fdata.country||'Not specified'],
     ['VAT ID',fdata.vatId||'Not provided'],
     ['Website',fdata.website||'—'],
     ['WhatsApp',fdata.whatsappNumber],

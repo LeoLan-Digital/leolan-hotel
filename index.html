@@ -914,7 +914,7 @@
     var msg=document.createElement('div');
     msg.className='chatbot-message '+sender;
     var lc=text.toLowerCase();
-    var hasBooking=sender==='bot'&&(lc.includes('buchen')||lc.includes('trial')||lc.includes('starter')||lc.includes('199')||lc.includes('349'));
+    var hasBooking=sender==='bot'&&(lc.includes('jetzt buchen')||lc.includes('start free trial')||lc.includes('reservier')||lc.includes('sign up')||lc.includes('get started')||lc.includes('contact us'));
     var btnHtml=hasBooking?'<div style="margin-top:8px"><a href="https://hotel.leolan.net/onboarding/" target="_blank" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">🚀 Start Free Trial →</a></div>':'';
     msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
     document.getElementById('chatbotMessages').appendChild(msg);

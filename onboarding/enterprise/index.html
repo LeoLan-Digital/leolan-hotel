@@ -1179,7 +1179,7 @@
     function refreshBookingSummary() {
       const modules = getSelectedModuleObjects();
       const monthlyTotal = getMonthlyTotal();
-      var _vatEl=document.getElementById('companyVatId'); var _euEl=document.getElementById('nonEUEnt'); const reverseCharge = (_vatEl && _vatEl.value.trim().length > 3) || (_euEl && _euEl.checked);
+      const reverseCharge = !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || !!(document.getElementById('companyVatId') && document.getElementById('companyVatId').value.trim().length > 3);
       const subtotal = monthlyTotal + SETUP_FEE;
       const vat = reverseCharge ? 0 : Math.round(subtotal * VAT_RATE * 100) / 100;
       const grossTotal = subtotal + vat;
@@ -1227,7 +1227,7 @@
       const modules = getSelectedModuleObjects();
       const selectedIds = modules.map((module) => module.id);
       const monthlyTotal = getMonthlyTotal();
-      var _vatEl=document.getElementById('companyVatId'); var _euEl=document.getElementById('nonEUEnt'); const reverseCharge = (_vatEl && _vatEl.value.trim().length > 3) || (_euEl && _euEl.checked);
+      const reverseCharge = !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || !!(document.getElementById('companyVatId') && document.getElementById('companyVatId').value.trim().length > 3);
       const customerCode = generateCustomerCode();
       const subtotal = monthlyTotal + SETUP_FEE;
       const grossTotal = subtotal + (reverseCharge ? 0 : Math.round(subtotal * 0.19 * 100) / 100);
@@ -1237,7 +1237,7 @@
       const billingZip = document.getElementById('companyZip')?.value.trim() || '';
       const billingCity = document.getElementById('companyCity')?.value.trim() || '';
       const billingPhone = document.getElementById('companyPhone')?.value.trim() || '';
-      const billingVatId = document.getElementById('companyVatId')?.value.trim() || '';
+      const billingVatId = (document.getElementById('companyVatId')||{value:''}).value.trim() || '';
 
       const payload = {
         customerCode,
@@ -1254,7 +1254,7 @@
         vatAmount: reverseCharge ? 0 : Math.round(monthlyTotal * 0.19 * 100) / 100,
         paket: 'enterprise',
         priceIds: [STRIPE_PRICE_ID],
-        reverseCharge: (document.getElementById('companyVatId')?.value.trim() || '').length > 3,
+        reverseCharge: ((document.getElementById('companyVatId')||{value:''}).value.trim() || '').length > 3,
         whatsappNumber: billingPhone,
         phone: billingPhone,
         address: billingStreet,

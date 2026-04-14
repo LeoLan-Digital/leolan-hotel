@@ -838,6 +838,12 @@
 
 <footer>
   <div class="footer-logo"><img src="logo.svg" alt="LeoLan Digital"></div>
+  <div style="display:flex;justify-content:center;gap:20px;margin-bottom:20px">
+    <a href="https://www.instagram.com/leolan_digital" target="_blank" style="color:#8b949e;font-size:24px;text-decoration:none;" title="Instagram">📸</a>
+    <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" style="color:#8b949e;font-size:24px;text-decoration:none;" title="Facebook">👍</a>
+    <a href="https://ki.leolan.net" target="_blank" style="color:#8b949e;font-size:24px;text-decoration:none;" title="Website">🌐</a>
+    <a href="https://wa.me/4915678483700" target="_blank" style="color:#8b949e;font-size:24px;text-decoration:none;" title="WhatsApp">💬</a>
+  </div>
   <div class="footer-links">
     <a href="https://hotel.leolan.net/onboarding/">Start Free Trial</a>
     <a href="https://ki.leolan.net">Restaurant Solutions</a>
@@ -851,6 +857,111 @@
     <a href="mailto:info@leolan.net">info@leolan.net</a> · <a href="tel:+493521788680">+49 3521 788680</a>
   </p>
 </footer>
+
+<!-- Chatbot -->
+<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()">💬 Bot testen</button>
+<div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
+  <div class="chatbot-window">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <div class="chatbot-avatar">L</div>
+        <div>
+          <strong>LeoLan AI</strong>
+          <span>Hotel Guest Assistant Demo</span>
+        </div>
+      </div>
+      <button class="chatbot-close" id="chatbotClose" aria-label="Schließen">✕</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages"></div>
+    <div class="chatbot-input-wrap">
+      <form class="chatbot-form" id="chatbotForm">
+        <input type="text" id="chatbotInput" placeholder="Nachricht …" autocomplete="off" autocorrect="off" style="font-size:16px">
+        <button type="submit" id="chatbotSend"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .chatbot-toggle{position:fixed;right:24px;bottom:24px;z-index:1200;background:#f5a623;color:#0d1117;border:none;border-radius:999px;padding:14px 20px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(245,166,35,.35)}
+  .chatbot-modal{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:flex-end;padding:24px;background:rgba(0,0,0,.55);z-index:1199}
+  .chatbot-modal.open{display:flex}
+  .chatbot-window{width:min(390px,100%);height:min(460px,calc(100dvh - 120px));background:linear-gradient(180deg,#17212b 0%,#0d1117 100%);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+  .chatbot-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08)}
+  .chatbot-title{display:flex;align-items:center;gap:12px}
+  .chatbot-avatar{width:42px;height:42px;border-radius:50%;background:#f5a623;color:#0d1117;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+  .chatbot-header strong{display:block;color:#fff;font-size:15px}
+  .chatbot-header span{display:block;color:rgba(255,255,255,.6);font-size:12px;margin-top:2px}
+  .chatbot-close{border:0;background:rgba(255,255,255,.1);color:#fff;width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer}
+  .chatbot-messages{flex:1;padding:12px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+  .chatbot-message{max-width:80%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.5;word-break:break-word}
+  .chatbot-message.bot{align-self:flex-start;background:#1e2e4a;color:#e8edf3;border-bottom-left-radius:4px}
+  .chatbot-message.user{align-self:flex-end;background:#2695d3;color:#fff;border-bottom-right-radius:4px}
+  .chatbot-message small{display:block;font-size:11px;opacity:.6;margin-top:4px}
+  .chatbot-input-wrap{padding:8px 12px 12px;background:#17212b}
+  .chatbot-form{display:flex;align-items:center;gap:8px}
+  .chatbot-form input{flex:1;background:#2b3847;border:none;color:#fff;border-radius:22px;padding:10px 16px;font-size:16px;outline:none;height:44px}
+  .chatbot-form input::placeholder{color:rgba(255,255,255,.4)}
+  .chatbot-form button{background:#2695d3;color:#fff;border:none;border-radius:50%;width:44px;height:44px;min-width:44px;cursor:pointer;display:flex!important;align-items:center;justify-content:center}
+</style>
+
+<script>
+  var chatHistory=[];
+  var chatbotSeeded=false;
+
+  function chatbotTime(){return new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});}
+  function appendChatMessage(text,sender){
+    var msg=document.createElement('div');
+    msg.className='chatbot-message '+sender;
+    var lc=text.toLowerCase();
+    var hasBooking=sender==='bot'&&(lc.includes('buchen')||lc.includes('trial')||lc.includes('starter')||lc.includes('199')||lc.includes('349'));
+    var btnHtml=hasBooking?'<div style="margin-top:8px"><a href="https://hotel.leolan.net/onboarding/" target="_blank" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">🚀 Start Free Trial →</a></div>':'';
+    msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
+    document.getElementById('chatbotMessages').appendChild(msg);
+    document.getElementById('chatbotMessages').scrollTop=99999;
+  }
+  async function getBotReplyAsync(message){
+    try{
+      var ctrl=new AbortController();
+      setTimeout(function(){ctrl.abort();},20000);
+      var resp=await fetch('https://n8n.leolan.net/webhook/onboarding-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:message,moduleKey:'hotel-demo',history:chatHistory}),signal:ctrl.signal});
+      var data=await resp.json();
+      var reply=data.reply||data.message||'I am here to help! 🏨';
+      chatHistory.push({role:'user',content:message});
+      chatHistory.push({role:'assistant',content:reply});
+      if(chatHistory.length>16)chatHistory=chatHistory.slice(-16);
+      return reply;
+    }catch(e){return 'Let me connect you with our team! Please visit hotel.leolan.net/onboarding';}
+  }
+  async function openChatbot(){
+    document.getElementById('chatbotModal').classList.add('open');
+    if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='none';
+    if(!chatbotSeeded){chatbotSeeded=true;var g=await getBotReplyAsync('__start__');appendChatMessage(g,'bot');}
+    setTimeout(function(){document.getElementById('chatbotInput').focus();},80);
+  }
+  function closeChatbot(){
+    document.getElementById('chatbotModal').classList.remove('open');
+    if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='';
+  }
+  document.getElementById('chatbotClose').addEventListener('click',closeChatbot);
+  document.getElementById('chatbotModal').addEventListener('click',function(e){if(e.target===this)closeChatbot();});
+  document.getElementById('chatbotForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    var value=document.getElementById('chatbotInput').value.trim();
+    if(!value)return;
+    appendChatMessage(value.replace(/</g,'&lt;'),('user'));
+    document.getElementById('chatbotInput').value='';
+    document.getElementById('chatbotInput').disabled=true;
+    var typing=document.createElement('div');typing.className='chatbot-message bot';typing.id='typing-ind';typing.innerHTML='<em>typing...</em>';
+    document.getElementById('chatbotMessages').appendChild(typing);
+    document.getElementById('chatbotMessages').scrollTop=99999;
+    var reply=await getBotReplyAsync(value);
+    var el=document.getElementById('typing-ind');if(el)el.remove();
+    appendChatMessage(reply,'bot');
+    document.getElementById('chatbotInput').disabled=false;
+    setTimeout(function(){var d=document.getElementById('chatbotDummy');if(d){d.removeAttribute('readonly');d.focus();d.setAttribute('readonly','');}setTimeout(function(){document.getElementById('chatbotInput').focus();},50);},50);
+  });
+</script>
 
 <script>
   function toggleFaq(btn){var item=btn.parentElement;item.classList.toggle('open');}

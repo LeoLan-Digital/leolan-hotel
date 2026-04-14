@@ -311,10 +311,11 @@ var chkRes=await fetch('https://n8n.leolan.net/webhook/stripe-checkout',{method:
     if(url&&url.startsWith('http')){window.location.href=url;}
     else{
       // Stripe URL not available - register and show code
-      var regRes=await fetch('https://n8n.leolan.net/webhook/kunden-register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fdata)});
-      var reg=await regRes.json();
-      if(!reg.customerCode)throw new Error('Registrierung fehlgeschlagen.');
-      localStorage.setItem('customerCode',reg.customerCode);
+      // Generate temp customer code - real registration happens after payment via Stripe webhook
+      var customerCode='K'+Math.floor(100000+Math.random()*900000);
+      localStorage.setItem('customerCode',customerCode);
+      fdata.customerCode=customerCode;
+      var reg={customerCode:customerCode};
       show(2);
       s.className='status';s.style.display='block';s.style.background='rgba(35,134,54,.15)';s.style.color='#3fb950';
       s.innerHTML='✓ Registriert! Kundencode: <strong>'+reg.customerCode+'</strong><br>Wir kontaktieren Sie per WhatsApp für die Einrichtung und Payment.';

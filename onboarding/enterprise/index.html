@@ -1202,8 +1202,8 @@
       const password = customerPassword.value;
 
       if (!name) return 'Bitte Vorname und Nachname eingeben.';
-      const pw = document.getElementById('customerPassword')?.value || '';
-      const pwc = document.getElementById('customerPasswordConfirm')?.value || '';
+      const pw = (document.getElementById('customerPassword')||{}).value || '';
+      const pwc = (document.getElementById('customerPasswordConfirm')||{}).value || '';
       if (pw.length < 8) return 'Passwort muss mindestens 8 Zeichen haben.';
       if (pw !== pwc) return 'Passwörter stimmen nicht überein.';
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Bitte eine gültige E-Mail eingeben.';
@@ -1232,11 +1232,11 @@
       const subtotal = monthlyTotal + SETUP_FEE;
       const grossTotal = subtotal + (reverseCharge ? 0 : Math.round(subtotal * 0.19 * 100) / 100);
 
-      const billingName = document.getElementById('companyName')?.value.trim() || customerName.value.trim();
-      const billingStreet = document.getElementById('companyStreet')?.value.trim() || '';
-      const billingZip = document.getElementById('companyZip')?.value.trim() || '';
-      const billingCity = document.getElementById('companyCity')?.value.trim() || '';
-      const billingPhone = document.getElementById('companyPhone')?.value.trim() || '';
+      const billingName = (document.getElementById('companyName')||{}).value.trim() || customerName.value.trim();
+      const billingStreet = (document.getElementById('companyStreet')||{}).value.trim() || '';
+      const billingZip = (document.getElementById('companyZip')||{}).value.trim() || '';
+      const billingCity = (document.getElementById('companyCity')||{}).value.trim() || '';
+      const billingPhone = (document.getElementById('companyPhone')||{}).value.trim() || '';
       const billingVatId = (document.getElementById('companyVatId')||{value:''}).value.trim() || '';
 
       const payload = {

@@ -1192,7 +1192,7 @@
       `).join('');
 
       bookingMonthly.textContent = `${formatCurrency(monthlyTotal)}/month`;
-      bookingTax.textContent = reverseCharge ? '0% Reverse Charge' : `19% · ${formatCurrency(vat)}`;
+      bookingTax.textContent = reverseCharge ? '0% (Non-EU / Reverse Charge)' : '19% · ' + formatCurrency(vat);
       bookingTotal.textContent = formatCurrency(grossTotal);
     }
 
@@ -1254,7 +1254,7 @@
         vatAmount: reverseCharge ? 0 : Math.round(monthlyTotal * 0.19 * 100) / 100,
         paket: 'enterprise',
         priceIds: [STRIPE_PRICE_ID],
-        reverseCharge: ((document.getElementById('companyVatId')||{value:''}).value.trim() || '').length > 3,
+        reverseCharge: !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || ((document.getElementById('companyVatId')||{value:''}).value.trim().length > 3),
         whatsappNumber: billingPhone,
         phone: billingPhone,
         address: billingStreet,

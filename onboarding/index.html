@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LeoLan Digital – Get Started</title>
+<title>LeoLan Digital – Jetzt starten</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
@@ -39,16 +39,16 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 @media(max-width:480px){.g2,.g3{grid-template-columns:1fr}}
 .pkgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:480px){.pkgs{grid-template-columns:1fr}}
-.pkg{border:2px solid #30363d;border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;background:#0d1117;position:relative;user-select:none;-webkit-user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-.pkg:hover{border-color:#f5a623}.pkg:active{transform:scale(0.98);border-color:#f5a623;background:rgba(245,166,35,.1)}
-.pkg.on{border-color:#f5a623;background:rgba(245,166,35,.07)}.pkg input[type=radio]:checked~*{color:inherit}.pkg:has(input[type=radio]:checked){border-color:#f5a623;background:rgba(245,166,35,.07)}.pkg:has(input[type=radio]:checked) .chk{display:flex}
+.pkg{border:2px solid #30363d;border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;background:#0d1117;position:relative}
+.pkg:hover{border-color:#f5a623}
+.pkg.on{border-color:#f5a623;background:rgba(245,166,35,.07)}
 .pkg-badge{display:inline-block;background:#f5a623;color:#000;font-size:.65rem;font-weight:800;padding:2px 7px;border-radius:999px;margin-bottom:6px}
 .pkg-name{font-weight:800;color:#f0f6fc;font-size:1rem;margin-bottom:3px}
 .pkg-price{font-size:1.3rem;font-weight:800;color:#f5a623}
 .pkg-price span{font-size:.8rem;font-weight:400;color:#8b949e}
 .pkg-desc{font-size:.78rem;color:#8b949e;margin-top:6px;line-height:1.4}
 .chk{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:#f5a623;display:none;align-items:center;justify-content:center;color:#000;font-size:.7rem;font-weight:800}
-.pkg.on .chk{display:flex}.pkg:has(input:checked) .chk{display:flex}
+.pkg.on .chk{display:flex}
 .btn{width:100%;padding:14px;border-radius:10px;border:none;font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s}
 .btn-primary{background:#f5a623;color:#000}
 .btn-primary:hover{opacity:.9}
@@ -82,141 +82,94 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 <div class="hero">
   <div class="logo">LeoLan Digital</div>
   <h1>AI System for Your Hotel</h1>
-  <p>Your AI System in 3 Steps.</p>
+  <p>In 3 Schritten zum eigenen KI-Assistenten.</p>
 </div>
 <div class="shell">
   <!-- Steps -->
   <div style="display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:24px">
-    <div class="swrap"><div class="sdot active" id="sd1">1</div><div class="slabel">Your Details</div></div>
+    <div class="swrap"><div class="sdot active" id="sd1">1</div><div class="slabel">Ihre Daten</div></div>
     <div class="sline" id="sl1"></div>
-    <div class="swrap"><div class="sdot" id="sd2">2</div><div class="slabel">Review</div></div>
+    <div class="swrap"><div class="sdot" id="sd2">2</div><div class="slabel">Prüfen</div></div>
     <div class="sline" id="sl2"></div>
-    <div class="swrap"><div class="sdot" id="sd3">3</div><div class="slabel">Payment</div></div>
+    <div class="swrap"><div class="sdot" id="sd3">3</div><div class="slabel">Zahlung</div></div>
   </div>
 
   <!-- STEP 1 -->
   <div id="s1">
-    <!-- Package -->
+    <!-- Paket -->
     <div class="card">
-      <h3>📦 Choose Package</h3>
+      <h3>📦 Paket wählen</h3>
       <div class="pkgs">
-        <label class="pkg" data-pkg="starter" for="pkg_starter" style="cursor:pointer;display:block">
-          <input type="radio" name="pkg_select" id="pkg_starter" value="starter" onchange="spkg('starter')" style="display:none">
-          <div class="chk">✓</div><div class="pkg-badge">🔥 Popular</div><div class="pkg-name">Single Module</div><div class="pkg-price">199€ <span>/ month</span></div><div class="pkg-desc">WhatsApp Bot, Guest Service, 500 messages/month</div>
-        </label>
-        <label class="pkg" data-pkg="pro" for="pkg_pro" style="cursor:pointer;display:block">
-          <input type="radio" name="pkg_select" id="pkg_pro" value="pro" onchange="spkg('pro')" style="display:none">
-          <div class="chk">✓</div><div class="pkg-badge" style="background:#5e81f4;color:#fff">⭐ Most Popular</div><div class="pkg-name">Guest Experience Suite</div><div class="pkg-price">349€ <span>/ month</span></div><div class="pkg-desc">Everything in Starter + Social Media, 2,000 messages/month</div>
-        </label>
+        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">🔥 Beliebt</div><div class="pkg-name">Starter</div><div class="pkg-price">199€ <span>/ month</span></div><div class="pkg-desc">WhatsApp Bot, Guest Service, 500 messages/month</div></div>
+        <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-name">Pro</div><div class="pkg-price">349€ <span>/ month</span></div><div class="pkg-desc">Everything in Starter + Social Media, 2,000 messages/month</div></div>
       </div>
-      <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">All prices excl. VAT · 12 months minimum · + 349€ one-time setup fee</p>
+      <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">Alle Preise zzgl. VAT: · 12 months minimum · + 349€ einmalige Setup-Gebühr</p>
     </div>
     <!-- Konto -->
     <div class="card">
       <h3>👤 Account Details</h3>
       <div class="g2">
-        <div class="field" id="fe-email"><label>Email *</label><input type="email" id="email" placeholder="name@hotel.com" autocomplete="email"><div class="err">Please enter a valid email.</div></div>
-        <div class="field" id="fe-name"><label>Your Name *</label><input type="text" id="name" placeholder="John Smith" autocomplete="name"><div class="err">Please enter your name.</div></div>
+        <div class="field" id="fe-email"><label>E-Mail *</label><input type="email" id="email" placeholder="name@firma.de" autocomplete="email"><div class="err">Gültige E-Mail eingeben.</div></div>
+        <div class="field" id="fe-name"><label>Your Name *</label><input type="text" id="name" placeholder="Max Mustermann" autocomplete="name"><div class="err">Name eingeben.</div></div>
       </div>
       <div class="g2">
-        <div class="field" id="fe-pw"><label>Password * (min. 8 chars)</label><div class="pw-wrap"><input type="password" id="pw" placeholder="Password" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw',this)">Show</button></div><div class="err">Minimum 8 characters.</div></div>
-        <div class="field" id="fe-pw2"><label>Confirm Password *</label><div class="pw-wrap"><input type="password" id="pw2" placeholder="Confirm" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw2',this)">Show</button></div><div class="err">Passwords don't match.</div></div>
+        <div class="field" id="fe-pw"><label>Passwort * (min. 8 Zeichen)</label><div class="pw-wrap"><input type="password" id="pw" placeholder="Passwort" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw',this)">Zeigen</button></div><div class="err">Min. 8 characters.</div></div>
+        <div class="field" id="fe-pw2"><label>Confirm Password *</label><div class="pw-wrap"><input type="password" id="pw2" placeholder="Wiederholen" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw2',this)">Zeigen</button></div><div class="err">Stimmt nicht überein.</div></div>
       </div>
     </div>
     <!-- Kundendaten -->
     <div class="card">
       <h3>🏢 Hotel & Billing Details</h3>
-      <div class="field" id="fe-company"><label>Hotel Name *</label><input type="text" id="company" placeholder="e.g. Grand Hotel Berlin"><div class="err">Please enter hotel name.</div></div>
+      <div class="field" id="fe-company"><label>Restaurantname *</label><input type="text" id="company" placeholder="z. B. Bella Vista GmbH"><div class="err">Restaurantname eingeben.</div></div>
       <div class="g2">
-        <div class="field" id="fe-street"><label>Street & Number *</label><input type="text" id="street" placeholder="123 Main Street"><div class="err">Address eingeben.</div></div>
+        <div class="field" id="fe-street"><label>Straße & Hausnummer *</label><input type="text" id="street" placeholder="Musterstraße 1"><div class="err">Adresse eingeben.</div></div>
         <div class="g2" style="gap:8px">
-          <div class="field" id="fe-zip"><label>ZIP *</label><input type="text" id="zip" placeholder="10001" maxlength="10"><div class="err">PLZ eingeben.</div></div>
-          <div class="field" id="fe-city"><label>City *</label><input type="text" id="city" placeholder="New York"><div class="err">Please enter city.</div></div>
-          <div class="field" id="fe-country"><label>Country *</label>
-            <select id="country" onchange="autoDetectEU()" style="background:#0e1621;border:1px solid #2a3a4a;color:#e8eaed;border-radius:12px;padding:13px 16px;font-size:16px;outline:none;width:100%">
-              <option value="">Select your country...</option>
-              <optgroup label="Europe (EU)">
-                <option value="DE">Germany</option><option value="AT">Austria</option><option value="FR">France</option><option value="IT">Italy</option><option value="ES">Spain</option><option value="NL">Netherlands</option><option value="BE">Belgium</option><option value="PT">Portugal</option><option value="PL">Poland</option><option value="SE">Sweden</option><option value="DK">Denmark</option><option value="FI">Finland</option>
-              </optgroup>
-              <optgroup label="Europe (non-EU)">
-                <option value="GB">United Kingdom</option><option value="CH">Switzerland</option><option value="NO">Norway</option><option value="TR">Turkey</option>
-              </optgroup>
-              <optgroup label="Middle East & Asia">
-                <option value="AE">UAE (Dubai)</option><option value="ID">Indonesia (Bali)</option><option value="TH">Thailand</option><option value="SG">Singapore</option><option value="JP">Japan</option><option value="CN">China</option><option value="IN">India</option>
-              </optgroup>
-              <optgroup label="Americas">
-                <option value="US">United States</option><option value="CA">Canada</option><option value="MX">Mexico</option><option value="BR">Brazil</option>
-              </optgroup>
-              <optgroup label="Other">
-                <option value="AU">Australia</option><option value="ZA">South Africa</option><option value="other">Other...</option>
-              </optgroup>
-            </select>
-            <div class="err">Please select your country.</div>
-          </div>
+          <div class="field" id="fe-zip"><label>ZIP *</label><input type="text" id="zip" placeholder="01234" maxlength="10"><div class="err">PLZ eingeben.</div></div>
+          <div class="field" id="fe-city"><label>City *</label><input type="text" id="city" placeholder="Dresden"><div class="err">Stadt eingeben.</div></div>
         </div>
       </div>
       <div class="g2">
-        <div class="field"><label>VAT ID <span style="color:#484f58;font-weight:400">(optional, EU companies)</span></label><input type="text" id="vatId" placeholder="GB123456789" oninput="this.value=this.value.toUpperCase();updateSum()"><div class="hint">EU company with VAT ID → 0% VAT (Reverse Charge)</div></div>
-        <div class="field">
-          <label class="check-label" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
-            <input type="checkbox" id="nonEU" onchange="updateSum()" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-            <span style="color:#8b949e;font-size:13px;line-height:1.5">My hotel is <strong style="color:#f0f6fc">outside the EU</strong> (USA, UAE, Asia, etc.) — <strong style="color:#4cd97b">0% VAT (tax-free export)</strong></span>
-          </label>
-        </div>
+        <div class="field"><label>VAT ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="text" id="vatId" placeholder="DE123456789"><div class="hint">Mit VAT ID → 0% VAT: (Reverse Charge)</div></div>
         <div class="field"><label>Website <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="url" id="website" placeholder="https://..."></div>
       </div>
       <div class="field" id="fe-whatsapp">
-        <label>WhatsApp Number *</label>
-        <input type="tel" id="whatsapp" placeholder="+1 234 567 8900">
-        <div class="hint orange">📱 Required: We will set up your AI Bot on this number.</div>
+        <label>WhatsApp-Nummer *</label>
+        <input type="tel" id="whatsapp" placeholder="+49 15678 483700">
+        <div class="hint orange">📱 Pflicht: Über diese Nummer richten wir Ihren KI-Bot ein.</div>
         <div class="err">WhatsApp-Nummer eingeben.</div>
       </div>
     </div>
-    <button class="btn btn-primary" onclick="go1()">Continue: Review Order →</button>
+    <button class="btn btn-primary" onclick="go1()">Weiter: Daten prüfen →</button>
   </div>
 
   <!-- STEP 2: Summary -->
   <div id="s2" style="display:none">
     <div class="card">
-      <h3>✅ Review Order</h3>
+      <h3>✅ Daten prüfen</h3>
       <div id="sumDetails"></div>
     </div>
     <div class="card">
-      <h3>💰 Price Summary</h3>
+      <h3>💰 Preisübersicht</h3>
       <div id="sumPrice"></div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
-      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
-        <input type="checkbox" id="chkAgb" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-        <span style="color:#8b949e;font-size:13px;line-height:1.5">I accept the <a href="https://ki.leolan.net/agb/" target="_blank" style="color:#f5a623">Terms & Conditions</a> *</span>
-      </label>
-      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
-        <input type="checkbox" id="chkPrivacy" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-        <span style="color:#8b949e;font-size:13px;line-height:1.5">I have read the <a href="https://ki.leolan.net/datenschutz/" target="_blank" style="color:#f5a623">Privacy Policy</a> *</span>
-      </label>
-      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
-        <input type="checkbox" id="chkAbo" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-        <span style="color:#8b949e;font-size:13px;line-height:1.5">I agree to the subscription (cancel anytime) *</span>
-      </label>
     </div>
     <button class="btn btn-primary" id="payBtn" onclick="doCheckout()">💳 Pay Now</button>
     <div class="status" id="status"></div>
-    <div class="note">After payment you will receive your customer code by email.<br>Mit diesem Code loggen Sie sich in der LeoLan Manager App an.</div>
+    <div class="note">Nach der Zahlung erhalten Sie Ihren Kundencode per E-Mail.<br>Mit diesem Code loggen Sie sich in der LeoLan Manager App an.</div>
     <button class="btn btn-back" onclick="show(1)" style="margin-top:8px">← Daten ändern</button>
   </div>
 
   <!-- STEP 3: Redirect -->
   <div id="s3" style="display:none;text-align:center;padding:40px 0">
     <div style="font-size:3rem;margin-bottom:16px">🔄</div>
-    <h2 style="color:#f0f6fc;margin-bottom:8px">Continueleitung zur Payment...</h2>
+    <h2 style="color:#f0f6fc;margin-bottom:8px">Weiterleitung zur Zahlung...</h2>
     <p style="color:#8b949e">Sie werden zu Stripe weitergeleitet.</p>
   </div>
 </div>
 <script>
-var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';window.onload=function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'All prices excl. VAT · + 349€ one-time setup fee':'All prices excl. VAT · 12 months minimum · + 349€ one-time setup fee';spkg(pkg);};
+var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';document.addEventListener('DOMContentLoaded',function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'All prices excl. VAT · + 349€ setup':'Alle Preise zzgl. VAT: · 12 months minimum · + 349€ einmalige Setup-Gebühr';});
 var fdata={};
-function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Show';}}
-function spkg(p){pkg=p;var radio=document.getElementById('pkg_'+p);if(radio)radio.checked=true;document.querySelectorAll('.pkg').forEach(function(c){c.classList.remove('on');var note=document.getElementById('legalNote');if(note){note.textContent=p==='pro'?'All prices excl. VAT · + 349€ one-time setup fee':'All prices excl. VAT · 12 months minimum · + 349€ one-time setup fee';}});var el=document.querySelector('[data-pkg="'+p+'"]');if(el)el.classList.add('on');}
+function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Zeigen';}}
+function spkg(p){pkg=p;document.querySelectorAll('.pkg').forEach(function(c){c.classList.remove('on');var note=document.getElementById('legalNote');if(note){note.textContent=p==='pro'?'All prices excl. VAT · + 349€ setup':'Alle Preise zzgl. VAT: · 12 months minimum · + 349€ einmalige Setup-Gebühr';}});document.querySelector('[data-pkg="'+p+'"]').classList.add('on');}
 function setErr(id,has){var f=document.getElementById('fe-'+id);if(f)f.classList.toggle('bad',has);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 function go1(){
@@ -239,10 +192,7 @@ function go1(){
   setErr('street',!street);if(!street)ok=false;
   setErr('zip',!zip);if(!zip)ok=false;
   setErr('city',!city);if(!city)ok=false;
-  var country=(document.getElementById('country')||{}).value||'';
   setErr('whatsapp',!wa);if(!wa)ok=false;
-  if(!country){var cel=document.getElementById('fe-country');if(cel)cel.querySelector('.err').style.display='block';ok=false;}
-  else{var cel=document.getElementById('fe-country');if(cel)cel.querySelector('.err').style.display='none';}
   if(!ok){window.scrollTo({top:0,behavior:'smooth'});return;}
   fdata={
     email:email,name:name,password:pw,
@@ -251,32 +201,30 @@ function go1(){
     address:street+', '+zip+' '+city,
     vatId:document.getElementById('vatId').value.trim(),
     website:document.getElementById('website').value.trim(),
-    whatsappNumber:wa,phone:wa,
-    country:(document.getElementById('country')||{}).value||''
+    whatsappNumber:wa,phone:wa
   };
   // Build summary
   var vatId=fdata.vatId;
-  var nonEU=document.getElementById("nonEU") && document.getElementById('nonEU').checked||false; var reverseCharge=(vatId&&vatId.length>4)||nonEU;
+  var reverseCharge=vatId&&vatId.length>4;
   var monthly=pkg==='starter'?199:349;
   var setup=349;
   var vat=reverseCharge?0:Math.round(monthly*0.19*100)/100;
   var vatSetup=reverseCharge?0:Math.round(setup*0.19*100)/100;
   var rows=[
     ['E-Mail',fdata.email],['Name',fdata.name],
-    ['Hotel',fdata.companyName],
-    ['Address',fdata.street+', '+fdata.zipCode+' '+fdata.city],
-    ['Country',fdata.country||'Not specified'],
-    ['VAT ID',fdata.vatId||'Not provided'],
+    ['Restaurant',fdata.companyName],
+    ['Adresse',fdata.street+', '+fdata.zipCode+' '+fdata.city],
+    ['VAT ID',fdata.vatId||'Keine Angabe'],
     ['Website',fdata.website||'—'],
     ['WhatsApp',fdata.whatsappNumber],
-    ['Package',(pkg==='starter'?'Single Module':'Guest Experience Suite')]
+    ['Paket',(pkg==='starter'?'Starter':'Pro')]
   ];
   document.getElementById('sumDetails').innerHTML=rows.map(function(r){return '<div class="sum-row"><span class="sum-label">'+esc(r[0])+'</span><span class="sum-value">'+esc(r[1])+'</span></div>';}).join('');
   document.getElementById('sumPrice').innerHTML=
     '<div class="sum-total">'+
-    '<div class="sum-total-row"><span style="color:#8b949e">Monthly (Package)</span><span>'+monthly+'€ / month</span></div>'+
-    '<div class="sum-total-row"><span style="color:#8b949e">Setup Fee (one-time)</span><span>'+setup+'€</span></div>'+
-    '<div class="sum-total-row"><span style="color:#8b949e">VAT '+(nonEU?'0% (Non-EU Export)':(reverseCharge?'0% (Reverse Charge)':'19%'))+'</span><span>'+vat.toFixed(2)+'€ / '+(reverseCharge?'0.00':vatSetup.toFixed(2))+'€</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">Monatlich (Paket)</span><span>'+monthly+'€ / Monat</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">Setup-Gebühr (einmalig)</span><span>'+setup+'€</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">VAT: '+(reverseCharge?'0% (Reverse Charge)':'19%')+'</span><span>'+vat.toFixed(2)+'€ / '+(reverseCharge?'0.00':vatSetup.toFixed(2))+'€</span></div>'+
     '<div class="sum-total-row big"><span>Total today</span><span>'+(Math.round((monthly+vat+setup+vatSetup)*100)/100).toFixed(2)+'€</span></div>'+
     '</div>';
   show(2);
@@ -293,23 +241,9 @@ function show(n){
   document.getElementById('sl2').className='sline'+(n>2?' done':'');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-async function autoDetectEU(){
-  var euCountries=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','NO','PT','IE','GR','CZ','SK','HU','RO','BG','HR','SI','LT','LV','EE','LU','MT','CY'];
-  var country=(document.getElementById('country')||{}).value||'';
-  var nonEUchk=document.getElementById('nonEU');
-  if(nonEUchk&&country){
-    if(!euCountries.includes(country)){
-      nonEUchk.checked=true;
-    } else {
-      nonEUchk.checked=false;
-    }
-  }
-  if(typeof updateSum==='function')updateSum();
-}
-
-function doCheckout(){
+async function doCheckout(){
   var btn=document.getElementById('payBtn');
-  btn.disabled=true;btn.textContent='Processing...';
+  btn.disabled=true;btn.textContent='Wird verarbeitet...';
   var s=document.getElementById('status');s.className='status';s.textContent='';
   try{
     // Save registration data for after payment
@@ -325,7 +259,7 @@ var vatAmount=reverseCharge?0:Math.round(pkgInfo.amount*0.19*100)/100;
 var chkPayload=Object.assign({},fdata,{
   customerEmail:fdata.email,
   priceIds:[pkgInfo.priceId],
-  modules:[{key:fdata.package,name:fdata.package==='starter'?'Single Module':'Guest Experience Suite',price:pkgInfo.amount,priceId:pkgInfo.priceId,desc:'LeoLan '+fdata.package}],
+  modules:[{key:fdata.package,name:fdata.package==='starter'?'Starter':'Pro',price:pkgInfo.amount,priceId:pkgInfo.priceId,desc:'LeoLan '+fdata.package}],
   monthlyNetTotal:pkgInfo.amount,
   setupFeeAmount:349,
   netTotal:pkgInfo.amount+349,
@@ -350,7 +284,7 @@ var chkRes=await fetch('https://n8n.leolan.net/webhook/stripe-checkout',{method:
       localStorage.setItem('customerCode',reg.customerCode);
       show(2);
       s.className='status';s.style.display='block';s.style.background='rgba(35,134,54,.15)';s.style.color='#3fb950';
-      s.innerHTML='✓ Registriert! Kundencode: <strong>'+reg.customerCode+'</strong><br>Wir kontaktieren Sie per WhatsApp für die Einrichtung und Payment.';
+      s.innerHTML='✓ Registriert! Kundencode: <strong>'+reg.customerCode+'</strong><br>Wir kontaktieren Sie per WhatsApp für die Einrichtung und Zahlung.';
       btn.textContent='✓ Erledigt';
     }
   }catch(e){
@@ -358,6 +292,7 @@ var chkRes=await fetch('https://n8n.leolan.net/webhook/stripe-checkout',{method:
     s.className='status err';s.textContent='Fehler: '+e.message;
     btn.disabled=false;btn.textContent='💳 Pay Now';
   }
-}</script>
+}
+spkg(pkg);</script>
 </body>
 </html>

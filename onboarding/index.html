@@ -1,616 +1,298 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LeoLan Digital Hotel Onboarding</title>
-  <style>
-    :root{
-      --navy:#1a2744;
-      --navy-2:#22345c;
-      --gold:#f5a623;
-      --gold-2:#ffbf57;
-      --bg:#07101d;
-      --surface:#101b31;
-      --surface-2:#13213c;
-      --line:rgba(255,255,255,.1);
-      --text:#f5f7fb;
-      --muted:rgba(245,247,251,.72);
-      --soft:rgba(245,247,251,.48);
-      --success:#34d399;
-      --danger:#f87171;
-      --shadow:0 28px 70px rgba(0,0,0,.34);
-      --radius:24px;
-      --font:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:var(--font);
-      color:var(--text);
-      background:
-        radial-gradient(circle at top right, rgba(245,166,35,.14), transparent 26%),
-        radial-gradient(circle at top left, rgba(26,39,68,.55), transparent 30%),
-        linear-gradient(180deg, #07101d 0%, #0b1424 100%);
-    }
-    a{color:inherit}
-    .shell{width:min(1120px,calc(100% - 24px));margin:0 auto;padding:24px 0 48px}
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border-radius:32px;
-      padding:28px;
-      background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 58%,#2d4677 100%);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-    }
-    .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
-    .hero::before{width:260px;height:260px;right:-90px;top:-90px;background:radial-gradient(circle,rgba(245,166,35,.28),rgba(245,166,35,0))}
-    .hero::after{width:220px;height:220px;left:-110px;bottom:-120px;background:radial-gradient(circle,rgba(255,255,255,.1),rgba(255,255,255,0))}
-    .topbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;position:relative;z-index:1}
-    .brand{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(245,166,35,.2);color:#ffd58a;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
-    .brand-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(245,166,35,.14)}
-    .portal-link{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:800;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#fff}
-    .portal-link:hover{background:rgba(255,255,255,.1)}
-    .hero-grid{position:relative;z-index:1;display:grid;gap:24px;margin-top:24px}
-    .hero h1{margin:0 0 14px;font-size:clamp(2.3rem,7vw,4.8rem);line-height:.98;letter-spacing:-.04em;max-width:720px}
-    .hero p{margin:0;max-width:760px;color:var(--muted);font-size:1.05rem;line-height:1.75}
-    .hero-stats{display:grid;gap:14px;margin-top:26px}
-    .hero-stat{padding:18px;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
-    .hero-stat strong{display:block;margin-bottom:6px;color:var(--gold);font-size:1.05rem}
-    .hero-stat span{color:var(--muted);line-height:1.6;font-size:.94rem}
-    .card{margin-top:20px;background:linear-gradient(180deg,rgba(16,27,49,.94),rgba(11,20,36,.98));border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden}
-    .progress{padding:20px 20px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02);position:sticky;top:0;z-index:2;backdrop-filter:blur(16px)}
-    .progress-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
-    .progress-label{font-weight:800;color:#fff}
-    .progress-meta{color:var(--soft);font-size:.92rem}
-    .progress-steps{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:12px}
-    .progress-step{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid transparent;color:var(--soft);min-width:0}
-    .progress-step.active{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.28);color:#fff}
-    .progress-step.done{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.16);color:#bdf4dc}
-    .progress-index{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.82rem;font-weight:900;background:rgba(255,255,255,.08);flex-shrink:0}
-    .progress-step.active .progress-index{background:var(--gold);color:var(--navy)}
-    .progress-step.done .progress-index{background:var(--success);color:#062816}
-    .progress-step small{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .progress-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
-    .progress-fill{height:100%;width:25%;border-radius:inherit;background:linear-gradient(90deg,var(--gold),var(--gold-2));transition:width .3s ease}
-    form{padding:20px}
-    .step{display:none;opacity:0;transform:translateY(14px)}
-    .step.active{display:block;opacity:1;transform:translateY(0);animation:fadeIn .28s ease}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    .step-tag{display:inline-block;margin-bottom:10px;color:#ffd58a;font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-    h2{margin:0 0 10px;font-size:clamp(1.6rem,4vw,2.35rem);line-height:1.08}
-    .intro{margin:0 0 24px;color:var(--muted);line-height:1.75}
-    .grid{display:grid;gap:16px}
-    .grid.two{grid-template-columns:1fr}
-    .field,.info-card,.success-card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:22px}
-    .field{padding:16px}
-    .field label{display:block;margin-bottom:8px;font-weight:800}
-    .req{color:var(--gold)}
-    input,select,textarea{
-      width:100%;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:14px;
-      padding:13px 14px;
-      background:rgba(255,255,255,.06);
-      color:#fff;
-      font:inherit;
-      transition:border-color .2s ease, box-shadow .2s ease;
-    }
-    input::placeholder,textarea::placeholder{color:rgba(255,255,255,.35)}
-    input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(245,166,35,.75);box-shadow:0 0 0 4px rgba(245,166,35,.14)}
-    select option{color:#111}
-    textarea{min-height:120px;resize:vertical}
-    .hint{margin-top:8px;color:var(--soft);font-size:.86rem;line-height:1.55}
-    .error{display:none;margin-top:8px;color:#ff9d9d;font-size:.84rem;font-weight:700}
-    .field.invalid .error{display:block}
-    .field.invalid input,.field.invalid select,.field.invalid textarea{border-color:rgba(248,113,113,.9);box-shadow:0 0 0 4px rgba(248,113,113,.12)}
-    .info-grid{display:grid;gap:16px}
-    .info-card{padding:18px}
-    .info-card strong{display:block;margin-bottom:6px;color:var(--gold)}
-    .info-card p{margin:0;color:var(--muted);line-height:1.65}
-    .nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:26px}
-    .btn{border:0;border-radius:16px;padding:14px 20px;min-width:150px;font:inherit;font-weight:900;cursor:pointer;transition:transform .18s ease, opacity .18s ease, background .2s ease}
-    .btn:hover{transform:translateY(-1px)}
-    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-    .btn-secondary{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.1)}
-    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:var(--navy);box-shadow:0 16px 32px rgba(245,166,35,.18)}
-    .status{display:none;margin-top:16px;padding:14px 16px;border-radius:16px;font-weight:700}
-    .status.error{display:block;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.18);color:#ffc5c5}
-    .status.success{display:block;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.18);color:#bdf4dc}
-    .success-screen{display:none;padding:44px 20px 24px;text-align:center}
-    .success-screen.show{display:block}
-    .success-icon{width:88px;height:88px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;font-size:2.4rem;background:rgba(52,211,153,.12);color:var(--success)}
-    .success-screen p{max-width:680px;margin:0 auto;color:var(--muted);line-height:1.75}
-    .success-actions{margin-top:24px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-    .hidden{display:none !important}
-    @media (min-width:740px){
-      .shell{width:min(1120px,calc(100% - 40px));padding-top:28px}
-      .hero{padding:34px}
-      .hero-grid{grid-template-columns:1.15fr .85fr;align-items:end}
-      .hero-stats{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:0}
-      form{padding:26px}
-      .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .info-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-    }
-    @media (max-width:760px){
-      .progress-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
-    }
-    @media (max-width:640px){
-      .shell{width:min(100% - 16px,1120px)}
-      .nav .btn,.success-actions .portal-link,.success-actions .btn{width:100%}
-      .progress-step small{font-size:.76rem}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hotel Onboarding — LeoLan Digital – Jetzt starten</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+.hero{background:linear-gradient(135deg,#1a2744 0%,#0d1117 100%);padding:40px 24px 28px;text-align:center;border-bottom:1px solid #21262d}
+.logo{font-size:26px;font-weight:800;color:#f5a623;margin-bottom:6px}
+.hero h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:800;margin-bottom:8px;color:#fff}
+.hero p{color:#8b949e;font-size:.95rem;max-width:500px;margin:0 auto;line-height:1.6}
+.shell{max-width:600px;margin:0 auto;padding:28px 20px 80px}
+.steps{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:28px}
+.sdot{width:32px;height:32px;border-radius:50%;border:2px solid #30363d;background:#0d1117;color:#8b949e;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.sdot.done{background:#238636;border-color:#238636;color:#fff}
+.sdot.active{background:#f5a623;border-color:#f5a623;color:#000}
+.sline{flex:1;height:2px;background:#21262d;max-width:70px;margin-top:15px;transition:background .3s}
+.sline.done{background:#238636}
+.swrap{display:flex;flex-direction:column;align-items:center;gap:4px}
+.slabel{font-size:.7rem;color:#8b949e;text-align:center;white-space:nowrap}
+.card{background:#161b22;border:1px solid #30363d;border-radius:14px;padding:24px;margin-bottom:14px}
+.card h3{font-size:.9rem;font-weight:700;color:#f5a623;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #21262d}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:.82rem;font-weight:600;color:#8b949e;margin-bottom:5px}
+.field input{width:100%;background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:11px 13px;color:#e6edf3;font-size:.9rem;outline:none;transition:border-color .2s}
+.field input:focus{border-color:#f5a623}
+.field .err{color:#f85149;font-size:.78rem;margin-top:3px;display:none}
+.field.bad .err{display:block}
+.field.bad input{border-color:#f85149}
+.field .hint{color:#8b949e;font-size:.78rem;margin-top:3px;line-height:1.4}
+.field .hint.orange{color:#f5a623;font-weight:600}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:70px}
+.pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#8b949e;cursor:pointer;font-size:.8rem;white-space:nowrap}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:480px){.g2,.g3{grid-template-columns:1fr}}
+.pkgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.pkgs{grid-template-columns:1fr}}
+.pkg{border:2px solid #30363d;border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;background:#0d1117;position:relative}
+.pkg:hover{border-color:#f5a623}
+.pkg.on{border-color:#f5a623;background:rgba(245,166,35,.07)}
+.pkg-badge{display:inline-block;background:#f5a623;color:#000;font-size:.65rem;font-weight:800;padding:2px 7px;border-radius:999px;margin-bottom:6px}
+.pkg-name{font-weight:800;color:#f0f6fc;font-size:1rem;margin-bottom:3px}
+.pkg-price{font-size:1.3rem;font-weight:800;color:#f5a623}
+.pkg-price span{font-size:.8rem;font-weight:400;color:#8b949e}
+.pkg-desc{font-size:.78rem;color:#8b949e;margin-top:6px;line-height:1.4}
+.chk{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:#f5a623;display:none;align-items:center;justify-content:center;color:#000;font-size:.7rem;font-weight:800}
+.pkg.on .chk{display:flex}
+.btn{width:100%;padding:14px;border-radius:10px;border:none;font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s}
+.btn-primary{background:#f5a623;color:#000}
+.btn-primary:hover{opacity:.9}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-back{background:#21262d;color:#8b949e;margin-bottom:8px}
+.status{text-align:center;padding:10px;border-radius:8px;font-size:.85rem;font-weight:600;display:none;margin-top:8px}
+.status.err{background:rgba(248,81,73,.15);color:#f85149;display:block}
+.note{color:#8b949e;font-size:.75rem;text-align:center;margin-top:10px;line-height:1.5}
+/* Summary */
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #21262d;font-size:.88rem}
+.sum-row:last-child{border-bottom:none}
+.sum-label{color:#8b949e}
+.sum-value{color:#f0f6fc;font-weight:600;text-align:right;max-width:60%}
+.sum-total{background:#0d1117;border-radius:10px;padding:16px;margin-top:12px}
+.sum-total-row{display:flex;justify-content:space-between;font-size:.88rem;padding:4px 0}
+.sum-total-row.big{font-size:1.1rem;font-weight:800;color:#f5a623;padding-top:10px;margin-top:6px;border-top:1px solid #21262d}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <section class="hero">
-      <div class="topbar">
-        <div class="brand"><span class="brand-dot"></span> LeoLan Digital · Hotel Onboarding</div>
-        <a class="portal-link" href="https://hotel.leolan.net/portal/" target="_blank" rel="noopener">Zum Portal Login</a>
-      </div>
-      <div class="hero-grid">
-        <div>
-          <h1>Ihr Hotel in wenigen Minuten für das LeoLan Portal anlegen.</h1>
-          <p>Erstellen Sie zuerst Ihr Konto, hinterlegen Sie Ihre Hoteldaten und verbinden Sie anschließend Ihre WhatsApp-Nummer. Danach kann unser Team direkt mit der Einrichtung starten.</p>
-        </div>
-        <div class="hero-stats">
-          <div class="hero-stat"><strong>Schrittweise Einrichtung</strong><span>Klare 4-Schritt-Strecke ohne unnötige Komplexität.</span></div>
-          <div class="hero-stat"><strong>Hotel-spezifisch</strong><span>Name, Adresse, Zimmeranzahl und Sterneklassifizierung direkt mit erfassen.</span></div>
-          <div class="hero-stat"><strong>Portal sofort erreichbar</strong><span>Bestehende Kunden gelangen jederzeit über hotel.leolan.net/portal/ in ihr Konto.</span></div>
-        </div>
-      </div>
-    </section>
+<div style="background:#0d1117;border-bottom:1px solid #21262d;position:sticky;top:0;z-index:100;padding:12px 20px">
+  <a href="https://ki.leolan.net/" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;color:#8b949e;text-decoration:none;font-size:14px;font-weight:600">
+    <span style="font-size:18px">←</span> Home
+  </a>
+  <div style="text-align:center">
+    <a href="https://ki.leolan.net/">
+      <img src="https://ki.leolan.net/leolan-logo.png" width="56" height="56" style="border-radius:16px;border:0;display:inline-block" alt="LeoLan">
+    </a>
+  </div>
+</div>
 
-    <section class="card">
-      <div class="progress" id="progressContainer">
-        <div class="progress-head">
-          <div>
-            <div class="progress-label" id="progressLabel">Schritt 1 von 4</div>
-            <div class="progress-meta" id="progressMeta">Account Registration</div>
-          </div>
-          <div class="progress-meta" id="saveState">Zwischenspeicherung aktiv</div>
-        </div>
-        <div class="progress-steps">
-          <div class="progress-step active" data-progress-step="0"><div class="progress-index">1</div><small>Account</small></div>
-          <div class="progress-step" data-progress-step="1"><div class="progress-index">2</div><small>Hoteldetails</small></div>
-          <div class="progress-step" data-progress-step="2"><div class="progress-index">3</div><small>WhatsApp</small></div>
-          <div class="progress-step" data-progress-step="3"><div class="progress-index">4</div><small>Fertig</small></div>
-        </div>
-        <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
-      </div>
-
-      <form id="onboardingForm" novalidate>
-        <div class="step active" data-step="0">
-          <span class="step-tag">Schritt 1</span>
-          <h2>Account Registration</h2>
-          <p class="intro">Legen Sie zuerst Ihr Kundenkonto an. Wir senden die Registrierung an unser Backend und speichern Ihren Kundencode direkt für die nächsten Schritte.</p>
-          <div class="grid two">
-            <div class="field" data-field="registerEmail">
-              <label for="registerEmail">E-Mail <span class="req">*</span></label>
-              <input type="email" id="registerEmail" placeholder="name@hotel.de" autocomplete="email">
-              <div class="error">Bitte eine gültige E-Mail-Adresse eingeben.</div>
-            </div>
-            <div class="field" data-field="registerName">
-              <label for="registerName">Name / Hotelname <span class="req">*</span></label>
-              <input type="text" id="registerName" placeholder="z. B. Boutique Hotel Aurora" autocomplete="organization">
-              <div class="error">Bitte Name oder Hotelname eingeben.</div>
-            </div>
-            <div class="field" data-field="registerPhone">
-              <label for="registerPhone">Telefon <span style="color:var(--muted);font-size:12px">(optional)</span></label>
-              <input type="tel" id="registerPhone" placeholder="+49 ..." autocomplete="tel">
-              <div class="error">Bitte eine Telefonnummer eingeben.</div>
-            </div>
-            <div class="field" data-field="registerPassword">
-              <label for="registerPassword">Passwort <span class="req">*</span></label>
-              <input type="password" id="registerPassword" placeholder="Mindestens 8 Zeichen" autocomplete="new-password">
-              <div class="error">Bitte ein Passwort mit mindestens 8 Zeichen eingeben.</div>
-            </div>
-            <div class="field" data-field="registerPasswordConfirm" style="grid-column:1 / -1;">
-              <label for="registerPasswordConfirm">Passwort bestätigen <span class="req">*</span></label>
-              <input type="password" id="registerPasswordConfirm" placeholder="Passwort wiederholen" autocomplete="new-password">
-              <div class="error">Passwörter stimmen nicht überein.</div>
-            </div>
-          </div>
-          <div class="status" id="registerStatus" aria-live="polite"></div>
-        </div>
-
-        <div class="step" data-step="1">
-          <span class="step-tag">Schritt 2</span>
-          <h2>Hotel details</h2>
-          <p class="intro">Diese Angaben nutzt LeoLan Digital für Einrichtung, Zuordnung im Portal und die spätere Automatisierung Ihres Hotels.</p>
-          <div class="grid two">
-            <div class="field" data-field="hotelName">
-              <label for="hotelName">Hotelname <span class="req">*</span></label>
-              <input type="text" id="hotelName" placeholder="Boutique Hotel Aurora">
-              <div class="error">Bitte den Hotelnamen eingeben.</div>
-            </div>
-            <div class="field" data-field="hotelAddress">
-              <label for="hotelAddress">Adresse <span class="req">*</span></label>
-              <input type="text" id="hotelAddress" placeholder="Straße, Hausnummer, PLZ Ort">
-              <div class="error">Bitte die Adresse eingeben.</div>
-            </div>
-            <div class="field" data-field="roomCount">
-              <label for="roomCount">Anzahl Zimmer <span class="req">*</span></label>
-              <input type="number" id="roomCount" min="1" step="1" placeholder="z. B. 24">
-              <div class="error">Bitte die Zimmeranzahl eingeben.</div>
-            </div>
-            <div class="field" data-field="starRating">
-              <label for="starRating">Sterneklassifizierung <span class="req">*</span></label>
-              <select id="starRating">
-                <option value="">Bitte auswählen</option>
-                <option value="1">1 Stern</option>
-                <option value="2">2 Sterne</option>
-                <option value="3">3 Sterne</option>
-                <option value="4">4 Sterne</option>
-                <option value="5">5 Sterne</option>
-                <option value="sonstige">Sonstige / keine offizielle Klassifizierung</option>
-              </select>
-              <div class="error">Bitte eine Sterneklassifizierung auswählen.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="step" data-step="2">
-          <span class="step-tag">Schritt 3</span>
-          <h2>WhatsApp setup</h2>
-          <p class="intro">Wie beim Restaurant-Onboarding brauchen wir für die Einrichtung vor allem Ihre WhatsApp-Nummer. Darüber kann Ihr Hotel später Anfragen und Gästekommunikation zentral abwickeln.</p>
-          <div class="grid">
-            <div class="field" data-field="whatsappNumber">
-              <label for="whatsappNumber">WhatsApp-Nummer <span class="req">*</span></label>
-              <input type="tel" id="whatsappNumber" placeholder="+49 15678 483700">
-              <div class="hint">Bitte die Nummer angeben, über die Gäste Ihr Hotel kontaktieren sollen.</div>
-              <div class="error">Bitte die WhatsApp-Nummer eingeben.</div>
-            </div>
-          </div>
-          <div class="info-grid" style="margin-top:18px;">
-            <div class="info-card">
-              <strong>Direkte Gästekommunikation</strong>
-              <p>Anfragen zu Verfügbarkeit, Check-in oder Hotelinfos können später direkt über WhatsApp laufen.</p>
-            </div>
-            <div class="info-card">
-              <strong>Schnelle Einrichtung</strong>
-              <p>Nach dem Absenden kann das LeoLan Team Ihre Nummer sofort technisch zuordnen und vorbereiten.</p>
-            </div>
-            <div class="info-card">
-              <strong>Portal-Zugang vorhanden</strong>
-              <p>Bestehende Kunden nutzen jederzeit den Login unter hotel.leolan.net/portal/.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="step" data-step="3">
-          <span class="step-tag">Schritt 4</span>
-          <h2>Fertig</h2>
-          <p class="intro">Prüfen Sie kurz Ihre Angaben. Mit dem finalen Klick speichern wir die Onboarding-Daten für Ihr Hotel und zeigen danach die Erfolgsansicht.</p>
-          <div class="grid two">
-            <div class="success-card" style="padding:18px;">
-              <strong style="display:block;margin-bottom:12px;color:var(--gold);">Account</strong>
-              <div id="summaryAccount" style="color:var(--muted);line-height:1.75;"></div>
-            </div>
-            <div class="success-card" style="padding:18px;">
-              <strong style="display:block;margin-bottom:12px;color:var(--gold);">Hotel & WhatsApp</strong>
-              <div id="summaryHotel" style="color:var(--muted);line-height:1.75;"></div>
-            </div>
-          </div>
-          <div class="status" id="submitStatus" aria-live="polite"></div>
-        </div>
-
-        <div class="nav" id="formNav">
-          <button type="button" class="btn btn-secondary" id="prevBtn">Zurück</button>
-          <button type="button" class="btn btn-primary" id="nextBtn">Weiter</button>
-          <button type="submit" class="btn btn-primary hidden" id="submitBtn">Onboarding abschließen</button>
-        </div>
-      </form>
-
-      <div class="success-screen" id="successScreen">
-        <div class="success-icon">✓</div>
-        <h2>Hotel-Onboarding erfolgreich</h2>
-        <p>Ihr Konto und Ihre Hoteldaten wurden erfolgreich gespeichert. Das LeoLan Team kann jetzt mit der Einrichtung starten. Für den späteren Zugriff auf Ihr Kundenportal nutzen Sie einfach den Login unter hotel.leolan.net/portal/.</p>
-        <div class="success-actions">
-          <a class="portal-link" href="https://hotel.leolan.net/portal/" target="_blank" rel="noopener">Zum Portal</a>
-          <a class="portal-link" href="https://hotel.leolan.net/" target="_blank" rel="noopener">Zur Hotel Homepage</a>
-        </div>
-      </div>
-    </section>
+<div class="hero">
+  <div class="logo">LeoLan Digital</div>
+  <h1>KI-System für Ihr Restaurant</h1>
+  <p>In 3 Schritten zum eigenen KI-Assistenten.</p>
+</div>
+<div class="shell">
+  <!-- Steps -->
+  <div style="display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:24px">
+    <div class="swrap"><div class="sdot active" id="sd1">1</div><div class="slabel">Ihre Daten</div></div>
+    <div class="sline" id="sl1"></div>
+    <div class="swrap"><div class="sdot" id="sd2">2</div><div class="slabel">Prüfen</div></div>
+    <div class="sline" id="sl2"></div>
+    <div class="swrap"><div class="sdot" id="sd3">3</div><div class="slabel">Zahlung</div></div>
   </div>
 
-  <script>
-    const STORAGE_KEY = 'leolan-hotel-onboarding-v1';
-    const REGISTER_WEBHOOK_URL = 'https://n8n.leolan.net/webhook/kunden-register';
-    const TOTAL_STEPS = 4;
-    const STEP_TITLES = ['Account Registration','Hotel details','WhatsApp setup','Done'];
+  <!-- STEP 1 -->
+  <div id="s1">
+    <!-- Paket -->
+    <div class="card">
+      <h3>📦 Paket wählen</h3>
+      <div class="pkgs">
+        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">🔥 Beliebt</div><div class="pkg-name">Starter</div><div class="pkg-price">199€ <span>/ Monat</span></div><div class="pkg-desc">WhatsApp-Bot, Reservierungen, 500 Nachrichten/Monat</div></div>
+        <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-name">Pro</div><div class="pkg-price">349€ <span>/ Monat</span></div><div class="pkg-desc">Alles aus Starter + Social Media, 2.000 Nachrichten/Monat</div></div>
+      </div>
+      <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">Alle Preise zzgl. MwSt. · 12 Monate Mindestlaufzeit · + 349€ einmalige Setup-Gebühr</p>
+    </div>
+    <!-- Konto -->
+    <div class="card">
+      <h3>👤 Zugangsdaten</h3>
+      <div class="g2">
+        <div class="field" id="fe-email"><label>E-Mail *</label><input type="email" id="email" placeholder="name@firma.de" autocomplete="email"><div class="err">Gültige E-Mail eingeben.</div></div>
+        <div class="field" id="fe-name"><label>Ihr Name *</label><input type="text" id="name" placeholder="Max Mustermann" autocomplete="name"><div class="err">Name eingeben.</div></div>
+      </div>
+      <div class="g2">
+        <div class="field" id="fe-pw"><label>Passwort * (min. 8 Zeichen)</label><div class="pw-wrap"><input type="password" id="pw" placeholder="Passwort" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw',this)">Zeigen</button></div><div class="err">Mindestens 8 Zeichen.</div></div>
+        <div class="field" id="fe-pw2"><label>Passwort bestätigen *</label><div class="pw-wrap"><input type="password" id="pw2" placeholder="Wiederholen" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw2',this)">Zeigen</button></div><div class="err">Stimmt nicht überein.</div></div>
+      </div>
+    </div>
+    <!-- Kundendaten -->
+    <div class="card">
+      <h3>🏢 Restaurant & Rechnungsdaten</h3>
+      <div class="field" id="fe-company"><label>Restaurantname *</label><input type="text" id="company" placeholder="z. B. Musterhotel GmbH"><div class="err">Restaurantname eingeben.</div></div>
+      <div class="g2">
+        <div class="field" id="fe-street"><label>Straße & Hausnummer *</label><input type="text" id="street" placeholder="Musterstraße 1"><div class="err">Adresse eingeben.</div></div>
+        <div class="g2" style="gap:8px">
+          <div class="field" id="fe-zip"><label>PLZ *</label><input type="text" id="zip" placeholder="01234" maxlength="10"><div class="err">PLZ eingeben.</div></div>
+          <div class="field" id="fe-city"><label>Stadt *</label><input type="text" id="city" placeholder="Dresden"><div class="err">Stadt eingeben.</div></div>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="field"><label>USt-ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="text" id="vatId" placeholder="DE123456789"><div class="hint">Mit USt-ID → 0% MwSt. (Reverse Charge)</div></div>
+        <div class="field"><label>Website <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="url" id="website" placeholder="https://..."></div>
+      </div>
+      <div class="field" id="fe-whatsapp">
+        <label>WhatsApp-Nummer *</label>
+        <input type="tel" id="whatsapp" placeholder="+49 15678 483700">
+        <div class="hint orange">📱 Pflicht: Über diese Nummer richten wir Ihren KI-Bot ein.</div>
+        <div class="err">WhatsApp-Nummer eingeben.</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="go1()">Weiter: Daten prüfen →</button>
+  </div>
 
-    const form = document.getElementById('onboardingForm');
-    const steps = [...document.querySelectorAll('.step')];
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    const progressFill = document.getElementById('progressFill');
-    const progressLabel = document.getElementById('progressLabel');
-    const progressMeta = document.getElementById('progressMeta');
-    const saveState = document.getElementById('saveState');
-    const registerStatus = document.getElementById('registerStatus');
-    const submitStatus = document.getElementById('submitStatus');
-    const successScreen = document.getElementById('successScreen');
-    const formNav = document.getElementById('formNav');
-    const progressContainer = document.getElementById('progressContainer');
+  <!-- STEP 2: Summary -->
+  <div id="s2" style="display:none">
+    <div class="card">
+      <h3>✅ Daten prüfen</h3>
+      <div id="sumDetails"></div>
+    </div>
+    <div class="card">
+      <h3>💰 Preisübersicht</h3>
+      <div id="sumPrice"></div>
+    </div>
+    <button class="btn btn-primary" id="payBtn" onclick="doCheckout()">💳 Jetzt bezahlen</button>
+    <div class="status" id="status"></div>
+    <div class="note">Nach der Zahlung erhalten Sie Ihren Kundencode per E-Mail.<br>Mit diesem Code loggen Sie sich in der LeoLan Manager App an.</div>
+    <button class="btn btn-back" onclick="show(1)" style="margin-top:8px">← Daten ändern</button>
+  </div>
 
-    let currentStep = 0;
-    let authState = { customerCode: '', token: '' };
-
-    const validateEmail = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    const escapeHtml = value => String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#039;');
-
-    function markInvalid(name, invalid = true) {
-      const field = document.querySelector(`[data-field="${name}"]`);
-      if (field) field.classList.toggle('invalid', invalid);
+  <!-- STEP 3: Redirect -->
+  <div id="s3" style="display:none;text-align:center;padding:40px 0">
+    <div style="font-size:3rem;margin-bottom:16px">🔄</div>
+    <h2 style="color:#f0f6fc;margin-bottom:8px">Weiterleitung zur Zahlung...</h2>
+    <p style="color:#8b949e">Sie werden zu Stripe weitergeleitet.</p>
+  </div>
+</div>
+<script>
+var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';document.addEventListener('DOMContentLoaded',function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'Alle Preise zzgl. MwSt. · + 349€ einmalige Setup-Gebühr':'Alle Preise zzgl. MwSt. · 12 Monate Mindestlaufzeit · + 349€ einmalige Setup-Gebühr';});
+var fdata={};
+function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Zeigen';}}
+function spkg(p){pkg=p;document.querySelectorAll('.pkg').forEach(function(c){c.classList.remove('on');var note=document.getElementById('legalNote');if(note){note.textContent=p==='pro'?'Alle Preise zzgl. MwSt. · + 349€ einmalige Setup-Gebühr':'Alle Preise zzgl. MwSt. · 12 Monate Mindestlaufzeit · + 349€ einmalige Setup-Gebühr';}});document.querySelector('[data-pkg="'+p+'"]').classList.add('on');}
+function setErr(id,has){var f=document.getElementById('fe-'+id);if(f)f.classList.toggle('bad',has);}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function go1(){
+  var email=document.getElementById('email').value.trim();
+  var name=document.getElementById('name').value.trim();
+  var pw=document.getElementById('pw').value;
+  var pw2=document.getElementById('pw2').value;
+  var company=document.getElementById('company').value.trim();
+  var street=document.getElementById('street').value.trim();
+  var zip=document.getElementById('zip').value.trim();
+  var city=document.getElementById('city').value.trim();
+  var wa=document.getElementById('whatsapp').value.trim();
+  var ok=true;
+  var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  setErr('email',!emailOk);if(!emailOk)ok=false;
+  setErr('name',!name);if(!name)ok=false;
+  setErr('pw',pw.length<8);if(pw.length<8)ok=false;
+  setErr('pw2',pw!==pw2);if(pw!==pw2)ok=false;
+  setErr('company',!company);if(!company)ok=false;
+  setErr('street',!street);if(!street)ok=false;
+  setErr('zip',!zip);if(!zip)ok=false;
+  setErr('city',!city);if(!city)ok=false;
+  setErr('whatsapp',!wa);if(!wa)ok=false;
+  if(!ok){window.scrollTo({top:0,behavior:'smooth'});return;}
+  fdata={
+    email:email,name:name,password:pw,
+    package:pkg,sector:'hotel',
+    companyName:company,street:street,zipCode:zip,city:city,
+    address:street+', '+zip+' '+city,
+    vatId:document.getElementById('vatId').value.trim(),
+    website:document.getElementById('website').value.trim(),
+    whatsappNumber:wa,phone:wa
+  };
+  // Build summary
+  var vatId=fdata.vatId;
+  var reverseCharge=vatId&&vatId.length>4;
+  var monthly=pkg==='starter'?199:349;
+  var setup=349;
+  var vat=reverseCharge?0:Math.round(monthly*0.19*100)/100;
+  var vatSetup=reverseCharge?0:Math.round(setup*0.19*100)/100;
+  var rows=[
+    ['E-Mail',fdata.email],['Name',fdata.name],
+    ['Restaurant',fdata.companyName],
+    ['Adresse',fdata.street+', '+fdata.zipCode+' '+fdata.city],
+    ['USt-ID',fdata.vatId||'Keine Angabe'],
+    ['Website',fdata.website||'—'],
+    ['WhatsApp',fdata.whatsappNumber],
+    ['Paket',(pkg==='starter'?'Starter':'Pro')]
+  ];
+  document.getElementById('sumDetails').innerHTML=rows.map(function(r){return '<div class="sum-row"><span class="sum-label">'+esc(r[0])+'</span><span class="sum-value">'+esc(r[1])+'</span></div>';}).join('');
+  document.getElementById('sumPrice').innerHTML=
+    '<div class="sum-total">'+
+    '<div class="sum-total-row"><span style="color:#8b949e">Monatlich (Paket)</span><span>'+monthly+'€ / Monat</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">Setup-Gebühr (einmalig)</span><span>'+setup+'€</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">MwSt. '+(reverseCharge?'0% (Reverse Charge)':'19%')+'</span><span>'+vat.toFixed(2)+'€ / '+(reverseCharge?'0.00':vatSetup.toFixed(2))+'€</span></div>'+
+    '<div class="sum-total-row big"><span>Gesamt heute</span><span>'+(Math.round((monthly+vat+setup+vatSetup)*100)/100).toFixed(2)+'€</span></div>'+
+    '</div>';
+  show(2);
+}
+function show(n){
+  document.getElementById('s1').style.display=n===1?'block':'none';
+  document.getElementById('s2').style.display=n===2?'block':'none';
+  document.getElementById('s3').style.display=n===3?'block':'none';
+  for(var i=1;i<=3;i++){
+    var d=document.getElementById('sd'+i);
+    d.className='sdot'+(i<n?' done':i===n?' active':'');
+  }
+  document.getElementById('sl1').className='sline'+(n>1?' done':'');
+  document.getElementById('sl2').className='sline'+(n>2?' done':'');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+async function doCheckout(){
+  var btn=document.getElementById('payBtn');
+  btn.disabled=true;btn.textContent='Wird verarbeitet...';
+  var s=document.getElementById('status');s.className='status';s.textContent='';
+  try{
+    // Save registration data for after payment
+    localStorage.setItem('pendingReg', JSON.stringify(fdata));
+    show(3);
+    // Go directly to Stripe checkout
+    // Add Stripe price IDs for the package
+var priceMap={'starter':{priceId:'price_1TL0yYLwGb6me8PhNJaI5B0d',amount:199},'pro':{priceId:'price_1TL0z0LwGb6me8PhRKNbQ3Qa',amount:349}};
+var pkgInfo=priceMap[fdata.package]||priceMap.starter;
+var reverseCharge=fdata.vatId&&fdata.vatId.length>4;
+var vatRate=19; // Stripe handles Reverse Charge via customer tax ID
+var vatAmount=reverseCharge?0:Math.round(pkgInfo.amount*0.19*100)/100;
+var chkPayload=Object.assign({},fdata,{
+  customerEmail:fdata.email,
+  priceIds:[pkgInfo.priceId],
+  modules:[{key:fdata.package,name:fdata.package==='starter'?'Starter':'Pro',price:pkgInfo.amount,priceId:pkgInfo.priceId,desc:'LeoLan '+fdata.package}],
+  monthlyNetTotal:pkgInfo.amount,
+  setupFeeAmount:349,
+  netTotal:pkgInfo.amount+349,
+  vatRate:vatRate,
+  vatAmount:vatAmount,
+  grossTotal:Math.round((pkgInfo.amount+349+(reverseCharge?0:Math.round((pkgInfo.amount+349)*0.19*100)/100))*100)/100, reverseCharge:false,
+  reverseCharge:reverseCharge,
+  selectedPackage:fdata.package,
+  successUrl:'https://hotel.leolan.net/danke/',
+  cancelUrl:'https://ki.leolan.net/onboarding/'
+});
+var chkRes=await fetch('https://n8n.leolan.net/webhook/stripe-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(chkPayload)});
+    var chkText=await chkRes.text();
+    var chk={};try{chk=JSON.parse(chkText);}catch(e){}
+    var url=chk.url||chk.checkoutUrl||(chk.data&&chk.data.url);
+    if(url&&url.startsWith('http')){window.location.href=url;}
+    else{
+      // Stripe URL not available - register and show code
+      var regRes=await fetch('https://n8n.leolan.net/webhook/kunden-register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fdata)});
+      var reg=await regRes.json();
+      if(!reg.customerCode)throw new Error('Registrierung fehlgeschlagen.');
+      localStorage.setItem('customerCode',reg.customerCode);
+      show(2);
+      s.className='status';s.style.display='block';s.style.background='rgba(35,134,54,.15)';s.style.color='#3fb950';
+      s.innerHTML='✓ Registriert! Kundencode: <strong>'+reg.customerCode+'</strong><br>Wir kontaktieren Sie per WhatsApp für die Einrichtung und Zahlung.';
+      btn.textContent='✓ Erledigt';
     }
-
-    function setStatus(el, text, type = '') {
-      if (!el) return;
-      el.className = 'status';
-      if (type) el.classList.add(type);
-      el.textContent = text || '';
-    }
-
-    function getData() {
-      return {
-        customerCode: authState.customerCode,
-        authToken: authState.token,
-        registerEmail: document.getElementById('registerEmail').value.trim(),
-        registerName: document.getElementById('registerName').value.trim(),
-        registerPhone: document.getElementById('registerPhone').value.trim(),
-        hotelName: document.getElementById('hotelName').value.trim(),
-        hotelAddress: document.getElementById('hotelAddress').value.trim(),
-        roomCount: document.getElementById('roomCount').value.trim(),
-        starRating: document.getElementById('starRating').value,
-        whatsappNumber: document.getElementById('whatsappNumber').value.trim(),
-        sector: 'hotel'
-      };
-    }
-
-    function persistForm() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(getData()));
-      saveState.textContent = `Automatisch gespeichert · ${new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}`;
-    }
-
-    function restoreForm() {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      try {
-        const data = JSON.parse(raw);
-        ['registerEmail','registerName','registerPhone','hotelName','hotelAddress','roomCount','whatsappNumber'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el && data[id]) el.value = data[id];
-        });
-        if (data.starRating) document.getElementById('starRating').value = data.starRating;
-        authState.customerCode = data.customerCode || '';
-        authState.token = data.authToken || '';
-      } catch (error) {
-        console.error('Restore failed', error);
-      }
-    }
-
-    function validateRegistration() {
-      const email = document.getElementById('registerEmail').value.trim();
-      const name = document.getElementById('registerName').value.trim();
-      const phone = document.getElementById('registerPhone').value.trim();
-      const password = document.getElementById('registerPassword').value;
-      const confirm = document.getElementById('registerPasswordConfirm').value;
-      let valid = true;
-
-      const emailValid = validateEmail(email);
-      markInvalid('registerEmail', !emailValid);
-      if (!emailValid) valid = false;
-
-      const nameValid = Boolean(name);
-      markInvalid('registerName', !nameValid);
-      if (!nameValid) valid = false;
-
-      const phoneValid = Boolean(phone);
-      markInvalid('registerPhone', !phoneValid);
-      if (!phoneValid) valid = false;
-
-      const passwordValid = password.length >= 8;
-      markInvalid('registerPassword', !passwordValid);
-      if (!passwordValid) valid = false;
-
-      const confirmValid = passwordValid && password === confirm;
-      markInvalid('registerPasswordConfirm', !confirmValid);
-      if (!confirmValid) valid = false;
-
-      return valid;
-    }
-
-    function validateHotelDetails() {
-      const hotelName = document.getElementById('hotelName').value.trim();
-      const hotelAddress = document.getElementById('hotelAddress').value.trim();
-      const roomCount = document.getElementById('roomCount').value.trim();
-      const starRating = document.getElementById('starRating').value;
-      let valid = true;
-
-      markInvalid('hotelName', !hotelName);
-      if (!hotelName) valid = false;
-
-      markInvalid('hotelAddress', !hotelAddress);
-      if (!hotelAddress) valid = false;
-
-      const roomValid = Number(roomCount) > 0;
-      markInvalid('roomCount', !roomValid);
-      if (!roomValid) valid = false;
-
-      const starValid = Boolean(starRating);
-      markInvalid('starRating', !starValid);
-      if (!starValid) valid = false;
-
-      return valid;
-    }
-
-    function validateWhatsappStep() {
-      const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
-      const valid = Boolean(whatsappNumber);
-      markInvalid('whatsappNumber', !valid);
-      return valid;
-    }
-
-    function validateStep(stepIndex) {
-      if (stepIndex === 0) return Boolean(authState.customerCode);
-      if (stepIndex === 1) return validateHotelDetails();
-      if (stepIndex === 2) return validateWhatsappStep();
-      return true;
-    }
-
-    function updateSummary() {
-      const data = getData();
-      document.getElementById('summaryAccount').innerHTML = `
-        <div><strong style="color:#fff">Kundencode:</strong> ${escapeHtml(data.customerCode || 'Noch nicht vorhanden')}</div>
-        <div><strong style="color:#fff">E-Mail:</strong> ${escapeHtml(data.registerEmail)}</div>
-        <div><strong style="color:#fff">Kontakt:</strong> ${escapeHtml(data.registerName)}</div>
-        <div><strong style="color:#fff">Telefon:</strong> ${escapeHtml(data.registerPhone)}</div>
-      `;
-      document.getElementById('summaryHotel').innerHTML = `
-        <div><strong style="color:#fff">Hotel:</strong> ${escapeHtml(data.hotelName)}</div>
-        <div><strong style="color:#fff">Adresse:</strong> ${escapeHtml(data.hotelAddress)}</div>
-        <div><strong style="color:#fff">Zimmer:</strong> ${escapeHtml(data.roomCount)}</div>
-        <div><strong style="color:#fff">Sterne:</strong> ${escapeHtml(data.starRating)}</div>
-        <div><strong style="color:#fff">WhatsApp:</strong> ${escapeHtml(data.whatsappNumber)}</div>
-      `;
-    }
-
-    function updateStep() {
-      steps.forEach((step, index) => step.classList.toggle('active', index === currentStep));
-      document.querySelectorAll('[data-progress-step]').forEach(step => {
-        const index = Number(step.dataset.progressStep);
-        step.classList.toggle('active', index === currentStep);
-        step.classList.toggle('done', index < currentStep);
-      });
-      progressLabel.textContent = `Schritt ${currentStep + 1} von ${TOTAL_STEPS}`;
-      progressMeta.textContent = STEP_TITLES[currentStep];
-      progressFill.style.width = `${((currentStep + 1) / TOTAL_STEPS) * 100}%`;
-      prevBtn.style.visibility = currentStep === 0 ? 'hidden' : 'visible';
-      nextBtn.classList.toggle('hidden', currentStep === TOTAL_STEPS - 1);
-      submitBtn.classList.toggle('hidden', currentStep !== TOTAL_STEPS - 1);
-      if (currentStep === TOTAL_STEPS - 1) updateSummary();
-    }
-
-    function showSuccess() {
-      form.classList.add('hidden');
-      formNav.classList.add('hidden');
-      progressContainer.classList.add('hidden');
-      successScreen.classList.add('show');
-      localStorage.removeItem(STORAGE_KEY);
-    }
-
-    async function registerAccount() {
-      if (!validateRegistration()) return;
-      nextBtn.disabled = true;
-      nextBtn.textContent = 'Konto wird erstellt...';
-      setStatus(registerStatus, '');
-
-      try {
-        const payload = {
-          email: document.getElementById('registerEmail').value.trim(),
-          password: document.getElementById('registerPassword').value,
-          name: document.getElementById('registerName').value.trim(),
-          phone: document.getElementById('registerPhone').value.trim(),
-          sector: 'hotel',
-          paket: 'starter'
-        };
-        const response = await fetch(REGISTER_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const result = await response.json().catch(() => ({}));
-        const customerCode = result.customerCode || result.code || result.customer_code || result.data?.customerCode || '';
-        const token = result.token || result.data?.token || '';
-        const effectiveToken = token || customerCode; if (!customerCode) throw new Error('Keine gültigen Zugangsdaten vom Server erhalten.'); const finalToken = effectiveToken;
-
-        authState = { customerCode, token };
-        if (!document.getElementById('hotelName').value.trim()) {
-          document.getElementById('hotelName').value = document.getElementById('registerName').value.trim();
-        }
-        persistForm();
-        setStatus(registerStatus, `Registrierung erfolgreich. Ihr Kundencode: ${customerCode}`, 'success');
-        currentStep = 1;
-        updateStep();
-      } catch (error) {
-        console.error(error);
-        setStatus(registerStatus, error.message || 'Registrierung fehlgeschlagen.', 'error');
-      } finally {
-        nextBtn.disabled = false;
-        nextBtn.textContent = 'Weiter';
-      }
-    }
-
-    async function submitOnboarding() {
-      persistForm();
-      return Promise.resolve();
-    }
-
-    function bindEvents() {
-      document.querySelectorAll('input, select, textarea').forEach(el => {
-        el.addEventListener('input', () => {
-          const wrapper = el.closest('.field');
-          if (wrapper) wrapper.classList.remove('invalid');
-          persistForm();
-        });
-        el.addEventListener('change', persistForm);
-      });
-
-      prevBtn.addEventListener('click', () => {
-        if (currentStep > 0) {
-          currentStep -= 1;
-          updateStep();
-        }
-      });
-
-      nextBtn.addEventListener('click', async () => {
-        if (currentStep === 0) {
-          await registerAccount();
-          return;
-        }
-        if (!validateStep(currentStep)) return;
-        persistForm();
-        if (currentStep < TOTAL_STEPS - 1) {
-          currentStep += 1;
-          updateStep();
-        }
-      });
-
-      form.addEventListener('submit', async event => {
-        event.preventDefault();
-        for (let i = 1; i < TOTAL_STEPS - 1; i += 1) {
-          if (!validateStep(i)) {
-            currentStep = i;
-            updateStep();
-            return;
-          }
-        }
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Wird gespeichert...';
-        setStatus(submitStatus, '');
-        try {
-          await submitOnboarding();
-          showSuccess();
-        } catch (error) {
-          console.error(error);
-          setStatus(submitStatus, 'Onboarding konnte nicht gespeichert werden. Bitte in wenigen Minuten erneut versuchen.', 'error');
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Onboarding abschließen';
-        }
-      });
-    }
-
-    restoreForm();
-    bindEvents();
-    updateStep();
-  </script>
+  }catch(e){
+    show(2);
+    s.className='status err';s.textContent='Fehler: '+e.message;
+    btn.disabled=false;btn.textContent='💳 Jetzt bezahlen';
+  }
+}
+spkg(pkg);</script>
 </body>
 </html>

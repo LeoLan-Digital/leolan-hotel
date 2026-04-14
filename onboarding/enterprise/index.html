@@ -746,11 +746,11 @@
     <section class="hero">
       <div class="brand"><span class="brand-dot"></span> LeoLan Digital · Enterprise</div>
       <h1>Configure Your Hotel Package</h1>
-      <p class="subtitle">Wählen Sie Module, informieren Sie sich per KI-Chat, buchen Sie direkt.</p>
+      <p class="subtitle">Select modules, get AI advice, book directly.</p>
       <div class="hero-pills">
-        <div class="pill">8 Module frei kombinierbar</div>
-        <div class="pill">349€ einmaliges Setup</div>
-        <div class="pill">Direkter Stripe Checkout</div>
+        <div class="pill">8 modules freely combinable</div>
+        <div class="pill">349€ one-time setup</div>
+        <div class="pill">Direct Stripe Checkout</div>
       </div>
     </section>
 
@@ -826,26 +826,26 @@
       </div>
       <div class="modal-body">
         <div class="field-grid">
-          <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px">Kundenkonto</h4>
+          <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px">Account</h4>
           <div class="field full">
             <label for="customerName">Vorname + Nachname *</label>
             <input id="customerName" type="text" autocomplete="name" placeholder="Max Mustermann" required />
           </div>
           <div class="field full">
-            <label for="customerEmail">E-Mail (für Kundenkonto) *</label>
+            <label for="customerEmail">E-Mail (für Account) *</label>
             <input id="customerEmail" type="email" autocomplete="email" placeholder="name@firma.de" required />
           </div>
           <div class="field full">
-            <label for="customerPassword">Passwort für Manager App *</label>
+            <label for="customerPassword">Password for Manager App *</label>
             <div class="password-wrap">
-              <input id="customerPassword" type="password" autocomplete="new-password" placeholder="Mindestens 8 Zeichen" required />
+              <input id="customerPassword" type="password" autocomplete="new-password" placeholder="Minimum 8 characters" required />
               <button class="eye-btn" id="togglePasswordBtn" type="button" aria-label="Passwort anzeigen">👁️</button>
             </div>
           </div>
           <div class="field full">
-            <label for="customerPasswordConfirm">Passwort bestätigen *</label>
+            <label for="customerPasswordConfirm">Confirm Password *</label>
             <div class="password-wrap">
-              <input id="customerPasswordConfirm" type="password" autocomplete="new-password" placeholder="Passwort wiederholen" required />
+              <input id="customerPasswordConfirm" type="password" autocomplete="new-password" placeholder="Repeat password" required />
               <button class="eye-btn" type="button" onclick="var i=document.getElementById('customerPasswordConfirm');i.type=i.type==='password'?'text':'password'" aria-label="Passwort anzeigen">👁️</button>
             </div>
           </div>
@@ -886,23 +886,23 @@
           <div class="summary-list-rows">
             <div class="summary-row"><strong>Monatlich</strong><span id="bookingMonthly">0€</span></div>
             <div class="summary-row"><strong>Setup</strong><span>349€</span></div>
-            <div class="summary-row"><strong>MwSt.</strong><span id="bookingTax">19%</span></div>
-            <div class="summary-row total"><span>Gesamt heute</span><span id="bookingTotal">0€</span></div>
+            <div class="summary-row"><strong>VAT</strong><span id="bookingTax">19%</span></div>
+            <div class="summary-row total"><span>Total today</span><span id="bookingTotal">0€</span></div>
           </div>
         </div>
 
         <div class="legal-checks">
           <label class="legal-check">
             <input type="checkbox" id="checkAgb" required>
-            <span>Ich akzeptiere die <a href="https://ki.leolan.net/agb/" target="_blank">AGB</a> *</span>
+            <span>I accept the <a href="https://ki.leolan.net/agb/" target="_blank">AGB</a> *</span>
           </label>
           <label class="legal-check">
             <input type="checkbox" id="checkDatenschutz" required>
-            <span>Ich habe die <a href="https://ki.leolan.net/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und akzeptiere sie *</span>
+            <span>I have read the <a href="https://ki.leolan.net/datenschutz/" target="_blank">Privacy Policy</a> and accept it *</span>
           </label>
           <label class="legal-check">
             <input type="checkbox" id="checkAbo" required>
-            <span>Ich stimme dem Abonnement zu (monatlich kündbar) *</span>
+            <span>I agree to the subscription (cancel anytime) *</span>
           </label>
         </div>
 
@@ -915,14 +915,14 @@
 
   <script>
     const MODULES = [
-      {id:'whatsapp-ki',icon:'🤖',name:'WhatsApp KI-Bot',price:499,desc:'KI-Assistent für automatische Gästekommunikation via WhatsApp. Inkl. 1.000 Nachrichten/month.',details:['Automatische Antworten auf Gästeanfragen','Ideal für Reservierungen, Öffnungszeiten und FAQs','Reduziert manuellen Aufwand im Tagesgeschäft']},
-      {id:'instagram',icon:'📸',name:'Instagram Auto-Posts',price:89,desc:'Tägliche KI-generierte Posts auf Instagram.',details:['Regelmäßiger Content ohne täglichen Aufwand','Texte und Themen KI-gestützt vorbereitet','Ideal für Sichtbarkeit und Markenaufbau']},
-      {id:'facebook',icon:'👍',name:'Facebook Auto-Posts',price:59,desc:'Automatische Posts & Interaktionen auf Facebook.',details:['Automatisierte Beiträge für Facebook-Seiten','Unterstützt lokale Reichweite und Wiedererkennung','Sinnvoll als Ergänzung zu Instagram']},
-      {id:'bewertungen',icon:'⭐',name:'Bewertungsmanagement',price:89,desc:'KI antwortet automatisch auf Google & TripAdvisor Reviews.',details:['Schnelle Antworten auf Bewertungen','Stärkt Außenwirkung und Vertrauen','Spart Zeit im operativen Alltag']},
-      {id:'google-biz',icon:'🗺️',name:'Google Business',price:79,desc:'Google Business Profil automatisch aktualisieren.',details:['Aktuelle Beiträge und Profilpflege','Hilft bei lokaler Auffindbarkeit','Gute Ergänzung zu Bewertungen']},
-      {id:'dashboard',icon:'📊',name:'Analytics Dashboard',price:39,desc:'Echtzeit-Dashboard für alle Kennzahlen.',details:['Zentrale Übersicht über relevante KPIs','Einfaches Monitoring aller aktiven Module','Gut für Inhaber und Management']},
-      {id:'email',icon:'📧',name:'E-Mail Marketing',price:59,desc:'Wichtige E-Mails automatisch erkennen & beantworten.',details:['Automatische Priorisierung eingehender Mails','Schnellere Bearbeitung wichtiger Anfragen','Entlastet das Team deutlich']},
-      {id:'reels',icon:'🎬',name:'Reels mit KI-Videos',price:149,desc:'Automatische KI-Video-Reels für Instagram & TikTok.',details:['Kurzvideos für hohe organische Reichweite','Moderne Content-Produktion mit KI-Unterstützung','Perfekt für Social-Media-Wachstum']},
+      {id:'whatsapp-ki',icon:'🤖',name:'WhatsApp AI Bot',price:499,desc:'AI assistant for automatic guest communication via WhatsApp. Incl. 1,000 messages/month.',details:['Automatische Antworten auf Gästeanfragen','Ideal für Reservierungen, Öffnungszeiten und FAQs','Reduziert manuellen Aufwand im Tagesgeschäft']},
+      {id:'instagram',icon:'📸',name:'Instagram Auto-Posts',price:89,desc:'Daily AI-generated posts on Instagram.',details:['Regelmäßiger Content ohne täglichen Aufwand','Texte und Themen KI-gestützt vorbereitet','Ideal für Sichtbarkeit und Markenaufbau']},
+      {id:'facebook',icon:'👍',name:'Facebook Auto-Posts',price:59,desc:'Automated posts & interactions on Facebook.',details:['Automatisierte Beiträge für Facebook-Seiten','Unterstützt lokale Reichweite und Wiedererkennung','Sinnvoll als Ergänzung zu Instagram']},
+      {id:'bewertungen',icon:'⭐',name:'Review Management',price:89,desc:'AI automatically replies to Google & TripAdvisor reviews.',details:['Schnelle Antworten auf Bewertungen','Stärkt Außenwirkung und Vertrauen','Spart Zeit im operativen Alltag']},
+      {id:'google-biz',icon:'🗺️',name:'Google Business',price:79,desc:'Automatically update your Google Business profile.',details:['Aktuelle Beiträge und Profilpflege','Hilft bei lokaler Auffindbarkeit','Gute Ergänzung zu Bewertungen']},
+      {id:'dashboard',icon:'📊',name:'Analytics Dashboard',price:39,desc:'Real-time dashboard for all key metrics.',details:['Zentrale Übersicht über relevante KPIs','Einfaches Monitoring aller aktiven Module','Gut für Inhaber und Management']},
+      {id:'email',icon:'📧',name:'Email Marketing',price:59,desc:'Automatically detect & reply to important emails.',details:['Automatische Priorisierung eingehender Mails','Schnellere Bearbeitung wichtiger Anfragen','Entlastet das Team deutlich']},
+      {id:'reels',icon:'🎬',name:'Reels with AI Videos',price:149,desc:'Automated AI video reels for Instagram & TikTok.',details:['Kurzvideos für hohe organische Reichweite','Moderne Content-Produktion mit KI-Unterstützung','Perfekt für Social-Media-Wachstum']},
     ];
 
     const CHAT_WEBHOOK_URL = 'https://n8n.leolan.net/webhook/onboarding-chat';
@@ -996,13 +996,13 @@
 
           <div class="module-actions">
             <button class="btn btn-info" type="button" data-action="info" data-module-id="${module.id}">ℹ️</button>
-            <button class="btn btn-chat" type="button" data-action="chat" data-module-id="${module.id}">KI fragen 💬</button>
+            <button class="btn btn-chat" type="button" data-action="chat" data-module-id="${module.id}">Ask AI 💬</button>
           </div>
 
           <div class="toggle-row">
             <div>
-              <div class="toggle-label">Auswählen</div>
-              <div class="toggle-caption">Modul direkt in Ihr Paket aufnehmen</div>
+              <div class="toggle-label">Select</div>
+              <div class="toggle-caption">Add module to package</div>
             </div>
             <label class="switch" aria-label="${escapeHtml(module.name)} auswählen">
               <input type="checkbox" data-action="toggle" data-module-id="${module.id}" ${selectedModules.has(module.id) ? 'checked' : ''}>

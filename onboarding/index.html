@@ -109,43 +109,43 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
     <div class="card">
       <h3>👤 Account Details</h3>
       <div class="g2">
-        <div class="field" id="fe-email"><label>E-Mail *</label><input type="email" id="email" placeholder="name@hotel.com" autocomplete="email"><div class="err">Gültige E-Mail eingeben.</div></div>
-        <div class="field" id="fe-name"><label>Your Name *</label><input type="text" id="name" placeholder="John Smith" autocomplete="name"><div class="err">Name eingeben.</div></div>
+        <div class="field" id="fe-email"><label>E-Mail *</label><input type="email" id="email" placeholder="name@hotel.com" autocomplete="email"><div class="err">Please enter a valid email.</div></div>
+        <div class="field" id="fe-name"><label>Your Name *</label><input type="text" id="name" placeholder="John Smith" autocomplete="name"><div class="err">Please enter your name.</div></div>
       </div>
       <div class="g2">
-        <div class="field" id="fe-pw"><label>Passwort * (min. 8 Zeichen)</label><div class="pw-wrap"><input type="password" id="pw" placeholder="Passwort" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw',this)">Zeigen</button></div><div class="err">Min. 8 characters.</div></div>
-        <div class="field" id="fe-pw2"><label>Confirm Password *</label><div class="pw-wrap"><input type="password" id="pw2" placeholder="Wiederholen" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw2',this)">Zeigen</button></div><div class="err">Stimmt nicht überein.</div></div>
+        <div class="field" id="fe-pw"><label>Password * (min. 8 Zeichen)</label><div class="pw-wrap"><input type="password" id="pw" placeholder="Password" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw',this)">Show</button></div><div class="err">Min. 8 characters.</div></div>
+        <div class="field" id="fe-pw2"><label>Confirm Password *</label><div class="pw-wrap"><input type="password" id="pw2" placeholder="Confirm" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw2',this)">Show</button></div><div class="err">Passwords don't match.</div></div>
       </div>
     </div>
     <!-- Kundendaten -->
     <div class="card">
       <h3>🏢 Hotel & Billing Details</h3>
-      <div class="field" id="fe-company"><label>Restaurantname *</label><input type="text" id="company" placeholder="z. B. Bella Vista GmbH"><div class="err">Restaurantname eingeben.</div></div>
+      <div class="field" id="fe-company"><label>Hotel Name *</label><input type="text" id="company" placeholder="e.g. Grand Hotel Berlin"><div class="err">Hotel Please enter your name.</div></div>
       <div class="g2">
-        <div class="field" id="fe-street"><label>Street & Number *</label><input type="text" id="street" placeholder="Musterstraße 1"><div class="err">Adresse eingeben.</div></div>
+        <div class="field" id="fe-street"><label>Street & Number *</label><input type="text" id="street" placeholder="123 Main Street"><div class="err">Adresse eingeben.</div></div>
         <div class="g2" style="gap:8px">
-          <div class="field" id="fe-zip"><label>ZIP *</label><input type="text" id="zip" placeholder="10001" maxlength="10"><div class="err">PLZ eingeben.</div></div>
-          <div class="field" id="fe-city"><label>City *</label><input type="text" id="city" placeholder="New York"><div class="err">Stadt eingeben.</div></div>
+          <div class="field" id="fe-zip"><label>ZIP *</label><input type="text" id="zip" placeholder="10001" maxlength="10"><div class="err">Please enter ZIP.</div></div>
+          <div class="field" id="fe-city"><label>City *</label><input type="text" id="city" placeholder="New York"><div class="err">Please enter city.</div></div>
         </div>
       </div>
       <div class="g2">
-        <div class="field"><label>VAT ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="text" id="vatId" placeholder="DE123456789"><div class="hint">Mit VAT ID → 0% VAT: (Reverse Charge)</div></div>
+        <div class="field"><label>VAT ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="text" id="vatId" placeholder="DE123456789"><div class="hint">With VAT ID → 0% VAT (Reverse Charge)</div></div>
         <div class="field"><label>Website <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="url" id="website" placeholder="https://..."></div>
       </div>
       <div class="field" id="fe-whatsapp">
-        <label>WhatsApp-Nummer *</label>
+        <label>WhatsApp Number *</label>
         <input type="tel" id="whatsapp" placeholder="+49 15678 483700">
-        <div class="hint orange">📱 Pflicht: Über diese Nummer richten wir Ihren KI-Bot ein.</div>
+        <div class="hint orange">📱 Required: We will set up your Hotel AI Bot on this number.</div>
         <div class="err">WhatsApp-Nummer eingeben.</div>
       </div>
     </div>
-    <button class="btn btn-primary" onclick="go1()">Weiter: Daten prüfen →</button>
+    <button class="btn btn-primary" onclick="go1()">Continue: Review Order →</button>
   </div>
 
   <!-- STEP 2: Summary -->
   <div id="s2" style="display:none">
     <div class="card">
-      <h3>✅ Daten prüfen</h3>
+      <h3>✅ Review Order</h3>
       <div id="sumDetails"></div>
     </div>
     <div class="card">
@@ -168,7 +168,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 <script>
 var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';document.addEventListener('DOMContentLoaded',function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'All prices excl. VAT · + 349€ setup':'Alle Preise zzgl. VAT: · 12 months minimum · + 349€ one-time setup fee';});
 var fdata={};
-function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Zeigen';}}
+function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Show';}}
 function spkg(p){pkg=p;document.querySelectorAll('.pkg').forEach(function(c){c.classList.remove('on');var note=document.getElementById('legalNote');if(note){note.textContent=p==='pro'?'All prices excl. VAT · + 349€ setup':'Alle Preise zzgl. VAT: · 12 months minimum · + 349€ one-time setup fee';}});document.querySelector('[data-pkg="'+p+'"]').classList.add('on');}
 function setErr(id,has){var f=document.getElementById('fe-'+id);if(f)f.classList.toggle('bad',has);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}

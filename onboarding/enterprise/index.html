@@ -1179,7 +1179,7 @@
     function refreshBookingSummary() {
       const modules = getSelectedModuleObjects();
       const monthlyTotal = getMonthlyTotal();
-      const reverseCharge = (document.getElementById('companyVatId')?.value.trim() || '').length > 3 || document.getElementById('nonEUEnt')?.checked;
+      const reverseCharge = ((document.getElementById('companyVatId')||{value:''}).value.trim().length > 3) || !!(document.getElementById('nonEUEnt')||{checked:false}).checked;
       const subtotal = monthlyTotal + SETUP_FEE;
       const vat = reverseCharge ? 0 : Math.round(subtotal * VAT_RATE * 100) / 100;
       const grossTotal = subtotal + vat;
@@ -1227,7 +1227,7 @@
       const modules = getSelectedModuleObjects();
       const selectedIds = modules.map((module) => module.id);
       const monthlyTotal = getMonthlyTotal();
-      const reverseCharge = (document.getElementById('companyVatId')?.value.trim() || '').length > 3 || document.getElementById('nonEUEnt')?.checked;
+      const reverseCharge = ((document.getElementById('companyVatId')||{value:''}).value.trim().length > 3) || !!(document.getElementById('nonEUEnt')||{checked:false}).checked;
       const customerCode = generateCustomerCode();
       const subtotal = monthlyTotal + SETUP_FEE;
       const grossTotal = subtotal + (reverseCharge ? 0 : Math.round(subtotal * 0.19 * 100) / 100);
@@ -1374,14 +1374,14 @@
   
 function autoDetectEUEnterprise(){
   var euC=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','NO','PT','IE','GR','CZ','SK','HU','RO','BG','HR','SI','LT','LV','EE','LU','MT','CY'];
-  var country=document.getElementById('companyCountry')?.value||'';
+  var country=(document.getElementById('companyCountry')||{value:''}).value||'';
   var chk=document.getElementById('nonEUEnterprise');
   if(chk&&country){chk.checked=!euC.includes(country);}
 }
 
 function autoDetectEUEnt(){
   var eu=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','PT','IE','GR','CZ','HU','RO','BG','LU','MT','CY'];
-  var v=document.getElementById('companyCountry')?.value||'';
+  var v=(document.getElementById('companyCountry')||{value:''}).value||'';
   var chk=document.getElementById('nonEUEnt');
   if(chk&&v)chk.checked=!eu.includes(v);
   if(typeof updateBookingSummary==='function')updateBookingSummary();

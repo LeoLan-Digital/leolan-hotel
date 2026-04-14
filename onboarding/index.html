@@ -239,7 +239,7 @@ function go1(){
   setErr('street',!street);if(!street)ok=false;
   setErr('zip',!zip);if(!zip)ok=false;
   setErr('city',!city);if(!city)ok=false;
-  var country=document.getElementById('country')?.value||'';
+  var country=(document.getElementById('country')||{}).value||'';
   setErr('whatsapp',!wa);if(!wa)ok=false;
   if(!country){var cel=document.getElementById('fe-country');if(cel)cel.querySelector('.err').style.display='block';ok=false;}
   else{var cel=document.getElementById('fe-country');if(cel)cel.querySelector('.err').style.display='none';}
@@ -252,11 +252,11 @@ function go1(){
     vatId:document.getElementById('vatId').value.trim(),
     website:document.getElementById('website').value.trim(),
     whatsappNumber:wa,phone:wa,
-    country:document.getElementById('country')?.value||''
+    country:(document.getElementById('country')||{}).value||''
   };
   // Build summary
   var vatId=fdata.vatId;
-  var nonEU=document.getElementById("nonEU")?.checked||false; var reverseCharge=(vatId&&vatId.length>4)||nonEU;
+  var nonEU=document.getElementById("nonEU") && document.getElementById('nonEU').checked||false; var reverseCharge=(vatId&&vatId.length>4)||nonEU;
   var monthly=pkg==='starter'?199:349;
   var setup=349;
   var vat=reverseCharge?0:Math.round(monthly*0.19*100)/100;
@@ -295,7 +295,7 @@ function show(n){
 }
 async function autoDetectEU(){
   var euCountries=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','NO','PT','IE','GR','CZ','SK','HU','RO','BG','HR','SI','LT','LV','EE','LU','MT','CY'];
-  var country=document.getElementById('country')?.value||'';
+  var country=(document.getElementById('country')||{}).value||'';
   var nonEUchk=document.getElementById('nonEU');
   if(nonEUchk&&country){
     if(!euCountries.includes(country)){

@@ -96,7 +96,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 
   <!-- STEP 1 -->
   <div id="s1">
-    <!-- Paket -->
+    <!-- Package -->
     <div class="card">
       <h3>📦 Choose Package</h3>
       <div class="pkgs">
@@ -122,7 +122,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
       <h3>🏢 Hotel & Billing Details</h3>
       <div class="field" id="fe-company"><label>Hotel Name *</label><input type="text" id="company" placeholder="e.g. Grand Hotel Berlin"><div class="err">Please enter hotel name.</div></div>
       <div class="g2">
-        <div class="field" id="fe-street"><label>Street & Number *</label><input type="text" id="street" placeholder="123 Main Street"><div class="err">Adresse eingeben.</div></div>
+        <div class="field" id="fe-street"><label>Street & Number *</label><input type="text" id="street" placeholder="123 Main Street"><div class="err">Address eingeben.</div></div>
         <div class="g2" style="gap:8px">
           <div class="field" id="fe-zip"><label>ZIP *</label><input type="text" id="zip" placeholder="10001" maxlength="10"><div class="err">PLZ eingeben.</div></div>
           <div class="field" id="fe-city"><label>City *</label><input type="text" id="city" placeholder="New York"><div class="err">Stadt eingeben.</div></div>
@@ -155,12 +155,26 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
       <div id="sumDetails"></div>
     </div>
     <div class="card">
-      <h3>💰 Preisübersicht</h3>
+      <h3>💰 Price Summary</h3>
       <div id="sumPrice"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+        <input type="checkbox" id="chkAgb" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">I accept the <a href="https://ki.leolan.net/agb/" target="_blank" style="color:#f5a623">Terms & Conditions</a> *</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+        <input type="checkbox" id="chkPrivacy" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">I have read the <a href="https://ki.leolan.net/datenschutz/" target="_blank" style="color:#f5a623">Privacy Policy</a> *</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+        <input type="checkbox" id="chkAbo" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">I agree to the subscription (cancel anytime) *</span>
+      </label>
     </div>
     <button class="btn btn-primary" id="payBtn" onclick="doCheckout()">💳 Pay Now</button>
     <div class="status" id="status"></div>
-    <div class="note">Nach der Payment erhalten Sie Ihren Kundencode per E-Mail.<br>Mit diesem Code loggen Sie sich in der LeoLan Manager App an.</div>
+    <div class="note">After payment you will receive your customer code by email.<br>Mit diesem Code loggen Sie sich in der LeoLan Manager App an.</div>
     <button class="btn btn-back" onclick="show(1)" style="margin-top:8px">← Daten ändern</button>
   </div>
 
@@ -218,18 +232,18 @@ function go1(){
   var vatSetup=reverseCharge?0:Math.round(setup*0.19*100)/100;
   var rows=[
     ['E-Mail',fdata.email],['Name',fdata.name],
-    ['Restaurant',fdata.companyName],
-    ['Adresse',fdata.street+', '+fdata.zipCode+' '+fdata.city],
-    ['VAT ID',fdata.vatId||'Keine Angabe'],
+    ['Hotel',fdata.companyName],
+    ['Address',fdata.street+', '+fdata.zipCode+' '+fdata.city],
+    ['VAT ID',fdata.vatId||'Not provided'],
     ['Website',fdata.website||'—'],
     ['WhatsApp',fdata.whatsappNumber],
-    ['Paket',(pkg==='starter'?'Single Module':'Guest Experience Suite')]
+    ['Package',(pkg==='starter'?'Single Module':'Guest Experience Suite')]
   ];
   document.getElementById('sumDetails').innerHTML=rows.map(function(r){return '<div class="sum-row"><span class="sum-label">'+esc(r[0])+'</span><span class="sum-value">'+esc(r[1])+'</span></div>';}).join('');
   document.getElementById('sumPrice').innerHTML=
     '<div class="sum-total">'+
-    '<div class="sum-total-row"><span style="color:#8b949e">Monatlich (Paket)</span><span>'+monthly+'€ / Monat</span></div>'+
-    '<div class="sum-total-row"><span style="color:#8b949e">Setup-Gebühr (einmalig)</span><span>'+setup+'€</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">Monthly (Package)</span><span>'+monthly+'€ / month</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">Setup Fee (one-time)</span><span>'+setup+'€</span></div>'+
     '<div class="sum-total-row"><span style="color:#8b949e">VAT '+(nonEU?'0% (Non-EU Export)':(reverseCharge?'0% (Reverse Charge)':'19%'))+'</span><span>'+vat.toFixed(2)+'€ / '+(reverseCharge?'0.00':vatSetup.toFixed(2))+'€</span></div>'+
     '<div class="sum-total-row big"><span>Total today</span><span>'+(Math.round((monthly+vat+setup+vatSetup)*100)/100).toFixed(2)+'€</span></div>'+
     '</div>';

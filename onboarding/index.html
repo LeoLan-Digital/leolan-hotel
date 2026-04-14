@@ -87,11 +87,11 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 <div class="shell">
   <!-- Steps -->
   <div style="display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:24px">
-    <div class="swrap"><div class="sdot active" id="sd1">1</div><div class="slabel">Ihre Daten</div></div>
+    <div class="swrap"><div class="sdot active" id="sd1">1</div><div class="slabel">Your Details</div></div>
     <div class="sline" id="sl1"></div>
-    <div class="swrap"><div class="sdot" id="sd2">2</div><div class="slabel">Prüfen</div></div>
+    <div class="swrap"><div class="sdot" id="sd2">2</div><div class="slabel">Review</div></div>
     <div class="sline" id="sl2"></div>
-    <div class="swrap"><div class="sdot" id="sd3">3</div><div class="slabel">Zahlung</div></div>
+    <div class="swrap"><div class="sdot" id="sd3">3</div><div class="slabel">Payment</div></div>
   </div>
 
   <!-- STEP 1 -->
@@ -191,7 +191,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
   <!-- STEP 3: Redirect -->
   <div id="s3" style="display:none;text-align:center;padding:40px 0">
     <div style="font-size:3rem;margin-bottom:16px">🔄</div>
-    <h2 style="color:#f0f6fc;margin-bottom:8px">Weiterleitung zur Zahlung...</h2>
+    <h2 style="color:#f0f6fc;margin-bottom:8px">Weiterleitung zur Payment...</h2>
     <p style="color:#8b949e">Sie werden zu Stripe weitergeleitet.</p>
   </div>
 </div>
@@ -317,7 +317,7 @@ var chkRes=await fetch('https://n8n.leolan.net/webhook/stripe-checkout',{method:
       localStorage.setItem('customerCode',reg.customerCode);
       show(2);
       s.className='status';s.style.display='block';s.style.background='rgba(35,134,54,.15)';s.style.color='#3fb950';
-      s.innerHTML='✓ Registriert! Kundencode: <strong>'+reg.customerCode+'</strong><br>Wir kontaktieren Sie per WhatsApp für die Einrichtung und Zahlung.';
+      s.innerHTML='✓ Registriert! Kundencode: <strong>'+reg.customerCode+'</strong><br>Wir kontaktieren Sie per WhatsApp für die Einrichtung und Payment.';
       btn.textContent='✓ Erledigt';
     }
   }catch(e){

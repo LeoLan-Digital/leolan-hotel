@@ -1,71 +1,734 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hotel Onboarding — LeoLan Digital – Jetzt starten</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
-.hero{background:linear-gradient(135deg,#1a2744 0%,#0d1117 100%);padding:40px 24px 28px;text-align:center;border-bottom:1px solid #21262d}
-.logo{font-size:26px;font-weight:800;color:#f5a623;margin-bottom:6px}
-.hero h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:800;margin-bottom:8px;color:#fff}
-.hero p{color:#8b949e;font-size:.95rem;max-width:500px;margin:0 auto;line-height:1.6}
-.shell{max-width:600px;margin:0 auto;padding:28px 20px 80px}
-.steps{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:28px}
-.sdot{width:32px;height:32px;border-radius:50%;border:2px solid #30363d;background:#0d1117;color:#8b949e;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
-.sdot.done{background:#238636;border-color:#238636;color:#fff}
-.sdot.active{background:#f5a623;border-color:#f5a623;color:#000}
-.sline{flex:1;height:2px;background:#21262d;max-width:70px;margin-top:15px;transition:background .3s}
-.sline.done{background:#238636}
-.swrap{display:flex;flex-direction:column;align-items:center;gap:4px}
-.slabel{font-size:.7rem;color:#8b949e;text-align:center;white-space:nowrap}
-.card{background:#161b22;border:1px solid #30363d;border-radius:14px;padding:24px;margin-bottom:14px}
-.card h3{font-size:.9rem;font-weight:700;color:#f5a623;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #21262d}
-.field{margin-bottom:13px}
-.field label{display:block;font-size:.82rem;font-weight:600;color:#8b949e;margin-bottom:5px}
-.field input{width:100%;background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:11px 13px;color:#e6edf3;font-size:.9rem;outline:none;transition:border-color .2s}
-.field input:focus{border-color:#f5a623}
-.field .err{color:#f85149;font-size:.78rem;margin-top:3px;display:none}
-.field.bad .err{display:block}
-.field.bad input{border-color:#f85149}
-.field .hint{color:#8b949e;font-size:.78rem;margin-top:3px;line-height:1.4}
-.field .hint.orange{color:#f5a623;font-weight:600}
-.pw-wrap{position:relative}
-.pw-wrap input{padding-right:70px}
-.pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#8b949e;cursor:pointer;font-size:.8rem;white-space:nowrap}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-@media(max-width:480px){.g2,.g3{grid-template-columns:1fr}}
-.pkgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:480px){.pkgs{grid-template-columns:1fr}}
-.pkg{border:2px solid #30363d;border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;background:#0d1117;position:relative}
-.pkg:hover{border-color:#f5a623}
-.pkg.on{border-color:#f5a623;background:rgba(245,166,35,.07)}
-.pkg-badge{display:inline-block;background:#f5a623;color:#000;font-size:.65rem;font-weight:800;padding:2px 7px;border-radius:999px;margin-bottom:6px}
-.pkg-name{font-weight:800;color:#f0f6fc;font-size:1rem;margin-bottom:3px}
-.pkg-price{font-size:1.3rem;font-weight:800;color:#f5a623}
-.pkg-price span{font-size:.8rem;font-weight:400;color:#8b949e}
-.pkg-desc{font-size:.78rem;color:#8b949e;margin-top:6px;line-height:1.4}
-.chk{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:#f5a623;display:none;align-items:center;justify-content:center;color:#000;font-size:.7rem;font-weight:800}
-.pkg.on .chk{display:flex}
-.btn{width:100%;padding:14px;border-radius:10px;border:none;font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s}
-.btn-primary{background:#f5a623;color:#000}
-.btn-primary:hover{opacity:.9}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed}
-.btn-back{background:#21262d;color:#8b949e;margin-bottom:8px}
-.status{text-align:center;padding:10px;border-radius:8px;font-size:.85rem;font-weight:600;display:none;margin-top:8px}
-.status.err{background:rgba(248,81,73,.15);color:#f85149;display:block}
-.note{color:#8b949e;font-size:.75rem;text-align:center;margin-top:10px;line-height:1.5}
-/* Summary */
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #21262d;font-size:.88rem}
-.sum-row:last-child{border-bottom:none}
-.sum-label{color:#8b949e}
-.sum-value{color:#f0f6fc;font-weight:600;text-align:right;max-width:60%}
-.sum-total{background:#0d1117;border-radius:10px;padding:16px;margin-top:12px}
-.sum-total-row{display:flex;justify-content:space-between;font-size:.88rem;padding:4px 0}
-.sum-total-row.big{font-size:1.1rem;font-weight:800;color:#f5a623;padding-top:10px;margin-top:6px;border-top:1px solid #21262d}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Hotel KI-System — LeoLan Digital – Enterprise Paket</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface-2: #1c2128;
+      --surface-3: #222833;
+      --border: rgba(255,255,255,0.08);
+      --text: #f0f6fc;
+      --muted: #9ba7b4;
+      --orange: #f5a623;
+      --orange-2: #ffbe55;
+      --danger: #ff6b6b;
+      --success: #2ecc71;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(245,166,35,.14), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(245,166,35,.08), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, input, textarea { font: inherit; }
+    button { font-family: inherit; }
+
+    .page {
+      width: min(calc(100% - 24px), var(--max));
+      margin: 0 auto;
+      padding: 18px 0 120px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 18px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(22,27,34,.96), rgba(22,27,34,.82));
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,.24), transparent 68%);
+      pointer-events: none;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 0 6px rgba(245,166,35,.12);
+    }
+
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(2rem, 8vw, 3.6rem);
+      line-height: .98;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .pill {
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(245,166,35,.18);
+      background: rgba(245,166,35,.08);
+      color: #ffd48a;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .modules-section { margin-top: 18px; }
+
+    .modules-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+
+    .module-card {
+      position: relative;
+      background: linear-gradient(180deg, var(--surface), rgba(28,33,40,.95));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.22);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .module-card.selected {
+      border-color: rgba(245,166,35,.7);
+      box-shadow: 0 16px 36px rgba(245,166,35,.12);
+    }
+
+    .module-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .module-title-wrap {
+      display: flex;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .module-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(245,166,35,.16), rgba(245,166,35,.06));
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .module-name {
+      margin: 0 0 4px;
+      font-size: 1.04rem;
+      line-height: 1.25;
+    }
+
+    .module-price {
+      color: var(--orange);
+      font-weight: 900;
+      font-size: .98rem;
+      white-space: nowrap;
+    }
+
+    .module-desc {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: .94rem;
+    }
+
+    .module-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .18s ease, opacity .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    .btn-info {
+      width: 46px;
+      min-width: 46px;
+      padding: 12px 0;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: var(--text);
+    }
+
+    .btn-chat {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(245,166,35,.12);
+      border: 1px solid rgba(245,166,35,.3);
+      color: #ffd48a;
+    }
+
+    .toggle-row {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .toggle-label {
+      font-weight: 800;
+      font-size: .95rem;
+    }
+
+    .toggle-caption {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .84rem;
+    }
+
+    .switch {
+      position: relative;
+      width: 58px;
+      height: 34px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      transition: .2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,.25);
+    }
+
+    .switch input:checked + .slider {
+      background: rgba(245,166,35,.92);
+      border-color: rgba(245,166,35,.92);
+    }
+
+    .switch input:checked + .slider::before {
+      transform: translateX(24px);
+      background: #161b22;
+    }
+
+    .sticky-bar {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 50;
+      display: none;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px;
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: 20px;
+      background: rgba(22,27,34,.96);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+
+    .sticky-bar.show { display: flex; }
+
+    .sticky-copy strong {
+      display: block;
+      font-size: .98rem;
+      color: var(--text);
+    }
+
+    .sticky-copy span {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .btn-book {
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      color: #161b22;
+      min-width: 150px;
+      box-shadow: 0 14px 26px rgba(245,166,35,.22);
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      padding: 12px;
+      background: rgba(6,10,15,.72);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal {
+      width: min(100%, 560px);
+      max-height: min(88vh, 900px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, var(--surface), var(--surface-2));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    }
+
+    .modal.chat-modal { width: min(100%, 720px); height: min(88vh, 820px); }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 16px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
+    }
+
+    .modal-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .modal-title-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(245,166,35,.18), rgba(245,166,35,.05));
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .modal-header h2,
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    .modal-header p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.45;
+    }
+
+    .close-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 0;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-size: 1.4rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .modal-body {
+      padding: 16px;
+      overflow: auto;
+    }
+
+    .info-box {
+      border: 1px solid rgba(245,166,35,.18);
+      background: rgba(245,166,35,.06);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #ffd48a;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .info-list li {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.05);
+      color: var(--text);
+      line-height: 1.5;
+      font-size: .92rem;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 16px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background:
+        radial-gradient(circle at top, rgba(245,166,35,.06), transparent 30%),
+        #0f141b;
+    }
+
+    .bubble {
+      max-width: 86%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: .94rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,.18);
+    }
+
+    .bubble.assistant {
+      align-self: flex-start;
+      background: #1b2330;
+      color: var(--text);
+      border-bottom-left-radius: 8px;
+    }
+
+    .bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      color: #161b22;
+      border-bottom-right-radius: 8px;
+      font-weight: 600;
+    }
+
+    .chat-status {
+      color: var(--muted);
+      font-size: .84rem;
+      padding: 0 2px;
+    }
+
+    .chat-input-wrap {
+      padding: 14px 16px 16px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    textarea,
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      background: #0f141b;
+      color: var(--text);
+      padding: 14px 14px;
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    textarea:focus,
+    input:focus {
+      border-color: rgba(245,166,35,.72);
+      box-shadow: 0 0 0 4px rgba(245,166,35,.12);
+    }
+
+    textarea {
+      min-height: 54px;
+      max-height: 140px;
+      resize: vertical;
+    }
+
+    .send-btn,
+    .submit-btn {
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      color: #161b22;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 12px 22px rgba(245,166,35,.2);
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: .9rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .eye-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+
+    .summary-box {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.05);
+    }
+
+    .summary-box h4 {
+      margin: 0 0 12px;
+      font-size: .98rem;
+    }
+
+    .summary-list-rows {
+      display: grid;
+      gap: 10px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .summary-row strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .summary-row.total {
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .summary-modules {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .summary-module {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.03);
+      font-size: .9rem;
+    }
+
+    .summary-module span:last-child {
+      color: var(--orange);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .helper,
+    .error,
+    .success-message {
+      margin-top: 10px;
+      font-size: .86rem;
+      line-height: 1.5;
+    }
+
+    .helper { color: var(--muted); }
+    .error { color: var(--danger); }
+    .success-message { color: var(--success); }
+
+    .legal-checks {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .legal-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .legal-check input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      accent-color: #f5a623;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .legal-check span {
+      color: #8b949e;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .legal-check a {
+      color: #f5a623;
+      text-decoration: none;
+    }
+
+    .legal-check a:hover {
+      text-decoration: underline;
+    }
+
+    .loading {
+      opacity: .7;
+      pointer-events: none;
+    }
+
+    @media (min-width: 700px) {
+      .page { width: min(calc(100% - 40px), var(--max)); padding-top: 26px; }
+      .hero { padding: 32px; }
+      .modules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .field.full { grid-column: 1 / -1; }
+      .sticky-bar {
+        left: 20px;
+        right: 20px;
+        bottom: 18px;
+        padding: 16px 18px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .modules-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .module-top,
+      .summary-row,
+      .summary-module,
+      .sticky-bar,
+      .chat-input-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn-book,
+      .send-btn,
+      .submit-btn { width: 100%; }
+      .bubble { max-width: 92%; }
+    }
+  </style>
 </head>
 <body>
 <div style="background:#0d1117;border-bottom:1px solid #21262d;position:sticky;top:0;z-index:100;padding:12px 20px">
@@ -79,220 +742,616 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
   </div>
 </div>
 
-<div class="hero">
-  <div class="logo">LeoLan Digital</div>
-  <h1>KI-System für Ihr Hotel</h1>
-  <p>In 3 Schritten zum eigenen KI-Assistenten.</p>
-</div>
-<div class="shell">
-  <!-- Steps -->
-  <div style="display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:24px">
-    <div class="swrap"><div class="sdot active" id="sd1">1</div><div class="slabel">Ihre Daten</div></div>
-    <div class="sline" id="sl1"></div>
-    <div class="swrap"><div class="sdot" id="sd2">2</div><div class="slabel">Prüfen</div></div>
-    <div class="sline" id="sl2"></div>
-    <div class="swrap"><div class="sdot" id="sd3">3</div><div class="slabel">Zahlung</div></div>
+  <main class="page">
+    <section class="hero">
+      <div class="brand"><span class="brand-dot"></span> LeoLan Digital · Enterprise</div>
+      <h1>Hotel KI-System konfigurieren</h1>
+      <p class="subtitle">Wählen Sie Module, informieren Sie sich per KI-Chat, buchen Sie direkt.</p>
+      <div class="hero-pills">
+        <div class="pill">8 Module frei kombinierbar</div>
+        <div class="pill">349€ einmaliges Setup</div>
+        <div class="pill">Direkter Stripe Checkout</div>
+      </div>
+    </section>
+
+    <section class="modules-section">
+      <div class="modules-grid" id="modulesGrid"></div>
+    </section>
+  </main>
+
+  <div class="sticky-bar" id="stickyBar">
+    <div class="sticky-copy">
+      <strong id="stickyHeadline">0 Module gewählt · 0€/Monat + 349€ Setup</strong>
+      <span id="stickySubline">Wählen Sie mindestens ein Modul aus, um direkt zu buchen.</span>
+    </div>
+    <button class="btn btn-book" id="bookBtn" type="button">Jetzt buchen →</button>
   </div>
 
-  <!-- STEP 1 -->
-  <div id="s1">
-    <!-- Paket -->
-    <div class="card">
-      <h3>📦 Paket wählen</h3>
-      <div class="pkgs">
-        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">🔥 Beliebt</div><div class="pkg-name">Starter</div><div class="pkg-price">199€ <span>/ Monat</span></div><div class="pkg-desc">WhatsApp-Bot, Zimmerservice, 500 Nachrichten/Monat</div></div>
-        <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-name">Pro</div><div class="pkg-price">349€ <span>/ Monat</span></div><div class="pkg-desc">Alles aus Starter + Social Media, 2.000 Nachrichten/Monat</div></div>
-      </div>
-      <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">Alle Preise zzgl. MwSt. · 12 Monate Mindestlaufzeit · + 349€ einmalige Setup-Gebühr</p>
-    </div>
-    <!-- Konto -->
-    <div class="card">
-      <h3>👤 Zugangsdaten</h3>
-      <div class="g2">
-        <div class="field" id="fe-email"><label>E-Mail *</label><input type="email" id="email" placeholder="name@firma.de" autocomplete="email"><div class="err">Gültige E-Mail eingeben.</div></div>
-        <div class="field" id="fe-name"><label>Ihr Name *</label><input type="text" id="name" placeholder="Max Mustermann" autocomplete="name"><div class="err">Name eingeben.</div></div>
-      </div>
-      <div class="g2">
-        <div class="field" id="fe-pw"><label>Passwort * (min. 8 Zeichen)</label><div class="pw-wrap"><input type="password" id="pw" placeholder="Passwort" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw',this)">Zeigen</button></div><div class="err">Mindestens 8 Zeichen.</div></div>
-        <div class="field" id="fe-pw2"><label>Passwort bestätigen *</label><div class="pw-wrap"><input type="password" id="pw2" placeholder="Wiederholen" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw2',this)">Zeigen</button></div><div class="err">Stimmt nicht überein.</div></div>
-      </div>
-    </div>
-    <!-- Kundendaten -->
-    <div class="card">
-      <h3>🏢 Hotel & Rechnungsdaten</h3>
-      <div class="field" id="fe-company"><label>Restaurantname *</label><input type="text" id="company" placeholder="z. B. Grand Hotel Berlin"><div class="err">Restaurantname eingeben.</div></div>
-      <div class="g2">
-        <div class="field" id="fe-street"><label>Straße & Hausnummer *</label><input type="text" id="street" placeholder="Musterstraße 1"><div class="err">Adresse eingeben.</div></div>
-        <div class="g2" style="gap:8px">
-          <div class="field" id="fe-zip"><label>PLZ *</label><input type="text" id="zip" placeholder="01234" maxlength="10"><div class="err">PLZ eingeben.</div></div>
-          <div class="field" id="fe-city"><label>Stadt *</label><input type="text" id="city" placeholder="Dresden"><div class="err">Stadt eingeben.</div></div>
+  <div class="modal-overlay" id="infoModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title-icon" id="infoIcon">ℹ️</div>
+          <div>
+            <h3 id="infoTitle">Modulinfo</h3>
+            <p id="infoSubtitle">Kurzüberblick</p>
+          </div>
         </div>
+        <button class="close-btn" type="button" data-close="infoModal">×</button>
       </div>
-      <div class="g2">
-        <div class="field"><label>USt-ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="text" id="vatId" placeholder="DE123456789"><div class="hint">Mit USt-ID → 0% MwSt. (Reverse Charge)</div></div>
-        <div class="field"><label>Website <span style="color:#484f58;font-weight:400">(optional)</span></label><input type="url" id="website" placeholder="https://..."></div>
-      </div>
-      <div class="field" id="fe-whatsapp">
-        <label>WhatsApp-Nummer *</label>
-        <input type="tel" id="whatsapp" placeholder="+49 15678 483700">
-        <div class="hint orange">📱 Pflicht: Über diese Nummer richten wir Ihren KI-Bot ein.</div>
-        <div class="err">WhatsApp-Nummer eingeben.</div>
+      <div class="modal-body">
+        <div class="info-box">
+          <strong id="infoPrice">0€/Monat</strong>
+          <div id="infoDescription"></div>
+        </div>
+        <ul class="info-list" id="infoDetails"></ul>
       </div>
     </div>
-    <button class="btn btn-primary" onclick="go1()">Weiter: Daten prüfen →</button>
   </div>
 
-  <!-- STEP 2: Summary -->
-  <div id="s2" style="display:none">
-    <div class="card">
-      <h3>✅ Daten prüfen</h3>
-      <div id="sumDetails"></div>
+  <div class="modal-overlay" id="chatModal" aria-hidden="true">
+    <div class="modal chat-modal" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title-icon" id="chatIcon">💬</div>
+          <div>
+            <h2 id="chatTitle">KI-Berater</h2>
+            <p id="chatSubtitle">Fragen Sie alles zum Modul.</p>
+          </div>
+        </div>
+        <button class="close-btn" type="button" data-close="chatModal">×</button>
+      </div>
+      <div class="chat-body" id="chatMessages"></div>
+      <div class="chat-input-wrap">
+        <div class="chat-input-row">
+          <textarea id="chatInput" rows="2" placeholder="Ihre Nachricht an den KI-Berater..."></textarea>
+          <button class="send-btn" id="sendChatBtn" type="button">Senden</button>
+        </div>
+        <div class="helper">Enter sendet · Shift + Enter für Zeilenumbruch</div>
+      </div>
     </div>
-    <div class="card">
-      <h3>💰 Preisübersicht</h3>
-      <div id="sumPrice"></div>
-    </div>
-    <button class="btn btn-primary" id="payBtn" onclick="doCheckout()">💳 Jetzt bezahlen</button>
-    <div class="status" id="status"></div>
-    <div class="note">Nach der Zahlung erhalten Sie Ihren Kundencode per E-Mail.<br>Mit diesem Code loggen Sie sich in der LeoLan Manager App an.</div>
-    <button class="btn btn-back" onclick="show(1)" style="margin-top:8px">← Daten ändern</button>
   </div>
 
-  <!-- STEP 3: Redirect -->
-  <div id="s3" style="display:none;text-align:center;padding:40px 0">
-    <div style="font-size:3rem;margin-bottom:16px">🔄</div>
-    <h2 style="color:#f0f6fc;margin-bottom:8px">Weiterleitung zur Zahlung...</h2>
-    <p style="color:#8b949e">Sie werden zu Stripe weitergeleitet.</p>
+  <div class="modal-overlay" id="bookingModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title-icon">🧾</div>
+          <div>
+            <h2 id="bookingTitle">Ihr Enterprise-Paket</h2>
+            <p>Direkt bezahlen und Stripe Checkout öffnen.</p>
+          </div>
+        </div>
+        <button class="close-btn" type="button" data-close="bookingModal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="field-grid">
+          <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px">Kundenkonto</h4>
+          <div class="field full">
+            <label for="customerName">Vorname + Nachname *</label>
+            <input id="customerName" type="text" autocomplete="name" placeholder="Max Mustermann" required />
+          </div>
+          <div class="field full">
+            <label for="customerEmail">E-Mail (für Kundenkonto) *</label>
+            <input id="customerEmail" type="email" autocomplete="email" placeholder="name@firma.de" required />
+          </div>
+          <div class="field full">
+            <label for="customerPassword">Passwort für Manager App *</label>
+            <div class="password-wrap">
+              <input id="customerPassword" type="password" autocomplete="new-password" placeholder="Mindestens 8 Zeichen" required />
+              <button class="eye-btn" id="togglePasswordBtn" type="button" aria-label="Passwort anzeigen">👁️</button>
+            </div>
+          </div>
+          <div class="field full">
+            <label for="customerPasswordConfirm">Passwort bestätigen *</label>
+            <div class="password-wrap">
+              <input id="customerPasswordConfirm" type="password" autocomplete="new-password" placeholder="Passwort wiederholen" required />
+              <button class="eye-btn" type="button" onclick="var i=document.getElementById('customerPasswordConfirm');i.type=i.type==='password'?'text':'password'" aria-label="Passwort anzeigen">👁️</button>
+            </div>
+          </div>
+          
+        </div>
+
+        <h4 style="color:#f5a623;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:16px 0 12px">Rechnungsdaten</h4>
+          <div class="field full">
+            <label for="companyName">Firmenname / Restaurant *</label>
+            <input id="companyName" type="text" placeholder="Muster Restaurant GmbH" required />
+          </div>
+          <div class="field full">
+            <label for="companyStreet">Straße + Hausnummer *</label>
+            <input id="companyStreet" type="text" placeholder="Musterstraße 1" required />
+          </div>
+          <div class="field" style="display:grid;grid-template-columns:1fr 2fr;gap:10px">
+            <div>
+              <label for="companyZip">PLZ *</label>
+              <input id="companyZip" type="text" placeholder="01234" required />
+            </div>
+            <div>
+              <label for="companyCity">Stadt *</label>
+              <input id="companyCity" type="text" placeholder="Dresden" required />
+            </div>
+          </div>
+          <div class="field full">
+            <label for="companyPhone">WhatsApp-Nummer für KI-Chatbot *</label>
+            <input id="companyPhone" type="tel" placeholder="+49 151 23456789" required />
+            <small style="color:#484f58;font-size:12px;margin-top:4px;display:block">Diese Nummer wird für Ihren Hotel WhatsApp Gäste-Bot verwendet</small>
+          </div>
+          <div class="field full">
+            <label for="companyVatId">USt-ID (optional, für Reverse Charge)</label>
+            <input id="companyVatId" type="text" placeholder="DE123456789" oninput="this.value=this.value.toUpperCase();if(typeof updateBookingSummary==='function')updateBookingSummary()" />
+          </div>
+        <div class="summary-box">
+          <h4>Zusammenfassung</h4>
+          <div class="summary-modules" id="bookingModules"></div>
+          <div class="summary-list-rows">
+            <div class="summary-row"><strong>Monatlich</strong><span id="bookingMonthly">0€</span></div>
+            <div class="summary-row"><strong>Setup</strong><span>349€</span></div>
+            <div class="summary-row"><strong>MwSt.</strong><span id="bookingTax">19%</span></div>
+            <div class="summary-row total"><span>Gesamt heute</span><span id="bookingTotal">0€</span></div>
+          </div>
+        </div>
+
+        <div class="legal-checks">
+          <label class="legal-check">
+            <input type="checkbox" id="checkAgb" required>
+            <span>Ich akzeptiere die <a href="https://ki.leolan.net/agb/" target="_blank">AGB</a> *</span>
+          </label>
+          <label class="legal-check">
+            <input type="checkbox" id="checkDatenschutz" required>
+            <span>Ich habe die <a href="https://ki.leolan.net/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und akzeptiere sie *</span>
+          </label>
+          <label class="legal-check">
+            <input type="checkbox" id="checkAbo" required>
+            <span>Ich stimme dem Abonnement zu (monatlich kündbar) *</span>
+          </label>
+        </div>
+
+        <div class="error" id="bookingError"></div>
+        <div class="success-message" id="bookingSuccess"></div>
+        <button class="submit-btn" id="submitBookingBtn" type="button" disabled>Jetzt kostenpflichtig bestellen</button>
+      </div>
+    </div>
   </div>
-</div>
-<script>
-var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';document.addEventListener('DOMContentLoaded',function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'Alle Preise zzgl. MwSt. · + 349€ einmalige Setup-Gebühr':'Alle Preise zzgl. MwSt. · 12 Monate Mindestlaufzeit · + 349€ einmalige Setup-Gebühr';});
-var fdata={};
-function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Zeigen';}}
-function spkg(p){pkg=p;document.querySelectorAll('.pkg').forEach(function(c){c.classList.remove('on');var note=document.getElementById('legalNote');if(note){note.textContent=p==='pro'?'Alle Preise zzgl. MwSt. · + 349€ einmalige Setup-Gebühr':'Alle Preise zzgl. MwSt. · 12 Monate Mindestlaufzeit · + 349€ einmalige Setup-Gebühr';}});document.querySelector('[data-pkg="'+p+'"]').classList.add('on');}
-function setErr(id,has){var f=document.getElementById('fe-'+id);if(f)f.classList.toggle('bad',has);}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function go1(){
-  var email=document.getElementById('email').value.trim();
-  var name=document.getElementById('name').value.trim();
-  var pw=document.getElementById('pw').value;
-  var pw2=document.getElementById('pw2').value;
-  var company=document.getElementById('company').value.trim();
-  var street=document.getElementById('street').value.trim();
-  var zip=document.getElementById('zip').value.trim();
-  var city=document.getElementById('city').value.trim();
-  var wa=document.getElementById('whatsapp').value.trim();
-  var ok=true;
-  var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  setErr('email',!emailOk);if(!emailOk)ok=false;
-  setErr('name',!name);if(!name)ok=false;
-  setErr('pw',pw.length<8);if(pw.length<8)ok=false;
-  setErr('pw2',pw!==pw2);if(pw!==pw2)ok=false;
-  setErr('company',!company);if(!company)ok=false;
-  setErr('street',!street);if(!street)ok=false;
-  setErr('zip',!zip);if(!zip)ok=false;
-  setErr('city',!city);if(!city)ok=false;
-  setErr('whatsapp',!wa);if(!wa)ok=false;
-  if(!ok){window.scrollTo({top:0,behavior:'smooth'});return;}
-  fdata={
-    email:email,name:name,password:pw,
-    package:pkg,sector:'hotel',
-    companyName:company,street:street,zipCode:zip,city:city,
-    address:street+', '+zip+' '+city,
-    vatId:document.getElementById('vatId').value.trim(),
-    website:document.getElementById('website').value.trim(),
-    whatsappNumber:wa,phone:wa
-  };
-  // Build summary
-  var vatId=fdata.vatId;
-  var reverseCharge=vatId&&vatId.length>4;
-  var monthly=pkg==='starter'?199:349;
-  var setup=349;
-  var vat=reverseCharge?0:Math.round(monthly*0.19*100)/100;
-  var vatSetup=reverseCharge?0:Math.round(setup*0.19*100)/100;
-  var rows=[
-    ['E-Mail',fdata.email],['Name',fdata.name],
-    ['Restaurant',fdata.companyName],
-    ['Adresse',fdata.street+', '+fdata.zipCode+' '+fdata.city],
-    ['USt-ID',fdata.vatId||'Keine Angabe'],
-    ['Website',fdata.website||'—'],
-    ['WhatsApp',fdata.whatsappNumber],
-    ['Paket',(pkg==='starter'?'Starter':'Pro')]
-  ];
-  document.getElementById('sumDetails').innerHTML=rows.map(function(r){return '<div class="sum-row"><span class="sum-label">'+esc(r[0])+'</span><span class="sum-value">'+esc(r[1])+'</span></div>';}).join('');
-  document.getElementById('sumPrice').innerHTML=
-    '<div class="sum-total">'+
-    '<div class="sum-total-row"><span style="color:#8b949e">Monatlich (Paket)</span><span>'+monthly+'€ / Monat</span></div>'+
-    '<div class="sum-total-row"><span style="color:#8b949e">Setup-Gebühr (einmalig)</span><span>'+setup+'€</span></div>'+
-    '<div class="sum-total-row"><span style="color:#8b949e">MwSt. '+(reverseCharge?'0% (Reverse Charge)':'19%')+'</span><span>'+vat.toFixed(2)+'€ / '+(reverseCharge?'0.00':vatSetup.toFixed(2))+'€</span></div>'+
-    '<div class="sum-total-row big"><span>Gesamt heute</span><span>'+(Math.round((monthly+vat+setup+vatSetup)*100)/100).toFixed(2)+'€</span></div>'+
-    '</div>';
-  show(2);
-}
-function show(n){
-  document.getElementById('s1').style.display=n===1?'block':'none';
-  document.getElementById('s2').style.display=n===2?'block':'none';
-  document.getElementById('s3').style.display=n===3?'block':'none';
-  for(var i=1;i<=3;i++){
-    var d=document.getElementById('sd'+i);
-    d.className='sdot'+(i<n?' done':i===n?' active':'');
-  }
-  document.getElementById('sl1').className='sline'+(n>1?' done':'');
-  document.getElementById('sl2').className='sline'+(n>2?' done':'');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-async function doCheckout(){
-  var btn=document.getElementById('payBtn');
-  btn.disabled=true;btn.textContent='Wird verarbeitet...';
-  var s=document.getElementById('status');s.className='status';s.textContent='';
-  try{
-    // Save registration data for after payment
-    localStorage.setItem('pendingReg', JSON.stringify(fdata));
-    show(3);
-    // Go directly to Stripe checkout
-    // Add Stripe price IDs for the package
-var priceMap={'starter':{priceId:'price_1TL0yYLwGb6me8PhNJaI5B0d',amount:199},'pro':{priceId:'price_1TL0z0LwGb6me8PhRKNbQ3Qa',amount:349}};
-var pkgInfo=priceMap[fdata.package]||priceMap.starter;
-var reverseCharge=fdata.vatId&&fdata.vatId.length>4;
-var vatRate=19; // Stripe handles Reverse Charge via customer tax ID
-var vatAmount=reverseCharge?0:Math.round(pkgInfo.amount*0.19*100)/100;
-var chkPayload=Object.assign({},fdata,{
-  customerEmail:fdata.email,
-  priceIds:[pkgInfo.priceId],
-  modules:[{key:fdata.package,name:fdata.package==='starter'?'Starter':'Pro',price:pkgInfo.amount,priceId:pkgInfo.priceId,desc:'LeoLan '+fdata.package}],
-  monthlyNetTotal:pkgInfo.amount,
-  setupFeeAmount:349,
-  netTotal:pkgInfo.amount+349,
-  vatRate:vatRate,
-  vatAmount:vatAmount,
-  grossTotal:Math.round((pkgInfo.amount+349+(reverseCharge?0:Math.round((pkgInfo.amount+349)*0.19*100)/100))*100)/100, reverseCharge:false,
-  reverseCharge:reverseCharge,
-  selectedPackage:fdata.package,
-  successUrl:'https://hotel.leolan.net/danke/',
-  cancelUrl:'https://hotel.leolan.net/onboarding/'
-});
-var chkRes=await fetch('https://n8n.leolan.net/webhook/stripe-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(chkPayload)});
-    var chkText=await chkRes.text();
-    var chk={};try{chk=JSON.parse(chkText);}catch(e){}
-    var url=chk.url||chk.checkoutUrl||(chk.data&&chk.data.url);
-    if(url&&url.startsWith('http')){window.location.href=url;}
-    else{
-      // Stripe URL not available - register and show code
-      var regRes=await fetch('https://n8n.leolan.net/webhook/kunden-register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fdata)});
-      var reg=await regRes.json();
-      if(!reg.customerCode)throw new Error('Registrierung fehlgeschlagen.');
-      localStorage.setItem('customerCode',reg.customerCode);
-      show(2);
-      s.className='status';s.style.display='block';s.style.background='rgba(35,134,54,.15)';s.style.color='#3fb950';
-      s.innerHTML='✓ Registriert! Kundencode: <strong>'+reg.customerCode+'</strong><br>Wir kontaktieren Sie per WhatsApp für die Einrichtung und Zahlung.';
-      btn.textContent='✓ Erledigt';
+
+  <script>
+    const MODULES = [
+      {id:'whatsapp-ki',icon:'🤖',name:'WhatsApp KI-Bot',price:499,desc:'KI-Assistent für automatische Gästekommunikation via WhatsApp. Inkl. 1.000 Nachrichten/Monat.',details:['Automatische Antworten auf Gästeanfragen','Ideal für Reservierungen, Öffnungszeiten und FAQs','Reduziert manuellen Aufwand im Tagesgeschäft']},
+      {id:'instagram',icon:'📸',name:'Instagram Auto-Posts',price:89,desc:'Tägliche KI-generierte Posts auf Instagram.',details:['Regelmäßiger Content ohne täglichen Aufwand','Texte und Themen KI-gestützt vorbereitet','Ideal für Sichtbarkeit und Markenaufbau']},
+      {id:'facebook',icon:'👍',name:'Facebook Auto-Posts',price:59,desc:'Automatische Posts & Interaktionen auf Facebook.',details:['Automatisierte Beiträge für Facebook-Seiten','Unterstützt lokale Reichweite und Wiedererkennung','Sinnvoll als Ergänzung zu Instagram']},
+      {id:'bewertungen',icon:'⭐',name:'Bewertungsmanagement',price:89,desc:'KI antwortet automatisch auf Google & TripAdvisor Reviews.',details:['Schnelle Antworten auf Bewertungen','Stärkt Außenwirkung und Vertrauen','Spart Zeit im operativen Alltag']},
+      {id:'google-biz',icon:'🗺️',name:'Google Business',price:79,desc:'Google Business Profil automatisch aktualisieren.',details:['Aktuelle Beiträge und Profilpflege','Hilft bei lokaler Auffindbarkeit','Gute Ergänzung zu Bewertungen']},
+      {id:'dashboard',icon:'📊',name:'Analytics Dashboard',price:39,desc:'Echtzeit-Dashboard für alle Kennzahlen.',details:['Zentrale Übersicht über relevante KPIs','Einfaches Monitoring aller aktiven Module','Gut für Inhaber und Management']},
+      {id:'email',icon:'📧',name:'E-Mail Marketing',price:59,desc:'Wichtige E-Mails automatisch erkennen & beantworten.',details:['Automatische Priorisierung eingehender Mails','Schnellere Bearbeitung wichtiger Anfragen','Entlastet das Team deutlich']},
+      {id:'reels',icon:'🎬',name:'Reels mit KI-Videos',price:149,desc:'Automatische KI-Video-Reels für Instagram & TikTok.',details:['Kurzvideos für hohe organische Reichweite','Moderne Content-Produktion mit KI-Unterstützung','Perfekt für Social-Media-Wachstum']},
+    ];
+
+    const CHAT_WEBHOOK_URL = 'https://n8n.leolan.net/webhook/onboarding-chat';
+    const CHECKOUT_WEBHOOK_URL = 'https://n8n.leolan.net/webhook/stripe-checkout';
+    const SETUP_FEE = 349;
+    const VAT_RATE = 0.19;
+    const STRIPE_PRICE_ID = 'price_1TL0yYLwGb6me8PhNJaI5B0d';
+
+    const selectedModules = new Set();
+    const chatHistories = {};
+    let activeChatModuleId = null;
+    let bookingLoading = false;
+
+    const modulesGrid = document.getElementById('modulesGrid');
+    const stickyBar = document.getElementById('stickyBar');
+    const stickyHeadline = document.getElementById('stickyHeadline');
+    const stickySubline = document.getElementById('stickySubline');
+    const bookBtn = document.getElementById('bookBtn');
+
+    const infoModal = document.getElementById('infoModal');
+    const chatModal = document.getElementById('chatModal');
+    const bookingModal = document.getElementById('bookingModal');
+
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendChatBtn = document.getElementById('sendChatBtn');
+
+    const bookingModules = document.getElementById('bookingModules');
+    const bookingMonthly = document.getElementById('bookingMonthly');
+    const bookingTax = document.getElementById('bookingTax');
+    const bookingTotal = document.getElementById('bookingTotal');
+    const bookingError = document.getElementById('bookingError');
+    const bookingSuccess = document.getElementById('bookingSuccess');
+    const submitBookingBtn = document.getElementById('submitBookingBtn');
+    const customerName = document.getElementById('customerName');
+    const customerEmail = document.getElementById('customerEmail');
+    const customerPassword = document.getElementById('customerPassword');
+    const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+    const legalCheckboxIds = ['checkAgb', 'checkDatenschutz', 'checkAbo'];
+
+    const formatCurrency = (value) => `${new Intl.NumberFormat('de-DE', {minimumFractionDigits: 0, maximumFractionDigits: 2}).format(Number(value || 0))}€`;
+    const escapeHtml = (value) => String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+    const getModuleById = (id) => MODULES.find((module) => module.id === id);
+    const getSelectedModuleObjects = () => MODULES.filter((module) => selectedModules.has(module.id));
+    const getMonthlyTotal = () => getSelectedModuleObjects().reduce((sum, module) => sum + module.price, 0);
+    const generateCustomerCode = () => `K${Math.floor(100000 + Math.random() * 900000)}`;
+    const legalChecksAccepted = () => legalCheckboxIds.every((id) => document.getElementById(id)?.checked);
+
+    function updateBookingButtonState() {
+      submitBookingBtn.disabled = bookingLoading || !legalChecksAccepted();
     }
-  }catch(e){
-    show(2);
-    s.className='status err';s.textContent='Fehler: '+e.message;
-    btn.disabled=false;btn.textContent='💳 Jetzt bezahlen';
-  }
-}
-spkg(pkg);</script>
+
+    function renderModules() {
+      modulesGrid.innerHTML = MODULES.map((module) => `
+        <article class="module-card" data-module-id="${module.id}">
+          <div class="module-top">
+            <div class="module-title-wrap">
+              <div class="module-icon">${module.icon}</div>
+              <div>
+                <h3 class="module-name">${escapeHtml(module.name)}</h3>
+                <p class="module-desc">${escapeHtml(module.desc)}</p>
+              </div>
+            </div>
+            <div class="module-price">${formatCurrency(module.price)}/Monat</div>
+          </div>
+
+          <div class="module-actions">
+            <button class="btn btn-info" type="button" data-action="info" data-module-id="${module.id}">ℹ️</button>
+            <button class="btn btn-chat" type="button" data-action="chat" data-module-id="${module.id}">KI fragen 💬</button>
+          </div>
+
+          <div class="toggle-row">
+            <div>
+              <div class="toggle-label">Auswählen</div>
+              <div class="toggle-caption">Modul direkt in Ihr Paket aufnehmen</div>
+            </div>
+            <label class="switch" aria-label="${escapeHtml(module.name)} auswählen">
+              <input type="checkbox" data-action="toggle" data-module-id="${module.id}" ${selectedModules.has(module.id) ? 'checked' : ''}>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function refreshModuleSelectionState() {
+      document.querySelectorAll('.module-card').forEach((card) => {
+        const id = card.dataset.moduleId;
+        card.classList.toggle('selected', selectedModules.has(id));
+      });
+
+      const count = selectedModules.size;
+      const monthlyTotal = getMonthlyTotal();
+
+      if (count > 0) {
+        stickyBar.classList.add('show');
+        stickyHeadline.textContent = `${count} ${count === 1 ? 'Modul gewählt' : 'Module gewählt'} · ${formatCurrency(monthlyTotal)}/Monat + ${formatCurrency(SETUP_FEE)} Setup`;
+        stickySubline.textContent = 'Buchung startet direkt im Stripe Checkout.';
+      } else {
+        stickyBar.classList.remove('show');
+        stickyHeadline.textContent = `0 Module gewählt · 0€/Monat + ${formatCurrency(SETUP_FEE)} Setup`;
+        stickySubline.textContent = 'Wählen Sie mindestens ein Modul aus, um direkt zu buchen.';
+      }
+    }
+
+    function openModal(modal) {
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modal) {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+      if (![infoModal, chatModal, bookingModal].some((item) => item.classList.contains('show'))) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function showInfo(moduleId) {
+      const module = getModuleById(moduleId);
+      if (!module) return;
+      document.getElementById('infoIcon').textContent = module.icon;
+      document.getElementById('infoTitle').textContent = module.name;
+      document.getElementById('infoSubtitle').textContent = 'Modul-Überblick';
+      document.getElementById('infoPrice').textContent = `${formatCurrency(module.price)} pro Monat`;
+      document.getElementById('infoDescription').textContent = module.desc;
+      document.getElementById('infoDetails').innerHTML = (module.details || []).map((detail) => `<li>${escapeHtml(detail)}</li>`).join('');
+      openModal(infoModal);
+    }
+
+    function ensureChatHistory(moduleId) {
+      if (!chatHistories[moduleId]) chatHistories[moduleId] = [];
+      return chatHistories[moduleId];
+    }
+
+    function renderChatMessages(moduleId) {
+      const history = ensureChatHistory(moduleId);
+      chatMessages.innerHTML = history.map((entry) => `
+        <div class="bubble ${entry.role === 'user' ? 'user' : 'assistant'}">${escapeHtml(entry.content)}</div>
+      `).join('');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendChatStatus(text) {
+      const el = document.createElement('div');
+      el.className = 'chat-status';
+      el.textContent = text;
+      chatMessages.appendChild(el);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return el;
+    }
+
+    function openChat(moduleId) {
+      const module = getModuleById(moduleId);
+      if (!module) return;
+      activeChatModuleId = moduleId;
+      document.getElementById('chatIcon').textContent = module.icon;
+      document.getElementById('chatTitle').textContent = `${module.name} · KI-Berater`;
+      document.getElementById('chatSubtitle').textContent = `${formatCurrency(module.price)}/Monat`;
+
+      const history = ensureChatHistory(moduleId);
+      if (history.length === 0) {
+        history.push({
+          role: 'assistant',
+          content: `Hallo! Ich bin dein persönlicher KI-Berater für ${module.name}. Was möchtest du wissen oder sollen wir direkt ein Demo-Rollenspiel machen?`
+        });
+      }
+
+      renderChatMessages(moduleId);
+      openModal(chatModal);
+      setTimeout(() => chatInput.focus(), 60);
+    }
+
+    async function sendChatMessage() {
+      if (!activeChatModuleId) return;
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      const module = getModuleById(activeChatModuleId);
+      const history = ensureChatHistory(activeChatModuleId);
+
+      history.push({ role: 'user', content: message });
+      renderChatMessages(activeChatModuleId);
+      chatInput.value = '';
+      chatInput.style.height = '54px';
+      sendChatBtn.disabled = true;
+
+      const status = appendChatStatus('LeoLan KI denkt nach...');
+
+      try {
+        const response = await fetch(CHAT_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message,
+            moduleKey: module.id,
+            history
+          })
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const result = await response.json();
+        const reply = String(result.reply || '').trim() || `Kurz gesagt: ${module.name} spart Zeit und erhöht Automatisierung im Alltag.`;
+        history.push({ role: 'assistant', content: reply });
+      } catch (error) {
+        history.push({
+          role: 'assistant',
+          content: `Gerade gibt es ein Verbindungsproblem. Kurz gesagt: ${module.name} ist eine starke Ergänzung für Ihr Paket. Versuchen Sie es gleich noch einmal.`
+        });
+      } finally {
+        status.remove();
+        renderChatMessages(activeChatModuleId);
+        sendChatBtn.disabled = false;
+        chatInput.focus();
+      }
+    }
+
+    function openBooking() {
+      if (selectedModules.size === 0) return;
+      bookingError.textContent = '';
+      bookingSuccess.textContent = '';
+      updateBookingButtonState();
+      refreshBookingSummary();
+      openModal(bookingModal);
+      setTimeout(() => customerName.focus(), 60);
+    }
+
+    function refreshBookingSummary() {
+      const modules = getSelectedModuleObjects();
+      const monthlyTotal = getMonthlyTotal();
+      const reverseCharge = (document.getElementById('companyVatId')?.value.trim() || '').length > 3;
+      const subtotal = monthlyTotal + SETUP_FEE;
+      const vat = reverseCharge ? 0 : Math.round(subtotal * VAT_RATE * 100) / 100;
+      const grossTotal = subtotal + vat;
+
+      bookingModules.innerHTML = modules.map((module) => `
+        <div class="summary-module">
+          <span>${escapeHtml(module.icon)} ${escapeHtml(module.name)}</span>
+          <span>${formatCurrency(module.price)}</span>
+        </div>
+      `).join('');
+
+      bookingMonthly.textContent = `${formatCurrency(monthlyTotal)}/Monat`;
+      bookingTax.textContent = reverseCharge ? '0% Reverse Charge' : `19% · ${formatCurrency(vat)}`;
+      bookingTotal.textContent = formatCurrency(grossTotal);
+    }
+
+    function validateBookingForm() {
+      const name = customerName.value.trim();
+      const email = customerEmail.value.trim();
+      const password = customerPassword.value;
+
+      if (!name) return 'Bitte Vorname und Nachname eingeben.';
+      const pw = document.getElementById('customerPassword')?.value || '';
+      const pwc = document.getElementById('customerPasswordConfirm')?.value || '';
+      if (pw.length < 8) return 'Passwort muss mindestens 8 Zeichen haben.';
+      if (pw !== pwc) return 'Passwörter stimmen nicht überein.';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Bitte eine gültige E-Mail eingeben.';
+      if (password.length < 8) return 'Bitte ein Passwort mit mindestens 8 Zeichen eingeben.';
+      if (selectedModules.size === 0) return 'Bitte zuerst mindestens ein Modul auswählen.';
+      if (!legalChecksAccepted()) return 'Bitte akzeptieren Sie alle Bedingungen';
+      return '';
+    }
+
+    async function submitBooking() {
+      if (bookingLoading) return;
+      bookingError.textContent = '';
+      bookingSuccess.textContent = '';
+
+      const validationError = validateBookingForm();
+      if (validationError) {
+        bookingError.textContent = validationError;
+        return;
+      }
+
+      const modules = getSelectedModuleObjects();
+      const selectedIds = modules.map((module) => module.id);
+      const monthlyTotal = getMonthlyTotal();
+      const reverseCharge = (document.getElementById('companyVatId')?.value.trim() || '').length > 3;
+      const customerCode = generateCustomerCode();
+      const subtotal = monthlyTotal + SETUP_FEE;
+      const grossTotal = subtotal + (reverseCharge ? 0 : Math.round(subtotal * 0.19 * 100) / 100);
+
+      const billingName = document.getElementById('companyName')?.value.trim() || customerName.value.trim();
+      const billingStreet = document.getElementById('companyStreet')?.value.trim() || '';
+      const billingZip = document.getElementById('companyZip')?.value.trim() || '';
+      const billingCity = document.getElementById('companyCity')?.value.trim() || '';
+      const billingPhone = document.getElementById('companyPhone')?.value.trim() || '';
+      const billingVatId = document.getElementById('companyVatId')?.value.trim() || '';
+
+      const payload = {
+        customerCode,
+        email: customerEmail.value.trim(),
+        customerEmail: customerEmail.value.trim(),
+        password: customerPassword.value,
+        companyName: billingName,
+        name: customerName.value.trim(),
+        modules: modules.map(m => ({id: m.id, name: m.name, price: m.price})),
+        moduleNames: modules.map(m => m.name).join(', '),
+        grossTotal,
+        monthlyNetTotal: monthlyTotal,
+        setupFeeAmount: SETUP_FEE,
+        vatAmount: reverseCharge ? 0 : Math.round(monthlyTotal * 0.19 * 100) / 100,
+        paket: 'enterprise',
+        priceIds: [STRIPE_PRICE_ID],
+        reverseCharge: (document.getElementById('companyVatId')?.value.trim() || '').length > 3,
+        whatsappNumber: billingPhone,
+        phone: billingPhone,
+        address: billingStreet,
+        zipCode: billingZip,
+        city: billingCity,
+        vatId: billingVatId,
+        successUrl: 'https://hotel.leolan.net/danke/?code=' + customerCode,
+        cancelUrl: 'https://hotel.leolan.net/onboarding/'
+      };
+
+      bookingLoading = true;
+      updateBookingButtonState();
+      bookingModal.querySelector('.modal').classList.add('loading');
+      bookingSuccess.textContent = 'Checkout wird vorbereitet...';
+
+      try {
+        const response = await fetch(CHECKOUT_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const contentType = response.headers.get('content-type') || '';
+        const result = contentType.includes('application/json') ? await response.json() : { url: (await response.text()).trim() };
+        const redirectUrl = result.url || result.checkoutUrl || result.data?.url || result.redirectUrl;
+
+        if (!redirectUrl || !/^https?:\/\//.test(redirectUrl)) {
+          throw new Error('Keine gültige Stripe-URL erhalten.');
+        }
+
+        bookingSuccess.textContent = 'Weiterleitung zu Stripe...';
+        window.location.href = redirectUrl;
+      } catch (error) {
+        bookingSuccess.textContent = '';
+        bookingError.textContent = 'Checkout konnte gerade nicht erstellt werden. Bitte erneut versuchen.';
+      } finally {
+        bookingLoading = false;
+        updateBookingButtonState();
+        bookingModal.querySelector('.modal').classList.remove('loading');
+      }
+    }
+
+    modulesGrid.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-action]');
+      if (!button) return;
+      const action = button.dataset.action;
+      const moduleId = button.dataset.moduleId;
+
+      if (action === 'info') showInfo(moduleId);
+      if (action === 'chat') openChat(moduleId);
+    });
+
+    modulesGrid.addEventListener('change', (event) => {
+      const checkbox = event.target.closest('input[data-action="toggle"]');
+      if (!checkbox) return;
+      const moduleId = checkbox.dataset.moduleId;
+      if (checkbox.checked) selectedModules.add(moduleId);
+      else selectedModules.delete(moduleId);
+      refreshModuleSelectionState();
+    });
+
+    bookBtn.addEventListener('click', openBooking);
+    sendChatBtn.addEventListener('click', sendChatMessage);
+    submitBookingBtn.addEventListener('click', submitBooking);
+
+    togglePasswordBtn.addEventListener('click', () => {
+      const visible = customerPassword.type === 'text';
+      customerPassword.type = visible ? 'password' : 'text';
+      togglePasswordBtn.textContent = visible ? '👁️' : '🙈';
+    });
+
+    legalCheckboxIds.forEach((id) => {
+      const checkbox = document.getElementById(id);
+      checkbox?.addEventListener('change', () => {
+        if (legalChecksAccepted() && bookingError.textContent === 'Bitte akzeptieren Sie alle Bedingungen') {
+          bookingError.textContent = '';
+        }
+        updateBookingButtonState();
+      });
+    });
+
+    chatInput.addEventListener('input', () => {
+      chatInput.style.height = 'auto';
+      chatInput.style.height = `${Math.min(chatInput.scrollHeight, 140)}px`;
+    });
+
+    chatInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendChatMessage();
+      }
+    });
+
+    document.querySelectorAll('[data-close]').forEach((button) => {
+      button.addEventListener('click', () => closeModal(document.getElementById(button.dataset.close)));
+    });
+
+    [infoModal, chatModal, bookingModal].forEach((overlay) => {
+      overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) closeModal(overlay);
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        [infoModal, chatModal, bookingModal].forEach((modal) => {
+          if (modal.classList.contains('show')) closeModal(modal);
+        });
+      }
+    });
+
+    renderModules();
+    refreshModuleSelectionState();
+    updateBookingButtonState();
+  </script>
 </body>
 </html>

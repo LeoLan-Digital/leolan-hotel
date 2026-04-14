@@ -993,7 +993,7 @@
     const getSelectedModuleObjects = () => MODULES.filter((module) => selectedModules.has(module.id));
     const getMonthlyTotal = () => getSelectedModuleObjects().reduce((sum, module) => sum + module.price, 0);
     const generateCustomerCode = () => `K${Math.floor(100000 + Math.random() * 900000)}`;
-    const legalChecksAccepted = () => legalCheckboxIds.every((id) => document.getElementById(id)?.checked);
+    const legalChecksAccepted = () => legalCheckboxIds.every((id) => !!(document.getElementById(id)||{checked:false}).checked);
 
     function updateBookingButtonState() {
       submitBookingBtn.disabled = bookingLoading || !legalChecksAccepted();
@@ -1283,7 +1283,7 @@ function refreshBookingSummary() {
 
         const contentType = response.headers.get('content-type') || '';
         const result = contentType.includes('application/json') ? await response.json() : { url: (await response.text()).trim() };
-        const redirectUrl = result.url || result.checkoutUrl || result.data?.url || result.redirectUrl;
+        const redirectUrl = result.url || result.checkoutUrl || (result.data||{}).url || result.redirectUrl;
 
         if (!redirectUrl || !/^https?:\/\//.test(redirectUrl)) {
           throw new Error('Keine gültige Stripe-URL erhalten.');
@@ -1332,7 +1332,7 @@ function refreshBookingSummary() {
 
     legalCheckboxIds.forEach((id) => {
       const checkbox = document.getElementById(id);
-      checkbox?.addEventListener('change', () => {
+      checkbox&&checkbox.addEventListener('change', () => {
         if (legalChecksAccepted() && bookingError.textContent === 'Please accept all terms') {
           bookingError.textContent = '';
         }

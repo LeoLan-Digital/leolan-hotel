@@ -82,7 +82,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 <div class="hero">
   <div class="logo">LeoLan Digital</div>
   <h1>AI System for Your Hotel</h1>
-  <p>In 3 Schritten zum eigenen KI-Assistenten.</p>
+  <p>Set up your AI system in 3 steps.</p>
 </div>
 <div class="shell">
   <!-- Steps -->
@@ -98,19 +98,19 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
   <div id="s1">
     <!-- Paket -->
     <div class="card">
-      <h3>📦 Paket wählen</h3>
+      <h3>📦 Choose Package</h3>
       <div class="pkgs">
-        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">🔥 Beliebt</div><div class="pkg-name">Starter</div><div class="pkg-price">199€ <span>/ month</span></div><div class="pkg-desc">WhatsApp Bot, Guest Service, 500 messages/month</div></div>
+        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">🔥 Popular</div><div class="pkg-name">Starter</div><div class="pkg-price">199€ <span>/ month</span></div><div class="pkg-desc">WhatsApp Bot, Guest Service, 500 messages/month</div></div>
         <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-name">Pro</div><div class="pkg-price">349€ <span>/ month</span></div><div class="pkg-desc">Everything in Starter + Social Media, 2,000 messages/month</div></div>
       </div>
-      <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">Alle Preise zzgl. VAT: · 12 months minimum · + 349€ einmalige Setup-Gebühr</p>
+      <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">Alle Preise zzgl. VAT: · 12 months minimum · + 349€ one-time setup fee</p>
     </div>
     <!-- Konto -->
     <div class="card">
       <h3>👤 Account Details</h3>
       <div class="g2">
-        <div class="field" id="fe-email"><label>E-Mail *</label><input type="email" id="email" placeholder="name@firma.de" autocomplete="email"><div class="err">Gültige E-Mail eingeben.</div></div>
-        <div class="field" id="fe-name"><label>Your Name *</label><input type="text" id="name" placeholder="Max Mustermann" autocomplete="name"><div class="err">Name eingeben.</div></div>
+        <div class="field" id="fe-email"><label>E-Mail *</label><input type="email" id="email" placeholder="name@hotel.com" autocomplete="email"><div class="err">Gültige E-Mail eingeben.</div></div>
+        <div class="field" id="fe-name"><label>Your Name *</label><input type="text" id="name" placeholder="John Smith" autocomplete="name"><div class="err">Name eingeben.</div></div>
       </div>
       <div class="g2">
         <div class="field" id="fe-pw"><label>Passwort * (min. 8 Zeichen)</label><div class="pw-wrap"><input type="password" id="pw" placeholder="Passwort" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw',this)">Zeigen</button></div><div class="err">Min. 8 characters.</div></div>
@@ -122,10 +122,10 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
       <h3>🏢 Hotel & Billing Details</h3>
       <div class="field" id="fe-company"><label>Restaurantname *</label><input type="text" id="company" placeholder="z. B. Bella Vista GmbH"><div class="err">Restaurantname eingeben.</div></div>
       <div class="g2">
-        <div class="field" id="fe-street"><label>Straße & Hausnummer *</label><input type="text" id="street" placeholder="Musterstraße 1"><div class="err">Adresse eingeben.</div></div>
+        <div class="field" id="fe-street"><label>Street & Number *</label><input type="text" id="street" placeholder="Musterstraße 1"><div class="err">Adresse eingeben.</div></div>
         <div class="g2" style="gap:8px">
-          <div class="field" id="fe-zip"><label>ZIP *</label><input type="text" id="zip" placeholder="01234" maxlength="10"><div class="err">PLZ eingeben.</div></div>
-          <div class="field" id="fe-city"><label>City *</label><input type="text" id="city" placeholder="Dresden"><div class="err">Stadt eingeben.</div></div>
+          <div class="field" id="fe-zip"><label>ZIP *</label><input type="text" id="zip" placeholder="10001" maxlength="10"><div class="err">PLZ eingeben.</div></div>
+          <div class="field" id="fe-city"><label>City *</label><input type="text" id="city" placeholder="New York"><div class="err">Stadt eingeben.</div></div>
         </div>
       </div>
       <div class="g2">
@@ -166,10 +166,10 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
   </div>
 </div>
 <script>
-var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';document.addEventListener('DOMContentLoaded',function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'All prices excl. VAT · + 349€ setup':'Alle Preise zzgl. VAT: · 12 months minimum · + 349€ einmalige Setup-Gebühr';});
+var urlPkg=new URLSearchParams(window.location.search).get('paket'); var pkg=urlPkg==='pro'?'pro':'starter';document.addEventListener('DOMContentLoaded',function(){var note=document.getElementById('legalNote');if(note)note.textContent=pkg==='pro'?'All prices excl. VAT · + 349€ setup':'Alle Preise zzgl. VAT: · 12 months minimum · + 349€ one-time setup fee';});
 var fdata={};
 function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Zeigen';}}
-function spkg(p){pkg=p;document.querySelectorAll('.pkg').forEach(function(c){c.classList.remove('on');var note=document.getElementById('legalNote');if(note){note.textContent=p==='pro'?'All prices excl. VAT · + 349€ setup':'Alle Preise zzgl. VAT: · 12 months minimum · + 349€ einmalige Setup-Gebühr';}});document.querySelector('[data-pkg="'+p+'"]').classList.add('on');}
+function spkg(p){pkg=p;document.querySelectorAll('.pkg').forEach(function(c){c.classList.remove('on');var note=document.getElementById('legalNote');if(note){note.textContent=p==='pro'?'All prices excl. VAT · + 349€ setup':'Alle Preise zzgl. VAT: · 12 months minimum · + 349€ one-time setup fee';}});document.querySelector('[data-pkg="'+p+'"]').classList.add('on');}
 function setErr(id,has){var f=document.getElementById('fe-'+id);if(f)f.classList.toggle('bad',has);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 function go1(){
@@ -205,7 +205,7 @@ function go1(){
   };
   // Build summary
   var vatId=fdata.vatId;
-  var reverseCharge=vatId&&vatId.length>4;
+  var nonEU=document.getElementById('nonEU')&&document.getElementById('nonEU').checked; var reverseCharge=nonEU||vatId&&vatId.length>4;
   var monthly=pkg==='starter'?199:349;
   var setup=349;
   var vat=reverseCharge?0:Math.round(monthly*0.19*100)/100;
@@ -214,7 +214,7 @@ function go1(){
     ['E-Mail',fdata.email],['Name',fdata.name],
     ['Restaurant',fdata.companyName],
     ['Adresse',fdata.street+', '+fdata.zipCode+' '+fdata.city],
-    ['VAT ID',fdata.vatId||'Keine Angabe'],
+    ['VAT ID',fdata.vatId||'Not provided'],
     ['Website',fdata.website||'—'],
     ['WhatsApp',fdata.whatsappNumber],
     ['Paket',(pkg==='starter'?'Starter':'Pro')]
@@ -253,7 +253,7 @@ async function doCheckout(){
     // Add Stripe price IDs for the package
 var priceMap={'starter':{priceId:'price_1TL0yYLwGb6me8PhNJaI5B0d',amount:199},'pro':{priceId:'price_1TL0z0LwGb6me8PhRKNbQ3Qa',amount:349}};
 var pkgInfo=priceMap[fdata.package]||priceMap.starter;
-var reverseCharge=fdata.vatId&&fdata.vatId.length>4;
+var nonEU=document.getElementById('nonEU')&&document.getElementById('nonEU').checked; var reverseCharge=nonEU||fdata.vatId&&fdata.vatId.length>4;
 var vatRate=19; // Stripe handles Reverse Charge via customer tax ID
 var vatAmount=reverseCharge?0:Math.round(pkgInfo.amount*0.19*100)/100;
 var chkPayload=Object.assign({},fdata,{
@@ -293,6 +293,14 @@ var chkRes=await fetch('https://n8n.leolan.net/webhook/stripe-checkout',{method:
     btn.disabled=false;btn.textContent='💳 Pay Now';
   }
 }
-spkg(pkg);</script>
+spkg(pkg);
+function detectEU(){
+  var eu=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','PT','IE','GR','CZ','HU','RO','BG','LU','MT','CY'];
+  var v=(document.getElementById('country')||{value:''}).value;
+  var chk=document.getElementById('nonEU');
+  if(chk&&v){chk.checked=!eu.includes(v);}
+  updateSum();
+}
+</script>
 </body>
 </html>

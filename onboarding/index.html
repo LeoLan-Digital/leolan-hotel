@@ -69,11 +69,11 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 </head>
 <body>
 <div style="background:#0d1117;border-bottom:1px solid #21262d;position:sticky;top:0;z-index:100;padding:12px 20px">
-  <a href="https://ki.leolan.net/" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;color:#8b949e;text-decoration:none;font-size:14px;font-weight:600">
+  <a href="https://hotel.leolan.net/" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;color:#8b949e;text-decoration:none;font-size:14px;font-weight:600">
     <span style="font-size:18px">←</span> Home
   </a>
   <div style="text-align:center">
-    <a href="https://ki.leolan.net/">
+    <a href="https://hotel.leolan.net/">
       <img src="https://ki.leolan.net/leolan-logo.png" width="56" height="56" style="border-radius:16px;border:0;display:inline-block" alt="LeoLan">
     </a>
   </div>
@@ -269,7 +269,7 @@ var chkPayload=Object.assign({},fdata,{
   reverseCharge:reverseCharge,
   selectedPackage:fdata.package,
   successUrl:'https://hotel.leolan.net/danke/',
-  cancelUrl:'https://ki.leolan.net/onboarding/'
+  cancelUrl:'https://hotel.leolan.net/onboarding/'
 });
 var chkRes=await fetch('https://n8n.leolan.net/webhook/stripe-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(chkPayload)});
     var chkText=await chkRes.text();

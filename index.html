@@ -961,7 +961,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     try{
       var ctrl=new AbortController();
       setTimeout(function(){ctrl.abort();},20000);
-      var resp=await fetch('https://n8n.leolan.net/webhook/onboarding-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:message,moduleKey:'hotel-demo',history:chatHistory}),signal:ctrl.signal});
+      var resp=await fetch('https://n8n.leolan.net/webhook/hotel-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:message,moduleKey:'hotel-demo',history:chatHistory}),signal:ctrl.signal});
       var data=await resp.json();
       var reply=data.reply||data.message||'I am here to help! 🏨';
       chatHistory.push({role:'user',content:message});

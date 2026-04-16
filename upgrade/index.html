@@ -163,7 +163,7 @@ function checkout() {
     modules: modules,
     setupFee: 0,
     noSetupFee: true,
-    reverseCharge: !!(customerData.vatId && customerData.vatId.length > 4)
+    reverseCharge: !!(customerData.reverseCharge) || !!(customerData.vatId && customerData.vatId.length > 4)
   };
 
   var xhr2 = new XMLHttpRequest();

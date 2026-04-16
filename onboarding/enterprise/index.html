@@ -1093,7 +1093,11 @@ function isEU() {
 function updateVat() {
   var net = getTotalPrice();
   var reverseCharge = document.getElementById('f_reversecharge') && document.getElementById('f_reversecharge').checked;
-  var vatId = val('f_vatid');
+  var vatId = (document.getElementById('f_vatid') ? document.getElementById('f_vatid').value.trim().toUpperCase() : '');
+  if (vatId && !/^[A-Z]{2}[0-9A-Z]{5,15}$/.test(vatId)) {
+    alert('Please enter a valid VAT ID (e.g. DE123456789) or leave it empty.');
+    return;
+  }
   var euCountry = isEU();
 
   var vatRate = 0;
@@ -1309,6 +1313,30 @@ function sendChatMessage() {
 // ============================================================
 renderModules();
 updateBottomBar();
+
+function validateVatId(input) {
+  var val = input.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  input.value = val;
+  var hint = document.getElementById('vatid_hint');
+  if (!hint) return;
+  if (!val) {
+    hint.textContent = 'Format: 2 letter country code + numbers (e.g. DE123456789)';
+    hint.style.color = '#8a9bb8';
+    input.style.borderColor = '#2a3a4a';
+    return;
+  }
+  // Must start with 2 letters + at least 5 digits
+  var valid = /^[A-Z]{2}[0-9A-Z]{5,15}$/.test(val);
+  if (valid) {
+    hint.textContent = '✓ Valid VAT ID format';
+    hint.style.color = '#4cd97b';
+    input.style.borderColor = '#4cd97b';
+  } else {
+    hint.textContent = '⚠️ Invalid format — must start with country code (e.g. DE, GB, FR) + numbers';
+    hint.style.color = '#f4a527';
+    input.style.borderColor = '#f4a527';
+  }
+}
 </script>
 </body>
 </html>

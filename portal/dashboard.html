@@ -76,6 +76,9 @@ body{font-family:-apple-system,sans-serif;background:#0e1621;color:#e8eaed;min-h
       <div class="row"><span class="row-label">Email</span><span class="row-value" id="billEmail">—</span></div>
       <div class="row"><span class="row-label">Company</span><span class="row-value" id="billCompany">—</span></div>
       <div class="row"><span class="row-label">Member since</span><span class="row-value" id="billSince">—</span></div>
+      <div class="row" id="billAddressRow" style="display:none"><span class="row-label">Address</span><span class="row-value" id="billAddress">—</span></div>
+      <div class="row" id="billZipRow" style="display:none"><span class="row-label">ZIP / City</span><span class="row-value" id="billZip">—</span></div>
+      <div class="row" id="billVatRow" style="display:none"><span class="row-label">VAT ID</span><span class="row-value" id="billVat">—</span></div>
       <button onclick="toggleEdit()" style="margin-top:12px;background:transparent;border:1px solid #2a3a4a;color:#5e81f4;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;width:100%">✏️ Edit Billing Info</button>
     </div>
 
@@ -93,6 +96,10 @@ body{font-family:-apple-system,sans-serif;background:#0e1621;color:#e8eaed;min-h
       <label style="color:#8a9bb8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block">VAT ID (optional)</label>
       <input id="e_vatid" type="text" placeholder="DE123456789" style="width:100%;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:10px;font-size:14px;margin-bottom:14px;box-sizing:border-box">
       <div id="editErr" style="color:#e8647c;font-size:13px;margin-bottom:10px;display:none"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px;background:#0e1621;border-radius:8px;border:1px solid #2a3a4a">
+        <input type="checkbox" id="e_reversecharge" style="width:18px;height:18px;flex-shrink:0">
+        <label for="e_reversecharge" style="color:#8a9bb8;font-size:13px;cursor:pointer">I am not an EU company (Reverse Charge / 0% VAT)</label>
+      </div>
       <button onclick="saveBilling()" style="width:100%;background:#5e81f4;color:#fff;border:none;border-radius:10px;padding:12px;font-size:15px;font-weight:700;cursor:pointer" id="saveBtn">Save Changes</button>
       <button onclick="toggleEdit()" style="width:100%;background:transparent;border:1px solid #2a3a4a;color:#8a9bb8;border-radius:10px;padding:10px;font-size:14px;cursor:pointer;margin-top:8px">Cancel</button>
     </div>
@@ -144,6 +151,9 @@ xhr.onload = function() {
   document.getElementById('billName').textContent = acc.name || '—';
   document.getElementById('billEmail').textContent = acc.email || '—';
   document.getElementById('billCompany').textContent = acc.companyName || '—';
+  if (acc.address) { document.getElementById('billAddress').textContent = acc.address; document.getElementById('billAddressRow').style.display = 'flex'; }
+  if (acc.zip || acc.city) { document.getElementById('billZip').textContent = (acc.zip || '') + ' ' + (acc.city || ''); document.getElementById('billZipRow').style.display = 'flex'; }
+  if (acc.vatId) { document.getElementById('billVat').textContent = acc.vatId; document.getElementById('billVatRow').style.display = 'flex'; }
   document.getElementById('billSince').textContent = (acc.createdAt || '').substring(0, 10) || '—';
   // Pre-fill edit form
   document.getElementById('e_company').value = acc.companyName || '';
@@ -191,7 +201,8 @@ xhr.send(JSON.stringify({customerCode: customerCode}));
       address: document.getElementById('e_address').value.trim(),
       zip: document.getElementById('e_zip').value.trim(),
       city: document.getElementById('e_city').value.trim(),
-      vatId: document.getElementById('e_vatid').value.trim()
+      vatId: document.getElementById('e_vatid').value.trim(),
+      reverseCharge: document.getElementById('e_reversecharge') && document.getElementById('e_reversecharge').checked
     };
 
     var xhr = new XMLHttpRequest();
@@ -204,6 +215,9 @@ xhr.send(JSON.stringify({customerCode: customerCode}));
       try { data = JSON.parse(xhr.responseText); } catch(e) {}
       if (data.success) {
         document.getElementById('billCompany').textContent = payload.companyName || '—';
+        if (payload.address) { document.getElementById('billAddress').textContent = payload.address; document.getElementById('billAddressRow').style.display = 'flex'; }
+        if (payload.zip || payload.city) { document.getElementById('billZip').textContent = (payload.zip||'') + ' ' + (payload.city||''); document.getElementById('billZipRow').style.display = 'flex'; }
+        if (payload.vatId) { document.getElementById('billVat').textContent = payload.vatId; document.getElementById('billVatRow').style.display = 'flex'; }
         document.getElementById('editCard').style.display = 'none';
       } else {
         err.textContent = data.error || 'Error saving.';

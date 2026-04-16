@@ -653,11 +653,11 @@
 <div class="page-header">
   <div class="enterprise-badge">LEOLAN DIGITAL · ENTERPRISE</div>
   <h1 class="page-title">Configure Your Hotel AI System</h1>
-  <p class="page-subtitle">Wählen Sie Module, informieren Sie sich per KI-Chat, buchen Sie direkt.</p>
+  <p class="page-subtitle">Select modules, get information via AI chat, and book directly.</p>
   <div class="feature-badges">
-    <div class="feature-badge"><span class="dot"></span> 8 Module frei kombinierbar</div>
+    <div class="feature-badge"><span class="dot"></span> 8 modules freely combinable</div>
     <div class="feature-badge"><span class="dot"></span> 349&#8364; einmaliges Setup</div>
-    <div class="feature-badge"><span class="dot"></span> Direkter Stripe Checkout</div>
+    <div class="feature-badge"><span class="dot"></span> Direct Stripe Checkout</div>
   </div>
 </div>
 
@@ -671,7 +671,7 @@
 <!-- STICKY BOTTOM BAR -->
 <div class="bottom-bar" id="bottomBar">
   <div class="bottom-bar-info">
-    <div class="bottom-bar-count" id="bottomCount">0 Module ausgewählt</div>
+    <div class="bottom-bar-count" id="bottomCount">0 modules selected</div>
     <div class="bottom-bar-price" id="bottomPrice">0&#8364; <span>/Monat + 349&#8364; Setup</span></div>
   </div>
   <button class="btn-weiter" id="btnWeiter" disabled onclick="openAccountModal()">Weiter &#8594;</button>
@@ -691,7 +691,7 @@
     <!-- STEP 2: Account -->
     <div class="modal-step active" id="step2">
       <div class="modal-title">Hotel-Account erstellen</div>
-      <div class="modal-subtitle">Schritt 1 von 2 &mdash; Ihre Zugangsdaten</div>
+      <div class="modal-subtitle">Step 1 von 2 &mdash; Ihre Zugangsdaten</div>
 
       <div class="form-group">
         <label>Hotel Name *</label>
@@ -700,36 +700,36 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Vorname *</label>
+          <label>First Name *</label>
           <input type="text" id="f_firstname" placeholder="Max">
           <div class="error-msg" id="err_firstname">Pflichtfeld</div>
         </div>
         <div class="form-group">
-          <label>Nachname *</label>
+          <label>Last Name *</label>
           <input type="text" id="f_lastname" placeholder="Mustermann">
           <div class="error-msg" id="err_lastname">Pflichtfeld</div>
         </div>
       </div>
       <div class="form-group">
-        <label>E-Mail *</label>
+        <label>Email *</label>
         <input type="email" id="f_email" placeholder="max@hotel.de">
         <div class="error-msg" id="err_email">Bitte g&#252;ltige E-Mail eingeben</div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Passwort * (min. 8 Zeichen)</label>
+          <label>Password * (min. 8 characters)</label>
           <input type="password" id="f_pass" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
           <div class="error-msg" id="err_pass">Mindestens 8 Zeichen</div>
         </div>
         <div class="form-group">
-          <label>Passwort bestätigen *</label>
+          <label>Confirm Password *</label>
           <input type="password" id="f_pass2" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
           <div class="error-msg" id="err_pass2">Passw&#246;rter stimmen nicht &#252;berein</div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Telefon</label>
+          <label>Phone</label>
           <input type="tel" id="f_phone" placeholder="+49 89 123456">
         </div>
         <div class="form-group">
@@ -905,7 +905,7 @@ function renderModules() {
     html += '<div class="card-name">' + m.name + '</div>';
     html += '<div class="card-desc">' + m.desc + '</div>';
     html += '<div class="card-actions">';
-    html += '<button class="btn-ki" onclick="openChat(\'' + m.id + '\')">KI fragen &#128310;</button>';
+    html += '<button class="btn-ki" onclick="openChat(\'' + m.id + '\')">Ask AI &#128310;</button>';
     html += '<div class="toggle-wrapper" onclick="toggleModule(\'' + m.id + '\')">';
     html += '<span class="toggle-label">Ausw&#228;hlen</span>';
     html += '<div class="toggle-switch" id="toggle_' + m.id + '"></div>';

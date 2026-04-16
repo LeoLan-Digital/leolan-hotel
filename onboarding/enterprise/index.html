@@ -819,7 +819,8 @@
 
       <div class="form-group">
         <label>VAT ID (optional, for B2B)</label>
-        <input type="text" id="f_vatid" placeholder="DE123456789" onchange="updateVat()">
+        <input type="text" id="f_vatid" placeholder="DE123456789" onchange="updateVat()" oninput="validateVatId(this)" style="width:100%;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:12px;font-size:15px">
+        <p id="vatid_hint" style="font-size:12px;margin-top:5px;color:#8a9bb8">Format: 2-letter country code + numbers (e.g. DE123456789)</p>
       </div>
 
       <div class="check-group">

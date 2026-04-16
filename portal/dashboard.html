@@ -77,6 +77,11 @@ body{font-family:-apple-system,sans-serif;background:#0e1621;color:#e8eaed;min-h
       <div class="row"><span class="row-label">Company</span><span class="row-value" id="billCompany">—</span></div>
       <div class="row"><span class="row-label">Member since</span><span class="row-value" id="billSince">—</span></div>
     </div>
+    <!-- Invoices -->
+    <div class="card" id="invoiceCard">
+      <div class="card-title">Invoices</div>
+      <div id="invoiceList"><p style="color:#8a9bb8;font-size:14px">No invoices yet.</p></div>
+    </div>
     <!-- Actions -->
     <div class="card">
       <div class="card-title">Upgrade / Add-ons</div>
@@ -122,6 +127,19 @@ xhr.onload = function() {
   document.getElementById('billCompany').textContent = acc.companyName || '—';
   document.getElementById('billSince').textContent = (acc.createdAt || '').substring(0, 10) || '—';
   document.getElementById('upgradeBtn').href = '/onboarding/enterprise/?code=' + encodeURIComponent(customerCode);
+
+  // Invoices
+  var invoices = acc.invoices || [];
+  var invList = document.getElementById('invoiceList');
+  if (invoices.length > 0) {
+    var html = '';
+    for (var i = 0; i < invoices.length; i++) {
+      var inv = invoices[i];
+      html += '<div class="row"><span class="row-label">' + (inv.date || '').substring(0,10) + ' — ' + (inv.description || 'Invoice') + '</span>';
+      html += '<span class="row-value">' + (inv.amount || '—') + '</span></div>';
+    }
+    invList.innerHTML = html;
+  }
 };
 xhr.onerror = function() {
   document.getElementById('loading').textContent = 'Connection error.';

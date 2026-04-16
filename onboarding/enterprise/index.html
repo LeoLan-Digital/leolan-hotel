@@ -878,7 +878,7 @@ var EU_COUNTRIES = ['DE','AT','FR','IT','ES','NL','BE','PL','CZ','HU','RO','PT',
 var MODULES = [
   { id: 'whatsapp', icon: '&#129302;', name: 'WhatsApp AI Bot', price: 499, desc: 'AI-powered chatbot answers guest inquiries 24/7 on WhatsApp.' },
   { id: 'instagram', icon: '&#128248;', name: 'Instagram Auto-Posts', price: 89, desc: 'Automatic posts with AI text and your hotel photos &ndash; daily fresh content.' },
-  { id: 'facebook', icon: '&#128077;', name: 'Facebook Auto-Posts', price: 59, desc: 'Regelm&#228;&#223;ige Facebook-Posts f&#252;r mehr Reichweite ohne Mehraufwand.' },
+  { id: 'facebook', icon: '&#128077;', name: 'Facebook Auto-Posts', price: 59, desc: 'Regular Facebook posts for more reach and engagement without extra effort.' },
   { id: 'bewertung', icon: '&#11088;', name: 'Review Management', price: 89, desc: 'AI responds to Google &amp; Booking reviews professionally and quickly.' },
   { id: 'google', icon: '&#128506;', name: 'Google Business', price: 79, desc: 'Optimization of your Google Business Profile for more visibility.' },
   { id: 'analytics', icon: '&#128202;', name: 'Analytics Dashboard', price: 39, desc: 'Live overview of all KPIs &ndash; bookings, reach, reviews.' },
@@ -907,7 +907,7 @@ function renderModules() {
     html += '<div class="card-actions">';
     html += '<button class="btn-ki" onclick="openChat(\'' + m.id + '\')">Ask AI &#128310;</button>';
     html += '<div class="toggle-wrapper" onclick="toggleModule(\'' + m.id + '\')">';
-    html += '<span class="toggle-label">Ausw&#228;hlen</span>';
+    html += '<span class="toggle-label">Select</span>';
     html += '<div class="toggle-switch" id="toggle_' + m.id + '"></div>';
     html += '</div>';
     html += '</div>';

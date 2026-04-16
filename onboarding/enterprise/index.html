@@ -813,7 +813,11 @@
 
       <div class="form-group">
         <label>Billing Address *</label>
-        <input type="text" id="f_address" placeholder="Musterstra&#223;e 1, 80331 M&#252;nchen">
+        <input type="text" id="f_address" placeholder="Street + House Number" style="width:100%;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:12px;font-size:15px;margin-bottom:8px">
+        <div style="display:flex;gap:8px;margin-bottom:0">
+          <input type="text" id="f_zip" placeholder="ZIP / Postal Code" style="width:140px;flex-shrink:0;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:12px;font-size:15px">
+          <input type="text" id="f_city" placeholder="City" style="flex:1;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:12px;font-size:15px">
+        </div>
         <div class="error-msg" id="err_address">Required field</div>
       </div>
 

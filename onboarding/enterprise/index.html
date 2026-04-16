@@ -1188,7 +1188,7 @@ function submitCheckout() {
       return cc + ' ' + num;
     })(),
     country: val('f_country'),
-    address: val('f_address'),
+    address: val('f_address') + ', ' + val('f_zip') + ' ' + val('f_city'),
     vatId: val('f_vatid'),
     reverseCharge: reverseCharge,
     selectedModules: moduleIds,

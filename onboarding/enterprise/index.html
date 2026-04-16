@@ -1144,6 +1144,12 @@ function submitCheckout() {
 
   var reverseCharge = document.getElementById('f_reversecharge') && document.getElementById('f_reversecharge').checked;
 
+  // Build modules array in format expected by Stripe webhook: [{name, price}]
+  var modulesForStripe = [];
+  for (var mi = 0; mi < list.length; mi++) {
+    modulesForStripe.push({ name: list[mi].name, price: list[mi].price });
+  }
+
   var payload = {
     paket: 'enterprise-hotel',
     purchaseType: 'enterprise',
@@ -1161,6 +1167,7 @@ function submitCheckout() {
     reverseCharge: reverseCharge,
     selectedModules: moduleIds,
     selectedModuleNames: moduleNames,
+    modules: modulesForStripe,
     monthlyTotal: getTotalPrice(),
     setupFee: 349
   };

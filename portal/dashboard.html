@@ -76,6 +76,25 @@ body{font-family:-apple-system,sans-serif;background:#0e1621;color:#e8eaed;min-h
       <div class="row"><span class="row-label">Email</span><span class="row-value" id="billEmail">—</span></div>
       <div class="row"><span class="row-label">Company</span><span class="row-value" id="billCompany">—</span></div>
       <div class="row"><span class="row-label">Member since</span><span class="row-value" id="billSince">—</span></div>
+      <button onclick="toggleEdit()" style="margin-top:12px;background:transparent;border:1px solid #2a3a4a;color:#5e81f4;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;width:100%">✏️ Edit Billing Info</button>
+    </div>
+
+    <!-- Edit Billing Form -->
+    <div class="card" id="editCard" style="display:none">
+      <div class="card-title">Edit Billing Info</div>
+      <label style="color:#8a9bb8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block">Company Name</label>
+      <input id="e_company" type="text" style="width:100%;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:10px;font-size:14px;margin-bottom:10px;box-sizing:border-box">
+      <label style="color:#8a9bb8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block">Street + House Number</label>
+      <input id="e_address" type="text" style="width:100%;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:10px;font-size:14px;margin-bottom:10px;box-sizing:border-box">
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <input id="e_zip" type="text" placeholder="ZIP" style="width:120px;flex-shrink:0;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:10px;font-size:14px">
+        <input id="e_city" type="text" placeholder="City" style="flex:1;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:10px;font-size:14px">
+      </div>
+      <label style="color:#8a9bb8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block">VAT ID (optional)</label>
+      <input id="e_vatid" type="text" placeholder="DE123456789" style="width:100%;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:10px;font-size:14px;margin-bottom:14px;box-sizing:border-box">
+      <div id="editErr" style="color:#e8647c;font-size:13px;margin-bottom:10px;display:none"></div>
+      <button onclick="saveBilling()" style="width:100%;background:#5e81f4;color:#fff;border:none;border-radius:10px;padding:12px;font-size:15px;font-weight:700;cursor:pointer" id="saveBtn">Save Changes</button>
+      <button onclick="toggleEdit()" style="width:100%;background:transparent;border:1px solid #2a3a4a;color:#8a9bb8;border-radius:10px;padding:10px;font-size:14px;cursor:pointer;margin-top:8px">Cancel</button>
     </div>
     <!-- Invoices -->
     <div class="card" id="invoiceCard">
@@ -126,6 +145,13 @@ xhr.onload = function() {
   document.getElementById('billEmail').textContent = acc.email || '—';
   document.getElementById('billCompany').textContent = acc.companyName || '—';
   document.getElementById('billSince').textContent = (acc.createdAt || '').substring(0, 10) || '—';
+  // Pre-fill edit form
+  document.getElementById('e_company').value = acc.companyName || '';
+  document.getElementById('e_address').value = acc.address || '';
+  document.getElementById('e_zip').value = acc.zip || '';
+  document.getElementById('e_city').value = acc.city || '';
+  document.getElementById('e_vatid').value = acc.vatId || '';
+
   document.getElementById('upgradeBtn').href = '/onboarding/enterprise/?code=' + encodeURIComponent(customerCode);
 
   // Invoices
@@ -145,6 +171,48 @@ xhr.onerror = function() {
   document.getElementById('loading').textContent = 'Connection error.';
 };
 xhr.send(JSON.stringify({customerCode: customerCode}));
+
+  function toggleEdit() {
+    var card = document.getElementById('editCard');
+    card.style.display = card.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function saveBilling() {
+    var btn = document.getElementById('saveBtn');
+    var err = document.getElementById('editErr');
+    err.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+
+    var payload = {
+      action: 'update-billing',
+      customerCode: customerCode,
+      companyName: document.getElementById('e_company').value.trim(),
+      address: document.getElementById('e_address').value.trim(),
+      zip: document.getElementById('e_zip').value.trim(),
+      city: document.getElementById('e_city').value.trim(),
+      vatId: document.getElementById('e_vatid').value.trim()
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://n8n.leolan.net/webhook/hotel-dashboard', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+      btn.disabled = false;
+      btn.textContent = 'Save Changes';
+      var data = {};
+      try { data = JSON.parse(xhr.responseText); } catch(e) {}
+      if (data.success) {
+        document.getElementById('billCompany').textContent = payload.companyName || '—';
+        document.getElementById('editCard').style.display = 'none';
+      } else {
+        err.textContent = data.error || 'Error saving.';
+        err.style.display = 'block';
+      }
+    };
+    xhr.onerror = function() { btn.disabled = false; btn.textContent = 'Save Changes'; };
+    xhr.send(JSON.stringify(payload));
+  }
 </script>
 </body>
 </html>

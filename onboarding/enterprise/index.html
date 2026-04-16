@@ -672,9 +672,9 @@
 <div class="bottom-bar" id="bottomBar">
   <div class="bottom-bar-info">
     <div class="bottom-bar-count" id="bottomCount">0 modules selected</div>
-    <div class="bottom-bar-price" id="bottomPrice">0&#8364; <span>/Monat + 349&#8364; Setup</span></div>
+    <div class="bottom-bar-price" id="bottomPrice">0&#8364; <span>/month + 349&#8364; setup</span></div>
   </div>
-  <button class="btn-weiter" id="btnWeiter" disabled onclick="openAccountModal()">Weiter &#8594;</button>
+  <button class="btn-weiter" id="btnWeiter" disabled onclick="openAccountModal()">Continue &#8594;</button>
 </div>
 
 <!-- BOOKING MODAL (Step 2 + 3) -->
@@ -738,7 +738,7 @@
         </div>
       </div>
 
-      <button class="btn-primary" onclick="goToBilling()">Weiter zur Zahlung &#8594;</button>
+      <button class="btn-primary" onclick="goToBilling()">Continue to Payment &#8594;</button>
     </div>
 
     <!-- STEP 3: Billing -->
@@ -900,7 +900,7 @@ function renderModules() {
     html += '<div class="module-card" id="card_' + m.id + '">';
     html += '<div class="card-top">';
     html += '<div class="card-icon">' + m.icon + '</div>';
-    html += '<div class="card-price">' + m.price + '&#8364;/Monat</div>';
+    html += '<div class="card-price">' + m.price + '&#8364;/month</div>';
     html += '</div>';
     html += '<div class="card-name">' + m.name + '</div>';
     html += '<div class="card-desc">' + m.desc + '</div>';
@@ -974,7 +974,7 @@ function updateBottomBar() {
   var btn = document.getElementById('btnWeiter');
 
   countEl.innerHTML = count + ' Modul' + (count === 1 ? '' : 'e') + ' ausgew&#228;hlt';
-  priceEl.innerHTML = total + '&#8364; <span>/Monat + 349&#8364; Setup</span>';
+  priceEl.innerHTML = total + '&#8364; <span>/month + 349&#8364; setup</span>';
   btn.disabled = count === 0;
 }
 

@@ -1211,19 +1211,19 @@ function submitCheckout() {
         if (data.url) {
           window.location.href = data.url;
         } else {
-          alert('Fehler beim Checkout: ' + (data.error || 'Bitte versuchen Sie es erneut.'));
+          alert('Fehler beim Checkout: ' + (data.error || 'Please try again.'));
           document.getElementById('btnKaufen').disabled = false;
           document.getElementById('btnKaufen').textContent = 'Buy Now';
         }
       } catch(e) {
-        alert('Verbindungsfehler. Bitte versuchen Sie es erneut.');
+        alert('Connection error. Please try again.');
         document.getElementById('btnKaufen').disabled = false;
         document.getElementById('btnKaufen').textContent = 'Buy Now';
       }
     }
   };
   xhr.onerror = function() {
-    alert('Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung.');
+    alert('Connection error. Bitte prüfen Sie Ihre Internetverbindung.');
     document.getElementById('btnKaufen').disabled = false;
     document.getElementById('btnKaufen').textContent = 'Buy Now';
   };
@@ -1304,7 +1304,7 @@ function sendChatMessage() {
   xhr.onerror = function() {
     var container = document.getElementById('chatMessages');
     if (container.contains(typingDiv)) container.removeChild(typingDiv);
-    appendChatMessage('bot', 'Verbindungsfehler. Bitte pr&#252;fen Sie Ihre Internetverbindung.');
+    appendChatMessage('bot', 'Connection error. Bitte pr&#252;fen Sie Ihre Internetverbindung.');
   };
   xhr.send(JSON.stringify(payload));
 }

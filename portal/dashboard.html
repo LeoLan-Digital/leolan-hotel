@@ -186,8 +186,7 @@ xhr.onload = function() {
       html += '<div style="text-align:right">';
       html += '<div style="font-size:15px;font-weight:700;color:#4cd97b">' + (inv.amount || '—') + '</div>';
       html += '<div style="font-size:11px;color:#4cd97b;margin-top:2px">' + (inv.status === 'paid' ? '✓ Paid' : inv.status || '') + '</div>';
-      var dlUrl = inv.pdfUrl || ('https://n8n.leolan.net/webhook/download-invoice?code=' + encodeURIComponent(customerCode) + '&id=' + encodeURIComponent(inv.id||'') + '&sector=hotel');
-      html += '<a href="' + dlUrl + '" target="_blank" style="font-size:11px;color:#5e81f4;text-decoration:none;margin-top:4px;display:block">⬇ Download PDF</a>';
+      html += '<a href="javascript:void(0)" onclick="resendInvoice(\'' + (inv.id||'') + '\')" style="font-size:11px;color:#5e81f4;text-decoration:none;margin-top:4px;display:block">📧 Send to my Email</a>';
       html += '</div>';
       html += '</div>';
       html += '</div>';
@@ -199,6 +198,23 @@ xhr.onerror = function() {
   document.getElementById('loading').textContent = 'Connection error.';
 };
 xhr.send(JSON.stringify({customerCode: customerCode}));
+
+  function resendInvoice(invoiceId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://n8n.leolan.net/webhook/resend-invoice', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+      var data = {};
+      try { data = JSON.parse(xhr.responseText); } catch(e) {}
+      if (data.success) {
+        alert('Invoice sent to your email!');
+      } else {
+        alert('Error: ' + (data.error || 'Could not send invoice.'));
+      }
+    };
+    xhr.onerror = function() { alert('Connection error.'); };
+    xhr.send(JSON.stringify({customerCode: customerCode, invoiceId: invoiceId, sector: 'hotel'}));
+  }
 
   function downloadInvoice(invoiceId, code) {
     window.open('https://n8n.leolan.net/webhook/download-invoice?code=' + encodeURIComponent(code) + '&id=' + encodeURIComponent(invoiceId) + '&sector=hotel', '_blank');

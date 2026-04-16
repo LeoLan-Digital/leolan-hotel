@@ -186,11 +186,8 @@ xhr.onload = function() {
       html += '<div style="text-align:right">';
       html += '<div style="font-size:15px;font-weight:700;color:#4cd97b">' + (inv.amount || '—') + '</div>';
       html += '<div style="font-size:11px;color:#4cd97b;margin-top:2px">' + (inv.status === 'paid' ? '✓ Paid' : inv.status || '') + '</div>';
-      if (inv.pdfUrl) {
-        html += '<a href="' + inv.pdfUrl + '" target="_blank" style="font-size:11px;color:#5e81f4;text-decoration:none;margin-top:4px;display:block">⬇ Download PDF</a>';
-      } else {
-        html += '<a href="javascript:void(0)" onclick="downloadInvoice(\'' + (inv.id||'') + '\', \'' + customerCode + '\')" style="font-size:11px;color:#5e81f4;text-decoration:none;margin-top:4px;display:block">⬇ Download PDF</a>';
-      }
+      var dlUrl = inv.pdfUrl || ('https://n8n.leolan.net/webhook/download-invoice?code=' + encodeURIComponent(customerCode) + '&id=' + encodeURIComponent(inv.id||'') + '&sector=hotel');
+      html += '<a href="' + dlUrl + '" target="_blank" style="font-size:11px;color:#5e81f4;text-decoration:none;margin-top:4px;display:block">⬇ Download PDF</a>';
       html += '</div>';
       html += '</div>';
       html += '</div>';

@@ -933,7 +933,7 @@
   </div>
 
   <script>
-    const MODULES = [
+    var MODULES = [
       {id:'whatsapp-ki',icon:'🤖',name:'WhatsApp AI Bot',price:499,desc:'AI assistant for automatic guest communication via WhatsApp. Incl. 1,000 messages/month.',details:['Automatische Antworten auf Gästeanfragen','Ideal für Reservierungen, Öffnungszeiten und FAQs','Reduziert manuellen Aufwand im Tagesgeschäft']},
       {id:'instagram',icon:'📸',name:'Instagram Auto-Posts',price:89,desc:'Daily AI-generated posts on Instagram.',details:['Regelmäßiger Content ohne täglichen Aufwand','Texte und Themen KI-gestützt vorbereitet','Ideal für Sichtbarkeit und Markenaufbau']},
       {id:'facebook',icon:'👍',name:'Facebook Auto-Posts',price:59,desc:'Automated posts & interactions on Facebook.',details:['Automatisierte Beiträge für Facebook-Seiten','Unterstützt lokale Reichweite und Wiedererkennung','Sinnvoll als Ergänzung zu Instagram']},
@@ -944,78 +944,78 @@
       {id:'reels',icon:'🎬',name:'Reels with AI Videos',price:149,desc:'Automated AI video reels for Instagram & TikTok.',details:['Kurzvideos für hohe organische Reichweite','Moderne Content-Produktion mit KI-Unterstützung','Perfekt für Social-Media-Wachstum']},
     ];
 
-    const CHAT_WEBHOOK_URL = 'https://n8n.leolan.net/webhook/onboarding-chat';
-    const CHECKOUT_WEBHOOK_URL = 'https://n8n.leolan.net/webhook/stripe-checkout';
-    const SETUP_FEE = 349;
-    const VAT_RATE = 0.19;
-    const STRIPE_PRICE_ID = 'price_1TL0yYLwGb6me8PhNJaI5B0d';
+    var CHAT_WEBHOOK_URL = 'https://n8n.leolan.net/webhook/onboarding-chat';
+    var CHECKOUT_WEBHOOK_URL = 'https://n8n.leolan.net/webhook/stripe-checkout';
+    var SETUP_FEE = 349;
+    var VAT_RATE = 0.19;
+    var STRIPE_PRICE_ID = 'price_1TL0yYLwGb6me8PhNJaI5B0d';
 
-    const selectedModules = new Set();
-    const chatHistories = {};
-    let activeChatModuleId = null;
-    let bookingLoading = false;
+    var selectedModules = new Set();
+    var chatHistories = {};
+    var activeChatModuleId = null;
+    var bookingLoading = false;
 
-    const modulesGrid = document.getElementById('modulesGrid');
-    const stickyBar = document.getElementById('stickyBar');
-    const stickyHeadline = document.getElementById('stickyHeadline');
-    const stickySubline = document.getElementById('stickySubline');
-    const bookBtn = document.getElementById('bookBtn');
+    var modulesGrid = document.getElementById('modulesGrid');
+    var stickyBar = document.getElementById('stickyBar');
+    var stickyHeadline = document.getElementById('stickyHeadline');
+    var stickySubline = document.getElementById('stickySubline');
+    var bookBtn = document.getElementById('bookBtn');
 
-    const infoModal = document.getElementById('infoModal');
-    const chatModal = document.getElementById('chatModal');
-    const bookingModal = document.getElementById('bookingModal');
+    var infoModal = document.getElementById('infoModal');
+    var chatModal = document.getElementById('chatModal');
+    var bookingModal = document.getElementById('bookingModal');
 
-    const chatMessages = document.getElementById('chatMessages');
-    const chatInput = document.getElementById('chatInput');
-    const sendChatBtn = document.getElementById('sendChatBtn');
+    var chatMessages = document.getElementById('chatMessages');
+    var chatInput = document.getElementById('chatInput');
+    var sendChatBtn = document.getElementById('sendChatBtn');
 
-    const bookingModules = document.getElementById('bookingModules');
-    const bookingMonthly = document.getElementById('bookingMonthly');
-    const bookingTax = document.getElementById('bookingTax');
-    const bookingTotal = document.getElementById('bookingTotal');
-    const bookingError = document.getElementById('bookingError');
-    const bookingSuccess = document.getElementById('bookingSuccess');
-    const submitBookingBtn = document.getElementById('submitBookingBtn');
-    const customerName = document.getElementById('customerName');
-    const customerEmail = document.getElementById('customerEmail');
-    const customerPassword = document.getElementById('customerPassword');
-    const togglePasswordBtn = document.getElementById('togglePasswordBtn');
-    const legalCheckboxIds = ['checkAgb', 'checkDatenschutz', 'checkAbo'];
+    var bookingModules = document.getElementById('bookingModules');
+    var bookingMonthly = document.getElementById('bookingMonthly');
+    var bookingTax = document.getElementById('bookingTax');
+    var bookingTotal = document.getElementById('bookingTotal');
+    var bookingError = document.getElementById('bookingError');
+    var bookingSuccess = document.getElementById('bookingSuccess');
+    var submitBookingBtn = document.getElementById('submitBookingBtn');
+    var customerName = document.getElementById('customerName');
+    var customerEmail = document.getElementById('customerEmail');
+    var customerPassword = document.getElementById('customerPassword');
+    var togglePasswordBtn = document.getElementById('togglePasswordBtn');
+    var legalCheckboxIds = ['checkAgb', 'checkDatenschutz', 'checkAbo'];
 
-    const formatCurrency = (value) => `${new Intl.NumberFormat('de-DE', {minimumFractionDigits: 0, maximumFractionDigits: 2}).format(Number(value || 0))}€`;
-    const escapeHtml = (value) => String(value ?? '')
+    var formatCurrency = function(value) { return "" + (new Intl.NumberFormat('de-DE', {minimumFractionDigits: 0, maximumFractionDigits: 2) + ").format(Number(value || 0))}€"; };
+    var escapeHtml = function(value) { return String(value || ''); }
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
-    const getModuleById = (id) => MODULES.find((module) => module.id === id);
-    const getSelectedModuleObjects = () => MODULES.filter((module) => selectedModules.has(module.id));
-    const getMonthlyTotal = () => getSelectedModuleObjects().reduce((sum, module) => sum + module.price, 0);
-    const generateCustomerCode = () => `K${Math.floor(100000 + Math.random() * 900000)}`;
-    const legalChecksAccepted = () => legalCheckboxIds.every((id) => !!(document.getElementById(id)||{checked:false}).checked);
+    var getModuleById = function(id) { return MODULES.filter(function(module) { return module.id === id; })[0]; };
+    var getSelectedModuleObjects = function() { return MODULES.filter(function(module) { return selectedModules.has(module.id); }); };
+    var getMonthlyTotal = function() { return getSelectedModuleObjects().reduce(function(sum, module) { return sum + module.price; }, 0); };
+    var generateCustomerCode = function() { return "K" + (Math.floor(100000 + Math.random() * 900000)) + ""; };
+    var legalChecksAccepted = function() { return legalCheckboxIds.every(function(id) { var el = document.getElementById(id); return !!(el && el.checked); }); };
 
     function updateBookingButtonState() {
       submitBookingBtn.disabled = bookingLoading || !legalChecksAccepted();
     }
 
     function renderModules() {
-      modulesGrid.innerHTML = MODULES.map((module) => `
-        <article class="module-card" data-module-id="${module.id}">
+      modulesGrid.innerHTML = MODULES.mapfunction((module) { return "; }
+        <article class="module-card" data-module-id="" + (module.id) + "">
           <div class="module-top">
             <div class="module-title-wrap">
-              <div class="module-icon">${module.icon}</div>
+              <div class="module-icon">" + (module.icon) + "</div>
               <div>
-                <h3 class="module-name">${escapeHtml(module.name)}</h3>
-                <p class="module-desc">${escapeHtml(module.desc)}</p>
+                <h3 class="module-name">" + (escapeHtml(module.name)) + "</h3>
+                <p class="module-desc">" + (escapeHtml(module.desc)) + "</p>
               </div>
             </div>
-            <div class="module-price">${formatCurrency(module.price)}/month</div>
+            <div class="module-price">" + (formatCurrency(module.price)) + "/month</div>
           </div>
 
           <div class="module-actions">
-            <button class="btn btn-info" type="button" data-action="info" data-module-id="${module.id}">ℹ️</button>
-            <button class="btn btn-chat" type="button" data-action="chat" data-module-id="${module.id}">Ask AI 💬</button>
+            <button class="btn btn-info" type="button" data-action="info" data-module-id="" + (module.id) + "">ℹ️</button>
+            <button class="btn btn-chat" type="button" data-action="chat" data-module-id="" + (module.id) + "">Ask AI 💬</button>
           </div>
 
           <div class="toggle-row">
@@ -1023,31 +1023,31 @@
               <div class="toggle-label">Select</div>
               <div class="toggle-caption">Add module to package</div>
             </div>
-            <label class="switch" aria-label="${escapeHtml(module.name)} auswählen">
-              <input type="checkbox" data-action="toggle" data-module-id="${module.id}" ${selectedModules.has(module.id) ? 'checked' : ''}>
+            <label class="switch" aria-label="" + (escapeHtml(module.name)) + " auswählen">
+              <input type="checkbox" data-action="toggle" data-module-id="" + (module.id) + "" " + (selectedModules.has(module.id) ? 'checked' : '') + ">
               <span class="slider"></span>
             </label>
           </div>
         </article>
-      `).join('');
+      ").join('');
     }
 
     function refreshModuleSelectionState() {
-      document.querySelectorAll('.module-card').forEach((card) => {
-        const id = card.dataset.moduleId;
+      document.querySelectorAll('.module-card').forEachfunction((card) {
+        var id = card.dataset.moduleId;
         card.classList.toggle('selected', selectedModules.has(id));
       });
 
-      const count = selectedModules.size;
-      const monthlyTotal = getMonthlyTotal();
+      var count = selectedModules.size;
+      var monthlyTotal = getMonthlyTotal();
 
       if (count > 0) {
         stickyBar.classList.add('show');
-        stickyHeadline.textContent = `${count} ${count === 1 ? 'Modul gewählt' : 'Module gewählt'} · ${formatCurrency(monthlyTotal)}/month + ${formatCurrency(SETUP_FEE)} Setup`;
+        stickyHeadline.textContent = "" + (count) + " " + (count === 1 ? 'Modul gewählt' : 'Module gewählt') + " · " + (formatCurrency(monthlyTotal)) + "/month + " + (formatCurrency(SETUP_FEE)) + " Setup";
         stickySubline.textContent = 'Buchung startet direkt im Stripe Checkout.';
       } else {
         stickyBar.classList.remove('show');
-        stickyHeadline.textContent = `0 Module gewählt · 0€/month + ${formatCurrency(SETUP_FEE)} Setup`;
+        stickyHeadline.textContent = "0 Module gewählt · 0€/month + " + (formatCurrency(SETUP_FEE)) + " Setup";
         stickySubline.textContent = 'Wählen Sie mindestens ein Modul aus, um direkt zu buchen.';
       }
     }
@@ -1061,20 +1061,20 @@
     function closeModal(modal) {
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden', 'true');
-      if (![infoModal, chatModal, bookingModal].some((item) => item.classList.contains('show'))) {
+      if function(![infoModal, chatModal, bookingModal].some((item) { return item.classList.contains('show'))) {; }
         document.body.style.overflow = '';
       }
     }
 
     function showInfo(moduleId) {
-      const module = getModuleById(moduleId);
+      var module = getModuleById(moduleId);
       if (!module) return;
       document.getElementById('infoIcon').textContent = module.icon;
       document.getElementById('infoTitle').textContent = module.name;
       document.getElementById('infoSubtitle').textContent = 'Modul-Überblick';
-      document.getElementById('infoPrice').textContent = `${formatCurrency(module.price)} pro Monat`;
+      document.getElementById('infoPrice').textContent = "" + (formatCurrency(module.price)) + " pro Monat";
       document.getElementById('infoDescription').textContent = module.desc;
-      document.getElementById('infoDetails').innerHTML = (module.details || []).map((detail) => `<li>${escapeHtml(detail)}</li>`).join('');
+      document.getElementById('infoDetails').innerHTML = (module.details || []).mapfunction((detail) { return "<li>" + (escapeHtml(detail)) + "</li>").join(''); };
       openModal(infoModal);
     }
 
@@ -1084,15 +1084,15 @@
     }
 
     function renderChatMessages(moduleId) {
-      const history = ensureChatHistory(moduleId);
-      chatMessages.innerHTML = history.map((entry) => `
-        <div class="bubble ${entry.role === 'user' ? 'user' : 'assistant'}">${escapeHtml(entry.content)}</div>
-      `).join('');
+      var history = ensureChatHistory(moduleId);
+      chatMessages.innerHTML = history.mapfunction((entry) { return "; }
+        <div class="bubble " + (entry.role === 'user' ? 'user' : 'assistant') + "">" + (escapeHtml(entry.content)) + "</div>
+      ").join('');
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
     function appendChatStatus(text) {
-      const el = document.createElement('div');
+      var el = document.createElement('div');
       el.className = 'chat-status';
       el.textContent = text;
       chatMessages.appendChild(el);
@@ -1101,33 +1101,33 @@
     }
 
     function openChat(moduleId) {
-      const module = getModuleById(moduleId);
+      var module = getModuleById(moduleId);
       if (!module) return;
       activeChatModuleId = moduleId;
       document.getElementById('chatIcon').textContent = module.icon;
-      document.getElementById('chatTitle').textContent = `${module.name} · KI-Berater`;
-      document.getElementById('chatSubtitle').textContent = `${formatCurrency(module.price)}/month`;
+      document.getElementById('chatTitle').textContent = "" + (module.name) + " · KI-Berater";
+      document.getElementById('chatSubtitle').textContent = "" + (formatCurrency(module.price)) + "/month";
 
-      const history = ensureChatHistory(moduleId);
+      var history = ensureChatHistory(moduleId);
       if (history.length === 0) {
         history.push({
           role: 'assistant',
-          content: `Hallo! Ich bin dein persönlicher KI-Berater für ${module.name}. Was möchtest du wissen oder sollen wir direkt ein Demo-Rollenspiel machen?`
+          content: "Hallo! Ich bin dein persönlicher KI-Berater für " + (module.name) + ". Was möchtest du wissen oder sollen wir direkt ein Demo-Rollenspiel machen?"
         });
       }
 
       renderChatMessages(moduleId);
       openModal(chatModal);
-      setTimeout(() => chatInput.focus(), 60);
+      setTimeoutfunction(() { return chatInput.focus(), 60); };
     }
 
     async function sendChatMessage() {
       if (!activeChatModuleId) return;
-      const message = chatInput.value.trim();
+      var message = chatInput.value.trim();
       if (!message) return;
 
-      const module = getModuleById(activeChatModuleId);
-      const history = ensureChatHistory(activeChatModuleId);
+      var module = getModuleById(activeChatModuleId);
+      var history = ensureChatHistory(activeChatModuleId);
 
       history.push({ role: 'user', content: message });
       renderChatMessages(activeChatModuleId);
@@ -1135,10 +1135,10 @@
       chatInput.style.height = '54px';
       sendChatBtn.disabled = true;
 
-      const status = appendChatStatus('LeoLan KI denkt nach...');
+      var status = appendChatStatus('LeoLan KI denkt nach...');
 
       try {
-        const response = await fetch(CHAT_WEBHOOK_URL, {
+        var response = await fetch(CHAT_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -1148,15 +1148,15 @@
           })
         });
 
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (!response.ok) throw new Error("HTTP " + (response.status) + "");
 
-        const result = await response.json();
-        const reply = String(result.reply || '').trim() || `Kurz gesagt: ${module.name} spart Zeit und erhöht Automatisierung im Alltag.`;
+        var result = await response.json();
+        var reply = String(result.reply || '').trim() || "Kurz gesagt: " + (module.name) + " spart Zeit und erhöht Automatisierung im Alltag.";
         history.push({ role: 'assistant', content: reply });
       } catch (error) {
         history.push({
           role: 'assistant',
-          content: `Gerade gibt es ein Verbindungsproblem. Kurz gesagt: ${module.name} ist eine starke Ergänzung für Ihr Paket. Versuchen Sie es gleich noch einmal.`
+          content: "Gerade gibt es ein Verbindungsproblem. Kurz gesagt: " + (module.name) + " ist eine starke Ergänzung für Ihr Paket. Versuchen Sie es gleich noch einmal."
         });
       } finally {
         status.remove();
@@ -1174,38 +1174,38 @@
       refreshBookingSummary();
       openModal(bookingModal);
       refreshBookingSummary();
-      setTimeout(() => customerName.focus(), 60);
+      setTimeoutfunction(() { return customerName.focus(), 60); };
     }
 
     function updateBookingSummary()
 function refreshBookingSummary() {
-      const modules = getSelectedModuleObjects();
-      const monthlyTotal = getMonthlyTotal();
-      const reverseCharge = !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || !!(document.getElementById('companyVatId') && document.getElementById('companyVatId').value.trim().length > 3);
-      const subtotal = monthlyTotal + SETUP_FEE;
-      const vat = reverseCharge ? 0 : Math.round(subtotal * VAT_RATE * 100) / 100;
-      const grossTotal = subtotal + vat;
+      var modules = getSelectedModuleObjects();
+      var monthlyTotal = getMonthlyTotal();
+      var reverseCharge = !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || !!(document.getElementById('companyVatId') && document.getElementById('companyVatId').value.trim().length > 3);
+      var subtotal = monthlyTotal + SETUP_FEE;
+      var vat = reverseCharge ? 0 : Math.round(subtotal * VAT_RATE * 100) / 100;
+      var grossTotal = subtotal + vat;
 
-      bookingModules.innerHTML = modules.map((module) => `
+      bookingModules.innerHTML = modules.mapfunction((module) { return "; }
         <div class="summary-module">
-          <span>${escapeHtml(module.icon)} ${escapeHtml(module.name)}</span>
-          <span>${formatCurrency(module.price)}</span>
+          <span>" + (escapeHtml(module.icon)) + " " + (escapeHtml(module.name)) + "</span>
+          <span>" + (formatCurrency(module.price)) + "</span>
         </div>
-      `).join('');
+      ").join('');
 
-      bookingMonthly.textContent = `${formatCurrency(monthlyTotal)}/month`;
+      bookingMonthly.textContent = "" + (formatCurrency(monthlyTotal)) + "/month";
       bookingTax.textContent = reverseCharge ? '0% (Non-EU / Reverse Charge)' : '19% · ' + formatCurrency(vat);
       bookingTotal.textContent = formatCurrency(grossTotal);
     }
 
     function validateBookingForm() {
-      const name = customerName.value.trim();
-      const email = customerEmail.value.trim();
-      const password = customerPassword.value;
+      var name = customerName.value.trim();
+      var email = customerEmail.value.trim();
+      var password = customerPassword.value;
 
       if (!name) return 'Bitte Vorname und Nachname eingeben.';
-      const pw = (document.getElementById('customerPassword')||{}).value || '';
-      const pwc = (document.getElementById('customerPasswordConfirm')||{}).value || '';
+      var pw = (document.getElementById('customerPassword')||{}).value || '';
+      var pwc = (document.getElementById('customerPasswordConfirm')||{}).value || '';
       if (pw.length < 8) return 'Passwort muss mindestens 8 Zeichen haben.';
       if (pw !== pwc) return 'Passwörter stimmen nicht überein.';
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Bitte eine gültige E-Mail eingeben.';
@@ -1220,36 +1220,36 @@ function refreshBookingSummary() {
       bookingError.textContent = '';
       bookingSuccess.textContent = '';
 
-      const validationError = validateBookingForm();
+      var validationError = validateBookingForm();
       if (validationError) {
         bookingError.textContent = validationError;
         return;
       }
 
-      const modules = getSelectedModuleObjects();
-      const selectedIds = modules.map((module) => module.id);
-      const monthlyTotal = getMonthlyTotal();
-      const reverseCharge = !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || !!(document.getElementById('companyVatId') && document.getElementById('companyVatId').value.trim().length > 3);
-      const customerCode = generateCustomerCode();
-      const subtotal = monthlyTotal + SETUP_FEE;
-      const grossTotal = subtotal + (reverseCharge ? 0 : Math.round(subtotal * 0.19 * 100) / 100);
+      var modules = getSelectedModuleObjects();
+      var selectedIds = modules.mapfunction((module) { return module.id); };
+      var monthlyTotal = getMonthlyTotal();
+      var reverseCharge = !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || !!(document.getElementById('companyVatId') && document.getElementById('companyVatId').value.trim().length > 3);
+      var customerCode = generateCustomerCode();
+      var subtotal = monthlyTotal + SETUP_FEE;
+      var grossTotal = subtotal + (reverseCharge ? 0 : Math.round(subtotal * 0.19 * 100) / 100);
 
-      const billingName = (document.getElementById('companyName')||{}).value.trim() || customerName.value.trim();
-      const billingStreet = (document.getElementById('companyStreet')||{}).value.trim() || '';
-      const billingZip = (document.getElementById('companyZip')||{}).value.trim() || '';
-      const billingCity = (document.getElementById('companyCity')||{}).value.trim() || '';
-      const billingPhone = (document.getElementById('companyPhone')||{}).value.trim() || '';
-      const billingVatId = (document.getElementById('companyVatId')||{value:''}).value.trim() || '';
+      var billingName = (document.getElementById('companyName')||{}).value.trim() || customerName.value.trim();
+      var billingStreet = (document.getElementById('companyStreet')||{}).value.trim() || '';
+      var billingZip = (document.getElementById('companyZip')||{}).value.trim() || '';
+      var billingCity = (document.getElementById('companyCity')||{}).value.trim() || '';
+      var billingPhone = (document.getElementById('companyPhone')||{}).value.trim() || '';
+      var billingVatId = (document.getElementById('companyVatId')||{value:''}).value.trim() || '';
 
-      const payload = {
+      var payload = {
         customerCode,
         email: customerEmail.value.trim(),
         customerEmail: customerEmail.value.trim(),
         password: customerPassword.value,
         companyName: billingName,
         name: customerName.value.trim(),
-        modules: modules.map(m => ({id: m.id, name: m.name, price: m.price})),
-        moduleNames: modules.map(m => m.name).join(', '),
+        modules: modules.map(function(m) { return ({id: m.id; }, name: m.name, price: m.price})),
+        moduleNames: modules.map(function(m) { return m.name; }).join(', '),
         grossTotal,
         monthlyNetTotal: monthlyTotal,
         setupFeeAmount: SETUP_FEE,
@@ -1273,17 +1273,17 @@ function refreshBookingSummary() {
       bookingSuccess.textContent = 'Checkout wird vorbereitet...';
 
       try {
-        const response = await fetch(CHECKOUT_WEBHOOK_URL, {
+        var response = await fetch(CHECKOUT_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
 
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (!response.ok) throw new Error("HTTP " + (response.status) + "");
 
-        const contentType = response.headers.get('content-type') || '';
-        const result = contentType.includes('application/json') ? await response.json() : { url: (await response.text()).trim() };
-        const redirectUrl = result.url || result.checkoutUrl || (result.data||{}).url || result.redirectUrl;
+        var contentType = response.headers.get('content-type') || '';
+        var result = contentType.includes('application/json') ? await response.json() : { url: (await response.text()).trim() };
+        var redirectUrl = result.url || result.checkoutUrl || (result.data||{}).url || result.redirectUrl;
 
         if (!redirectUrl || !/^https?:\/\//.test(redirectUrl)) {
           throw new Error('Keine gültige Stripe-URL erhalten.');
@@ -1301,20 +1301,20 @@ function refreshBookingSummary() {
       }
     }
 
-    modulesGrid.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-action]');
+    modulesGrid.addEventListenerfunction('click', (event) {
+      var button = event.target.closest('[data-action]');
       if (!button) return;
-      const action = button.dataset.action;
-      const moduleId = button.dataset.moduleId;
+      var action = button.dataset.action;
+      var moduleId = button.dataset.moduleId;
 
       if (action === 'info') showInfo(moduleId);
       if (action === 'chat') openChat(moduleId);
     });
 
-    modulesGrid.addEventListener('change', (event) => {
-      const checkbox = event.target.closest('input[data-action="toggle"]');
+    modulesGrid.addEventListenerfunction('change', (event) {
+      var checkbox = event.target.closest('input[data-action="toggle"]');
       if (!checkbox) return;
-      const moduleId = checkbox.dataset.moduleId;
+      var moduleId = checkbox.dataset.moduleId;
       if (checkbox.checked) selectedModules.add(moduleId);
       else selectedModules.delete(moduleId);
       refreshModuleSelectionState();
@@ -1324,15 +1324,15 @@ function refreshBookingSummary() {
     sendChatBtn.addEventListener('click', sendChatMessage);
     submitBookingBtn.addEventListener('click', submitBooking);
 
-    togglePasswordBtn.addEventListener('click', () => {
-      const visible = customerPassword.type === 'text';
+    togglePasswordBtn.addEventListenerfunction('click', () {
+      var visible = customerPassword.type === 'text';
       customerPassword.type = visible ? 'password' : 'text';
       togglePasswordBtn.textContent = visible ? '👁️' : '🙈';
     });
 
-    legalCheckboxIds.forEach((id) => {
-      const checkbox = document.getElementById(id);
-      checkbox&&checkbox.addEventListener('change', () => {
+    legalCheckboxIds.forEachfunction((id) {
+      var checkbox = document.getElementById(id);
+      checkbox&&checkbox.addEventListenerfunction('change', () {
         if (legalChecksAccepted() && bookingError.textContent === 'Please accept all terms') {
           bookingError.textContent = '';
         }
@@ -1340,31 +1340,31 @@ function refreshBookingSummary() {
       });
     });
 
-    chatInput.addEventListener('input', () => {
+    chatInput.addEventListenerfunction('input', () {
       chatInput.style.height = 'auto';
-      chatInput.style.height = `${Math.min(chatInput.scrollHeight, 140)}px`;
+      chatInput.style.height = "" + (Math.min(chatInput.scrollHeight, 140)) + "px";
     });
 
-    chatInput.addEventListener('keydown', (event) => {
+    chatInput.addEventListenerfunction('keydown', (event) {
       if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
         sendChatMessage();
       }
     });
 
-    document.querySelectorAll('[data-close]').forEach((button) => {
-      button.addEventListener('click', () => closeModal(document.getElementById(button.dataset.close)));
+    document.querySelectorAll('[data-close]').forEachfunction((button) {
+      button.addEventListenerfunction('click', () { return closeModal(document.getElementById(button.dataset.close))); };
     });
 
-    [infoModal, chatModal, bookingModal].forEach((overlay) => {
-      overlay.addEventListener('click', (event) => {
+    [infoModal, chatModal, bookingModal].forEachfunction((overlay) {
+      overlay.addEventListenerfunction('click', (event) {
         if (event.target === overlay) closeModal(overlay);
       });
     });
 
-    document.addEventListener('keydown', (event) => {
+    document.addEventListenerfunction('keydown', (event) {
       if (event.key === 'Escape') {
-        [infoModal, chatModal, bookingModal].forEach((modal) => {
+        [infoModal, chatModal, bookingModal].forEachfunction((modal) {
           if (modal.classList.contains('show')) closeModal(modal);
         });
       }
@@ -1388,6 +1388,6 @@ function autoDetectEUEnt(){
   if(chk&&v)chk.checked=!eu.includes(v);
   updateBookingSummary();
 }
-</script>
+
 </body>
 </html>

@@ -60,8 +60,11 @@ function login() {
   xhr.onload = function() {
     btn.disabled = false;
     btn.textContent = 'Sign In';
+    var raw = xhr.responseText;
+    err.textContent = 'Response: ' + raw.substring(0,200);
+    err.style.display = 'block';
     var data = {};
-    try { data = JSON.parse(xhr.responseText); } catch(e) {}
+    try { data = JSON.parse(raw); } catch(e) { return; }
     if (data.success && data.customerCode) {
       window.location.href = '/portal/dashboard.html?code=' + encodeURIComponent(data.customerCode);
     } else if (data.blocked) {

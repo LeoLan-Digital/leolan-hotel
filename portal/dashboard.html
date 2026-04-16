@@ -152,7 +152,7 @@ xhr.onload = function() {
   document.getElementById('e_city').value = acc.city || '';
   document.getElementById('e_vatid').value = acc.vatId || '';
 
-  document.getElementById('upgradeBtn').href = '/onboarding/enterprise/?code=' + encodeURIComponent(customerCode);
+  document.getElementById('upgradeBtn').href = '/upgrade/?code=' + encodeURIComponent(customerCode);
 
   // Invoices
   var invoices = acc.invoices || [];

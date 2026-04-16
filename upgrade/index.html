@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Upgrade — LeoLan Digital</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,sans-serif;background:#0e1621;color:#e8eaed;min-height:100vh;padding:20px}
+.card{background:#17212b;border-radius:14px;padding:20px;max-width:600px;margin:0 auto 16px}
+.logo{text-align:center;margin-bottom:24px}
+.logo img{width:48px;height:48px}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{color:#8a9bb8;font-size:14px;text-align:center;margin-bottom:0}
+.card-title{font-size:12px;font-weight:700;color:#8a9bb8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px}
+.customer-box{background:#0e1621;border-radius:10px;padding:14px;margin-bottom:4px}
+.customer-name{font-size:15px;font-weight:700}
+.customer-email{color:#8a9bb8;font-size:13px;margin-top:2px}
+.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.modules-grid{grid-template-columns:1fr}}
+.module{background:#0e1621;border:2px solid #2a3a4a;border-radius:12px;padding:14px;cursor:pointer}
+.module.selected{border-color:#5e81f4;background:#5e81f410}
+.module-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.module-price{color:#5e81f4;font-size:13px;font-weight:600}
+.module-desc{color:#8a9bb8;font-size:12px;margin-top:4px;line-height:1.4}
+.summary-row{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;color:#8a9bb8;border-bottom:1px solid #1a2a3a}
+.summary-row:last-child{color:#e8eaed;font-weight:700;font-size:16px;border-bottom:none;padding-top:10px}
+.btn{display:block;width:100%;background:#5e81f4;color:#fff;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;margin-top:8px}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.loading{text-align:center;padding:40px;color:#8a9bb8}
+.err{background:#ef444420;border:1px solid #ef4444;border-radius:8px;padding:10px;color:#ef4444;font-size:13px;margin-bottom:12px;display:none}
+</style>
+</head>
+<body>
+<div class="logo">
+  <img src="https://hotel.leolan.net/logo.svg" alt="LeoLan" onerror="this.style.display='none'">
+  <h1>Add Modules</h1>
+  <p class="sub">Select additional modules for your hotel</p>
+</div>
+
+<div id="loading" class="loading">Loading your account...</div>
+<div id="main" style="display:none">
+  <div class="card">
+    <div class="card-title">Your Account</div>
+    <div class="customer-box">
+      <div class="customer-name" id="custName">—</div>
+      <div class="customer-email" id="custEmail">—</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Select Modules</div>
+    <div class="modules-grid" id="modulesGrid"></div>
+  </div>
+
+  <div class="card" id="summaryCard" style="display:none">
+    <div class="card-title">Order Summary</div>
+    <div id="summaryRows"></div>
+    <div class="err" id="checkoutErr"></div>
+    <button class="btn" id="buyBtn" onclick="checkout()">Pay Now →</button>
+    <p style="color:#8a9bb8;font-size:12px;text-align:center;margin-top:10px">No re-entry of billing data needed — we use your existing account details.</p>
+  </div>
+</div>
+
+<script>
+var MODULES = [
+  {id:'whatsapp', name:'WhatsApp AI Bot', price:499, desc:'AI chatbot 24/7 on WhatsApp'},
+  {id:'instagram', name:'Instagram Auto-Posts', price:89, desc:'Daily AI posts'},
+  {id:'facebook', name:'Facebook Auto-Posts', price:59, desc:'Regular reach posts'},
+  {id:'reviews', name:'Review Management', price:89, desc:'AI responds to reviews'},
+  {id:'google', name:'Google Business', price:79, desc:'Profile optimization'},
+  {id:'analytics', name:'Analytics Dashboard', price:39, desc:'All KPIs in one view'},
+  {id:'email', name:'Email Marketing', price:59, desc:'Automated campaigns'},
+  {id:'reels', name:'Reels with AI Videos', price:149, desc:'AI-generated short videos'}
+];
+
+var customerCode = (new URLSearchParams(window.location.search)).get('code') || '';
+var selected = [];
+var customerData = {};
+
+if (!customerCode) { window.location.href = '/portal/'; }
+
+// Load customer data
+var xhr = new XMLHttpRequest();
+xhr.open('POST', 'https://n8n.leolan.net/webhook/hotel-dashboard', true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.onload = function() {
+  var data = {};
+  try { data = JSON.parse(xhr.responseText); } catch(e) {}
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+  var acc = data.account || {};
+  customerData = acc;
+  document.getElementById('custName').textContent = acc.name || customerCode;
+  document.getElementById('custEmail').textContent = acc.email || '';
+  renderModules();
+};
+xhr.onerror = function() { document.getElementById('loading').textContent = 'Connection error.'; };
+xhr.send(JSON.stringify({customerCode: customerCode}));
+
+function renderModules() {
+  var html = '';
+  for (var i = 0; i < MODULES.length; i++) {
+    var m = MODULES[i];
+    var sel = selected.indexOf(m.id) >= 0;
+    html += '<div class="module' + (sel ? ' selected' : '') + '" onclick="toggleModule(\'' + m.id + '\')">';
+    html += '<div class="module-name">' + m.name + '</div>';
+    html += '<div class="module-price">' + m.price + '€/month</div>';
+    html += '<div class="module-desc">' + m.desc + '</div>';
+    html += '</div>';
+  }
+  document.getElementById('modulesGrid').innerHTML = html;
+  updateSummary();
+}
+
+function toggleModule(id) {
+  var idx = selected.indexOf(id);
+  if (idx >= 0) selected.splice(idx, 1);
+  else selected.push(id);
+  renderModules();
+}
+
+function updateSummary() {
+  var card = document.getElementById('summaryCard');
+  if (selected.length === 0) { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+  var total = 0;
+  var rows = '';
+  for (var i = 0; i < selected.length; i++) {
+    for (var j = 0; j < MODULES.length; j++) {
+      if (MODULES[j].id === selected[i]) {
+        total += MODULES[j].price;
+        rows += '<div class="summary-row"><span>' + MODULES[j].name + '</span><span>' + MODULES[j].price + '€/Mo</span></div>';
+      }
+    }
+  }
+  rows += '<div class="summary-row"><span>Total / Month</span><span>' + total + '€</span></div>';
+  document.getElementById('summaryRows').innerHTML = rows;
+}
+
+function checkout() {
+  var btn = document.getElementById('buyBtn');
+  var err = document.getElementById('checkoutErr');
+  err.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Redirecting...';
+
+  var modules = [];
+  for (var i = 0; i < selected.length; i++) {
+    for (var j = 0; j < MODULES.length; j++) {
+      if (MODULES[j].id === selected[i]) modules.push({name: MODULES[j].name, price: MODULES[j].price});
+    }
+  }
+
+  var payload = {
+    paket: 'addon-hotel',
+    purchaseType: 'addon',
+    sector: 'hotel',
+    customerCode: customerCode,
+    customerEmail: customerData.email || '',
+    companyName: customerData.companyName || customerData.name || '',
+    vatId: customerData.vatId || '',
+    modules: modules,
+    setupFee: 0,
+    noSetupFee: true,
+    reverseCharge: !!(customerData.vatId && customerData.vatId.length > 4)
+  };
+
+  var xhr2 = new XMLHttpRequest();
+  xhr2.open('POST', 'https://n8n.leolan.net/webhook/stripe-checkout', true);
+  xhr2.setRequestHeader('Content-Type', 'application/json');
+  xhr2.onload = function() {
+    var data = {};
+    try { data = JSON.parse(xhr2.responseText); } catch(e) {}
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      err.textContent = data.error || 'Checkout failed.';
+      err.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Pay Now →';
+    }
+  };
+  xhr2.onerror = function() {
+    btn.disabled = false;
+    btn.textContent = 'Pay Now →';
+    err.textContent = 'Connection error.';
+    err.style.display = 'block';
+  };
+  xhr2.send(JSON.stringify(payload));
+}
+</script>
+</body>
+</html>

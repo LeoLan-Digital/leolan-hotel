@@ -171,8 +171,19 @@ xhr.onload = function() {
     var html = '';
     for (var i = 0; i < invoices.length; i++) {
       var inv = invoices[i];
-      html += '<div class="row"><span class="row-label">' + (inv.date || '').substring(0,10) + ' — ' + (inv.description || 'Invoice') + '</span>';
-      html += '<span class="row-value">' + (inv.amount || '—') + '</span></div>';
+      html += '<div style="padding:10px 0;border-bottom:1px solid #1a2a3a">';
+      html += '<div style="display:flex;justify-content:space-between;align-items:center">';
+      html += '<div>';
+      html += '<div style="font-size:14px;font-weight:600;color:#e8eaed">' + (inv.description || 'Invoice') + '</div>';
+      html += '<div style="font-size:12px;color:#8a9bb8;margin-top:2px">' + (inv.id || '') + ' · ' + (inv.date || '').substring(0,10) + '</div>';
+      if (inv.net) html += '<div style="font-size:11px;color:#8a9bb8;margin-top:2px">Net: ' + inv.net + ' · VAT: ' + (inv.vat || '0€') + '</div>';
+      html += '</div>';
+      html += '<div style="text-align:right">';
+      html += '<div style="font-size:15px;font-weight:700;color:#4cd97b">' + (inv.amount || '—') + '</div>';
+      html += '<div style="font-size:11px;color:#4cd97b;margin-top:2px">' + (inv.status === 'paid' ? '✓ Paid' : inv.status || '') + '</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
     }
     invList.innerHTML = html;
   }

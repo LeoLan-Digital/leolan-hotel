@@ -743,11 +743,11 @@
 
     <!-- STEP 3: Billing -->
     <div class="modal-step" id="step3">
-      <div class="modal-title">Rechnungsdaten &amp; Zahlung</div>
-      <div class="modal-subtitle">Schritt 2 von 2 &mdash; Abonnement starten</div>
+      <div class="modal-title">Billing Details &amp; Payment</div>
+      <div class="modal-subtitle">Step 2 of 2 &mdash; Start Subscription</div>
 
       <div class="form-group">
-        <label>Land *</label>
+        <label>Country *</label>
         <select id="f_country" onchange="updateVat()">
           <optgroup label="Europa">
             <option value="DE">Deutschland</option>
@@ -792,19 +792,19 @@
       </div>
 
       <div class="form-group">
-        <label>Rechnungsadresse *</label>
+        <label>Billing Address *</label>
         <input type="text" id="f_address" placeholder="Musterstra&#223;e 1, 80331 M&#252;nchen">
         <div class="error-msg" id="err_address">Pflichtfeld</div>
       </div>
 
       <div class="form-group">
-        <label>USt-ID (optional, f&#252;r B2B)</label>
+        <label>VAT ID (optional, for B2B)</label>
         <input type="text" id="f_vatid" placeholder="DE123456789" onchange="updateVat()">
       </div>
 
       <div class="check-group">
         <input type="checkbox" id="f_reversecharge" onchange="updateVat()">
-        <label for="f_reversecharge">Ich bin kein EU-Unternehmen (Reverse Charge / 0% MwSt.)</label>
+        <label for="f_reversecharge">I am not an EU company (Reverse Charge / 0% VAT)</label>
       </div>
 
       <!-- Selected modules summary -->
@@ -813,15 +813,15 @@
       <!-- Price summary -->
       <div class="price-summary" id="priceSummary">
         <div class="price-row"><span>Module (netto)</span><span id="ps_net">0,00 &#8364;</span></div>
-        <div class="price-row"><span>Einmalig Setup</span><span>349,00 &#8364;</span></div>
+        <div class="price-row"><span>One-time Setup</span><span>349,00 &#8364;</span></div>
         <div class="price-row" id="ps_vat_row"><span>MwSt. 19%</span><span id="ps_vat">0,00 &#8364;</span></div>
-        <div class="price-row total"><span>Gesamt / Monat</span><span id="ps_total">0,00 &#8364;</span></div>
+        <div class="price-row total"><span>Total / Month</span><span id="ps_total">0,00 &#8364;</span></div>
       </div>
 
       <!-- Legal checkboxes -->
       <div class="check-group">
         <input type="checkbox" id="chk_agb">
-        <label for="chk_agb">Ich akzeptiere die <a href="/agb" target="_blank">AGB</a> von LeoLan Digital.</label>
+        <label for="chk_agb">I accept the <a href="/agb" target="_blank">Terms &amp; Conditions</a> of LeoLan Digital.</label>
       </div>
       <div class="check-group">
         <input type="checkbox" id="chk_datenschutz">
@@ -829,11 +829,11 @@
       </div>
       <div class="check-group">
         <input type="checkbox" id="chk_abo">
-        <label for="chk_abo">Ich stimme zu, dass ein monatliches Abonnement gestartet wird und kenne das Widerrufsrecht.</label>
+        <label for="chk_abo">I agree that a monthly subscription will be started and I am aware of my right of withdrawal.</label>
       </div>
       <div class="error-msg" id="err_legal" style="display:none; margin-bottom:8px;">Bitte alle Checkboxen best&#228;tigen.</div>
 
-      <button class="btn-primary orange" id="btnKaufen" onclick="submitCheckout()">Jetzt kaufen</button>
+      <button class="btn-primary orange" id="btnKaufen" onclick="submitCheckout()">Buy Now</button>
       <button class="btn-back" onclick="goBackToAccount()">&#8592; Zur&#252;ck</button>
     </div>
 
@@ -1131,7 +1131,7 @@ function submitCheckout() {
   }
 
   var btn = document.getElementById('btnKaufen');
-  if (btn) btn.innerHTML = '<span class="spinner"></span> Wird verarbeitet...';
+  if (btn) btn.innerHTML = '<span class="spinner"></span> Processing...';
   if (btn) btn.disabled = true;
 
   var list = getSelectedList();
@@ -1183,20 +1183,20 @@ function submitCheckout() {
           window.location.href = data.url;
         } else {
           alert('Fehler beim Checkout: ' + (data.error || 'Bitte versuchen Sie es erneut.'));
-          document.getElementById('btnSubmit').disabled = false;
-          document.getElementById('btnSubmit').textContent = 'Jetzt kaufen';
+          document.getElementById('btnKaufen').disabled = false;
+          document.getElementById('btnKaufen').textContent = 'Buy Now';
         }
       } catch(e) {
         alert('Verbindungsfehler. Bitte versuchen Sie es erneut.');
-        document.getElementById('btnSubmit').disabled = false;
-        document.getElementById('btnSubmit').textContent = 'Jetzt kaufen';
+        document.getElementById('btnKaufen').disabled = false;
+        document.getElementById('btnKaufen').textContent = 'Buy Now';
       }
     }
   };
   xhr.onerror = function() {
     alert('Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung.');
-    document.getElementById('btnSubmit').disabled = false;
-    document.getElementById('btnSubmit').textContent = 'Jetzt kaufen';
+    document.getElementById('btnKaufen').disabled = false;
+    document.getElementById('btnKaufen').textContent = 'Buy Now';
   };
   xhr.send(JSON.stringify(payload));
 }

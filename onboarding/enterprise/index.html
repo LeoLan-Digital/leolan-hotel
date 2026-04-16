@@ -770,15 +770,15 @@
         <label>Country *</label>
         <select id="f_country" onchange="updateVat()">
           <optgroup label="Europa">
-            <option value="DE">Deutschland</option>
+            <option value="DE">Germany 🇩🇪</option>
             <option value="AT">&#214;sterreich</option>
             <option value="CH">Schweiz (kein EU-MwSt.)</option>
-            <option value="FR">Frankreich</option>
-            <option value="IT">Italien</option>
-            <option value="ES">Spanien</option>
-            <option value="NL">Niederlande</option>
+            <option value="FR">France 🇫🇷</option>
+            <option value="IT">Italy 🇮🇹</option>
+            <option value="ES">Spain 🇪🇸</option>
+            <option value="NL">Netherlands 🇳🇱</option>
             <option value="BE">Belgien</option>
-            <option value="PL">Polen</option>
+            <option value="PL">Poland 🇵🇱</option>
             <option value="CZ">Tschechien</option>
             <option value="HU">Ungarn</option>
             <option value="RO">Rum&#228;nien</option>
@@ -835,7 +835,7 @@
       <div class="price-summary" id="priceSummary">
         <div class="price-row"><span>Modules (net)</span><span id="ps_net">0,00 &#8364;</span></div>
         <div class="price-row"><span>One-time Setup</span><span>349,00 &#8364;</span></div>
-        <div class="price-row" id="ps_vat_row"><span>MwSt. 19%</span><span id="ps_vat">0,00 &#8364;</span></div>
+        <div class="price-row" id="ps_vat_row"><span>VAT 19%</span><span id="ps_vat">0,00 &#8364;</span></div>
         <div class="price-row total"><span>Total / Month</span><span id="ps_total">0,00 &#8364;</span></div>
       </div>
 
@@ -855,7 +855,7 @@
       <div class="error-msg" id="err_legal" style="display:none; margin-bottom:8px;">Bitte alle Checkboxen best&#228;tigen.</div>
 
       <button class="btn-primary orange" id="btnKaufen" onclick="submitCheckout()">Buy Now</button>
-      <button class="btn-back" onclick="goBackToAccount()">&#8592; Zur&#252;ck</button>
+      <button class="btn-back" onclick="goBackToAccount()">&#8592; Back</button>
     </div>
 
     <!-- STEP 4: Success -->
@@ -1102,20 +1102,20 @@ function updateVat() {
   var euCountry = isEU();
 
   var vatRate = 0;
-  var vatLabel = 'MwSt. 0%';
+  var vatLabel = 'VAT 0%';
 
   if (euCountry && !reverseCharge) {
     if (val('f_country') === 'DE') {
       // DE: always 19%
       vatRate = 0.19;
-      vatLabel = 'MwSt. 19%';
+      vatLabel = 'VAT 19%';
     } else if (vatId) {
       // EU B2B with VAT ID = reverse charge
       vatRate = 0;
-      vatLabel = 'MwSt. 0% (Reverse Charge)';
+      vatLabel = 'VAT 0% (Reverse Charge)';
     } else {
       vatRate = 0.19;
-      vatLabel = 'MwSt. 19%';
+      vatLabel = 'VAT 19%';
     }
   }
 
@@ -1327,7 +1327,7 @@ function validateVatId(input) {
     return;
   }
   // Must start with 2 letters + at least 5 digits
-  var valid = /^[A-Z]{2}[0-9A-Z]{5,15}$/.test(val);
+  var valid = /^[A-Z]{2}[0-9][0-9A-Z]{4,14}$/.test(val);
   if (valid) {
     hint.textContent = '✓ Valid VAT ID format';
     hint.style.color = '#4cd97b';

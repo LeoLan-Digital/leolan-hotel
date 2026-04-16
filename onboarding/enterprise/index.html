@@ -696,18 +696,18 @@
       <div class="form-group">
         <label>Hotel Name *</label>
         <input type="text" id="f_company" placeholder="Grand Hotel Beispiel">
-        <div class="error-msg" id="err_company">Pflichtfeld</div>
+        <div class="error-msg" id="err_company">Required field</div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>First Name *</label>
           <input type="text" id="f_firstname" placeholder="Max">
-          <div class="error-msg" id="err_firstname">Pflichtfeld</div>
+          <div class="error-msg" id="err_firstname">Required field</div>
         </div>
         <div class="form-group">
           <label>Last Name *</label>
           <input type="text" id="f_lastname" placeholder="Mustermann">
-          <div class="error-msg" id="err_lastname">Pflichtfeld</div>
+          <div class="error-msg" id="err_lastname">Required field</div>
         </div>
       </div>
       <div class="form-group">
@@ -814,7 +814,7 @@
       <div class="form-group">
         <label>Billing Address *</label>
         <input type="text" id="f_address" placeholder="Musterstra&#223;e 1, 80331 M&#252;nchen">
-        <div class="error-msg" id="err_address">Pflichtfeld</div>
+        <div class="error-msg" id="err_address">Required field</div>
       </div>
 
       <div class="form-group">
@@ -1070,7 +1070,7 @@ function buildBillingStep() {
   for (var i = 0; i < list.length; i++) {
     html += '<div class="selected-module-item">';
     html += '<span>' + list[i].icon + ' ' + list[i].name + '</span>';
-    html += '<span>' + list[i].price + '&#8364;/Mo</span>';
+    html += '<span>' + list[i].price + '&#8364;/month</span>';
     html += '</div>';
   }
   document.getElementById('selectedModulesList').innerHTML = html;

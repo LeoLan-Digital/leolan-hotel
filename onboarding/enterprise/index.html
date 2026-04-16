@@ -734,7 +734,27 @@
         </div>
         <div class="form-group">
           <label>WhatsApp Number *</label>
-          <input type="tel" id="f_whatsapp" placeholder="+49 151 12345678">
+          <div style="display:flex;gap:8px;align-items:center">
+            <select id="f_whatsapp_cc" style="background:#17212b;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:12px 8px;font-size:14px;width:120px;flex-shrink:0">
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+43">🇦🇹 +43</option>
+              <option value="+41">🇨🇭 +41</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+31">🇳🇱 +31</option>
+              <option value="+90">🇹🇷 +90</option>
+              <option value="+7">🇷🇺 +7</option>
+              <option value="+971">🇦🇪 +971</option>
+              <option value="+966">🇸🇦 +966</option>
+              <option value="+91">🇮🇳 +91</option>
+              <option value="+55">🇧🇷 +55</option>
+            </select>
+            <input type="tel" id="f_whatsapp_num" placeholder="151 12345678" style="flex:1;background:#17212b;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:12px;font-size:15px" oninput="this.value=this.value.replace(/[^0-9 ]/g,\'\')">
+          </div>
+          <p style="color:#f4a527;font-size:12px;margin-top:6px">📱 Required for your AI WhatsApp Bot</p>
         </div>
       </div>
 
@@ -1160,7 +1180,11 @@ function submitCheckout() {
     email: val('f_email'),
     password: val('f_pass'),
     phone: val('f_phone'),
-    whatsapp: val('f_whatsapp'),
+    whatsapp: (function() {
+      var cc = document.getElementById('f_whatsapp_cc') ? document.getElementById('f_whatsapp_cc').value : '+49';
+      var num = document.getElementById('f_whatsapp_num') ? document.getElementById('f_whatsapp_num').value.trim() : '';
+      return cc + ' ' + num;
+    })(),
     country: val('f_country'),
     address: val('f_address'),
     vatId: val('f_vatid'),

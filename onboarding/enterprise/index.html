@@ -1209,6 +1209,7 @@ function submitCheckout() {
       try {
         var data = JSON.parse(xhr.responseText);
         if (data.url) {
+          localStorage.setItem('leolan_hotel_email', val('f_email'));
           window.location.href = data.url;
         } else {
           alert('Fehler beim Checkout: ' + (data.error || 'Please try again.'));

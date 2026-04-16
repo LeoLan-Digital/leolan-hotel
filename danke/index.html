@@ -58,10 +58,26 @@ h1{font-size:1.8rem;font-weight:800;color:#f0f6fc;margin-bottom:12px}
 
 <script>
 // Show customer code if available
-var code = localStorage.getItem('customerCode') || new URLSearchParams(window.location.search).get('code');
+var params = new URLSearchParams(window.location.search);
+var code = params.get('code') || localStorage.getItem('leolan_hotel_code');
+var email = params.get('email') || localStorage.getItem('leolan_hotel_email');
+
 if(code) {
   document.getElementById('codeDisplay').textContent = code;
   document.getElementById('codeBox').style.display = 'block';
+} else if(email) {
+  // Try to fetch code from backend using email
+  fetch('https://n8n.leolan.net/webhook/hotel-dashboard', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({action:'lookup-by-email', email: email})
+  }).then(function(r){return r.json();}).then(function(d){
+    var c2 = d && d.account && d.account.customerCode;
+    if(c2) {
+      document.getElementById('codeDisplay').textContent = c2;
+      document.getElementById('codeBox').style.display = 'block';
+    }
+  }).catch(function(){});
 }
 </script>
 </body>

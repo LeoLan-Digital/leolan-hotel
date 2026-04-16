@@ -79,6 +79,7 @@ body{font-family:-apple-system,sans-serif;background:#0e1621;color:#e8eaed;min-h
       <div class="row" id="billAddressRow" style="display:none"><span class="row-label">Address</span><span class="row-value" id="billAddress">—</span></div>
       <div class="row" id="billZipRow" style="display:none"><span class="row-label">ZIP / City</span><span class="row-value" id="billZip">—</span></div>
       <div class="row" id="billVatRow" style="display:none"><span class="row-label">VAT ID</span><span class="row-value" id="billVat">—</span></div>
+      <div class="row" id="billTaxRow" style="display:none"><span class="row-label">Tax</span><span class="row-value" id="billTax">—</span></div>
       <button onclick="toggleEdit()" style="margin-top:12px;background:transparent;border:1px solid #2a3a4a;color:#5e81f4;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;width:100%">✏️ Edit Billing Info</button>
     </div>
 
@@ -154,6 +155,10 @@ xhr.onload = function() {
   if (acc.address) { document.getElementById('billAddress').textContent = acc.address; document.getElementById('billAddressRow').style.display = 'flex'; }
   if (acc.zip || acc.city) { document.getElementById('billZip').textContent = (acc.zip || '') + ' ' + (acc.city || ''); document.getElementById('billZipRow').style.display = 'flex'; }
   if (acc.vatId) { document.getElementById('billVat').textContent = acc.vatId; document.getElementById('billVatRow').style.display = 'flex'; }
+  if (acc.reverseCharge) { document.getElementById('billTax').textContent = '0% (Reverse Charge)'; document.getElementById('billTaxRow').style.display = 'flex'; }
+  else { document.getElementById('billTax').textContent = '19% VAT'; document.getElementById('billTaxRow').style.display = 'flex'; }
+  // Pre-fill checkbox
+  if (document.getElementById('e_reversecharge')) document.getElementById('e_reversecharge').checked = !!(acc.reverseCharge);
   document.getElementById('billSince').textContent = (acc.createdAt || '').substring(0, 10) || '—';
   // Pre-fill edit form
   document.getElementById('e_company').value = acc.companyName || '';
@@ -229,6 +234,8 @@ xhr.send(JSON.stringify({customerCode: customerCode}));
         if (payload.address) { document.getElementById('billAddress').textContent = payload.address; document.getElementById('billAddressRow').style.display = 'flex'; }
         if (payload.zip || payload.city) { document.getElementById('billZip').textContent = (payload.zip||'') + ' ' + (payload.city||''); document.getElementById('billZipRow').style.display = 'flex'; }
         if (payload.vatId) { document.getElementById('billVat').textContent = payload.vatId; document.getElementById('billVatRow').style.display = 'flex'; }
+        document.getElementById('billTax').textContent = payload.reverseCharge ? '0% (Reverse Charge)' : '19% VAT';
+        document.getElementById('billTaxRow').style.display = 'flex';
         document.getElementById('editCard').style.display = 'none';
       } else {
         err.textContent = data.error || 'Error saving.';

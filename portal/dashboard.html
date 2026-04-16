@@ -186,6 +186,11 @@ xhr.onload = function() {
       html += '<div style="text-align:right">';
       html += '<div style="font-size:15px;font-weight:700;color:#4cd97b">' + (inv.amount || '—') + '</div>';
       html += '<div style="font-size:11px;color:#4cd97b;margin-top:2px">' + (inv.status === 'paid' ? '✓ Paid' : inv.status || '') + '</div>';
+      if (inv.pdfUrl) {
+        html += '<a href="' + inv.pdfUrl + '" target="_blank" style="font-size:11px;color:#5e81f4;text-decoration:none;margin-top:4px;display:block">⬇ Download PDF</a>';
+      } else {
+        html += '<a href="javascript:void(0)" onclick="downloadInvoice(\'' + (inv.id||'') + '\', \'' + customerCode + '\')" style="font-size:11px;color:#5e81f4;text-decoration:none;margin-top:4px;display:block">⬇ Download PDF</a>';
+      }
       html += '</div>';
       html += '</div>';
       html += '</div>';
@@ -197,6 +202,10 @@ xhr.onerror = function() {
   document.getElementById('loading').textContent = 'Connection error.';
 };
 xhr.send(JSON.stringify({customerCode: customerCode}));
+
+  function downloadInvoice(invoiceId, code) {
+    window.open('https://n8n.leolan.net/webhook/hotel-dashboard?action=download-invoice&invoiceId=' + encodeURIComponent(invoiceId) + '&customerCode=' + encodeURIComponent(code), '_blank');
+  }
 
   function toggleEdit() {
     var card = document.getElementById('editCard');

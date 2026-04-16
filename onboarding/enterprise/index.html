@@ -982,40 +982,40 @@
     var togglePasswordBtn = document.getElementById('togglePasswordBtn');
     var legalCheckboxIds = ['checkAgb', 'checkDatenschutz', 'checkAbo'];
 
-    var formatCurrency = function(value) { return "" + (new Intl.NumberFormat('de-DE', {minimumFractionDigits: 0, maximumFractionDigits: 2) + ").format(Number(value || 0))}€"; };
+    var formatCurrency = function(value) { " + new Intl.NumberFormat('de-DE', {minimumFractionDigits: 0, maximumFractionDigits: 2}).format(Number(value || 0)) + "€";
     var escapeHtml = function(value) { return String(value || ''); }
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
-    var getModuleById = function(id) { return MODULES.filter(function(module) { return module.id === id; })[0]; };
-    var getSelectedModuleObjects = function() { return MODULES.filter(function(module) { return selectedModules.has(module.id); }); };
-    var getMonthlyTotal = function() { return getSelectedModuleObjects().reduce(function(sum, module) { return sum + module.price; }, 0); };
-    var generateCustomerCode = function() { return "K" + (Math.floor(100000 + Math.random() * 900000)) + ""; };
-    var legalChecksAccepted = function() { return legalCheckboxIds.every(function(id) { var el = document.getElementById(id); return !!(el && el.checked); }); };
+    var getModuleById = function(id) { for(var i=0;i<MODULES.length;i++){if(MODULES[i].id===id)return MODULES[i];}return null; };
+    var getSelectedModuleObjects = function() { return MODULES.filter(function(module){return selectedModules.has(module.id);}); };
+    var getMonthlyTotal = function() { return getSelectedModuleObjects().reduce(function(sum,module){return sum+module.price;},0); };
+    var generateCustomerCode = function() { return 'K' + Math.floor(100000 + Math.random() * 900000); };
+    var legalChecksAccepted = function() { for(var i=0;i<legalCheckboxIds.length;i++){var el=document.getElementById(legalCheckboxIds[i]);if(!el||!el.checked)return false;}return true; };
 
     function updateBookingButtonState() {
       submitBookingBtn.disabled = bookingLoading || !legalChecksAccepted();
     }
 
     function renderModules() {
-      modulesGrid.innerHTML = MODULES.mapfunction((module) { return "; }
-        <article class="module-card" data-module-id="" + (module.id) + "">
+      modulesGrid.innerHTML = MODULES.map(function(module) { return  `
+        <article class="module-card" data-module-id="${module.id}">
           <div class="module-top">
             <div class="module-title-wrap">
-              <div class="module-icon">" + (module.icon) + "</div>
+              <div class="module-icon">${module.icon}</div>
               <div>
-                <h3 class="module-name">" + (escapeHtml(module.name)) + "</h3>
-                <p class="module-desc">" + (escapeHtml(module.desc)) + "</p>
+                <h3 class="module-name">${escapeHtml(module.name)}</h3>
+                <p class="module-desc">${escapeHtml(module.desc)}</p>
               </div>
             </div>
-            <div class="module-price">" + (formatCurrency(module.price)) + "/month</div>
+            <div class="module-price">${formatCurrency(module.price)}/month</div>
           </div>
 
           <div class="module-actions">
-            <button class="btn btn-info" type="button" data-action="info" data-module-id="" + (module.id) + "">ℹ️</button>
-            <button class="btn btn-chat" type="button" data-action="chat" data-module-id="" + (module.id) + "">Ask AI 💬</button>
+            <button class="btn btn-info" type="button" data-action="info" data-module-id="${module.id}">ℹ️</button>
+            <button class="btn btn-chat" type="button" data-action="chat" data-module-id="${module.id}">Ask AI 💬</button>
           </div>
 
           <div class="toggle-row">
@@ -1023,17 +1023,17 @@
               <div class="toggle-label">Select</div>
               <div class="toggle-caption">Add module to package</div>
             </div>
-            <label class="switch" aria-label="" + (escapeHtml(module.name)) + " auswählen">
-              <input type="checkbox" data-action="toggle" data-module-id="" + (module.id) + "" " + (selectedModules.has(module.id) ? 'checked' : '') + ">
+            <label class="switch" aria-label="${escapeHtml(module.name)} auswählen">
+              <input type="checkbox" data-action="toggle" data-module-id="${module.id}" ${selectedModules.has(module.id) ? 'checked' : ''}>
               <span class="slider"></span>
             </label>
           </div>
         </article>
-      ").join('');
+      `).join('');
     }
 
     function refreshModuleSelectionState() {
-      document.querySelectorAll('.module-card').forEachfunction((card) {
+      document.querySelectorAll('.module-card').forEach(function(card) {
         var id = card.dataset.moduleId;
         card.classList.toggle('selected', selectedModules.has(id));
       });
@@ -1043,11 +1043,11 @@
 
       if (count > 0) {
         stickyBar.classList.add('show');
-        stickyHeadline.textContent = "" + (count) + " " + (count === 1 ? 'Modul gewählt' : 'Module gewählt') + " · " + (formatCurrency(monthlyTotal)) + "/month + " + (formatCurrency(SETUP_FEE)) + " Setup";
+        stickyHeadline.textContent = `${count} ${count === 1 ? 'Modul gewählt' : 'Module gewählt'} · ${formatCurrency(monthlyTotal)}/month + ${formatCurrency(SETUP_FEE)} Setup`;
         stickySubline.textContent = 'Buchung startet direkt im Stripe Checkout.';
       } else {
         stickyBar.classList.remove('show');
-        stickyHeadline.textContent = "0 Module gewählt · 0€/month + " + (formatCurrency(SETUP_FEE)) + " Setup";
+        stickyHeadline.textContent = `0 Module gewählt · 0€/month + ${formatCurrency(SETUP_FEE)} Setup`;
         stickySubline.textContent = 'Wählen Sie mindestens ein Modul aus, um direkt zu buchen.';
       }
     }
@@ -1061,7 +1061,7 @@
     function closeModal(modal) {
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden', 'true');
-      if function(![infoModal, chatModal, bookingModal].some((item) { return item.classList.contains('show'))) {; }
+      if (![infoModal, chatModal, bookingModal].some(function(item) { return  item.classList.contains('show'))) {
         document.body.style.overflow = '';
       }
     }
@@ -1072,9 +1072,9 @@
       document.getElementById('infoIcon').textContent = module.icon;
       document.getElementById('infoTitle').textContent = module.name;
       document.getElementById('infoSubtitle').textContent = 'Modul-Überblick';
-      document.getElementById('infoPrice').textContent = "" + (formatCurrency(module.price)) + " pro Monat";
+      document.getElementById('infoPrice').textContent = `${formatCurrency(module.price)} pro Monat`;
       document.getElementById('infoDescription').textContent = module.desc;
-      document.getElementById('infoDetails').innerHTML = (module.details || []).mapfunction((detail) { return "<li>" + (escapeHtml(detail)) + "</li>").join(''); };
+      document.getElementById('infoDetails').innerHTML = (module.details || []).map(function(detail) { return  `<li>${escapeHtml(detail)}</li>`).join('');
       openModal(infoModal);
     }
 
@@ -1085,9 +1085,9 @@
 
     function renderChatMessages(moduleId) {
       var history = ensureChatHistory(moduleId);
-      chatMessages.innerHTML = history.mapfunction((entry) { return "; }
-        <div class="bubble " + (entry.role === 'user' ? 'user' : 'assistant') + "">" + (escapeHtml(entry.content)) + "</div>
-      ").join('');
+      chatMessages.innerHTML = history.map(function(entry) { return  `
+        <div class="bubble ${entry.role === 'user' ? 'user' : 'assistant'}">${escapeHtml(entry.content)}</div>
+      `).join('');
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
@@ -1105,20 +1105,20 @@
       if (!module) return;
       activeChatModuleId = moduleId;
       document.getElementById('chatIcon').textContent = module.icon;
-      document.getElementById('chatTitle').textContent = "" + (module.name) + " · KI-Berater";
-      document.getElementById('chatSubtitle').textContent = "" + (formatCurrency(module.price)) + "/month";
+      document.getElementById('chatTitle').textContent = `${module.name} · KI-Berater`;
+      document.getElementById('chatSubtitle').textContent = `${formatCurrency(module.price)}/month`;
 
       var history = ensureChatHistory(moduleId);
       if (history.length === 0) {
         history.push({
           role: 'assistant',
-          content: "Hallo! Ich bin dein persönlicher KI-Berater für " + (module.name) + ". Was möchtest du wissen oder sollen wir direkt ein Demo-Rollenspiel machen?"
+          content: `Hallo! Ich bin dein persönlicher KI-Berater für ${module.name}. Was möchtest du wissen oder sollen wir direkt ein Demo-Rollenspiel machen?`
         });
       }
 
       renderChatMessages(moduleId);
       openModal(chatModal);
-      setTimeoutfunction(() { return chatInput.focus(), 60); };
+      setTimeout(function() { chatInput.focus(); }, 60);
     }
 
     async function sendChatMessage() {
@@ -1148,15 +1148,15 @@
           })
         });
 
-        if (!response.ok) throw new Error("HTTP " + (response.status) + "");
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         var result = await response.json();
-        var reply = String(result.reply || '').trim() || "Kurz gesagt: " + (module.name) + " spart Zeit und erhöht Automatisierung im Alltag.";
+        var reply = String(result.reply || '').trim() || `Kurz gesagt: ${module.name} spart Zeit und erhöht Automatisierung im Alltag.`;
         history.push({ role: 'assistant', content: reply });
       } catch (error) {
         history.push({
           role: 'assistant',
-          content: "Gerade gibt es ein Verbindungsproblem. Kurz gesagt: " + (module.name) + " ist eine starke Ergänzung für Ihr Paket. Versuchen Sie es gleich noch einmal."
+          content: `Gerade gibt es ein Verbindungsproblem. Kurz gesagt: ${module.name} ist eine starke Ergänzung für Ihr Paket. Versuchen Sie es gleich noch einmal.`
         });
       } finally {
         status.remove();
@@ -1174,7 +1174,7 @@
       refreshBookingSummary();
       openModal(bookingModal);
       refreshBookingSummary();
-      setTimeoutfunction(() { return customerName.focus(), 60); };
+      setTimeout(function() { customerName.focus(); }, 60);
     }
 
     function updateBookingSummary()
@@ -1186,14 +1186,14 @@ function refreshBookingSummary() {
       var vat = reverseCharge ? 0 : Math.round(subtotal * VAT_RATE * 100) / 100;
       var grossTotal = subtotal + vat;
 
-      bookingModules.innerHTML = modules.mapfunction((module) { return "; }
+      bookingModules.innerHTML = modules.map(function(module) { return  `
         <div class="summary-module">
-          <span>" + (escapeHtml(module.icon)) + " " + (escapeHtml(module.name)) + "</span>
-          <span>" + (formatCurrency(module.price)) + "</span>
+          <span>${escapeHtml(module.icon)} ${escapeHtml(module.name)}</span>
+          <span>${formatCurrency(module.price)}</span>
         </div>
-      ").join('');
+      `).join('');
 
-      bookingMonthly.textContent = "" + (formatCurrency(monthlyTotal)) + "/month";
+      bookingMonthly.textContent = `${formatCurrency(monthlyTotal)}/month`;
       bookingTax.textContent = reverseCharge ? '0% (Non-EU / Reverse Charge)' : '19% · ' + formatCurrency(vat);
       bookingTotal.textContent = formatCurrency(grossTotal);
     }
@@ -1227,7 +1227,7 @@ function refreshBookingSummary() {
       }
 
       var modules = getSelectedModuleObjects();
-      var selectedIds = modules.mapfunction((module) { return module.id); };
+      var selectedIds = modules.map(function(module) { return  module.id);
       var monthlyTotal = getMonthlyTotal();
       var reverseCharge = !!(document.getElementById('nonEUEnt') && document.getElementById('nonEUEnt').checked) || !!(document.getElementById('companyVatId') && document.getElementById('companyVatId').value.trim().length > 3);
       var customerCode = generateCustomerCode();
@@ -1248,8 +1248,8 @@ function refreshBookingSummary() {
         password: customerPassword.value,
         companyName: billingName,
         name: customerName.value.trim(),
-        modules: modules.map(function(m) { return ({id: m.id; }, name: m.name, price: m.price})),
-        moduleNames: modules.map(function(m) { return m.name; }).join(', '),
+        modules: modules.map(function(m){return {id:m.id,name:m.name,price:m.price};}),
+        moduleNames: modules.map(function(m){return m.name;}).join(', '),
         grossTotal,
         monthlyNetTotal: monthlyTotal,
         setupFeeAmount: SETUP_FEE,
@@ -1279,7 +1279,7 @@ function refreshBookingSummary() {
           body: JSON.stringify(payload)
         });
 
-        if (!response.ok) throw new Error("HTTP " + (response.status) + "");
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         var contentType = response.headers.get('content-type') || '';
         var result = contentType.includes('application/json') ? await response.json() : { url: (await response.text()).trim() };
@@ -1301,7 +1301,7 @@ function refreshBookingSummary() {
       }
     }
 
-    modulesGrid.addEventListenerfunction('click', (event) {
+    modulesGrid.addEventListener('click', function(event) {
       var button = event.target.closest('[data-action]');
       if (!button) return;
       var action = button.dataset.action;
@@ -1311,7 +1311,7 @@ function refreshBookingSummary() {
       if (action === 'chat') openChat(moduleId);
     });
 
-    modulesGrid.addEventListenerfunction('change', (event) {
+    modulesGrid.addEventListener('change', function(event) {
       var checkbox = event.target.closest('input[data-action="toggle"]');
       if (!checkbox) return;
       var moduleId = checkbox.dataset.moduleId;
@@ -1324,15 +1324,15 @@ function refreshBookingSummary() {
     sendChatBtn.addEventListener('click', sendChatMessage);
     submitBookingBtn.addEventListener('click', submitBooking);
 
-    togglePasswordBtn.addEventListenerfunction('click', () {
+    togglePasswordBtn.addEventListener('click', function() {
       var visible = customerPassword.type === 'text';
       customerPassword.type = visible ? 'password' : 'text';
       togglePasswordBtn.textContent = visible ? '👁️' : '🙈';
     });
 
-    legalCheckboxIds.forEachfunction((id) {
+    legalCheckboxIds.forEach(function(id) {
       var checkbox = document.getElementById(id);
-      checkbox&&checkbox.addEventListenerfunction('change', () {
+      checkbox&&checkbox.addEventListener('change', function() {
         if (legalChecksAccepted() && bookingError.textContent === 'Please accept all terms') {
           bookingError.textContent = '';
         }
@@ -1340,31 +1340,31 @@ function refreshBookingSummary() {
       });
     });
 
-    chatInput.addEventListenerfunction('input', () {
+    chatInput.addEventListener('input', function() {
       chatInput.style.height = 'auto';
-      chatInput.style.height = "" + (Math.min(chatInput.scrollHeight, 140)) + "px";
+      chatInput.style.height = `${Math.min(chatInput.scrollHeight, 140)}px`;
     });
 
-    chatInput.addEventListenerfunction('keydown', (event) {
+    chatInput.addEventListener('keydown', function(event) {
       if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
         sendChatMessage();
       }
     });
 
-    document.querySelectorAll('[data-close]').forEachfunction((button) {
-      button.addEventListenerfunction('click', () { return closeModal(document.getElementById(button.dataset.close))); };
+    document.querySelectorAll('[data-close]').forEach(function(button) {
+      button.addEventListener('click', function() { return closeModal(document.getElementById(button.dataset.close; })));
     });
 
-    [infoModal, chatModal, bookingModal].forEachfunction((overlay) {
-      overlay.addEventListenerfunction('click', (event) {
+    [infoModal, chatModal, bookingModal].forEach(function(overlay) {
+      overlay.addEventListener('click', function(event) {
         if (event.target === overlay) closeModal(overlay);
       });
     });
 
-    document.addEventListenerfunction('keydown', (event) {
+    document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape') {
-        [infoModal, chatModal, bookingModal].forEachfunction((modal) {
+        [infoModal, chatModal, bookingModal].forEach(function(modal) {
           if (modal.classList.contains('show')) closeModal(modal);
         });
       }
@@ -1388,6 +1388,6 @@ function autoDetectEUEnt(){
   if(chk&&v)chk.checked=!eu.includes(v);
   updateBookingSummary();
 }
-
+</script>
 </body>
 </html>

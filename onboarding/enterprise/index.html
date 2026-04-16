@@ -1170,11 +1170,26 @@ function submitCheckout() {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
-      showStep('step4');
+      try {
+        var data = JSON.parse(xhr.responseText);
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert('Fehler beim Checkout: ' + (data.error || 'Bitte versuchen Sie es erneut.'));
+          document.getElementById('btnSubmit').disabled = false;
+          document.getElementById('btnSubmit').textContent = 'Jetzt kaufen';
+        }
+      } catch(e) {
+        alert('Verbindungsfehler. Bitte versuchen Sie es erneut.');
+        document.getElementById('btnSubmit').disabled = false;
+        document.getElementById('btnSubmit').textContent = 'Jetzt kaufen';
+      }
     }
   };
   xhr.onerror = function() {
-    showStep('step4');
+    alert('Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung.');
+    document.getElementById('btnSubmit').disabled = false;
+    document.getElementById('btnSubmit').textContent = 'Jetzt kaufen';
   };
   xhr.send(JSON.stringify(payload));
 }

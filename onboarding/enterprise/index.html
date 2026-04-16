@@ -812,7 +812,7 @@
 
       <!-- Price summary -->
       <div class="price-summary" id="priceSummary">
-        <div class="price-row"><span>Module (netto)</span><span id="ps_net">0,00 &#8364;</span></div>
+        <div class="price-row"><span>Modules (net)</span><span id="ps_net">0,00 &#8364;</span></div>
         <div class="price-row"><span>One-time Setup</span><span>349,00 &#8364;</span></div>
         <div class="price-row" id="ps_vat_row"><span>MwSt. 19%</span><span id="ps_vat">0,00 &#8364;</span></div>
         <div class="price-row total"><span>Total / Month</span><span id="ps_total">0,00 &#8364;</span></div>
@@ -973,7 +973,7 @@ function updateBottomBar() {
   var priceEl = document.getElementById('bottomPrice');
   var btn = document.getElementById('btnWeiter');
 
-  countEl.innerHTML = count + ' Modul' + (count === 1 ? '' : 'e') + ' ausgew&#228;hlt';
+  countEl.innerHTML = count + ' module' + (count === 1 ? '' : 's') + ' selected';
   priceEl.innerHTML = total + '&#8364; <span>/month + 349&#8364; setup</span>';
   btn.disabled = count === 0;
 }

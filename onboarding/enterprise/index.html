@@ -1105,15 +1105,12 @@ function updateVat() {
   var vatLabel = 'VAT 0%';
 
   if (euCountry && !reverseCharge) {
-    if (val('f_country') === 'DE') {
-      // DE: always 19%
-      vatRate = 0.19;
-      vatLabel = 'VAT 19%';
-    } else if (vatId) {
-      // EU B2B with VAT ID = reverse charge
+    if (vatId && vatId.length >= 8) {
+      // Any EU country with VAT ID = B2B Reverse Charge = 0%
       vatRate = 0;
-      vatLabel = 'VAT 0% (Reverse Charge)';
+      vatLabel = 'VAT 0% (Reverse Charge B2B)';
     } else {
+      // No VAT ID = consumer price = 19%
       vatRate = 0.19;
       vatLabel = 'VAT 19%';
     }
@@ -1338,6 +1335,22 @@ function validateVatId(input) {
     hint.style.color = '#f4a527';
     input.style.borderColor = '#f4a527';
   }
+}
+
+function checkEmailExists(email) {
+  if (!email || email.indexOf('@') < 0) return;
+  fetch('https://n8n.leolan.net/webhook/hotel-login', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({email: email, password: '__check_only__'})
+  }).then(function(r){return r.json();}).then(function(d){
+    var hint = document.getElementById('email_hint');
+    if (d && d.success) {
+      if (hint) { hint.textContent = '⚠️ An account with this email already exists. Log in instead.'; hint.style.color = '#f4a527'; }
+    } else {
+      if (hint) { hint.textContent = '✓ Email available'; hint.style.color = '#4cd97b'; }
+    }
+  }).catch(function(){});
 }
 </script>
 </body>

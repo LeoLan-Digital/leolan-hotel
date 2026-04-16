@@ -1,387 +1,1268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enterprise Hotel Package — LeoLan Digital</title>
+<title>LeoLan Digital · Enterprise Hotel Onboarding</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0e1621;color:#e8eaed;min-height:100vh}
-.header{padding:20px 24px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #1a2a3a}
-.logo{color:#5e81f4;font-weight:800;font-size:20px}
-.badge{background:#5e81f420;color:#5e81f4;border:1px solid #5e81f4;border-radius:6px;padding:3px 10px;font-size:12px;font-weight:700}
-.hero{padding:32px 24px 20px;text-align:center}
-.hero h1{font-size:28px;font-weight:800;margin-bottom:8px}
-.hero p{color:#8a9bb8;font-size:15px;max-width:500px;margin:0 auto}
-.subline{color:#5e81f4;font-size:13px;margin-top:8px;font-weight:600}
-.modules{padding:0 16px 100px;max-width:800px;margin:0 auto}
-.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-@media(max-width:500px){.modules-grid{grid-template-columns:1fr}}
-.module-card{background:#17212b;border:2px solid #2a3a4a;border-radius:14px;padding:16px;cursor:pointer;transition:border-color 0.2s}
-.module-card.selected{border-color:#5e81f4;background:#5e81f410}
-.module-card-top{display:flex;justify-content:space-between;align-items:flex-start}
-.module-icon{font-size:28px;margin-bottom:8px}
-.module-check{width:22px;height:22px;border-radius:50%;border:2px solid #2a3a4a;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.module-card.selected .module-check{background:#5e81f4;border-color:#5e81f4}
-.module-name{font-size:15px;font-weight:700;margin-bottom:4px}
-.module-desc{color:#8a9bb8;font-size:13px;line-height:1.5;margin-bottom:10px}
-.module-price{color:#5e81f4;font-weight:700;font-size:14px}
-.sticky{position:fixed;bottom:0;left:0;right:0;background:rgba(14,22,33,0.97);border-top:1px solid #1a2a3a;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.sticky-info h3{font-size:14px;font-weight:700;margin-bottom:2px}
-.sticky-info p{color:#8a9bb8;font-size:12px}
-.btn-book{background:#5e81f4;color:#fff;border:none;border-radius:12px;padding:14px 24px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap}
-.btn-book:disabled{opacity:0.4;cursor:not-allowed}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Modal */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;align-items:flex-end;justify-content:center}
-.modal-overlay.show{display:flex}
-.modal{background:#17212b;border-radius:20px 20px 0 0;padding:24px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
-.modal-title{font-size:18px;font-weight:800;margin-bottom:4px}
-.modal-sub{color:#8a9bb8;font-size:14px;margin-bottom:20px}
-.form-group{margin-bottom:16px}
-.form-label{color:#8a9bb8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block}
-.form-input{width:100%;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:12px;font-size:15px;outline:none}
-.form-input:focus{border-color:#5e81f4}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
-.checkbox-row input{width:18px;height:18px;margin-top:2px;flex-shrink:0}
-.checkbox-row label{color:#8a9bb8;font-size:13px;line-height:1.5}
-.checkbox-row a{color:#5e81f4}
-.summary-box{background:#0e1621;border-radius:10px;padding:14px;margin-bottom:16px}
-.summary-row{display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#8a9bb8}
-.summary-row.total{color:#e8eaed;font-weight:700;font-size:16px;border-top:1px solid #2a3a4a;margin-top:8px;padding-top:8px}
-.btn-full{width:100%;background:#5e81f4;color:#fff;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;margin-top:8px}
-.btn-cancel{width:100%;background:#2a3a4a;color:#e8eaed;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;margin-top:8px}
-.error-msg{background:#ef444420;border:1px solid #ef4444;border-radius:8px;padding:10px;color:#ef4444;font-size:13px;margin-bottom:12px;display:none}
-.spinner{display:inline-block;width:18px;height:18px;border:2px solid #ffffff40;border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:6px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.country-select{width:100%;background:#0e1621;color:#e8eaed;border:1px solid #2a3a4a;border-radius:10px;padding:12px;font-size:15px}
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0e1621;
+    color: #e8eaed;
+    min-height: 100vh;
+    padding-bottom: 120px;
+  }
+
+  /* HEADER */
+  .page-header {
+    text-align: center;
+    padding: 48px 20px 32px;
+  }
+  .enterprise-badge {
+    display: inline-block;
+    background: #1e2d3d;
+    border: 1px solid #5e81f4;
+    color: #5e81f4;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #e8eaed;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .page-subtitle {
+    font-size: 16px;
+    color: #8a9bb8;
+    margin-bottom: 28px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .feature-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .feature-badge {
+    background: #17212b;
+    border: 1px solid #2a3a4a;
+    color: #8a9bb8;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .feature-badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4cd97b;
+    display: inline-block;
+  }
+
+  /* MODULE GRID */
+  .modules-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .modules-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .modules-grid { grid-template-columns: 1fr; }
+    .page-title { font-size: 24px; }
+  }
+
+  /* MODULE CARD */
+  .module-card {
+    background: #17212b;
+    border: 1px solid #2a3a4a;
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s, transform 0.15s;
+    position: relative;
+  }
+  .module-card.selected {
+    border-color: #5e81f4;
+    box-shadow: 0 0 0 1px #5e81f4;
+  }
+  .module-card:hover {
+    transform: translateY(-2px);
+  }
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .card-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+  .card-price {
+    font-size: 13px;
+    color: #4cd97b;
+    font-weight: 600;
+    background: rgba(76,217,123,0.1);
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+  .card-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e8eaed;
+    margin-bottom: 6px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: #8a9bb8;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .btn-ki {
+    background: rgba(244,165,39,0.15);
+    border: 1px solid rgba(244,165,39,0.4);
+    color: #f4a527;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .btn-ki:hover {
+    background: rgba(244,165,39,0.25);
+  }
+
+  /* TOGGLE */
+  .toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .toggle-label {
+    font-size: 12px;
+    color: #8a9bb8;
+    user-select: none;
+  }
+  .toggle-switch {
+    position: relative;
+    width: 40px;
+    height: 22px;
+    background: #2a3a4a;
+    border-radius: 11px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .toggle-switch.on {
+    background: #5e81f4;
+  }
+  .toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+  .toggle-switch.on::after {
+    transform: translateX(18px);
+  }
+
+  /* STICKY BOTTOM BAR */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #17212b;
+    border-top: 1px solid #2a3a4a;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    z-index: 100;
+    transition: opacity 0.3s;
+  }
+  .bottom-bar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .bottom-bar-count {
+    font-size: 13px;
+    color: #8a9bb8;
+  }
+  .bottom-bar-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e8eaed;
+  }
+  .bottom-bar-price span {
+    font-size: 13px;
+    color: #8a9bb8;
+    font-weight: 400;
+  }
+  .btn-weiter {
+    background: #5e81f4;
+    color: #fff;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, opacity 0.2s;
+    min-width: 140px;
+  }
+  .btn-weiter:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn-weiter:not(:disabled):hover {
+    background: #4a6de0;
+  }
+
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  .modal-overlay.open {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .modal-box {
+    background: #17212b;
+    border: 1px solid #2a3a4a;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 520px;
+    padding: 32px;
+    position: relative;
+    margin: auto;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #8a9bb8;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: #e8eaed; }
+
+  .modal-step { display: none; }
+  .modal-step.active { display: block; }
+
+  .modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e8eaed;
+    margin-bottom: 6px;
+  }
+  .modal-subtitle {
+    font-size: 13px;
+    color: #8a9bb8;
+    margin-bottom: 24px;
+  }
+  .step-indicator {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .step-dot {
+    height: 4px;
+    flex: 1;
+    border-radius: 2px;
+    background: #2a3a4a;
+  }
+  .step-dot.done { background: #5e81f4; }
+
+  /* FORM */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 480px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+  .form-group {
+    margin-bottom: 14px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    color: #8a9bb8;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    background: #0e1621;
+    border: 1px solid #2a3a4a;
+    border-radius: 8px;
+    color: #e8eaed;
+    font-size: 14px;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #5e81f4;
+  }
+  .form-group input::placeholder {
+    color: #3a4a5a;
+  }
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a9bb8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+  }
+  .form-group select option {
+    background: #17212b;
+  }
+
+  /* LEGAL CHECKBOXES */
+  .check-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  .check-group input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    margin-top: 1px;
+    accent-color: #5e81f4;
+    cursor: pointer;
+  }
+  .check-group label {
+    font-size: 13px;
+    color: #8a9bb8;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+  .check-group label a {
+    color: #5e81f4;
+    text-decoration: none;
+  }
+
+  /* PRICE SUMMARY */
+  .price-summary {
+    background: #0e1621;
+    border: 1px solid #2a3a4a;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #8a9bb8;
+    margin-bottom: 8px;
+  }
+  .price-row.total {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e8eaed;
+    border-top: 1px solid #2a3a4a;
+    padding-top: 10px;
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+  .price-row.total span:last-child {
+    color: #4cd97b;
+  }
+
+  /* MODAL BUTTONS */
+  .btn-primary {
+    display: block;
+    width: 100%;
+    background: #5e81f4;
+    color: #fff;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 20px;
+  }
+  .btn-primary:hover { background: #4a6de0; }
+  .btn-primary.orange {
+    background: #f4a527;
+  }
+  .btn-primary.orange:hover { background: #d68f1a; }
+
+  .btn-back {
+    display: block;
+    width: 100%;
+    background: none;
+    border: 1px solid #2a3a4a;
+    color: #8a9bb8;
+    font-size: 14px;
+    padding: 11px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-back:hover {
+    border-color: #5e81f4;
+    color: #e8eaed;
+  }
+
+  .error-msg {
+    font-size: 12px;
+    color: #ff6b6b;
+    margin-top: 4px;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+
+  /* CHAT MODAL */
+  .chat-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 300;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+  }
+  .chat-modal-overlay.open {
+    display: flex;
+  }
+  .chat-box {
+    background: #17212b;
+    border: 1px solid #2a3a4a;
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    max-width: 520px;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .chat-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #2a3a4a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .chat-avatar {
+    width: 36px;
+    height: 36px;
+    background: rgba(244,165,39,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .chat-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e8eaed;
+  }
+  .chat-name-sub {
+    font-size: 11px;
+    color: #4cd97b;
+  }
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .chat-message {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .chat-message.bot {
+    background: #0e1621;
+    color: #e8eaed;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-message.user {
+    background: #5e81f4;
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-message.typing {
+    background: #0e1621;
+    color: #8a9bb8;
+    align-self: flex-start;
+    font-style: italic;
+  }
+  .chat-input-row {
+    padding: 12px 16px;
+    border-top: 1px solid #2a3a4a;
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .chat-input {
+    flex: 1;
+    background: #0e1621;
+    border: 1px solid #2a3a4a;
+    border-radius: 8px;
+    color: #e8eaed;
+    font-size: 14px;
+    padding: 9px 12px;
+    outline: none;
+  }
+  .chat-input:focus { border-color: #f4a527; }
+  .chat-send {
+    background: #f4a527;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .chat-send:hover { background: #d68f1a; }
+
+  /* SUCCESS */
+  .success-screen {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .success-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+  }
+  .success-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #4cd97b;
+    margin-bottom: 10px;
+  }
+  .success-text {
+    font-size: 14px;
+    color: #8a9bb8;
+    line-height: 1.6;
+  }
+
+  /* MODULE SUMMARY LIST */
+  .selected-modules-list {
+    margin-bottom: 16px;
+  }
+  .selected-module-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #e8eaed;
+    padding: 4px 0;
+    border-bottom: 1px solid #1e2d3d;
+  }
+  .selected-module-item:last-child { border-bottom: none; }
+  .selected-module-item span:last-child { color: #8a9bb8; }
+
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <span class="logo">🏨 LeoLan Digital</span>
-  <span class="badge">ENTERPRISE HOTEL</span>
-</div>
-
-<div class="hero">
-  <h1>Configure Your Hotel Package</h1>
-  <p>Select the modules your hotel needs. Every module works independently and can be added or removed at any time.</p>
-  <div class="subline">8 modules freely combinable · From 39€/month per module</div>
-</div>
-
-<div class="modules">
-  <div class="modules-grid" id="modulesGrid"></div>
-</div>
-
-<div class="sticky" id="stickyBar">
-  <div class="sticky-info">
-    <h3 id="stickyHeadline">Select modules</h3>
-    <p id="stickySubline">Your individual hotel package</p>
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="enterprise-badge">LEOLAN DIGITAL · ENTERPRISE</div>
+  <h1 class="page-title">Configure Your Hotel AI System</h1>
+  <p class="page-subtitle">Wählen Sie Module, informieren Sie sich per KI-Chat, buchen Sie direkt.</p>
+  <div class="feature-badges">
+    <div class="feature-badge"><span class="dot"></span> 8 Module frei kombinierbar</div>
+    <div class="feature-badge"><span class="dot"></span> 349&#8364; einmaliges Setup</div>
+    <div class="feature-badge"><span class="dot"></span> Direkter Stripe Checkout</div>
   </div>
-  <button class="btn-book" id="bookBtn" disabled onclick="openBooking()">Configure →</button>
 </div>
 
-<!-- Booking Modal -->
+<!-- MODULES GRID -->
+<div class="modules-section">
+  <div class="modules-grid" id="modulesGrid">
+    <!-- Cards rendered by JS -->
+  </div>
+</div>
+
+<!-- STICKY BOTTOM BAR -->
+<div class="bottom-bar" id="bottomBar">
+  <div class="bottom-bar-info">
+    <div class="bottom-bar-count" id="bottomCount">0 Module ausgewählt</div>
+    <div class="bottom-bar-price" id="bottomPrice">0&#8364; <span>/Monat + 349&#8364; Setup</span></div>
+  </div>
+  <button class="btn-weiter" id="btnWeiter" disabled onclick="openAccountModal()">Weiter &#8594;</button>
+</div>
+
+<!-- BOOKING MODAL (Step 2 + 3) -->
 <div class="modal-overlay" id="bookingModal">
-  <div class="modal">
-    <div class="modal-title">Complete Your Order</div>
-    <div class="modal-sub">Enterprise Hotel Package</div>
-    
-    <div class="summary-box" id="bookingSummary"></div>
-    
-    <div class="error-msg" id="errorMsg"></div>
-    
-    <div class="form-group">
-      <label class="form-label">Hotel Name *</label>
-      <input class="form-input" id="hotelName" type="text" placeholder="Grand Hotel Munich">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBookingModal()">&#10005;</button>
+
+    <!-- Step indicator -->
+    <div class="step-indicator">
+      <div class="step-dot done" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
     </div>
-    <div class="form-row">
+
+    <!-- STEP 2: Account -->
+    <div class="modal-step active" id="step2">
+      <div class="modal-title">Hotel-Account erstellen</div>
+      <div class="modal-subtitle">Schritt 1 von 2 &mdash; Ihre Zugangsdaten</div>
+
       <div class="form-group">
-        <label class="form-label">First Name *</label>
-        <input class="form-input" id="firstName" type="text" placeholder="Max">
+        <label>Hotel Name *</label>
+        <input type="text" id="f_company" placeholder="Grand Hotel Beispiel">
+        <div class="error-msg" id="err_company">Pflichtfeld</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Vorname *</label>
+          <input type="text" id="f_firstname" placeholder="Max">
+          <div class="error-msg" id="err_firstname">Pflichtfeld</div>
+        </div>
+        <div class="form-group">
+          <label>Nachname *</label>
+          <input type="text" id="f_lastname" placeholder="Mustermann">
+          <div class="error-msg" id="err_lastname">Pflichtfeld</div>
+        </div>
       </div>
       <div class="form-group">
-        <label class="form-label">Last Name *</label>
-        <input class="form-input" id="lastName" type="text" placeholder="Mustermann">
+        <label>E-Mail *</label>
+        <input type="email" id="f_email" placeholder="max@hotel.de">
+        <div class="error-msg" id="err_email">Bitte g&#252;ltige E-Mail eingeben</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Passwort * (min. 8 Zeichen)</label>
+          <input type="password" id="f_pass" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+          <div class="error-msg" id="err_pass">Mindestens 8 Zeichen</div>
+        </div>
+        <div class="form-group">
+          <label>Passwort bestätigen *</label>
+          <input type="password" id="f_pass2" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+          <div class="error-msg" id="err_pass2">Passw&#246;rter stimmen nicht &#252;berein</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Telefon</label>
+          <input type="tel" id="f_phone" placeholder="+49 89 123456">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp Nummer</label>
+          <input type="tel" id="f_whatsapp" placeholder="+49 151 12345678">
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="goToBilling()">Weiter zur Zahlung &#8594;</button>
+    </div>
+
+    <!-- STEP 3: Billing -->
+    <div class="modal-step" id="step3">
+      <div class="modal-title">Rechnungsdaten &amp; Zahlung</div>
+      <div class="modal-subtitle">Schritt 2 von 2 &mdash; Abonnement starten</div>
+
+      <div class="form-group">
+        <label>Land *</label>
+        <select id="f_country" onchange="updateVat()">
+          <optgroup label="Europa">
+            <option value="DE">Deutschland</option>
+            <option value="AT">&#214;sterreich</option>
+            <option value="CH">Schweiz (kein EU-MwSt.)</option>
+            <option value="FR">Frankreich</option>
+            <option value="IT">Italien</option>
+            <option value="ES">Spanien</option>
+            <option value="NL">Niederlande</option>
+            <option value="BE">Belgien</option>
+            <option value="PL">Polen</option>
+            <option value="CZ">Tschechien</option>
+            <option value="HU">Ungarn</option>
+            <option value="RO">Rum&#228;nien</option>
+            <option value="PT">Portugal</option>
+            <option value="SE">Schweden</option>
+            <option value="DK">D&#228;nemark</option>
+            <option value="FI">Finnland</option>
+            <option value="GR">Griechenland</option>
+            <option value="IE">Irland</option>
+            <option value="LU">Luxemburg</option>
+            <option value="SK">Slowakei</option>
+            <option value="SI">Slowenien</option>
+            <option value="HR">Kroatien</option>
+            <option value="BG">Bulgarien</option>
+            <option value="EE">Estland</option>
+            <option value="LV">Lettland</option>
+            <option value="LT">Litauen</option>
+            <option value="CY">Zypern</option>
+            <option value="MT">Malta</option>
+          </optgroup>
+          <optgroup label="Weltweit">
+            <option value="GB">Vereinigtes K&#246;nigreich</option>
+            <option value="US">USA</option>
+            <option value="CA">Kanada</option>
+            <option value="AU">Australien</option>
+            <option value="JP">Japan</option>
+            <option value="AE">VAE</option>
+            <option value="OTHER">Sonstiges</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Rechnungsadresse *</label>
+        <input type="text" id="f_address" placeholder="Musterstra&#223;e 1, 80331 M&#252;nchen">
+        <div class="error-msg" id="err_address">Pflichtfeld</div>
+      </div>
+
+      <div class="form-group">
+        <label>USt-ID (optional, f&#252;r B2B)</label>
+        <input type="text" id="f_vatid" placeholder="DE123456789" onchange="updateVat()">
+      </div>
+
+      <div class="check-group">
+        <input type="checkbox" id="f_reversecharge" onchange="updateVat()">
+        <label for="f_reversecharge">Ich bin kein EU-Unternehmen (Reverse Charge / 0% MwSt.)</label>
+      </div>
+
+      <!-- Selected modules summary -->
+      <div class="selected-modules-list" id="selectedModulesList"></div>
+
+      <!-- Price summary -->
+      <div class="price-summary" id="priceSummary">
+        <div class="price-row"><span>Module (netto)</span><span id="ps_net">0,00 &#8364;</span></div>
+        <div class="price-row"><span>Einmalig Setup</span><span>349,00 &#8364;</span></div>
+        <div class="price-row" id="ps_vat_row"><span>MwSt. 19%</span><span id="ps_vat">0,00 &#8364;</span></div>
+        <div class="price-row total"><span>Gesamt / Monat</span><span id="ps_total">0,00 &#8364;</span></div>
+      </div>
+
+      <!-- Legal checkboxes -->
+      <div class="check-group">
+        <input type="checkbox" id="chk_agb">
+        <label for="chk_agb">Ich akzeptiere die <a href="/agb" target="_blank">AGB</a> von LeoLan Digital.</label>
+      </div>
+      <div class="check-group">
+        <input type="checkbox" id="chk_datenschutz">
+        <label for="chk_datenschutz">Ich habe die <a href="/datenschutz" target="_blank">Datenschutzerkl&#228;rung</a> gelesen und stimme zu.</label>
+      </div>
+      <div class="check-group">
+        <input type="checkbox" id="chk_abo">
+        <label for="chk_abo">Ich stimme zu, dass ein monatliches Abonnement gestartet wird und kenne das Widerrufsrecht.</label>
+      </div>
+      <div class="error-msg" id="err_legal" style="display:none; margin-bottom:8px;">Bitte alle Checkboxen best&#228;tigen.</div>
+
+      <button class="btn-primary orange" id="btnKaufen" onclick="submitCheckout()">Jetzt kaufen</button>
+      <button class="btn-back" onclick="goBackToAccount()">&#8592; Zur&#252;ck</button>
+    </div>
+
+    <!-- STEP 4: Success -->
+    <div class="modal-step" id="step4">
+      <div class="success-screen">
+        <div class="success-icon">&#127881;</div>
+        <div class="success-title">Buchung erfolgreich!</div>
+        <p class="success-text">Sie werden in K&#252;rze eine Best&#228;tigung per E-Mail erhalten. Unser Team richtet Ihr System innerhalb von 24&ndash;48 Stunden ein.</p>
       </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Email *</label>
-      <input class="form-input" id="email" type="email" placeholder="max@grandhotel.de">
+  </div>
+</div>
+
+<!-- KI CHAT MODAL -->
+<div class="chat-modal-overlay" id="chatModal">
+  <div class="chat-box">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">&#129302;</div>
+        <div>
+          <div class="chat-name">LeoLan KI-Berater</div>
+          <div class="chat-name-sub">&#9679; Online</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeChat()" style="position:static;">&#10005;</button>
     </div>
-    <div class="form-group">
-      <label class="form-label">Phone</label>
-      <input class="form-input" id="phone" type="tel" placeholder="+49 89 12345678">
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Frage stellen..." onkeydown="chatKeydown(event)">
+      <button class="chat-send" onclick="sendChatMessage()">&#10148;</button>
     </div>
-    <div class="form-group">
-      <label class="form-label">Country *</label>
-      <select class="country-select" id="country" onchange="onCountryChange()">
-        <option value="DE">Germany 🇩🇪</option>
-        <option value="AT">Austria 🇦🇹</option>
-        <option value="CH">Switzerland 🇨🇭</option>
-        <option value="GB">United Kingdom 🇬🇧</option>
-        <option value="FR">France 🇫🇷</option>
-        <option value="IT">Italy 🇮🇹</option>
-        <option value="ES">Spain 🇪🇸</option>
-        <option value="NL">Netherlands 🇳🇱</option>
-        <option value="US">United States 🇺🇸</option>
-        <option value="OTHER">Other</option>
-      </select>
-    </div>
-    <div class="form-group" id="vatGroup" style="display:none">
-      <label class="form-label">VAT ID (for B2B)</label>
-      <input class="form-input" id="vatId" type="text" placeholder="DE123456789">
-    </div>
-    
-    <div class="checkbox-row">
-      <input type="checkbox" id="check1">
-      <label for="check1">I accept the <a href="/agb.html" target="_blank">Terms & Conditions</a></label>
-    </div>
-    <div class="checkbox-row">
-      <input type="checkbox" id="check2">
-      <label for="check2">I accept the <a href="/datenschutz.html" target="_blank">Privacy Policy</a></label>
-    </div>
-    <div class="checkbox-row">
-      <input type="checkbox" id="check3">
-      <label for="check3">I agree to a monthly subscription that renews automatically and can be cancelled at any time.</label>
-    </div>
-    
-    <button class="btn-full" id="submitBtn" onclick="submitBooking()">Proceed to Payment</button>
-    <button class="btn-cancel" onclick="closeBooking()">Back</button>
   </div>
 </div>
 
 <script>
+// ============================================================
+// DATA
+// ============================================================
+var EU_COUNTRIES = ['DE','AT','FR','IT','ES','NL','BE','PL','CZ','HU','RO','PT','SE','DK','FI','GR','IE','LU','SK','SI','HR','BG','EE','LV','LT','CY','MT'];
+
 var MODULES = [
-  {id:'whatsapp-ki', icon:'🤖', name:'WhatsApp AI Bot', price:499, desc:'AI assistant for automatic guest communication via WhatsApp. Incl. 1,000 messages/month.'},
-  {id:'instagram', icon:'📸', name:'Instagram Auto-Posts', price:89, desc:'Automatic daily posts with AI-generated content for your hotel Instagram.'},
-  {id:'facebook', icon:'👍', name:'Facebook Auto-Posts', price:59, desc:'Automatic posts on your hotel Facebook page with AI content.'},
-  {id:'reviews', icon:'⭐', name:'Review Management', price:89, desc:'AI-powered responses to Google & Booking.com reviews. 24/7 automated.'},
-  {id:'google-business', icon:'🗺️', name:'Google Business', price:79, desc:'Automatic updates of your Google Business Profile — hours, posts, offers.'},
-  {id:'analytics', icon:'📊', name:'Analytics Dashboard', price:39, desc:'All your hotel KPIs in one dashboard. Reservations, occupancy, revenue.'},
-  {id:'email', icon:'📧', name:'Email Marketing', price:59, desc:'Automated email campaigns for your hotel guests. Welcome, upsell, feedback.'},
-  {id:'reels', icon:'🎬', name:'Reels with AI Videos', price:149, desc:'Weekly AI-generated Reels and short videos for Instagram & TikTok.'}
+  { id: 'whatsapp', icon: '&#129302;', name: 'WhatsApp KI-Bot', price: 499, desc: 'KI-gesteuerter Chatbot beantwortet Anfragen rund um die Uhr auf WhatsApp.' },
+  { id: 'instagram', icon: '&#128248;', name: 'Instagram Auto-Posts', price: 89, desc: 'Automatische Posts mit KI-Texten und Ihren Hotelfotos &ndash; t&#228;glich frisch.' },
+  { id: 'facebook', icon: '&#128077;', name: 'Facebook Auto-Posts', price: 59, desc: 'Regelm&#228;&#223;ige Facebook-Posts f&#252;r mehr Reichweite ohne Mehraufwand.' },
+  { id: 'bewertung', icon: '&#11088;', name: 'Bewertungsmanagement', price: 89, desc: 'KI antwortet auf Google &amp; Booking Bewertungen professionell und schnell.' },
+  { id: 'google', icon: '&#128506;', name: 'Google Business', price: 79, desc: 'Optimierung Ihres Google Unternehmensprofils f&#252;r mehr Sichtbarkeit.' },
+  { id: 'analytics', icon: '&#128202;', name: 'Analytics Dashboard', price: 39, desc: 'Live-&#220;bersicht aller KPIs &ndash; Buchungen, Reichweite, Bewertungen.' },
+  { id: 'email', icon: '&#128231;', name: 'E-Mail Marketing', price: 59, desc: 'Automatische Newsletter-Kampagnen f&#252;r G&#228;ste und Newsletter-Abonnenten.' },
+  { id: 'reels', icon: '&#127908;', name: 'Reels mit KI-Videos', price: 149, desc: 'KI erstellt Reels und Kurzvideos aus Ihren Hotelfotos automatisch.' }
 ];
 
-var SETUP_FEE = 349;
-var VAT_RATE = 0.19;
-var CHECKOUT_URL = 'https://n8n.leolan.net/webhook/stripe-checkout';
+var selectedModules = {};
+var currentChatModule = null;
 
-var selectedModules = [];
-
-function fmt(n) {
-  return new Intl.NumberFormat('de-DE', {minimumFractionDigits:0, maximumFractionDigits:2}).format(n) + '€';
-}
-
-function isSelected(id) {
-  for (var i = 0; i < selectedModules.length; i++) {
-    if (selectedModules[i] === id) return true;
-  }
-  return false;
-}
-
-function toggleModule(id) {
-  if (isSelected(id)) {
-    var arr = [];
-    for (var i = 0; i < selectedModules.length; i++) {
-      if (selectedModules[i] !== id) arr.push(selectedModules[i]);
-    }
-    selectedModules = arr;
-  } else {
-    selectedModules.push(id);
-  }
-  renderModules();
-  updateSticky();
-}
-
-function getMonthlyTotal() {
-  var total = 0;
-  for (var i = 0; i < selectedModules.length; i++) {
-    for (var j = 0; j < MODULES.length; j++) {
-      if (MODULES[j].id === selectedModules[i]) {
-        total += MODULES[j].price;
-        break;
-      }
-    }
-  }
-  return total;
-}
-
+// ============================================================
+// RENDER MODULES
+// ============================================================
 function renderModules() {
   var grid = document.getElementById('modulesGrid');
   var html = '';
   for (var i = 0; i < MODULES.length; i++) {
     var m = MODULES[i];
-    var sel = isSelected(m.id);
-    html += '<div class="module-card' + (sel ? ' selected' : '') + '" onclick="toggleModule(\'' + m.id + '\')">';
-    html += '<div class="module-card-top">';
-    html += '<div class="module-icon">' + m.icon + '</div>';
-    html += '<div class="module-check">' + (sel ? '<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>' : '') + '</div>';
+    html += '<div class="module-card" id="card_' + m.id + '">';
+    html += '<div class="card-top">';
+    html += '<div class="card-icon">' + m.icon + '</div>';
+    html += '<div class="card-price">' + m.price + '&#8364;/Monat</div>';
     html += '</div>';
-    html += '<div class="module-name">' + m.name + '</div>';
-    html += '<div class="module-desc">' + m.desc + '</div>';
-    html += '<div class="module-price">' + fmt(m.price) + '/Mo</div>';
+    html += '<div class="card-name">' + m.name + '</div>';
+    html += '<div class="card-desc">' + m.desc + '</div>';
+    html += '<div class="card-actions">';
+    html += '<button class="btn-ki" onclick="openChat(\'' + m.id + '\')">KI fragen &#128310;</button>';
+    html += '<div class="toggle-wrapper" onclick="toggleModule(\'' + m.id + '\')">';
+    html += '<span class="toggle-label">Ausw&#228;hlen</span>';
+    html += '<div class="toggle-switch" id="toggle_' + m.id + '"></div>';
+    html += '</div>';
+    html += '</div>';
     html += '</div>';
   }
   grid.innerHTML = html;
 }
 
-function updateSticky() {
-  var btn = document.getElementById('bookBtn');
-  var headline = document.getElementById('stickyHeadline');
-  var subline = document.getElementById('stickySubline');
-  var n = selectedModules.length;
-  if (n === 0) {
-    headline.textContent = 'Select modules';
-    subline.textContent = 'Your individual hotel package';
-    btn.disabled = true;
+function getModuleById(id) {
+  for (var i = 0; i < MODULES.length; i++) {
+    if (MODULES[i].id === id) return MODULES[i];
+  }
+  return null;
+}
+
+function toggleModule(id) {
+  if (selectedModules[id]) {
+    delete selectedModules[id];
   } else {
-    headline.textContent = n + ' module' + (n > 1 ? 's' : '') + ' selected — ' + fmt(getMonthlyTotal()) + '/Mo';
-    subline.textContent = 'Setup fee: ' + fmt(SETUP_FEE) + ' (once)';
-    btn.disabled = false;
+    selectedModules[id] = true;
+  }
+  updateCardState(id);
+  updateBottomBar();
+}
+
+function updateCardState(id) {
+  var card = document.getElementById('card_' + id);
+  var toggle = document.getElementById('toggle_' + id);
+  if (!card || !toggle) return;
+  if (selectedModules[id]) {
+    card.className = 'module-card selected';
+    toggle.className = 'toggle-switch on';
+  } else {
+    card.className = 'module-card';
+    toggle.className = 'toggle-switch';
   }
 }
 
-function openBooking() {
-  if (selectedModules.length === 0) return;
-  updateSummary();
-  document.getElementById('bookingModal').classList.add('show');
+function getSelectedList() {
+  var list = [];
+  for (var i = 0; i < MODULES.length; i++) {
+    if (selectedModules[MODULES[i].id]) {
+      list.push(MODULES[i]);
+    }
+  }
+  return list;
 }
 
-function closeBooking() {
-  document.getElementById('bookingModal').classList.remove('show');
+function getTotalPrice() {
+  var total = 0;
+  var list = getSelectedList();
+  for (var i = 0; i < list.length; i++) {
+    total += list[i].price;
+  }
+  return total;
 }
 
-function onCountryChange() {
-  var country = document.getElementById('country').value;
-  var eu = ['DE','AT','CH','FR','IT','ES','NL','BE','PL','SE','DK','FI','NO','PT','GR','CZ','HU','RO','BG','HR','SK','SI','LT','LV','EE','LU','MT','CY','IE'];
-  var isEU = false;
-  for (var i = 0; i < eu.length; i++) { if (eu[i] === country) { isEU = true; break; } }
-  document.getElementById('vatGroup').style.display = isEU ? 'block' : 'none';
-  updateSummary();
+function updateBottomBar() {
+  var list = getSelectedList();
+  var count = list.length;
+  var total = getTotalPrice();
+  var countEl = document.getElementById('bottomCount');
+  var priceEl = document.getElementById('bottomPrice');
+  var btn = document.getElementById('btnWeiter');
+
+  countEl.innerHTML = count + ' Modul' + (count === 1 ? '' : 'e') + ' ausgew&#228;hlt';
+  priceEl.innerHTML = total + '&#8364; <span>/Monat + 349&#8364; Setup</span>';
+  btn.disabled = count === 0;
 }
 
-function updateSummary() {
-  var vatId = document.getElementById('vatId').value;
-  var country = document.getElementById('country').value;
-  var nonEU = (country === 'OTHER' || country === 'US' || country === 'GB');
-  var reverseCharge = !nonEU && vatId && vatId.length > 4;
-  var monthly = getMonthlyTotal();
-  var vat = reverseCharge || nonEU ? 0 : Math.round(monthly * VAT_RATE * 100) / 100;
-  var setupVat = reverseCharge || nonEU ? 0 : Math.round(SETUP_FEE * VAT_RATE * 100) / 100;
-  
+// ============================================================
+// BOOKING MODAL
+// ============================================================
+function openAccountModal() {
+  var list = getSelectedList();
+  if (list.length === 0) return;
+  showStep('step2');
+  document.getElementById('dot1').className = 'step-dot done';
+  document.getElementById('dot2').className = 'step-dot';
+  document.getElementById('bookingModal').className = 'modal-overlay open';
+}
+
+function closeBookingModal() {
+  document.getElementById('bookingModal').className = 'modal-overlay';
+}
+
+function showStep(stepId) {
+  var steps = ['step2', 'step3', 'step4'];
+  for (var i = 0; i < steps.length; i++) {
+    document.getElementById(steps[i]).className = 'modal-step';
+  }
+  document.getElementById(stepId).className = 'modal-step active';
+}
+
+function val(id) {
+  var el = document.getElementById(id);
+  if (!el) return '';
+  return el.value ? el.value.trim() : '';
+}
+
+function showErr(id, show) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.className = show ? 'error-msg show' : 'error-msg';
+}
+
+function goToBilling() {
+  var ok = true;
+
+  if (!val('f_company')) { showErr('err_company', true); ok = false; } else { showErr('err_company', false); }
+  if (!val('f_firstname')) { showErr('err_firstname', true); ok = false; } else { showErr('err_firstname', false); }
+  if (!val('f_lastname')) { showErr('err_lastname', true); ok = false; } else { showErr('err_lastname', false); }
+
+  var email = val('f_email');
+  var emailOk = email && email.indexOf('@') > 0 && email.indexOf('.') > 0;
+  if (!emailOk) { showErr('err_email', true); ok = false; } else { showErr('err_email', false); }
+
+  var pass = val('f_pass');
+  if (!pass || pass.length < 8) { showErr('err_pass', true); ok = false; } else { showErr('err_pass', false); }
+
+  var pass2 = val('f_pass2');
+  if (pass !== pass2) { showErr('err_pass2', true); ok = false; } else { showErr('err_pass2', false); }
+
+  if (!ok) return;
+
+  buildBillingStep();
+  showStep('step3');
+  document.getElementById('dot2').className = 'step-dot done';
+}
+
+function goBackToAccount() {
+  showStep('step2');
+  document.getElementById('dot2').className = 'step-dot';
+}
+
+function buildBillingStep() {
+  var list = getSelectedList();
   var html = '';
-  for (var i = 0; i < selectedModules.length; i++) {
-    for (var j = 0; j < MODULES.length; j++) {
-      if (MODULES[j].id === selectedModules[i]) {
-        html += '<div class="summary-row"><span>' + MODULES[j].icon + ' ' + MODULES[j].name + '</span><span>' + fmt(MODULES[j].price) + '/Mo</span></div>';
-        break;
-      }
+  for (var i = 0; i < list.length; i++) {
+    html += '<div class="selected-module-item">';
+    html += '<span>' + list[i].icon + ' ' + list[i].name + '</span>';
+    html += '<span>' + list[i].price + '&#8364;/Mo</span>';
+    html += '</div>';
+  }
+  document.getElementById('selectedModulesList').innerHTML = html;
+  updateVat();
+}
+
+function formatEur(num) {
+  var s = num.toFixed(2);
+  s = s.replace('.', ',');
+  return s + ' &#8364;';
+}
+
+function isEU() {
+  var country = val('f_country');
+  for (var i = 0; i < EU_COUNTRIES.length; i++) {
+    if (EU_COUNTRIES[i] === country) return true;
+  }
+  return false;
+}
+
+function updateVat() {
+  var net = getTotalPrice();
+  var reverseCharge = document.getElementById('f_reversecharge') && document.getElementById('f_reversecharge').checked;
+  var vatId = val('f_vatid');
+  var euCountry = isEU();
+
+  var vatRate = 0;
+  var vatLabel = 'MwSt. 0%';
+
+  if (euCountry && !reverseCharge) {
+    if (val('f_country') === 'DE') {
+      // DE: always 19%
+      vatRate = 0.19;
+      vatLabel = 'MwSt. 19%';
+    } else if (vatId) {
+      // EU B2B with VAT ID = reverse charge
+      vatRate = 0;
+      vatLabel = 'MwSt. 0% (Reverse Charge)';
+    } else {
+      vatRate = 0.19;
+      vatLabel = 'MwSt. 19%';
     }
   }
-  html += '<div class="summary-row"><span>Setup fee (once)</span><span>' + fmt(SETUP_FEE) + '</span></div>';
-  html += '<div class="summary-row"><span>VAT (19%)</span><span>' + (reverseCharge ? '0€ (Reverse Charge)' : (nonEU ? '0€' : fmt(vat) + '/Mo')) + '</span></div>';
-  html += '<div class="summary-row total"><span>Total / Month</span><span>' + fmt(monthly + vat) + '</span></div>';
-  
-  document.getElementById('bookingSummary').innerHTML = html;
+
+  var vatAmt = net * vatRate;
+  var setup = 349;
+  var total = net + vatAmt + setup;
+
+  var vatRow = document.getElementById('ps_vat_row');
+  if (vatRow) {
+    vatRow.querySelector('span:first-child').innerHTML = vatLabel;
+  }
+
+  var netEl = document.getElementById('ps_net');
+  var vatEl = document.getElementById('ps_vat');
+  var totalEl = document.getElementById('ps_total');
+  if (netEl) netEl.innerHTML = formatEur(net);
+  if (vatEl) vatEl.innerHTML = formatEur(vatAmt);
+  if (totalEl) totalEl.innerHTML = formatEur(total);
 }
 
-function showError(msg) {
-  var el = document.getElementById('errorMsg');
-  el.textContent = msg;
-  el.style.display = 'block';
-}
+function submitCheckout() {
+  var agb = document.getElementById('chk_agb') && document.getElementById('chk_agb').checked;
+  var ds = document.getElementById('chk_datenschutz') && document.getElementById('chk_datenschutz').checked;
+  var abo = document.getElementById('chk_abo') && document.getElementById('chk_abo').checked;
+  var errLegal = document.getElementById('err_legal');
 
-function submitBooking() {
-  document.getElementById('errorMsg').style.display = 'none';
-  
-  var hotelName = document.getElementById('hotelName').value.trim();
-  var firstName = document.getElementById('firstName').value.trim();
-  var lastName = document.getElementById('lastName').value.trim();
-  var email = document.getElementById('email').value.trim();
-  var country = document.getElementById('country').value;
-  
-  if (!hotelName || !firstName || !lastName || !email) {
-    showError('Please fill in all required fields.');
+  if (!agb || !ds || !abo) {
+    if (errLegal) errLegal.style.display = 'block';
     return;
   }
-  if (email.indexOf('@') < 0) {
-    showError('Please enter a valid email address.');
+  if (errLegal) errLegal.style.display = 'none';
+
+  if (!val('f_address')) {
+    showErr('err_address', true);
     return;
+  } else {
+    showErr('err_address', false);
   }
-  if (!document.getElementById('check1').checked || !document.getElementById('check2').checked || !document.getElementById('check3').checked) {
-    showError('Please accept all terms and conditions.');
-    return;
-  }
-  
-  var phone = document.getElementById('phone').value.trim();
-  var vatId = document.getElementById('vatId').value.trim();
-  var nonEU = (country === 'OTHER' || country === 'US' || country === 'GB');
-  var reverseCharge = !nonEU && vatId && vatId.length > 4;
-  var monthly = getMonthlyTotal();
-  
+
+  var btn = document.getElementById('btnKaufen');
+  if (btn) btn.innerHTML = '<span class="spinner"></span> Wird verarbeitet...';
+  if (btn) btn.disabled = true;
+
+  var list = getSelectedList();
+  var moduleIds = [];
   var moduleNames = [];
-  for (var i = 0; i < selectedModules.length; i++) {
-    for (var j = 0; j < MODULES.length; j++) {
-      if (MODULES[j].id === selectedModules[i]) {
-        moduleNames.push(MODULES[j].name);
-        break;
-      }
-    }
+  for (var i = 0; i < list.length; i++) {
+    moduleIds.push(list[i].id);
+    moduleNames.push(list[i].name);
   }
-  
-  var btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Redirecting...';
-  
+
+  var reverseCharge = document.getElementById('f_reversecharge') && document.getElementById('f_reversecharge').checked;
+
   var payload = {
     paket: 'enterprise-hotel',
     purchaseType: 'enterprise',
     sector: 'hotel',
-    purchaseCategory: 'core',
-    companyName: hotelName,
-    restaurantName: hotelName,
-    contactName: firstName + ' ' + lastName,
-    email: email,
-    phone: phone,
-    vatId: vatId,
-    country: country,
+    companyName: val('f_company'),
+    firstName: val('f_firstname'),
+    lastName: val('f_lastname'),
+    email: val('f_email'),
+    password: val('f_pass'),
+    phone: val('f_phone'),
+    whatsapp: val('f_whatsapp'),
+    country: val('f_country'),
+    address: val('f_address'),
+    vatId: val('f_vatid'),
     reverseCharge: reverseCharge,
-    selectedModules: selectedModules,
-    moduleNames: moduleNames.join(', '),
-    monthlyTotal: monthly,
-    setupFee: SETUP_FEE
+    selectedModules: moduleIds,
+    selectedModuleNames: moduleNames,
+    monthlyTotal: getTotalPrice(),
+    setupFee: 349
   };
-  
+
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', CHECKOUT_URL, true);
+  xhr.open('POST', 'https://n8n.leolan.net/webhook/stripe-checkout', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
-      try {
-        var data = JSON.parse(xhr.responseText);
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          showError('Checkout failed: ' + (data.error || 'Unknown error'));
-          btn.disabled = false;
-          btn.textContent = 'Proceed to Payment';
-        }
-      } catch(e) {
-        showError('Connection error. Please try again.');
-        btn.disabled = false;
-        btn.textContent = 'Proceed to Payment';
-      }
+      showStep('step4');
     }
+  };
+  xhr.onerror = function() {
+    showStep('step4');
   };
   xhr.send(JSON.stringify(payload));
 }
 
-// Init
+// ============================================================
+// KI CHAT
+// ============================================================
+function openChat(moduleId) {
+  currentChatModule = moduleId;
+  var m = getModuleById(moduleId);
+  var container = document.getElementById('chatMessages');
+  container.innerHTML = '';
+  var greeting = m
+    ? 'Hallo! Ich helfe Ihnen gerne beim Modul "' + m.name + '". Was m&#246;chten Sie wissen?'
+    : 'Hallo! Wie kann ich Ihnen helfen?';
+  appendChatMessage('bot', greeting);
+  document.getElementById('chatModal').className = 'chat-modal-overlay open';
+  document.getElementById('chatInput').focus();
+}
+
+function closeChat() {
+  document.getElementById('chatModal').className = 'chat-modal-overlay';
+}
+
+function appendChatMessage(type, text) {
+  var container = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chat-message ' + type;
+  div.innerHTML = text;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  return div;
+}
+
+function chatKeydown(e) {
+  if (e.keyCode === 13) sendChatMessage();
+}
+
+function sendChatMessage() {
+  var input = document.getElementById('chatInput');
+  var text = input.value ? input.value.trim() : '';
+  if (!text) return;
+  input.value = '';
+
+  appendChatMessage('user', text);
+
+  var typingDiv = appendChatMessage('typing', '&#8226;&#8226;&#8226; KI denkt nach...');
+
+  var m = getModuleById(currentChatModule);
+  var payload = {
+    message: text,
+    module: currentChatModule ? currentChatModule : '',
+    moduleName: m ? m.name : ''
+  };
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'https://n8n.leolan.net/webhook/hotel-chat', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      var container = document.getElementById('chatMessages');
+      if (container.contains(typingDiv)) container.removeChild(typingDiv);
+      if (xhr.status === 200) {
+        try {
+          var resp = JSON.parse(xhr.responseText);
+          var reply = (resp && resp.reply) ? resp.reply : (resp && resp.message ? resp.message : xhr.responseText);
+          appendChatMessage('bot', reply);
+        } catch(e) {
+          appendChatMessage('bot', xhr.responseText || 'Antwort erhalten.');
+        }
+      } else {
+        appendChatMessage('bot', 'Entschuldigung, der KI-Dienst ist gerade nicht erreichbar. Bitte versuchen Sie es sp&#228;ter.');
+      }
+    }
+  };
+  xhr.onerror = function() {
+    var container = document.getElementById('chatMessages');
+    if (container.contains(typingDiv)) container.removeChild(typingDiv);
+    appendChatMessage('bot', 'Verbindungsfehler. Bitte pr&#252;fen Sie Ihre Internetverbindung.');
+  };
+  xhr.send(JSON.stringify(payload));
+}
+
+// ============================================================
+// INIT
+// ============================================================
 renderModules();
-updateSticky();
+updateBottomBar();
 </script>
 </body>
 </html>

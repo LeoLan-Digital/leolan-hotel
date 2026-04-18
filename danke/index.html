@@ -32,9 +32,10 @@ h1{font-size:1.8rem;font-weight:800;color:#f0f6fc;margin-bottom:12px}
   <p class="sub">Welcome to LeoLan Digital. Your AI system is now being set up for you.</p>
 
   <div class="code-box" id="codeBox" style="display:none">
-    <div class="code-label">Your Customer Code</div>
+    <div class="code-label">Dein Kundencode</div>
+    <div style="color:#f0f6fc;font-size:1.15rem;font-weight:700;margin-bottom:10px">Dein Kundencode: <strong id="codeInline">—</strong></div>
     <div class="code" id="codeDisplay">—</div>
-    <div class="code-hint">Use this code to log in to the LeoLan Manager App</div>
+    <div class="code-hint">Notiere ihn dir — du brauchst ihn für die App.</div>
   </div>
 
   <div class="steps">
@@ -64,6 +65,7 @@ var email = params.get('email') || localStorage.getItem('leolan_hotel_email');
 
 if(code) {
   document.getElementById('codeDisplay').textContent = code;
+  document.getElementById('codeInline').textContent = code;
   document.getElementById('codeBox').style.display = 'block';
 } else if(email) {
   // Try to fetch code from backend using email
@@ -75,6 +77,7 @@ if(code) {
     var c2 = d && d.account && d.account.customerCode;
     if(c2) {
       document.getElementById('codeDisplay').textContent = c2;
+      document.getElementById('codeInline').textContent = c2;
       document.getElementById('codeBox').style.display = 'block';
     }
   }).catch(function(){});

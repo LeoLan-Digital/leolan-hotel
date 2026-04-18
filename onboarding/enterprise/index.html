@@ -718,18 +718,6 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Password * (min. 8 characters)</label>
-          <input type="password" id="f_pass" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-          <div class="error-msg" id="err_pass">Mindestens 8 Zeichen</div>
-        </div>
-        <div class="form-group">
-          <label>Confirm Password *</label>
-          <input type="password" id="f_pass2" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-          <div class="error-msg" id="err_pass2">Passw&#246;rter stimmen nicht &#252;berein</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
           <label>Phone</label>
           <input type="tel" id="f_phone" placeholder="+49 89 123456">
         </div>
@@ -1051,12 +1039,6 @@ function goToBilling() {
   var emailOk = email && email.indexOf('@') > 0 && email.indexOf('.') > 0;
   if (!emailOk) { showErr('err_email', true); ok = false; } else { showErr('err_email', false); }
 
-  var pass = val('f_pass');
-  if (!pass || pass.length < 8) { showErr('err_pass', true); ok = false; } else { showErr('err_pass', false); }
-
-  var pass2 = val('f_pass2');
-  if (pass !== pass2) { showErr('err_pass2', true); ok = false; } else { showErr('err_pass2', false); }
-
   if (!ok) return;
 
   buildBillingStep();
@@ -1185,7 +1167,6 @@ function submitCheckout() {
     firstName: val('f_firstname'),
     lastName: val('f_lastname'),
     email: val('f_email'),
-    password: val('f_pass'),
     phone: val('f_phone'),
     whatsapp: (function() {
       var cc = document.getElementById('f_whatsapp_cc') ? document.getElementById('f_whatsapp_cc').value : '+49';

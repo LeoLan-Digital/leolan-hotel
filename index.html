@@ -967,7 +967,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     msg.className='chatbot-message '+sender;
     var lc=text.toLowerCase();
     var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('suite')||lc.includes('modul')||lc.includes('starter')||lc.includes('pro')||lc.includes('enterprise')||lc.includes('buchen')||lc.includes('booking')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding'));
-    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/onboarding/enterprise/" target="_blank" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Pakete buchen</a><a href="/onboarding/?paket=starter" target="_blank" style="display:inline-block;background:#2695d3;color:#fff;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">🔧 Einzelmodul</a></div>':'';
+    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/onboarding/?paket=starter" target="_blank" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Pakete</a><a href="/onboarding/enterprise/" target="_blank" style="display:inline-block;background:#2695d3;color:#fff;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">🔧 Einzelmodul</a></div>':'';
     msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;

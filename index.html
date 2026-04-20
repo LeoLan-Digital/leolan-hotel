@@ -1011,7 +1011,16 @@ document.getElementById('contactForm').addEventListener('submit', async function
     var el=document.getElementById('typing-ind');if(el)el.remove();
     appendChatMessage(reply,'bot');
     document.getElementById('chatbotInput').disabled=false;
-    setTimeout(function(){var d=document.getElementById('chatbotDummy');if(d){d.removeAttribute('readonly');d.focus();d.setAttribute('readonly','');}setTimeout(function(){document.getElementById('chatbotInput').focus();},50);},50);
+    // Keep keyboard open on mobile after sending
+    setTimeout(function(){
+      var inp = document.getElementById('chatbotInput');
+      inp.focus();
+      // iOS keyboard fix
+      inp.setAttribute('readonly', false);
+      inp.removeAttribute('readonly');
+      inp.click();
+      inp.focus();
+    }, 100);
   });
 </script>
 

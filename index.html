@@ -1003,19 +1003,14 @@ document.getElementById('contactForm').addEventListener('submit', async function
     if(!value)return;
     appendChatMessage(value.replace(/</g,'&lt;'),('user'));
     document.getElementById('chatbotInput').value='';
-    // Do NOT disable input — this causes keyboard to disappear on iOS
-    // document.getElementById('chatbotInput').disabled=true;
-    var typing=document.createElement('div');typing.className='chatbot-message bot';typing.id='typing-ind';typing.innerHTML='<em>typing...</em>';
+    var typing=document.createElement('div');typing.className='chatbot-message bot';typing.id='typing-ind';typing.innerHTML='<em>...</em>';
     document.getElementById('chatbotMessages').appendChild(typing);
     document.getElementById('chatbotMessages').scrollTop=99999;
     var reply=await getBotReplyAsync(value);
     var el=document.getElementById('typing-ind');if(el)el.remove();
     appendChatMessage(reply,'bot');
-    // Input was never disabled, keyboard stays open
-    setTimeout(function(){
-      var inp = document.getElementById('chatbotInput');
-      if(inp){ inp.focus(); }
-    }, 200);
+    document.getElementById('chatbotMessages').scrollTop=99999;
+    document.getElementById('chatbotInput').focus();
   });
 </script>
 

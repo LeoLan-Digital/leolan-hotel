@@ -927,7 +927,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     <div class="chatbot-messages" id="chatbotMessages"></div>
     <div class="chatbot-input-wrap">
       <form class="chatbot-form" id="chatbotForm">
-        <input type="text" id="chatbotInput" placeholder="Nachricht …" autocomplete="off" autocorrect="off" style="font-size:16px">
+        <input type="text" id="chatbotInput" placeholder="Nachricht …" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
         <button type="submit" id="chatbotSend"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </form>
     </div>
@@ -1003,24 +1003,15 @@ document.getElementById('contactForm').addEventListener('submit', async function
     if(!value)return;
     appendChatMessage(value.replace(/</g,'&lt;'),('user'));
     document.getElementById('chatbotInput').value='';
-    document.getElementById('chatbotInput').disabled=true;
+    // Do NOT disable input — this causes keyboard to disappear on iOS
+    // document.getElementById('chatbotInput').disabled=true;
     var typing=document.createElement('div');typing.className='chatbot-message bot';typing.id='typing-ind';typing.innerHTML='<em>typing...</em>';
     document.getElementById('chatbotMessages').appendChild(typing);
     document.getElementById('chatbotMessages').scrollTop=99999;
     var reply=await getBotReplyAsync(value);
     var el=document.getElementById('typing-ind');if(el)el.remove();
     appendChatMessage(reply,'bot');
-    document.getElementById('chatbotInput').disabled=false;
-    // Keep keyboard open on mobile after sending
-    setTimeout(function(){
-      var inp = document.getElementById('chatbotInput');
-      inp.focus();
-      // iOS keyboard fix
-      inp.setAttribute('readonly', false);
-      inp.removeAttribute('readonly');
-      inp.click();
-      inp.focus();
-    }, 100);
+    // Input was never disabled, keyboard stays open
   });
 </script>
 

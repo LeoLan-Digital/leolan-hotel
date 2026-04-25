@@ -106,6 +106,34 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
       <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">Alle Preise zzgl. VAT: · 12 months minimum · + 349€ one-time setup fee</p>
     </div>
     <!-- Konto -->
+    <!-- SEO Add-on -->
+    <div class="card">
+      <h3>🔍 SEO & Online Visibility <span style="font-size:.75rem;font-weight:400;color:#8b949e">(optional)</span></h3>
+      <p style="color:#8b949e;font-size:.84rem;margin-bottom:12px">Get found on Google, ChatGPT and more — by guests actively searching for hotels.</p>
+      <div class="pkgs">
+        <div class="pkg" id="seo-none" onclick="sseo('none')" style="border-color:#f5a623;background:rgba(245,166,35,.07)">
+          <div class="chk" style="display:flex">✓</div>
+          <div class="pkg-name">No SEO</div>
+          <div class="pkg-price" style="font-size:1rem">0€</div>
+          <div class="pkg-desc">AI automation only</div>
+        </div>
+        <div class="pkg" id="seo-basic" onclick="sseo('basic')">
+          <div class="chk">✓</div>
+          <div class="pkg-badge" style="background:#3fb950;color:#000">NEW</div>
+          <div class="pkg-name">SEO Basic</div>
+          <div class="pkg-price">+99€ <span>/ month</span></div>
+          <div class="pkg-desc">Google Business, Local SEO, monthly report</div>
+        </div>
+        <div class="pkg" id="seo-pro" onclick="sseo('pro')">
+          <div class="chk">✓</div>
+          <div class="pkg-badge" style="background:#5e81f4;color:#fff">RECOMMENDED</div>
+          <div class="pkg-name">SEO Pro</div>
+          <div class="pkg-price">+199€ <span>/ month</span></div>
+          <div class="pkg-desc">Local SEO + AI Search (ChatGPT, Gemini) + Backlinks</div>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <h3>👤 Account Details</h3>
       <div class="g2">
@@ -349,6 +377,11 @@ function detectEU(){
   if(chk&&v){chk.checked=!eu.includes(v);}
   updateSum();
 }
+
+var seo='none';
+function sseo(s){seo=s;['none','basic','pro'].forEach(function(x){var el=document.getElementById('seo-'+x);if(el){el.style.borderColor=x===s?'#f5a623':'';el.style.background=x===s?'rgba(245,166,35,.07)':'';var chk=el.querySelector('.chk');if(chk)chk.style.display=x===s?'flex':'none';}});updateTotal();}
+function updateTotal(){var base=pkg==='starter'?199:349;var seoPrice=seo==='basic'?99:seo==='pro'?199:0;var t=document.getElementById('total-price');if(t)t.textContent='€'+(base+seoPrice)+'/month';}
+
 </script>
 </body>
 </html>

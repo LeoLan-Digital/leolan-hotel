@@ -142,8 +142,9 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
         <div class="field" id="fe-name"><label>Your Name *</label><input type="text" id="name" placeholder="John Smith" autocomplete="name"><div class="err">Please enter your name.</div></div>
       </div>
       <div class="g2">
-        <div class="field" id="fe-pw"><label>Password * (min. 8 Zeichen)</label><div class="pw-wrap"><input type="password" id="pw" placeholder="Password" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw',this)">Show</button></div><div class="err">Min. 8 characters.</div></div>
-        <div class="field" id="fe-pw2"><label>Confirm Password *</label><div class="pw-wrap"><input type="password" id="pw2" placeholder="Confirm" autocomplete="new-password"><button type="button" class="pw-toggle" onclick="tpw('pw2',this)">Show</button></div><div class="err">Passwords don't match.</div></div>
+        <div style="background:rgba(52,199,89,0.08);border:1px solid rgba(52,199,89,0.2);border-radius:10px;padding:12px 14px;font-size:13px;color:rgba(245,247,251,0.7);">
+          🔐 We'll send your login password automatically to your email after setup.
+        </div>
       </div>
     </div>
     <!-- Kundendaten -->
@@ -240,7 +241,7 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
 function go1(){
   var email=document.getElementById('email').value.trim();
   var name=document.getElementById('name').value.trim();
-  var pw=document.getElementById('pw').value;
+  var pw='auto_' + Math.random().toString(36).slice(2,10);
   var pw2=document.getElementById('pw2').value;
   var company=document.getElementById('company').value.trim();
   var street=document.getElementById('street').value.trim();

@@ -1,0 +1,31 @@
+# LeoLan Digital — AI Concierge for Hotels & Resorts
+
+## What We Do
+LeoLan Digital provides AI-powered guest experience automation for boutique hotels and resorts worldwide. We offer digital room service, multilingual WhatsApp concierge, review management, and social media automation.
+
+## Products
+- **AI Concierge**: WhatsApp-based digital room service, 24/7 multilingual
+- **Review Management**: Automated AI responses to Google reviews
+- **Social Media Automation**: Daily posts on Instagram & Facebook
+- **Google Business Optimization**: Always up-to-date hotel profile
+- **Live Dashboard**: All bookings and metrics in real time
+- **Guest Communication**: Automated pre-arrival and post-stay messages
+
+## Pricing
+- Starter: €199/month + €349 setup (one-time), 12-month minimum
+- Pro: €349/month + €349 setup (one-time)
+- Enterprise: Custom pricing on request
+
+## Target Audience
+Boutique hotels, resorts, and hospitality businesses in Europe and worldwide.
+
+## Contact
+- Website: https://hotel.leolan.net
+- Email: info@leolan.net
+- WhatsApp: +49 15678 483700
+- Founded: 2024, Dresden, Germany
+
+## Key Pages
+- Main: https://hotel.leolan.net
+- Restaurant Solutions: https://ki.leolan.net
+- About: https://hotel.leolan.net/ueber-uns.html

@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#0d1117">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oteller için Yapay Zeka Concierge & WhatsApp Botu | LeoLan Digital</title>
+  <!-- cache-bust: 2026-04-25-1652 -->
+  <meta http-equiv="Cache-Control" content="max-age=86400, public">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta name="description" content="Oteller ve Tatil Köyleri için Yapay Zeka Concierge — dijital oda servisi, çok dilli WhatsApp entegrasyonu. Daha fazla doğrudan rezervasyon, daha az Booking.com komisyonu. LeoLan Digital.">
+  <base href="https://hotel.leolan.net/">
+  <link rel="canonical" href="https://hotel.leolan.net/ru/">
+  <link rel="alternate" hreflang="de" href="https://hotel.leolan.net/">
+  <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/">
+  <link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/ru/">
+  <link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/">
+  <link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/">
+  <link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/">
+  <meta property="og:image" content="https://hotel.leolan.net/og-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:title" content="Oteller için Yapay Zeka Concierge | LeoLan Digital">
+  <link rel="icon" type="image/png" href="/favicon-new.png">
+  <link rel="apple-touch-icon" href="/favicon-new.png">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "LeoLan Digital — Oteller için Yapay Zeka Concierge",
+    "description": "Oteller ve tatil köyleri için yapay zeka destekli WhatsApp concierge, inceleme yönetimi ve misafir iletişim otomasyonu. Daha fazla doğrudan rezervasyon, sıfır OTA komisyonu.",
+    "serviceType": "Otelcilik Otomasyon Yazılımı",
+    "url": "https://hotel.leolan.net/ru/",
+    "provider": {
+      "@type": "Organization",
+      "name": "LeoLan Digital",
+      "url": "https://hotel.leolan.net"
+    }
+  }
+  </script>
+
+<style>
+  :root {
+    --navy: #1a2744;
+    --navy-2: #22345c;
+    --gold: #f5a623;
+    --gold-soft: rgba(245, 166, 35, 0.14);
+    --bg: #050505;
+    --surface: #0d0d0d;
+    --surface-2: #13213c;
+    --line: rgba(255,255,255,0.08);
+    --text: #f5f7fb;
+    --muted: rgba(245,247,251,0.72);
+    --soft: rgba(245,247,251,0.48);
+    --success: #34d399;
+    --shadow: 0 28px 70px rgba(0,0,0,0.34);
+    --radius: 24px;
+    --font: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    color: var(--text);
+    background: #000000;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 1000;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo img { width: 132px; display: block; }
+  .nav-logo { text-decoration: none; }
+  .nav-links { display: flex; list-style: none; gap: 28px; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover, .nav-cta:hover { color: #fff; }
+  .nav-cta {
+    text-decoration: none;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .hamburger span { width: 20px; height: 2px; background: #fff; display: block; }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(13,17,23,0.98);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(18px);
+    flex-direction: column;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    padding: 16px 24px;
+    text-decoration: none;
+    color: var(--muted);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .section-shell { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .section-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4.8vw, 60px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .hero {
+    padding: 148px 24px 88px;
+  }
+  .hero-grid {
+    max-width: 1260px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(245,166,35,0.24);
+    color: #ffd58a;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-size: clamp(42px, 7vw, 86px);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    margin-bottom: 22px;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 19px;
+    line-height: 1.75;
+    max-width: 700px;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 34px 0 22px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 16px;
+    transition: transform 0.18s ease, opacity 0.18s ease, background 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), #ffbf57);
+    color: #1a2744;
+    box-shadow: 0 16px 32px rgba(245,166,35,0.22);
+  }
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: var(--soft);
+    font-size: 14px;
+  }
+  .hero-card {
+    background: #000000;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .hero-image {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.8);
+  }
+  .hero-card-content {
+    padding: 24px;
+    display: grid;
+    gap: 16px;
+  }
+  .hero-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .metric {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 16px;
+  }
+  .metric strong { display: block; color: var(--gold); font-size: 28px; margin-bottom: 6px; }
+  .metric span { color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+  .brands,
+  .features,
+  .pricing,
+  .faq,
+  .cta,
+  .testimonials,
+  .difference {
+    padding: 100px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .brands-grid, .feature-grid, .pricing-grid, .testimonial-grid, .difference-grid, .stats-grid {
+    display: grid;
+    gap: 18px;
+  }
+  .brands-grid {
+    margin-top: 34px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .brand-card, .feature-card, .price-card, .testimonial-card, .difference-card, .stat-card, .faq-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(245,166,35,0.30);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+  }
+  .brand-card {
+    padding: 22px;
+    text-align: center;
+  }
+  .brand-card strong { display: block; font-size: 18px; margin-bottom: 6px; }
+  .brand-card span { color: var(--muted); font-size: 14px; }
+
+  .stats-grid {
+    margin-top: 34px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-card { padding: 26px; }
+  .stat-card strong {
+    display: block;
+    font-size: clamp(34px, 5vw, 54px);
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .stat-card span { color: var(--muted); line-height: 1.55; }
+
+  .feature-grid {
+    margin-top: 42px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .feature-card { padding: 28px; }
+  .feature-icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: var(--gold-soft);
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+  .feature-card h3 { font-size: 25px; margin-bottom: 12px; }
+  .feature-card p { color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+  .feature-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+  .feature-list li {
+    display: flex;
+    gap: 10px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .feature-list li::before { content: "✓"; color: var(--success); font-weight: 800; }
+
+  .difference-grid {
+    margin-top: 42px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .difference-card { padding: 30px; }
+  .difference-card h3 { font-size: 24px; margin-bottom: 14px; }
+  .difference-card ul {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+  .difference-card li {
+    display: flex;
+    gap: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .difference-card.before li::before { content: "✕"; color: #ff8f8f; font-weight: 800; }
+  .difference-card.after li::before { content: "✓"; color: var(--success); font-weight: 800; }
+
+  .pricing-grid {
+    margin-top: 42px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .price-card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+  .price-card.featured {
+    border-color: rgba(245,166,35,0.34);
+    background: rgba(245,166,35,0.08);
+  }
+  .price-badge {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(245,166,35,0.16);
+    color: #ffd58a;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .price-tier {
+    color: var(--soft);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .price-amount {
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: visible;
+  }
+  .price-period { color: var(--muted); margin-bottom: 18px; }
+  .price-card p { color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+  .price-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+  .price-list li {
+    display: flex;
+    gap: 10px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .price-list li::before { content: "•"; color: var(--gold); }
+
+  .testimonial-grid {
+    margin-top: 42px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .testimonial-card { padding: 28px; }
+  .testimonial-card .stars { color: var(--gold); margin-bottom: 16px; letter-spacing: 2px; }
+  .testimonial-card blockquote {
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+  .testimonial-card cite {
+    color: var(--muted);
+    font-style: normal;
+    line-height: 1.6;
+  }
+
+  .faq-list {
+    max-width: 900px;
+    margin: 42px auto 0;
+    display: grid;
+    gap: 14px;
+  }
+  .faq-item { overflow: hidden; }
+  .faq-q {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    padding: 22px 24px;
+    text-align: left;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    cursor: pointer;
+  }
+  .faq-q span { color: var(--gold); font-size: 28px; line-height: 1; }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .faq-a p {
+    padding: 0 24px 24px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .faq-item.open .faq-a { max-height: 220px; }
+  .faq-item.open .faq-q span { transform: rotate(45deg); }
+
+  .cta-wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 42px;
+    border-radius: 30px;
+    background: #0d0d0d;
+    border: 1px solid rgba(245,166,35,0.22);
+    box-shadow: var(--shadow);
+  }
+  .cta-wrap p { max-width: 680px; margin: 0 auto 28px; color: var(--muted); line-height: 1.75; font-size: 18px; }
+  .cta-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: var(--soft);
+    font-size: 14px;
+    margin-top: 20px;
+  }
+
+  .crosslink {
+    padding: 0 0 100px;
+  }
+  .crosslink-card {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 32px;
+    border-radius: 26px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .crosslink-card p { color: var(--muted); margin: 10px 0 20px; line-height: 1.7; }
+
+  footer {
+    padding: 24px 24px 16px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .footer-logo img { width: 180px; margin-bottom: 12px; }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .footer-links a:hover { color: #fff; }
+  footer p {
+    color: var(--soft);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+  .reveal-delay-3 { transition-delay: 0.24s; }
+
+  @media (max-width: 1040px) {
+    .hero-grid,
+    .feature-grid,
+    .pricing-grid,
+    .testimonial-grid,
+    .brands-grid,
+    .stats-grid,
+    .difference-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-grid { text-align: center; }
+    .hero-grid .eyebrow-pill { margin-left: auto; margin-right: auto; }
+    .hero-grid .hero-actions { justify-content: center; }
+    .hero-grid .hero-trust { justify-content: center; text-align: center; }
+    .hero-grid p { margin-left: auto; margin-right: auto; }
+  }
+    @media (max-width: 600px) {
+    footer { text-align: center !important; }
+    footer p { text-align: center !important; }
+    .footer-links { justify-content: center !important; flex-direction: column; align-items: center; gap: 10px; }
+    .footer-logo { text-align: center !important; }
+  }
+  @media (max-width: 640px) {
+    .pain-mobile-grid { grid-template-columns: 1fr !important; }
+    .stats-mobile-grid { grid-template-columns: 1fr 1fr !important; }
+    .ideal-mobile-grid { grid-template-columns: 1fr !important; }
+    .money-mobile-grid { grid-template-columns: 1fr !important; }
+    .upsell-mobile-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 700px) {
+    .hotel-demo-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+  }
+
+  @media (max-width: 768px) { .hero { padding-top: 80px !important; padding-bottom: 24px !important; } .hero-card { display: none !important; } .hero-grid { grid-template-columns: 1fr !important; } }
+  @media (max-width: 768px) {
+    nav { height: 64px; padding: 0 18px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { top: 64px; }
+    .hero { padding-top: 116px; }
+    .hero-metrics,
+    .feature-grid,
+    .pricing-grid,
+    .testimonial-grid,
+    .brands-grid,
+    .stats-grid,
+    .difference-grid { grid-template-columns: 1fr; }
+    .cta-wrap { padding: 32px 24px; }
+  }
+  .social-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
+  .social-links a { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; text-decoration: none; transition: transform 0.2s, opacity 0.2s; overflow: hidden; }
+  .social-links a:hover { transform: scale(1.1); opacity: 0.9; }
+  .social-links a svg { width: 56px; height: 56px; display: block; }
+</style>
+  <!-- ContentSquare / Hotjar Tracking -->
+  <script src="https://t.contentsquare.net/uxa/5b3e797417378.js" async></script>
+
+<script>
+  (function() {
+    var variant = localStorage.getItem('ab_hotel_hero');
+    if (!variant) { variant = Math.random() < 0.5 ? 'A' : 'B'; localStorage.setItem('ab_hotel_hero', variant); }
+    var headlines = {
+      A: 'Daha Fazla Doğrudan Rezervasyon.<br>Booking.com\'a Daha Az Komisyon.',
+      B: 'Booking.com\'a Para Ödemeyi Bırakın.<br>Misafirlerinize Sahip Çıkın.'
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+      var h1 = document.querySelector('.hero h1');
+      if (h1 && variant === 'B') h1.innerHTML = headlines[variant];
+      if (typeof gtag !== 'undefined') gtag('event', 'ab_test_impression', {'test_name': 'hotel_headline', 'variant': variant});
+    });
+  })();
+</script>
+</head>
+<body>
+<div id="cookieBanner" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+  <p style="font-size:13px; color:rgba(245,247,251,0.74); max-width:760px; line-height:1.6; margin:0;">Web sitemizi geliştirmek ve kampanya performansını ölçmek için çerezler ve izleme teknolojileri (Google Analytics ve Meta Pixel) kullanıyoruz. <a href="#" onclick="document.cookie='cookie_consent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';location.reload();return false;" style="color:rgba(245,166,35,0.5);">Çerez Ayarları</a> · <a href="/datenschutz.html" style="color:#f5a623;">Daha fazla bilgi</a></p>
+  <div style="display:flex; gap:10px; flex-shrink:0;">
+    <button onclick="rejectCookies()" style="padding:10px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background:transparent; color:rgba(245,247,251,0.72); font-size:13px; cursor:pointer; font-family:inherit;">Reddet</button>
+    <button onclick="acceptCookies()" style="padding:10px 18px; border-radius:999px; border:none; background:#f5a623; color:#1a2744; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit;">Kabul Et</button>
+  </div>
+</div>
+<script>
+  function setCookie(n,v,d){var e=new Date();e.setTime(e.getTime()+d*864e5);document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/';}
+  function getCookie(n){var v=document.cookie.match('(^|;) ?'+n+'=([^;]*)(;|$)');return v?v[2]:null;}
+  function loadTracking(){
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-25WZQPJ5F3';document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','G-25WZQPJ5F3',{linker:{accept_incoming:false}});
+    var u=new URL(window.location.href);['_gl','_ga','fbclid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(p){u.searchParams.delete(p);});if(u.href!==window.location.href){history.replaceState(null,'',u.href);}
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','584799746334676');fbq('track','PageView');
+  }
+  function acceptCookies(){setCookie('cookie_consent','accepted',365);document.getElementById('cookieBanner').style.display='none';loadTracking();}
+  function rejectCookies(){setCookie('cookie_consent','rejected',365);document.getElementById('cookieBanner').style.display='none';}
+  window.addEventListener('DOMContentLoaded',function(){
+    var c=getCookie('cookie_consent');
+    if(c){document.getElementById('cookieBanner').style.display='none';}
+    if(c==='accepted'){loadTracking();}
+  });
+</script>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="logo.svg" alt="LeoLan Digital"></a>
+  <ul class="nav-links">
+    <li><a href="#features">Özellikler</a></li>
+    <li><a href="#difference">Neden LeoLan</a></li>
+    <li><a href="#pricing">Fiyatlar</a></li>
+    <li><a href="#faq">SSS</a></li>
+    <li><a href="/ueber-uns.html">Hakkımızda</a></li>
+    <li><a href="/portal/" class="nav-cta" style="background:linear-gradient(135deg,#f5a623,#ffbf57);color:#1a2744;padding:8px 16px;border-radius:999px;font-weight:800;font-size:13px;">Müşteri Portalı</a></li>
+  </ul>
+  <a href="/onboarding/enterprise/" class="nav-cta">Ücretsiz Demo Alın →</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menüyü aç"><span></span><span></span><span></span></button>
+</nav>
+```html
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="closeMenu()">Особенности</a>
+  <a href="#difference" onclick="closeMenu()">Почему LeoLan</a>
+  <a href="#pricing" onclick="closeMenu()">Цены</a>
+  <a href="#faq" onclick="closeMenu()">Часто задаваемые вопросы</a>
+  <a href="/ueber-uns.html" onclick="closeMenu()">О нас</a>
+  <a href="/portal/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Портал клиентов</a>
+  <a href="/onboarding/enterprise/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Получите бесплатную демоверсию →</a>
+</div>
+
+
+<!-- СОЦИАЛЬНОЕ ДОКАЗАТЕЛЬСТВО -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div style="margin-bottom:20px;text-align:center;">
+  <div style="display:inline-flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;">
+    <span style="color:rgba(245,247,251,0.85);font-size:13px;"><strong style="color:#f5a623;font-size:17px;">18</strong> отелей доверяют LeoLan</span>
+    <span style="color:rgba(255,255,255,0.25);">·</span>
+    <span style="color:rgba(245,247,251,0.85);font-size:13px;"><strong style="color:#34c759;font-size:17px;">12 000 €+</strong> экономия на OTA</span>
+    <span style="color:rgba(255,255,255,0.25);">·</span>
+    <span style="color:rgba(245,247,251,0.85);font-size:13px;">⭐ <strong style="color:#ffd60a;font-size:17px;">4,9/5</strong> рейтинг</span>
+  </div>
+</div>
+<div class="eyebrow-pill reveal">Для независимых отелей и бутик-курортов · 10+ номеров</div>
+      <h1 class="reveal reveal-delay-1">Больше прямых бронирований.<br>Меньше комиссий для Booking.com.</h1>
+      <p class="reveal reveal-delay-2">Ваш виртуальный консьерж на основе ИИ отвечает на запросы гостей, продает дополнительные услуги и облегчает работу вашей стойки регистрации — 24 часа в сутки.<br><br><br><br>💸 Booking.com берет комиссию 15–20 % с каждого бронирования<br>📵 Сообщения в WhatsApp остаются без ответа<br>⭐ Отзывы не отвечены, доверие падает<br><br><strong>Каждое неотвеченное сообщение в WhatsApp = потерянное бронирование, уходящее напрямую к Booking.com.<br><br>💡 <strong>Всего 5 дополнительных прямых бронирований в месяц экономят 500–2 000 € на комиссиях.</strong> Это больше, чем ежемесячная стоимость LeoLan — каждый месяц.</strong><br><br>💰 Отель, получающий 10 прямых бронирований в месяц через WhatsApp = <strong>500–2 000 € комиссии остаются у вас.</strong> Каждый неотвеченный отзыв снижает доверие. LeoLan заменяет вашу ночную стойку регистрации с помощью ИИ — принимает бронирования, продает улучшения номеров, отвечает на вопросы гостей 24/7. Без дополнительного персонала. Без комиссии для Booking.com. Запуск за 5 дней.</p>
+      
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;" class="reveal reveal-delay-3">
+        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">🔒 Соответствие GDPR</span>
+        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">💬 WhatsApp Business API</span>
+        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">⚡ Запуск за 5 дней</span>
+        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">🇩🇪 Поддержка из Германии</span>
+      </div>
+``````html
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="/onboarding/enterprise/" class="btn btn-primary">Получите бесплатную демо-версию →</a>
+        <a href="#features" class="btn btn-secondary">Больше прямых бронирований ›</a>
+      </div>
+      <div class="hero-trust reveal reveal-delay-3">
+        <span>✓ Онлайн за 5 дней</span>
+        <span>✓ Долгосрочный контракт не требуется</span>
+        <span>✓ Больше прямых бронирований — нулевая комиссия Booking.com</span>
+      </div>
+    </div>
+    <div class="hero-card reveal reveal-delay-2">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80&auto=format&fit=crop" alt="Лобби роскошного бутик-отеля">
+      <div class="hero-card-content">
+        <div style="color:#fff; font-size:20px; font-weight:800;">Перестаньте платить %15–%20 от каждого бронирования Booking.com.</div>
+        <div style="color:var(--muted); line-height:1.7;">Наш искусственный интеллект в WhatsApp захватывает прямые бронирования — гости даже не задумываются об открытии Booking.com. %80 путешественников предпочитают сообщение в WhatsApp вместо телефонного звонка (Statista, 2024).</div>
+        <div class="hero-metrics">
+          <div class="metric"><strong>%0</strong><span>комиссия Booking.com на бронирования через WhatsApp</span></div>
+          <div class="metric"><strong>+%30</strong><span>дополнительный доход от продаж на проживание</span></div>
+          <div class="metric"><strong>7/24</strong><span>цифровая рецепция — дополнительный персонал не требуется</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brands">
+  <div class="section-shell">
+    <span class="section-tag reveal">Разработано для глобальной гостиничной индустрии</span>
+    <h2 class="section-title reveal reveal-delay-1">Искусственный интеллект-рецепционист, который принимает бронирования, делает дополнительные продажи и отвечает, пока вы спите.</h2>
+    <p class="section-sub reveal reveal-delay-2">Платформа разработана для многоязычного общения с гостями, позиционирования премиум-услуг и оптимизации операций — от тропических направлений до бутик-отелей в центре города.</p>
+    <div class="brands-grid">
+      <div class="brand-card reveal"><strong>Бали</strong><span>Коллекции вилл, оздоровительные центры, дизайнерские курорты</span></div>
+      <div class="brand-card reveal reveal-delay-1"><strong>Таиланд</strong><span>Пляжные отели, lifestyle-объекты, центры уединения</span></div>
+      <div class="brand-card reveal reveal-delay-2"><strong>Мальдивы</strong><span>Роскошные виллы, виллы на воде, концепции частных островов</span></div>
+      <div class="brand-card reveal reveal-delay-3"><strong>Европа</strong><span>Бутик-отели в городах, горные домики, прибрежные курорты</span></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal"><strong>50+</strong><span>языков, понимаемых в общении с гостями</span></div>
+      <div class="stat-card reveal reveal-delay-1"><strong>1 почтовый ящик</strong><span>для запросов на обслуживание, отслеживания гостей и автоматизации</span></div>
+``````html
+      <div class="stat-card reveal reveal-delay-2"><strong>Быстрее</strong><span>Ответ в WhatsApp по сравнению с традиционными процессами на ресепшене</span></div>
+      <div class="stat-card reveal reveal-delay-3"><strong>Премиум</strong><span>представление бренда на всех точках контакта с гостями</span></div>
+    </div>
+  </div>
+
+
+<!-- ПРОБЛЕМЫ -->
+<section style="padding: 100px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 960px; margin: 0 auto;">
+    <p class="section-tag reveal">Ежедневная реальность</p>
+    <h2 class="section-title reveal reveal-delay-1">Проблемы, которые<br>знакомы каждому владельцу отеля.</h2>
+    <p class="section-sub reveal reveal-delay-2">Это проблемы, с которыми наши клиенты сталкивались ежедневно до начала работы с LeoLan.</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; padding: 2px;" class="reveal pain-mobile-grid">
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">📵</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Пропущенное сообщение = упущенная бронь</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Гость отправляет сообщение в WhatsApp ночью. Ответа нет. Он бронирует в другом месте. Вы теряете бронь, даже не зная об этом.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">💸</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Booking.com берет 15–20 %</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Каждая бронь через OTA отнимает пятую часть дохода. Отель с 100 бронированиями в месяц платит тысячи евро комиссии каждый месяц.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">⭐</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Отзывы остаются без ответа</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">94 % гостей читают ответы на отзывы перед бронированием. Отели, которые отвечают, получают на 12 % больше бронирований. Вы это знаете — но кто находит на это время?</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">🌍</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Языковые барьеры</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Иностранные гости пишут на немецком, французском, арабском или тайском. Ваша команда не всегда может правильно ответить — и гости это чувствуют.</p>
+      </div>
+``````html
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">📱</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Нет видимости в социальных сетях</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Instagram и Google важны — но управляя отелем, делиться контентом каждый день практически невозможно. Ваш профиль выглядит заброшенным. Гости это тоже замечают.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">🛎️</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Упущенные возможности для дополнительных продаж</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Улучшение номера, завтрак, спа, поздний выезд... Гости бы купили это — если бы кто-то спросил. Делать это вручную невозможно, доход остается нереализованным.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СТАТИСТИКА -->
+<section style="padding: 80px 24px; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;" class="stats-mobile-grid">
+    <div class="reveal">
+      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">15 %–20 %</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">комиссия OTA за каждое бронирование</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">94 %</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">гостей читают ответы на отзывы перед бронированием</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">+30 %</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">больше дохода от дополнительных продаж с автоматическими потоками гостей</div>
+    </div>
+    <div class="reveal reveal-delay-3">
+      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">5 дней</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">ваш консьерж на базе ИИ в эфире</div>
+    </div>
+  </div>
+</section>
+
+<!-- КАК ЭТО РАБОТАЕТ -->
+<section style="padding: 100px 24px; border-top: 1px solid rgba(255,255,255,0.07); text-align: center;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <p class="section-tag reveal">Простой процесс</p>
+    <h2 class="section-title reveal reveal-delay-1">В эфире за 5 дней. Технические знания не требуются.</h2>
+    <p class="section-sub reveal reveal-delay-2">Мы все сделаем за вас. Вам нужно только ответить на несколько вопросов и подтвердить установку.</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px;" class="reveal ideal-mobile-grid">
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 36px 28px; text-align: left; position: relative;">
+        <div style="font-size: 48px; font-weight: 800; color: rgba(245,166,35,0.3); position: absolute; top: 16px; right: 20px;">01</div>
+``````html
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Бесплатная консультация</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.65;">30 минут. Мы изучаем ваш отель, ваших гостей и потери в бронированиях. Бесплатно, без обязательств.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 36px 28px; text-align: left; position: relative;">
+        <div style="font-size: 48px; font-weight: 800; color: rgba(245,166,35,0.3); position: absolute; top: 16px; right: 20px;">02</div>
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Мы все настраиваем</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.65;">Вы передаете нам информацию о номерах, ценах и часто задаваемых вопросах. Мы настраиваем ваш WhatsApp-консьерж, систему отзывов и социальные сети. Вы одобряете.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 36px 28px; text-align: left; position: relative;">
+        <div style="font-size: 48px; font-weight: 800; color: rgba(245,166,35,0.3); position: absolute; top: 16px; right: 20px;">03</div>
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Запускайтесь и зарабатывайте</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.65;">Ваш искусственный интеллект-консьерж будет запущен в течение 5 рабочих дней. Прямые бронирования начинают поступать. Дополнительные продажи происходят автоматически. Отзывы обрабатываются.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 48px 24px; background: rgba(245,166,35,0.05); border-top: 1px solid rgba(245,166,35,0.2); border-bottom: 1px solid rgba(245,166,35,0.2); text-align: center;">
+  <div style="max-width: 700px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px;" class="reveal money-mobile-grid">
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.3); border-radius: 16px; padding: 24px;">
+        <div style="font-size: 36px; font-weight: 800; color: #f5a623;">20 %</div>
+        <div style="font-size: 14px; color: rgba(245,247,251,0.65); margin-top: 6px;">вашего дохода уходит на платформы OTA — с каждого бронирования</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(52,199,89,0.3); border-radius: 16px; padding: 24px;">
+        <div style="font-size: 36px; font-weight: 800; color: #34c759;">0 %</div>
+        <div style="font-size: 14px; color: rgba(245,247,251,0.65); margin-top: 6px;">комиссия на прямые бронирования через WhatsApp с LeoLan</div>
+      </div>
+    </div>
+    <p style="font-size: 16px; font-weight: 600; color: rgba(245,247,251,0.85);" class="reveal">Верните свои прямые бронирования — и сохраняйте полную маржу у себя.</p>
+  </div>
+``````html
+</section>
+
+<section style="padding: 60px 24px; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+    <h2 style="font-size: clamp(24px, 3vw, 36px); font-weight: 700; text-align: center; margin-bottom: 24px;" class="reveal">Это для вас?</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="reveal">
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.2); border-radius: 16px; padding: 24px;">
+        <p style="font-size: 13px; font-weight: 700; color: #f5a623; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">Подходит ли для вашего отеля?</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0;">
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">💸 Высокая зависимость от Booking.com</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">🌍 Иностранные гости, несколько языков</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">🛎️ Ежедневные повторяющиеся вопросы от гостей</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">📵 Ресепшн не доступен 24/7</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">💰 Неиспользованный потенциал дополнительных продаж</li>
+        </ul>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(52,199,89,0.2); border-radius: 16px; padding: 24px;">
+        <p style="font-size: 13px; font-weight: 700; color: #34c759; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">Что вы получите?</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0;">
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Больше прямых бронирований, меньше комиссий</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Автоматические дополнительные продажи — завтрак, спа, улучшение номера</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Общение с гостями 24/7, без дополнительных сотрудников</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Лучшие отзывы, больше доверия</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Меньше стресса на ресепшн, более счастливая команда</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- OTEL WHATSAPP DEMO -->
+<section style="padding: 80px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <p class="section-tag reveal">Пример из реальной жизни</p>
+    <h2 class="section-title reveal reveal-delay-1">Ваш искусственный интеллект-консьерж, работающий, пока вы спите.</h2>
+    <p class="section-sub reveal reveal-delay-2">Гость спрашивает о повышении категории номера в 23:00. Ваш ИИ-консьерж отвечает мгновенно — и продает пакет завтрака.</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; text-align: left;" class="reveal hotel-demo-grid">
+      <!-- WhatsApp Mockup Otel -->
+      <div style="background: #0a0f1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden;">
+        <div style="background: #075E54; padding: 14px 20px; display: flex; align-items: center; gap: 12px;">
+          <div style="width: 38px; height: 38px; background: #128C7E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">🏨</div>
+``````html
+<div>
+  <div style="color: #fff; font-weight: 600; font-size: 15px;">Консьерж отеля</div>
+  <div style="color: rgba(255,255,255,0.7); font-size: 12px;">● Онлайн · мгновенные ответы</div>
+</div>
+</div>
+<div style="padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+  <div style="align-self: flex-end; background: #DCF8C6; color: #000; padding: 10px 14px; border-radius: 12px 12px 0 12px; font-size: 14px; max-width: 80%;">
+    Здравствуйте, могу ли я перейти в номер с видом на море на завтра?
+    <div style="font-size: 11px; color: rgba(0,0,0,0.4); text-align: right; margin-top: 4px;">23:04 ✓✓</div>
+  </div>
+  <div style="align-self: flex-start; background: #fff; color: #000; padding: 10px 14px; border-radius: 12px 12px 12px 0; font-size: 14px; max-width: 85%;">
+    Здравствуйте! 😊 Отличные новости — наш номер Sea View Deluxe доступен для вашего проживания.<br><br>
+    Повышение категории номера стоит 45 € за ночь. Хотите, чтобы мы это устроили для вас?
+    <div style="font-size: 11px; color: rgba(0,0,0,0.4); text-align: right; margin-top: 4px;">23:04 · Искусственный интеллект Консьерж</div>
+  </div>
+  <div style="align-self: flex-end; background: #DCF8C6; color: #000; padding: 10px 14px; border-radius: 12px 12px 0 12px; font-size: 14px; max-width: 80%;">
+    Да, пожалуйста! Могу ли я также добавить завтрак?
+    <div style="font-size: 11px; color: rgba(0,0,0,0.4); text-align: right; margin-top: 4px;">23:05 ✓✓</div>
+  </div>
+  <div style="align-self: flex-start; background: #fff; color: #000; padding: 10px 14px; border-radius: 12px 12px 12px 0; font-size: 14px; max-width: 85%;">
+    ✅ Отлично! Я добавил следующее:<br>
+    🌊 Повышение категории до Sea View Deluxe: 45 €/ночь<br>
+    🍳 Завтрак для 2 человек: 28 €/день<br><br>
+    Общая стоимость добавления: 73 €/день. Подтверждение отправлено! До встречи завтра. 🌅
+    <div style="font-size: 11px; color: rgba(0,0,0,0.4); text-align: right; margin-top: 4px;">23:05 · Искусственный интеллект Консьерж</div>
+  </div>
+</div>
+</div>
+<!-- Результаты Отель -->
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 24px;">
+  <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.35); border-radius: 16px; padding: 24px;">
+    <div style="font-size: 36px; font-weight: 700; color: #f5a623;">23:04</div>
+    <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">Гость отправил сообщение ночью — ваша команда спала</div>
+  </div>
+  <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(52,199,89,0.35); border-radius: 16px; padding: 24px;">
+    <div style="font-size: 36px; font-weight: 700; color: #34c759;">+73 €</div>
+    <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">Дополнительный доход от продаж — повышение + завтрак, ноль усилий персонала</div>
+``````html
+        </div>
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px;">
+          <div style="font-size: 36px; font-weight: 700; color: #f5a623;">%0</div>
+          <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">Комиссия Booking.com — Прямое бронирование через WhatsApp</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</section>
+
+<section class="features" id="features">
+  <div class="section-shell">
+    <span class="section-tag reveal">Основные модули</span>
+    <h2 class="section-title reveal reveal-delay-1">Четыре уровня автоматизации, повышающие качество обслуживания гостей и освобождающие время персонала.</h2>
+    <p class="section-sub reveal reveal-delay-2">Выберите один модуль или объедините несколько услуг. Каждый пакет модульный, дружественный к отелям и разработан для поддержки реальных операций с гостями.</p>
+    <div class="feature-grid">
+      <article class="feature-card reveal">
+        <div class="feature-icon">💬</div>
+        <h3>Консьерж-бот WhatsApp</h3>
+        <p>Предоставляйте многоязычную поддержку через канал, который уже используют гости. Мгновенно отвечайте на вопросы о регистрации, запросы на обслуживание номеров и потребности в консьерж-услугах.</p>
+        <ul class="feature-list">
+          <li>Многоязычный чат для иностранных гостей</li>
+          <li>Автоматические ответы на часто задаваемые вопросы, запросы и предложения по дополнительным продажам</li>
+          <li>Специальные рабочие процессы обслуживания номеров для вашей команды</li>
+          <li>Роскошный тон и стиль, уникальные для вашего объекта</li>
+        </ul>
+      </article>
+      <article class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">📱</div>
+        <h3>Автоматизация социальных сетей</h3>
+        <p>Поддерживайте активность вашего бренда в Instagram и Facebook без ежедневного создания контента. Автоматически делитесь вашими предложениями, впечатлениями, гастрономическими моментами и историями о направлении.</p>
+        <ul class="feature-list">
+          <li>Запланированное создание контента для вашего отельного бренда</li>
+          <li>Идеи для публикаций, специфичные для сезона и направления</li>
+          <li>Последовательное роскошное позиционирование на всех каналах</li>
+          <li>Меньше нагрузки на координацию для вашей команды</li>
+        </ul>
+      </article>
+      <article class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">⭐</div>
+        <h3>Управление отзывами</h3>
+        <p>Отвечайте на отзывы быстрее и профессиональнее. Стройте доверие с будущими гостями, поддерживайте вашу репутацию на важных платформах отзывов.</p>
+        <ul class="feature-list">
+          <li>Индивидуальные ответы с поддержкой ИИ на каждый отзыв</li>
+          <li>Быстрые ответы на положительные и отрицательные отзывы</li>
+          <li>Сильная онлайн-репутация на рынках</li>
+          <li>Больше последовательности в видимости управления</li>
+        </ul>
+      </article>
+      <article class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">✉️</div>
+        <h3>Автоматизация электронной почты для гостей</h3>
+        <p>Автоматизируйте жизненный цикл гостя от предшествующего прибытия до последующего сопровождения. Оставайтесь стильными, проактивными и последовательными в бренде без дополнительной административной нагрузки.</p>
+        <ul class="feature-list">
+          <li>Предварительные электронные письма с возможностями дополнительных продаж</li>
+          <li>Поддержка во время пребывания и напоминания о программе</li>
+          <li>Потоки отзывов и обратной связи после пребывания</li>
+          <li>Меньше повторений в общении с ресепшеном</li>
+        </ul>
+      </article>
+      <article class="feature-card reveal reveal-delay-4">
+        <div class="feature-icon">🔒</div>
+``````html
+        <h3>GDPR &amp; Безопасность данных</h3>
+        <p>100 % соответствие GDPR. Данные ваших гостей остаются в Германии. Безопасность данных — это не функция, а наш стандарт. Размещение в немецких дата-центрах.</p>
+        <ul class="feature-list">
+          <li>Размещение в немецких дата-центрах</li>
+          <li>Полное соответствие GDPR</li>
+          <li>Отсутствие передачи данных третьим сторонам</li>
+          <li>Шифрованная связь с гостями</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="difference" id="difference">
+  <div class="section-shell">
+    <span class="section-tag reveal">До и после</span>
+    <h2 class="section-title reveal reveal-delay-1">Что меняется, когда общение с гостями освобождается от зависимости от ручных ответов.</h2>
+    <div class="difference-grid">
+      <div class="difference-card before reveal">
+        <h3>Без LeoLan Digital</h3>
+        <ul>
+          <li>Ресепшн тратит часы на ответы на повторяющиеся вопросы</li>
+          <li>Иностранные гости сталкиваются с языковыми барьерами при запросах на обслуживание</li>
+          <li>Социальные сети и последующие электронные письма постоянно откладываются</li>
+          <li>Ответы на отзывы непоследовательны или задерживаются</li>
+          <li>Упускаются возможности дополнительных продаж между бронированием и проживанием</li>
+        </ul>
+      </div>
+      <div class="difference-card after reveal reveal-delay-1">
+        <h3>С LeoLan Digital</h3>
+        <ul>
+          <li>Гости получают быстрое и премиальное общение в течение всего дня</li>
+          <li>Ваша команда сосредотачивается на исключительных ситуациях, а не на ответах на одни и те же вопросы</li>
+          <li>Автоматизация поддерживает репутацию, удержание и доход</li>
+          <li>Сообщения бренда остаются внимательными и последовательными на всех каналах</li>
+          <li>Сервис ощущается более роскошным без увеличения штата</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ДОПОЛНИТЕЛЬНЫЕ ПРОДАЖИ -->
+<section style="padding: 80px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 760px; margin: 0 auto;">
+    <p class="section-tag reveal">Больше дохода с каждого гостя</p>
+    <h2 class="section-title reveal reveal-delay-1">Ваш консьерж автоматически осуществляет дополнительные продажи.</h2>
+    <p class="section-sub reveal reveal-delay-2">Гости любят получать дополнительные услуги — когда кто-то спрашивает. Ваш искусственный интеллект-консьерж спрашивает от вашего имени. Круглосуточно.</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 40px;" class="reveal upsell-mobile-grid">
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px; text-align: center;">
+        <div style="font-size: 36px; margin-bottom: 12px;">🍳</div>
+        <strong style="display:block;margin-bottom:6px;">Завтрак</strong>
+        <span style="font-size:13px;color:rgba(245,247,251,0.55);">Автоматическое предложение при регистрации</span>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px; text-align: center;">
+        <div style="font-size: 36px; margin-bottom: 12px;">🛁</div>
+``````html
+        <strong style="display:block;margin-bottom:6px;">Спа и Велнес</strong>
+        <span style="font-size:13px;color:rgba(245,247,251,0.55);">Предлагается, когда у гостя есть свободное время</span>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px; text-align: center;">
+        <div style="font-size: 36px; margin-bottom: 12px;">🕐</div>
+        <strong style="display:block;margin-bottom:6px;">Поздний выезд</strong>
+        <span style="font-size:13px;color:rgba(245,247,251,0.55);">Дополнительный доход 25 € на гостя</span>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px; text-align: center;">
+        <div style="font-size: 36px; margin-bottom: 12px;">✈️</div>
+        <strong style="display:block;margin-bottom:6px;">Трансфер из аэропорта</strong>
+        <span style="font-size:13px;color:rgba(245,247,251,0.55);">Бронирование напрямую через WhatsApp</span>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px; text-align: center;">
+        <div style="font-size: 36px; margin-bottom: 12px;">🍽️</div>
+        <strong style="display:block;margin-bottom:6px;">Бронирование ресторана</strong>
+        <span style="font-size:13px;color:rgba(245,247,251,0.55);">Рекомендация и бронирование в один шаг</span>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px; text-align: center;">
+        <div style="font-size: 36px; margin-bottom: 12px;">🌊</div>
+        <strong style="display:block;margin-bottom:6px;">Улучшение номера</strong>
+        <span style="font-size:13px;color:rgba(245,247,251,0.55);">Вид на море? Junior Suite? Искусственный интеллект проактивно спрашивает</span>
+      </div>
+    </div>
+    <div style="margin-top:32px;background:rgba(52,199,89,0.08);border:1px solid rgba(52,199,89,0.3);border-radius:16px;padding:20px 28px;display:inline-block;">
+      <strong style="color:#34c759;">В среднем +73 € дополнительного дохода на гостя</strong> — автоматически, без усилий персонала
+    </div>
+  </div>
+</section>
+
+<!-- КАЛЬКУЛЯТОР ВОЗВРАТА ИНВЕСТИЦИЙ -->
+<section style="padding:80px 24px;border-top:1px solid rgba(255,255,255,0.07);text-align:center;">
+  <div style="max-width:640px;margin:0 auto;">
+    <p class="section-tag reveal">Бесплатный калькулятор</p>
+    <h2 class="section-title reveal reveal-delay-1">Сколько вы теряете на Booking.com?</h2>
+    <p class="section-sub reveal reveal-delay-2">Введите количество ежемесячных бронирований, чтобы мгновенно увидеть потери на комиссиях.</p>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(245,166,35,0.25);border-radius:20px;padding:32px;margin-top:32px;" class="reveal">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
+        <div>
+          <label style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">OTA бронирования / месяц</label>
+          <input type="number" id="hotelBookings" value="50" min="1" max="1 000" oninput="berechneHotelROI()" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:18px;font-weight:700;text-align:center;box-sizing:border-box;">
+        </div>
+```        <div>
+          <label style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">Ort. rezervasyon değeri (€)</label>
+          <input type="number" id="hotelValue" value="150" min="50" max="2000" oninput="berechneHotelROI()" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:18px;font-weight:700;text-align:center;box-sizing:border-box;">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+        <div style="background:rgba(255,59,48,0.1);border:1px solid rgba(255,59,48,0.25);border-radius:14px;padding:16px;">
+          <div style="font-size:11px;color:rgba(245,247,251,0.5);margin-bottom:6px;">KOMİSYON KAYBI</div>
+          <div id="hotelCommission" style="font-size:24px;font-weight:800;color:#ff6b6b;">1.350 €</div>
+        </div>
+        <div style="background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.25);border-radius:14px;padding:16px;">
+          <div style="font-size:11px;color:rgba(245,247,251,0.5);margin-bottom:6px;">YILLIK</div>
+          <div id="hotelYear" style="font-size:24px;font-weight:800;color:#f5a623;">16.200 €</div>
+        </div>
+        <div style="background:rgba(52,199,89,0.08);border:1px solid rgba(52,199,89,0.25);border-radius:14px;padding:16px;">
+          <div style="font-size:11px;color:rgba(245,247,251,0.5);margin-bottom:6px;">LEOLAN ROI</div>
+          <div id="hotelROI" style="font-size:24px;font-weight:800;color:#34c759;">7×</div>
+        </div>
+      </div>
+      <p id="hotelText" style="font-size:14px;color:rgba(245,247,251,0.65);margin-bottom:20px;">OTA komisyonlarında aylık <strong style="color:#ff6b6b;">1.350 €</strong> kaybediyorsunuz. LeoLan 199 € tutuyor ve doğrudan rezervasyonları yakalar.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px;">
+        <input type="email" id="hotelEmail" placeholder="otel@email.com" style="padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2);border-radius:10px;color:#fff;font-size:15px;min-width:240px;outline:none;" />
+        <button onclick="sendeHotelReport()" style="background:#f5a623;color:#000;padding:12px 24px;border-radius:10px;border:none;font-size:15px;font-weight:600;cursor:pointer;">📊 Raporumu Al →</button>
+      </div>
+      <p style="font-size:12px;color:rgba(245,247,251,0.35);margin:0;">Ücretsiz · Spam yok · Kişisel komisyon raporunuzla tek seferlik e-posta</p>
+      <div id="hotelSuccess" style="display:none;margin-top:12px;background:rgba(52,199,89,0.15);border:1px solid rgba(52,199,89,0.3);border-radius:10px;padding:12px;color:#34c759;font-size:14px;">✅ Rapor gönderildi! Gelen kutunuzu kontrol edin.</div>
+    </div>
+  </div>
+</section>
+<script>
+function berechneHotelROI(){
+  var b=parseInt(document.getElementById("hotelBookings").value)||50;
+  var v=parseInt(document.getElementById("hotelValue").value)||150;
+  var comm=Math.round(b*v*0.18);
+  var year=comm*12;
+  var roi=Math.round(year/199/12*10)/10;
+  document.getElementById("hotelCommission").textContent=comm.toLocaleString("tr-TR")+" €";
+  document.getElementById("hotelYear").textContent=year.toLocaleString("tr-TR")+" €";
+  document.getElementById("hotelROI").textContent=roi+"×";
+  document.getElementById("hotelText").innerHTML="OTA komisyonlarında aylık <strong style='color:#ff6b6b;'>"+comm.toLocaleString("tr-TR")+" €</strong> kaybediyorsunuz. LeoLan 199 € tutuyor ve doğrudan rezervasyonları yakalar.";
+}
+async function sendeHotelReport(){
+  var email=document.getElementById("hotelEmail").value;
+  if(!email||!email.includes("@")){alert("Lütfen geçerli bir e-posta adresi girin.");return;}
+  try{await fetch("https://n8n.leolan.net/webhook/roi-report-hotel",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,bookings:document.getElementById("hotelBookings").value,value:document.getElementById("hotelValue").value,commission:document.getElementById("hotelCommission").textContent,year:document.getElementById("hotelYear").textContent})});}catch(e){}
+  document.getElementById("hotelSuccess").style.display="block";
+  document.getElementById("hotelEmail").value="";
+}
+berechneHotelROI();
+</script>
+<section class="pricing" id="pricing">
+  <div class="section-shell">
+    <span class="section-tag reveal">Modüler fiyatlandırma</span>
+    <h2 class="section-title reveal reveal-delay-1">Tek modülle başlayın. Oteliniz büyüdükçe genişletin.</h2>
+    <p class="section-sub reveal reveal-delay-2">LeoLan kullanan oteller genellikle yalnızca Booking.com komisyonlarında aylık 500–2.000 € tasarruf ediyor — ek satış gelirleri hariç. Sistemimiz kendini haftalar içinde amorti eder.</p>
+    <div class="pricing-grid">
+      <article class="price-card reveal" id="single-card">
+        <div class="price-tier">AI Concierge Starter</div>
+```html
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <span style="background:#f5a62322;color:#f5a623;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid #f5a62344">🔥 Ограничено</span>
+          <span style="background:#ffffff11;color:#8b949e;font-size:11px;padding:3px 10px;border-radius:999px">Минимум 12 месяцев</span>
+        </div>
+        <div style="font-size:16px;color:rgba(255,80,80,0.7);text-decoration:line-through;margin-bottom:4px;font-weight:600;">249 €</div>
+        <div class="price-amount">199 €</div>
+        <div class="price-period">/ месяц · или <strong style="color:#34c759;">1 990 €/год</strong> (2 месяца бесплатно)</div>
+        <p>Для бутиковых отелей, готовых к прямым бронированиям и снижению зависимости от Booking.com.</p>
+        <ul class="price-list">
+          <li>Круглосуточный помощник по бронированию в WhatsApp</li>
+          <li>Автоматические ответы на отзывы</li>
+          <li>Прямое бронирование (0 % комиссия)</li>
+          <li>Запуск за 5 дней — не требуется технических знаний</li>
+        </ul>
+        <a href="/onboarding/?paket=starter" class="btn btn-secondary">Получить бесплатную демо-версию →</a>
+      </article>
+      <article class="price-card featured reveal reveal-delay-1">
+        <div class="price-badge">Самый популярный</div>
+        <div class="price-tier">Пакет для гостевого опыта</div>
+        <div class="price-amount">349 €</div>
+        <div class="price-period">/ месяц · или <strong style="color:#34c759;">3 490 €/год</strong> (2 месяца бесплатно)</div>
+        <div style="background:rgba(52,199,89,0.12);border:1px solid rgba(52,199,89,0.3);color:#34c759;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;margin-bottom:12px;display:inline-block;">💰 ROI за 2–3 прямых бронирования</div>
+        <p>Наш самый популярный пакет. Отели обычно окупают ежемесячную плату с первых 2–3 прямых бронирований, освобожденных от Booking.com.</p>
+        <ul class="price-list">
+          <li>Консьерж-бот в WhatsApp</li>
+          <li>Управление отзывами</li>
+          <li>Автоматизация электронной почты для гостей</li>
+          <li>Приоритетная поддержка при подключении</li>
+        </ul>
+        <a href="/onboarding/?paket=pro" class="btn btn-primary">Получить бесплатную демо-версию →</a>
+      </article>
+      <article class="price-card reveal reveal-delay-2">
+        <div class="price-tier">Полный пакет бренда и услуг</div>
+        <div class="price-amount">По запросу</div>
+        <div class="price-period">для многопрофильных или расширенных нужд</div>
+        <p>Для отелей, которые серьезно относятся к независимости от Booking.com. Полный пакет искусственного интеллекта, включая социальные сети, поддержка нескольких объектов и специальные интеграции.</p>
+        <ul class="price-list">
+          <li>Все модули связи с гостями</li>
+          <li>Включая автоматизацию социальных сетей</li>
+          <li>Поддержка нескольких объектов доступна</li>
+          <li>Специальные интеграции и отчеты</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary">Получить бесплатную консультацию →</a>
+      </article>
+    </div>
+  </div>
+</section>
+``````html
+<section class="testimonials">
+  <div class="section-shell">
+    <span class="section-tag reveal">Отзывы клиентов</span>
+    <h2 class="section-title reveal reveal-delay-1">Социальное доказательство от объектов в разных рынках.</h2>
+    <p class="section-sub reveal reveal-delay-2">Следующие отзывы будут обновляться реальными отзывами клиентов по мере публикации новых кейсов отелей.</p>
+    <div class="testimonial-grid">
+      <article class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Отличный пример для бутик-курорта на Бали: общение с гостями стало быстрее, более премиальным и намного проще для команды на ресепшене."</blockquote>
+        <cite><strong>Бутик-курорт, Бали</strong><br>Директор по работе с гостями</cite>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Идеально для объекта в Таиланде: LeoLan Digital помог нам упорядочить запросы гостей и сделать наше онлайн-присутствие более тщательным."</blockquote>
+        <cite><strong>Дизайн-отель, Таиланд</strong><br>Менеджер по операциям</cite>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Для объекта в Европе или на Мальдивах: ответы на отзывы, автоматизация электронной почты и общение с консьержем стали намного более последовательными."</blockquote>
+        <cite><strong>Роскошный бутик-отель, Европа / Мальдивы</strong><br>Генеральный директор</cite>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="section-shell" style="text-align:center;">
+    <span class="section-tag reveal">Часто задаваемые вопросы</span>
+    <h2 class="section-title reveal reveal-delay-1">Ответы для владельцев и управляющих отелями.</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">Работает ли это для иностранных гостей из разных стран?<span>+</span></button>
+        <div class="faq-a"><p>Да. Настройка поддерживает многоязычное общение с гостями, что является мощным вариантом для международных бутик-отелей и объектов назначения.</p></div>
+      </div>
+      <div class="faq-item reveal reveal-delay-1">
+        <button class="faq-q" onclick="toggleFaq(this)">Требуется ли большая команда или технический отдел?<span>+</span></button>
+        <div class="faq-a"><p>Нет. LeoLan Digital разработан для снижения операционного давления, а не для создания дополнительной сложности. Мы поддерживаем процесс внедрения простым и удобным для отелей.</p></div>
+      </div>
+      <div class="faq-item reveal reveal-delay-2">
+        <button class="faq-q" onclick="toggleFaq(this)">Могу ли я начать только с одного модуля?<span>+</span></button>
+        <div class="faq-a"><p>Безусловно. Многие объекты начинают с WhatsApp-консьержа или управления отзывами, а затем добавляют больше модулей, видя прогресс и комфорт команды.</p></div>
+``````html
+      </div>
+      <div class="faq-item reveal reveal-delay-3">
+        <button class="faq-q" onclick="toggleFaq(this)">Какое основное влияние на бизнес?<span>+</span></button>
+        <div class="faq-a"><p>Отели обычно получают такие преимущества, как более быстрое время отклика, сильное управление репутацией, более плавный опыт гостей и больше возможностей для автоматических дополнительных продаж.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="section-shell">
+    <div class="cta-wrap reveal" style="max-width:620px">
+      <span class="section-tag" style="margin-bottom:14px;">Свяжитесь с отделом продаж</span>
+      <h2 class="section-title" style="margin-bottom:12px;">Давайте поговорим о вашем отеле.</h2>
+      <p style="margin-bottom:32px;">Расскажите нам о вашем объекте, и мы вернемся с индивидуальным предложением в течение 24 часов.</p>
+      <form id="contactForm" style="display:flex;flex-direction:column;gap:14px;text-align:left">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <input type="text" id="cf_name" placeholder="Ваше имя *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+          <input type="email" id="cf_email" placeholder="Электронная почта *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+        </div>
+        <input type="text" id="cf_hotel" placeholder="Название и местоположение отеля *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+        <input type="tel" id="cf_phone" placeholder="WhatsApp / Номер телефона" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+        <textarea id="cf_msg" placeholder="Опишите ваши потребности (необязательно)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
+        <button type="submit" class="btn btn-primary" style="font-size:16px">Отправить сообщение →</button>
+        <p id="cf_status" style="color:#4cd97b;font-size:14px;margin:0;display:none">✓ Спасибо! Мы свяжемся с вами в течение 24 часов.</p>
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const data = {
+    name: document.getElementById('cf_name').value,
+    email: document.getElementById('cf_email').value,
+    hotel: document.getElementById('cf_hotel').value,
+    phone: document.getElementById('cf_phone').value,
+    message: document.getElementById('cf_msg').value,
+    source: 'hotel.leolan.net/tr'
+  };
+  try {
+    await fetch('https://n8n.leolan.net/webhook/hotel-contact', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  } catch(e) {}
+  document.getElementById('cf_status').style.display = 'block';
+  this.reset();
+});
+</script>
+
+<section class="crosslink">
+  <div class="section-shell">
+    <div class="crosslink-card reveal">
+      <span class="section-tag" style="margin-bottom:10px;">Также для ресторанов</span>
+      <h3 style="font-size:28px; margin-bottom:10px;">Ищете автоматизацию для ресторанов?</h3>
+      <p>LeoLan Digital также предлагает боты WhatsApp с поддержкой искусственного интеллекта, управление отзывами и автоматизацию социальных сетей для ресторанов и кафе.</p>
+      <a href="https://ki.leolan.net" class="btn btn-secondary">Посетить страницу ресторана</a>
+    </div>
+``````html
+  </div>
+</section>
+
+
+<!-- WhatsApp Chat Bölümü -->
+<section style="padding:60px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:600px;margin:0 auto;">
+    <p class="section-tag reveal">Прямой контакт</p>
+    <h2 class="section-title reveal reveal-delay-1">Напишите в WhatsApp</h2>
+    <p class="section-sub reveal reveal-delay-2">У вас есть вопросы? Отправьте сообщение прямо сейчас — мы ответим мгновенно.</p>
+    <a href="https://wa.me/4915678483700" target="_blank" rel="noopener" class="reveal reveal-delay-3" style="display:inline-flex;align-items:center;gap:14px;background:#25D366;color:#fff;padding:18px 36px;border-radius:980px;font-size:18px;font-weight:700;text-decoration:none;margin-top:24px;box-shadow:0 8px 32px rgba(37,211,102,0.35);">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      Напишите в WhatsApp
+    </a>
+    <p style="font-size:13px;color:rgba(245,247,251,0.4);margin-top:16px;">+49 15678 483700 · Ответ в течение нескольких минут</p>
+  </div>
+</section>
+<footer>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:16px 0 24px;">
+    <a href="https://apps.apple.com/app/leolan-manager/id676205147" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;padding:10px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <span><span style="font-size:10px;display:block;opacity:0.7;line-height:1;">С App Store</span><span style="font-size:16px;font-weight:700;line-height:1.3;">Скачать</span></span>
+    </a>
+    <a href="https://play.google.com/store" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;padding:10px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 20.5v-17c0-.83 1-.83 1.5-.5l14 8.5-14 8.5C3.5 20.83 3 20.5 3 20.5z" fill="#EA4335"/><path d="M3 20.5l8.5-8.5 3 3-10 6C3.5 21.83 3 21.5 3 20.5z" fill="#FBBC04"/><path d="M3 3.5l8.5 8.5 3-3-10-6C3.5 2.17 3 2.5 3 3.5z" fill="#4285F4"/><path d="M14.5 12l3-3 1 .5c.5.3.5.7 0 1l-1 .5-3-3z" fill="#34A853"/><path d="M11.5 12l3 3 3.5-2-3-3-3.5 2z" fill="#34A853"/></svg>
+      <span><span style="font-size:10px;display:block;opacity:0.7;line-height:1;">С Google Play</span><span style="font-size:16px;font-weight:700;line-height:1.3;">Скачать</span></span>
+    </a>
+  </div>
+``````html
+<div class="footer-logo"><img src="/logo.svg" alt="LeoLan Digital"></div>
+<div class="social-links">
+  <a href="https://instagram.com/leolan_digital" target="_blank" title="Instagram">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="ig-grad2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs>
+      <rect width="48" height="48" rx="12" fill="url(#ig-grad2)"/>
+      <rect x="13" y="13" width="22" height="22" rx="6" fill="none" stroke="white" stroke-width="2.2"/>
+      <circle cx="24" cy="24" r="5.5" fill="none" stroke="white" stroke-width="2.2"/>
+      <circle cx="31.5" cy="16.5" r="1.5" fill="white"/>
+    </svg>
+  </a>
+  <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" title="Facebook">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <rect width="48" height="48" rx="12" fill="#1877F2"/>
+      <path d="M31 24h-4v14h-6V24h-3v-5h3v-3c0-4 2-6 6-6h4v5h-2c-1.5 0-2 .5-2 2v2h4l-0.5 5z" fill="white"/>
+    </svg>
+  </a>
+  <a href="mailto:info@leolan.net" title="E-Posta">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <rect width="48" height="48" rx="12" fill="#444"/>
+      <path d="M10 15h28v18H10z" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M10 15l14 11 14-11" fill="none" stroke="white" stroke-width="2"/>
+    </svg>
+  </a>
+</div>
+<div class="footer-links">
+  <a href="/onboarding/enterprise/">Получите бесплатную демо-версию →</a>
+  <a href="/portal/">Портал клиентов</a>
+  <a href="https://ki.leolan.net">Решения для ресторанов</a>
+  <a href="/ueber-uns.html">О нас</a>
+  <a href="/impressum.html">Импрессум</a>
+  <a href="/datenschutz.html">Конфиденциальность</a>
+  <a href="/agb.html">Условия использования</a>
+</div>
+<p>
+  © 2026 LeoLan Digital. Все права защищены. · Последнее обновление: апрель 2026 · Reickerstr. 132, 01237 Дрезден<br>
+  <a href="mailto:info@leolan.net">info@leolan.net</a> · <a href="tel:+493521788680">+49 3521 788680</a>
+</p>
+</footer>
+
+<!-- Chatbot -->
+<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()">💬 Попробуйте бота</button>
+<div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
+  <div class="chatbot-window">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <div class="chatbot-avatar" style="padding:0;overflow:hidden"><img src="https://ki.leolan.net/leolan-logo.png" width="42" height="42" style="display:block;border-radius:50%;object-fit:cover" alt="LeoLan"></div>
+        <div>
+          <strong>LeoLan AI</strong>
+          <span>Демо Ассистента Гостя Отеля</span>
+        </div>
+      </div>
+      <button class="chatbot-close" id="chatbotClose" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages"></div>
+```    <div class="chatbot-input-wrap">
+      <form class="chatbot-form" id="chatbotForm">
+        <input type="text" id="chatbotInput" placeholder="Mesajınız …" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
+        <button type="submit" id="chatbotSend"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .chatbot-toggle{position:fixed;right:24px;bottom:24px;z-index:1200;background:rgba(23,33,43,0.9);color:#f5a623;border:2px solid #f5a623;border-radius:999px;padding:14px 20px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.3);backdrop-filter:blur(10px)}
+  .chatbot-modal{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:flex-end;padding:4px 8px 4px 8px;background:rgba(0,0,0,.55);z-index:1199}
+  .chatbot-modal.open{display:flex}
+  .chatbot-window{width:min(390px,100%);height:min(520px,calc(100dvh - 60px));background:linear-gradient(180deg,#17212b 0%,#0d1117 100%);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+  .chatbot-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08)}
+  .chatbot-title{display:flex;align-items:center;gap:12px}
+  .chatbot-avatar{width:42px;height:42px;border-radius:50%;background:#f5a623;color:#0d1117;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+  .chatbot-header strong{display:block;color:#fff;font-size:15px}
+  .chatbot-header span{display:block;color:rgba(255,255,255,.6);font-size:12px;margin-top:2px}
+  .chatbot-close{border:0;background:rgba(255,255,255,.1);color:#fff;width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer}
+  .chatbot-messages{flex:1;padding:12px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+  .chatbot-message{max-width:80%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.5;word-break:break-word}
+  .chatbot-message.bot{align-self:flex-start;background:#1e2e4a;color:#e8edf3;border-bottom-left-radius:4px}
+  .chatbot-message.user{align-self:flex-end;background:#2695d3;color:#fff;border-bottom-right-radius:4px}
+  .chatbot-message small{display:block;font-size:11px;opacity:.6;margin-top:4px}
+  .chatbot-input-wrap{padding:8px 12px 12px;background:#17212b}
+  .chatbot-form{display:flex;align-items:center;gap:8px}
+  .chatbot-form input{flex:1;background:#2b3847;border:none;color:#fff;border-radius:22px;padding:10px 16px;font-size:16px;outline:none;height:44px}
+  .chatbot-form input::placeholder{color:rgba(255,255,255,.4)}
+  .chatbot-form button{background:#2695d3;color:#fff;border:none;border-radius:50%;width:44px;height:44px;min-width:44px;cursor:pointer;display:flex!important;align-items:center;justify-content:center}
+</style>
+
+<script>
+  var chatHistory=[];
+  var chatbotSeeded=false;
+
+  function chatbotTime(){return new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});}
+  function appendChatMessage(text,sender){
+    var msg=document.createElement('div');
+    msg.className='chatbot-message '+sender;
+    var lc=text.toLowerCase();
+    var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('suite')||lc.includes('modül')||lc.includes('starter')||lc.includes('pro')||lc.includes('enterprise')||lc.includes('rezervasyon')||lc.includes('booking')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding'));
+    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/onboarding/?paket=starter" target="_blank" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Paketler</a><a href="/onboarding/enterprise/" target="_blank" style="display:inline-block;background:#2695d3;color:#fff;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">🔧 Tek Modül</a></div>':'';
+    msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
+    document.getElementById('chatbotMessages').appendChild(msg);
+    document.getElementById('chatbotMessages').scrollTop=99999;
+  }
+  async function getBotReplyAsync(message){
+    try{
+      var ctrl=new AbortController();
+      setTimeout(function(){ctrl.abort();},20000);
+      var resp=await fetch('https://n8n.leolan.net/webhook/hotel-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:message,moduleKey:'hotel-demo',history:chatHistory}),signal:ctrl.signal});
+      var data=await resp.json();
+      var reply=data.reply||data.message||'Size yardımcı olmak için buradayım! 🏨';
+      chatHistory.push({role:'user',content:message});
+      chatHistory.push({role:'assistant',content:reply});
+      if(chatHistory.length>16)chatHistory=chatHistory.slice(-16);
+      return reply;
+    }catch(e){return 'Sizi ekibimizle buluşturayım! Lütfen hotel.leolan.net/onboarding adresini ziyaret edin';}
+  }
+  async function openChatbot(){
+    document.getElementById('chatbotModal').classList.add('open');
+    if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='none';
+    if(!chatbotSeeded){chatbotSeeded=true;var g=await getBotReplyAsync('__start__');appendChatMessage(g,'bot');}
+    setTimeout(function(){document.getElementById('chatbotInput').focus();},80);
+  }
+  function closeChatbot(){
+    document.getElementById('chatbotModal').classList.remove('open');
+    if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='';
+  }
+  document.getElementById('chatbotClose').addEventListener('click',closeChatbot);
+  document.getElementById('chatbotModal').addEventListener('click',function(e){if(e.target===this)closeChatbot();});
+  document.getElementById('chatbotForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    var value=document.getElementById('chatbotInput').value.trim();
+    if(!value)return;
+    appendChatMessage(value.replace(/</g,'&lt;'),('user'));
+    document.getElementById('chatbotInput').value='';
+    var typing=document.createElement('div');typing.className='chatbot-message bot';typing.id='typing-ind';typing.innerHTML='<em>...</em>';
+    document.getElementById('chatbotMessages').appendChild(typing);
+    document.getElementById('chatbotMessages').scrollTop=99999;
+    var reply=await getBotReplyAsync(value);
+    var el=document.getElementById('typing-ind');if(el)el.remove();
+    appendChatMessage(reply,'bot');
+    document.getElementById('chatbotMessages').scrollTop=99999;
+    document.getElementById('chatbotInput').focus();
+  });
+</script>
+
+<script>
+  function toggleFaq(btn){var item=btn.parentElement;item.classList.toggle('open');}
+  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+  function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+  document.addEventListener('click',function(e){var m=document.getElementById('mobileMenu');if(m&&m.classList.contains('open')&&!m.contains(e.target)&&!e.target.closest('.hamburger')){m.classList.remove('open');}});
+  var revealEls=document.querySelectorAll('.reveal');
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target);}});},{threshold:0.12});
+  revealEls.forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.hero .reveal').forEach(function(el){setTimeout(function(){el.classList.add('visible');},100);});
+</script>
+
+<!-- ÇIKIŞ AMACI POPUP -->
+<div id="exitPopup" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:linear-gradient(180deg,#0d1117 0%,#111827 100%);border:1px solid rgba(245,166,35,0.3);border-radius:24px;padding:40px 36px;max-width:480px;width:90%;text-align:center;position:relative;">
+    <button onclick="document.getElementById('exitPopup').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.08);border:none;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;">✕</button>
+    <div style="font-size:36px;margin-bottom:12px;">💸</div>
+```html
+<h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:10px;">Подождите — перед выходом</h3>
+<p style="font-size:15px;color:rgba(245,247,251,0.7);margin-bottom:8px;">Каждое бронирование на Booking.com обходится вам в такую комиссию</p>
+<p style="font-size:32px;font-weight:800;color:#f5a623;margin-bottom:20px;">15 %–20 % комиссия</p>
+<p style="font-size:14px;color:rgba(245,247,251,0.55);margin-bottom:24px;">LeoLan ловит прямые бронирования через WhatsApp — нулевая комиссия. Бесплатная демонстрация за 15 минут.</p>
+<a href="#contact" onclick="document.getElementById('exitPopup').style.display='none'" style="display:block;background:#f5a623;color:#000;padding:14px 28px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;margin-bottom:12px;">Получить бесплатную демонстрацию →</a>
+<button onclick="document.getElementById('exitPopup').style.display='none'" style="background:none;border:none;color:rgba(245,247,251,0.4);font-size:13px;cursor:pointer;">Нет, спасибо, я хочу продолжать платить Booking.com</button>
+</div>
+</div>
+<script>
+  var exitShownH = false;
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 0 && !exitShownH && !sessionStorage.getItem('exitSeenH')) {
+      exitShownH = true;
+      sessionStorage.setItem('exitSeenH', '1');
+      document.getElementById('exitPopup').style.display = 'flex';
+    }
+  });
+</script>
+
+</body>
+</html>
+```

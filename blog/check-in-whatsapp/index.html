@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Check-in per WhatsApp: Gaestekommunikation vor Ankunft automatisieren | LeoLan Digital</title>
+<meta name="description" content="Wie Hotels die Gaestekommunikation vor der Ankunft per WhatsApp automatisieren und Check-in reibungslos gestalten. Praxisguide 2026.">
+<meta name="keywords" content="Check-in automatisieren Hotel, WhatsApp Check-in Hotel, Hotel Gaestekommunikation vor Ankunft, Hotel Pre-Arrival, Hotel Kommunikation automatisch">
+<link rel="canonical" href="https://hotel.leolan.net/blog/check-in-whatsapp/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#07111e;color:#d0e0f0;line-height:1.7}
+.topbar{background:#040c18;padding:16px 28px;border-bottom:1px solid #1a3050;display:flex;align-items:center}
+.topbar a{color:#4da6ff;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.topbar .logo{color:#fff;font-size:16px;font-weight:800;margin-left:auto}
+.hero{position:relative;height:440px;overflow:hidden;background:#0a1a2e}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,17,30,0.15) 0%,rgba(7,17,30,0.85) 100%)}
+.hero-content{position:absolute;bottom:0;left:0;right:0;padding:36px 48px}
+.tag{display:inline-block;background:#4da6ff;color:#fff;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 14px;border-radius:4px;margin-bottom:14px}
+h1{font-size:clamp(22px,3.8vw,42px);font-weight:800;line-height:1.2;color:#fff;max-width:780px}
+.wrap{max-width:860px;margin:0 auto;padding:48px 24px}
+.lead{background:#0c1f36;border-left:4px solid #4da6ff;border-radius:0 12px 12px 0;padding:22px 28px;margin-bottom:40px;font-size:17px;line-height:1.8;color:#9fc0e0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:32px 0}
+.stat{background:#0a1830;border:1px solid #1a3050;border-radius:14px;padding:18px 14px;text-align:center}
+.stat-n{font-size:30px;font-weight:800;color:#4da6ff;display:block;line-height:1}
+.stat-l{font-size:12px;color:#3a6080;margin-top:6px;line-height:1.4}
+h2{font-size:22px;font-weight:700;color:#4da6ff;margin:44px 0 14px;padding-bottom:8px;border-bottom:2px solid #1a3050}
+p{font-size:16px;line-height:1.75;color:#9ab8d0;margin-bottom:16px}
+ul,ol{margin:0 0 20px;padding:0;list-style:none}
+li{padding:10px 0 10px 30px;position:relative;border-bottom:1px solid #0c1f36;color:#9ab8d0;font-size:15px}
+ul li::before{content:"->>";position:absolute;left:0;color:#4da6ff;font-weight:700}
+ol{counter-reset:n}ol li{counter-increment:n}
+ol li::before{content:counter(n);position:absolute;left:0;top:10px;background:#0c1f36;border:1px solid #1a4060;color:#4da6ff;font-size:12px;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;line-height:22px}
+.blog-img{width:100%;border-radius:14px;margin:28px 0;display:block;max-height:420px;object-fit:cover;border:1px solid #1a3050}
+.app-img{width:100%;border-radius:12px;margin:24px 0;display:block;max-height:300px;object-fit:cover;border:2px solid #1a4060}
+.cap{text-align:center;font-size:13px;color:#3a6080;margin-top:-18px;margin-bottom:24px}
+.cta{background:linear-gradient(135deg,#0a2a5e 0%,#1050a0 100%);border-radius:18px;padding:40px 36px;text-align:center;margin:48px 0;border:1px solid #2a6ab8}
+.cta h3{color:#fff;font-size:22px;font-weight:800;margin-bottom:10px}
+.cta p{color:#6898c0;margin-bottom:24px}
+.btn{display:inline-block;background:#4da6ff;color:#fff;padding:13px 38px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none}
+.faq-item{background:#0a1830;border:1px solid #1a3050;border-radius:12px;padding:18px 22px;margin-bottom:10px}
+.faq-item h3{color:#7ec4ff;font-size:15px;font-weight:700;margin:0 0 8px}
+.faq-item p{margin:0;font-size:14px;color:#5080a0}
+footer{background:#040c18;border-top:1px solid #1a3050;padding:24px;text-align:center;color:#2a5070;font-size:13px}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.hero-content{padding:24px}}
+</style>
+</head>
+<body>
+<div class="topbar"><a href="/">Blog</a><span class="logo">LeoLan Digital Hotel</span></div>
+<div class="hero">
+<img src="https://raw.githubusercontent.com/LeoLan-Digital/leolan-hotel/main/blog/images/hero/hotel.jpg" alt="Hotel Check-in WhatsApp automatisch">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<span class="tag">Hotel Check-in 2026</span>
+<h1>Check-in per WhatsApp: Gaestekommunikation vor Ankunft automatisieren</h1>
+</div>
+</div>
+<div class="wrap">
+<div class="lead">Gaeste die vor ihrer Ankunft <strong>automatisch informiert werden</strong> sind entspannter begeisterter und hinterlassen bessere Bewertungen. WhatsApp Pre-Arrival macht das vollautomatisch - fuer jede Sprache jede Uhrzeit.</div>
+<div class="stats">
+<div class="stat"><span class="stat-n">4.800+</span><span class="stat-l">Automatische Buchungen</span></div>
+<div class="stat"><span class="stat-n">+30%</span><span class="stat-l">Mehr Direktbuchungen</span></div>
+<div class="stat"><span class="stat-n">4,9/5</span><span class="stat-l">Kundenbewertung</span></div>
+<div class="stat"><span class="stat-n">8 Spr.</span><span class="stat-l">Automatisch erkannt</span></div>
+</div>
+<img src="https://raw.githubusercontent.com/LeoLan-Digital/leolan-hotel/main/blog/images/hero/hotel.jpg" alt="Hotel Check-in automatisch" class="blog-img">
+<h2>Warum Pre-Arrival-Kommunikation entscheidend ist</h2>
+<p>Ein Gast der weiss was ihn erwartet kommt entspannt an. Ein Gast der sich fragen muss wo er parken soll wie der Check-in funktioniert oder ob sein Sonderwunsch bearbeitet wurde - kommt gestresst an. Und gestresste Gaeste hinterlassen schlechtere Bewertungen.</p>
+<p>Mit automatischer WhatsApp-Kommunikation vor der Ankunft aendert sich das: Jeder Gast bekommt genau die Infos die er braucht - zum richtigen Zeitpunkt in seiner Sprache.</p>
+<h2>Was automatische Pre-Arrival-Kommunikation leistet</h2>
+<ul>
+<li>Buchungsbestaetigung sofort nach der Reservierung</li>
+<li>24 Stunden vor Check-in: Anfahrtsbeschreibung Parkinfo Check-in-Zeit</li>
+<li>3 Stunden vor Ankunft: WLAN-Passwort Zimmernummer fruehzeitiger Check-in</li>
+<li>Sonderwuensche automatisch erfassen (Allergie Bett-Konfiguration Zimmerpraeferenz)</li>
+<li>Check-out Infos und Rechnung vorab versenden</li>
+<li>Nach dem Aufenthalt: Bewertungsanfrage und Wiederkehr-Angebot</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LeoLan-Digital/leolan-hotel/main/blog/images/app/dashboard.jpg" alt="LeoLan Hotel Manager App" class="app-img">
+<p class="cap">LeoLan Hotel Manager App - Gaeste-Kommunikation im Ueberblick</p>
+<h2>Automatisch mehrsprachig</h2>
+<p>Internationale Gaeste erhalten alle Nachrichten automatisch in ihrer Sprache. Der Bot erkennt die Sprache aus der ersten Nachricht und kommuniziert konsequent auf Deutsch Englisch Tuerkisch Arabisch Russisch Franzoesisch Italienisch oder Spanisch.</p>
+<p>Ein arabischer Geschaeftsreisender bekommt seine Anfahrtsbeschreibung auf Arabisch. Ein tuerkisches Ehepaar bekommt seinen Willkommensgruss auf Tuerkisch. Keine manuellen Uebersetzungen mehr.</p>
+<h2>Check-in Ablauf mit WhatsApp-Bot</h2>
+<ol>
+<li>Buchung eingeht: Sofortige Bestaetigung per WhatsApp</li>
+<li>7 Tage vor Ankunft: Reise-Erinnerung mit Hotel-Infos</li>
+<li>24 Stunden vorher: Anfahrt Parken Check-in Zeiten</li>
+<li>Am Check-in Tag: Zimmer-Nummer WLAN fruehes Einchecken</li>
+<li>Nach Check-out: Danke-Nachricht und Bewertungslink</li>
+</ol>
+<img src="https://raw.githubusercontent.com/LeoLan-Digital/leolan-hotel/main/blog/images/app/reservations.jpg" alt="LeoLan Hotel Reservierungen" class="app-img">
+<p class="cap">LeoLan Hotel Manager App - Reservierungs- und Gaestemanagement</p>
+<h2>Ergebnis: Bessere Bewertungen weniger Fragen</h2>
+<p>Hotels die automatische Pre-Arrival-Kommunikation einsetzen berichten:</p>
+<ul>
+<li>30-50% weniger Telefonanfragen am Check-in Tag</li>
+<li>Durchschnittliche Google-Bewertung steigt um 0.3-0.5 Sterne</li>
+<li>Gaestezufriedenheit messbar hoeher (NPS +15 Punkte)</li>
+<li>Sonderwuensche werden haeufiger erfuellt weil fruehzeitig kommuniziert</li>
+</ul>
+<div class="cta"><h3>Pre-Arrival-Kommunikation aktivieren</h3><p>Erster Monat kostenlos - Kein Vertrag - 5 Werktage Einrichtung</p><a href="https://hotel.leolan.net" class="btn">Kostenlos testen</a></div>
+<h2>Haeufige Fragen</h2>
+<div class="faq-item"><h3>Kann der Bot direkt mit Gaesten kommunizieren?</h3><p>Ja. Vollautomatisch in bis zu 8 Sprachen. Du kannst jederzeit manuell eingreifen.</p></div>
+<div class="faq-item"><h3>Wie wird die Gaestenummer erfasst?</h3><p>Beim Buchungsprozess oder durch Eingabe ins Hotel-Portal. Bestandsbuchungen koennen importiert werden.</p></div>
+<div class="faq-item"><h3>Was kostet der Hotel-Bot?</h3><p>Ab 149 EUR/Monat inklusive Pre-Arrival-Kommunikation. Erster Monat kostenlos.</p></div>
+</div>
+<footer>2026 LeoLan Digital - <a href="https://hotel.leolan.net" style="color:#4da6ff">hotel.leolan.net</a></footer>
+</body></html>

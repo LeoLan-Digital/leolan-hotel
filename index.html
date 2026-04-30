@@ -11,7 +11,8 @@
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="description" content="AI Concierge for Hotels & Resorts — digital room service, multilingual WhatsApp integration. More direct bookings, less Booking.com commission. LeoLan Digital.">
   <link rel="canonical" href="https://hotel.leolan.net/">
-  <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/">
+  <link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/">
+  <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/">
   <link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/">
   <link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/">
   <link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/">
@@ -589,6 +590,17 @@
       if (typeof gtag !== 'undefined') gtag('event', 'ab_test_impression', {'test_name': 'hotel_headline', 'variant': variant});
     });
   })();
+</script>
+<!-- language redirect -->
+<script>
+(function() {
+  var lang = (navigator.language || navigator.userLanguage || '').toLowerCase().split('-')[0];
+  var map = {'de': '/de/', 'tr': '/tr/', 'ru': '/ru/', 'id': '/id/', 'th': '/th/'};
+  var target = map[lang] || '/en/';
+  if (!window.location.pathname.match(/^\/(de|en|tr|ru|id|th)\//)) {
+    window.location.replace(target);
+  }
+})();
 </script>
 </head>
 <body>

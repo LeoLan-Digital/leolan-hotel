@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<base href="https://hotel.leolan.net/">
+<meta charset="UTF-8">
+<meta name="theme-color" content="#0d1117">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Concierge & WhatsApp Bot for Hotels | LeoLan Digital</title>
+  <!-- cache-bust: 2026-04-25-1652 -->
+  <meta http-equiv="Cache-Control" content="max-age=86400, public">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta name="description" content="AI Concierge for Hotels & Resorts — digital room service, multilingual WhatsApp integration. More direct bookings, less Booking.com commission. LeoLan Digital.">
+  <link rel="canonical" href="https://hotel.leolan.net/th/">
+  <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/">
+  <link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/">
+  <link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/">
+  <link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/">
+  <link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/">
+  <link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/">
+  <meta property="og:image" content="https://hotel.leolan.net/og-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:title" content="AI Concierge for Hotels & Resorts | LeoLan Digital">
+  <link rel="icon" type="image/png" href="/favicon-new.png">
+  <link rel="apple-touch-icon" href="/favicon-new.png">
+<style>
+  :root {
+    --navy: #1a2744;
+    --navy-2: #22345c;
+    --gold: #f5a623;
+    --gold-soft: rgba(245, 166, 35, 0.14);
+    --bg: #050505;
+    --surface: #0d0d0d;
+    --surface-2: #13213c;
+    --line: rgba(255,255,255,0.08);
+    --text: #f5f7fb;
+    --muted: rgba(245,247,251,0.72);
+    --soft: rgba(245,247,251,0.48);
+    --success: #34d399;
+    --shadow: 0 28px 70px rgba(0,0,0,0.34);
+    --radius: 24px;
+    --font: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    color: var(--text);
+    background: #000000;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 1000;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo img { width: 132px; display: block; }
+  .nav-logo { text-decoration: none; }
+  .nav-links { display: flex; list-style: none; gap: 28px; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover, .nav-cta:hover { color: #fff; }
+  .nav-cta {
+    text-decoration: none;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .hamburger span { width: 20px; height: 2px; background: #fff; display: block; }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(13,17,23,0.98);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(18px);
+    flex-direction: column;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    padding: 16px 24px;
+    text-decoration: none;
+    color: var(--muted);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .section-shell { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .section-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4.8vw, 60px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .hero {
+    padding: 148px 24px 88px;
+  }
+  .hero-grid {
+    max-width: 1260px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(245,166,35,0.24);
+    color: #ffd58a;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-size: clamp(42px, 7vw, 86px);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    margin-bottom: 22px;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 19px;
+    line-height: 1.75;
+    max-width: 700px;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 34px 0 22px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 16px;
+    transition: transform 0.18s ease, opacity 0.18s ease, background 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), #ffbf57);
+    color: #1a2744;
+    box-shadow: 0 16px 32px rgba(245,166,35,0.22);
+  }
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: var(--soft);
+    font-size: 14px;
+  }
+  .hero-card {
+    background: #000000;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .hero-image {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.8);
+  }
+  .hero-card-content {
+    padding: 24px;
+    display: grid;
+    gap: 16px;
+  }
+  .hero-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .metric {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 16px;
+  }
+  .metric strong { display: block; color: var(--gold); font-size: 28px; margin-bottom: 6px; }
+  .metric span { color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+  .brands,
+  .features,
+  .pricing,
+  .faq,
+  .cta,
+  .testimonials,
+  .difference {
+    padding: 100px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .brands-grid, .feature-grid, .pricing-grid, .testimonial-grid, .difference-grid, .stats-grid {
+    display: grid;
+    gap: 18px;
+  }
+  .brands-grid {
+    margin-top: 34px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .brand-card, .feature-card, .price-card, .testimonial-card, .difference-card, .stat-card, .faq-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(245,166,35,0.30);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+  }
+  .brand-card {
+    padding: 22px;
+    text-align: center;
+  }
+  .brand-card strong { display: block; font-size: 18px; margin-bottom: 6px; }
+  .brand-card span { color: var(--muted); font-size: 14px; }
+
+  .stats-grid {
+    margin-top: 34px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-card { padding: 26px; }
+  .stat-card strong {
+    display: block;
+    font-size: clamp(34px, 5vw, 54px);
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .stat-card span { color: var(--muted); line-height: 1.55; }
+
+  .feature-grid {
+    margin-top: 42px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .feature-card { padding: 28px; }
+  .feature-icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: var(--gold-soft);
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+  .feature-card h3 { font-size: 25px; margin-bottom: 12px; }
+  .feature-card p { color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+  .feature-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+  .feature-list li {
+    display: flex;
+    gap: 10px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .feature-list li::before { content: "✓"; color: var(--success); font-weight: 800; }
+
+  .difference-grid {
+    margin-top: 42px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .difference-card { padding: 30px; }
+  .difference-card h3 { font-size: 24px; margin-bottom: 14px; }
+  .difference-card ul {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+  .difference-card li {
+    display: flex;
+    gap: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .difference-card.before li::before { content: "✕"; color: #ff8f8f; font-weight: 800; }
+  .difference-card.after li::before { content: "✓"; color: var(--success); font-weight: 800; }
+
+  .pricing-grid {
+    margin-top: 42px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .price-card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+  .price-card.featured {
+    border-color: rgba(245,166,35,0.34);
+    background: rgba(245,166,35,0.08);
+  }
+  .price-badge {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(245,166,35,0.16);
+    color: #ffd58a;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .price-tier {
+    color: var(--soft);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .price-amount {
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: visible;
+  }
+  .price-period { color: var(--muted); margin-bottom: 18px; }
+  .price-card p { color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+  .price-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+  .price-list li {
+    display: flex;
+    gap: 10px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .price-list li::before { content: "•"; color: var(--gold); }
+
+  .testimonial-grid {
+    margin-top: 42px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .testimonial-card { padding: 28px; }
+  .testimonial-card .stars { color: var(--gold); margin-bottom: 16px; letter-spacing: 2px; }
+  .testimonial-card blockquote {
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+  .testimonial-card cite {
+    color: var(--muted);
+    font-style: normal;
+    line-height: 1.6;
+  }
+
+  .faq-list {
+    max-width: 900px;
+    margin: 42px auto 0;
+    display: grid;
+    gap: 14px;
+  }
+  .faq-item { overflow: hidden; }
+  .faq-q {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    padding: 22px 24px;
+    text-align: left;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    cursor: pointer;
+  }
+  .faq-q span { color: var(--gold); font-size: 28px; line-height: 1; }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .faq-a p {
+    padding: 0 24px 24px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .faq-item.open .faq-a { max-height: 220px; }
+  .faq-item.open .faq-q span { transform: rotate(45deg); }
+
+  .cta-wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 42px;
+    border-radius: 30px;
+    background: #0d0d0d;
+    border: 1px solid rgba(245,166,35,0.22);
+    box-shadow: var(--shadow);
+  }
+  .cta-wrap p { max-width: 680px; margin: 0 auto 28px; color: var(--muted); line-height: 1.75; font-size: 18px; }
+  .cta-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: var(--soft);
+    font-size: 14px;
+    margin-top: 20px;
+  }
+
+  .crosslink {
+    padding: 0 0 100px;
+  }
+  .crosslink-card {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 32px;
+    border-radius: 26px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .crosslink-card p { color: var(--muted); margin: 10px 0 20px; line-height: 1.7; }
+
+  footer {
+    padding: 24px 24px 16px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .footer-logo img { width: 180px; margin-bottom: 12px; }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .footer-links a:hover { color: #fff; }
+  footer p {
+    color: var(--soft);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+  .reveal-delay-3 { transition-delay: 0.24s; }
+
+  @media (max-width: 1040px) {
+    .hero-grid,
+    .feature-grid,
+    .pricing-grid,
+    .testimonial-grid,
+    .brands-grid,
+    .stats-grid,
+    .difference-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-grid { text-align: center; }
+    .hero-grid .eyebrow-pill { margin-left: auto; margin-right: auto; }
+    .hero-grid .hero-actions { justify-content: center; }
+    .hero-grid .hero-trust { justify-content: center; text-align: center; }
+    .hero-grid p { margin-left: auto; margin-right: auto; }
+  }
+    @media (max-width: 600px) {
+    footer { text-align: center !important; }
+    footer p { text-align: center !important; }
+    .footer-links { justify-content: center !important; flex-direction: column; align-items: center; gap: 10px; }
+    .footer-logo { text-align: center !important; }
+  }
+  @media (max-width: 640px) {
+    .pain-mobile-grid { grid-template-columns: 1fr !important; }
+    .stats-mobile-grid { grid-template-columns: 1fr 1fr !important; }
+    .ideal-mobile-grid { grid-template-columns: 1fr !important; }
+    .money-mobile-grid { grid-template-columns: 1fr !important; }
+    .upsell-mobile-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 700px) {
+    .hotel-demo-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+  }
+
+  @media (max-width: 768px) { .hero { padding-top: 80px !important; padding-bottom: 24px !important; } .hero-card { display: none !important; } .hero-grid { grid-template-columns: 1fr !important; } }
+  @media (max-width: 768px) {
+    nav { height: 64px; padding: 0 18px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { top: 64px; }
+    .hero { padding-top: 116px; }
+    .hero-metrics,
+    .feature-grid,
+    .pricing-grid,
+    .testimonial-grid,
+    .brands-grid,
+    .stats-grid,
+    .difference-grid { grid-template-columns: 1fr; }
+    .cta-wrap { padding: 32px 24px; }
+  }
+  .social-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
+  .social-links a { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; text-decoration: none; transition: transform 0.2s, opacity 0.2s; overflow: hidden; }
+  .social-links a:hover { transform: scale(1.1); opacity: 0.9; }
+  .social-links a svg { width: 56px; height: 56px; display: block; }
+</style>
+  <!-- ContentSquare / Hotjar Tracking -->
+  <script src="https://t.contentsquare.net/uxa/5b3e797417378.js" async></script>
+
+<script>
+  (function() {
+    var variant = localStorage.getItem('ab_hotel_hero');
+    if (!variant) { variant = Math.random() < 0.5 ? 'A' : 'B'; localStorage.setItem('ab_hotel_hero', variant); }
+    var headlines = {
+      A: 'More Direct Bookings.<br>Less Commission to Booking.com.',
+      B: 'Stop Paying Booking.com.<br>Own Your Guests.'
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+      var h1 = document.querySelector('.hero h1');
+      if (h1 && variant === 'B') h1.innerHTML = headlines[variant];
+      if (typeof gtag !== 'undefined') gtag('event', 'ab_test_impression', {'test_name': 'hotel_headline', 'variant': variant});
+    });
+  })();
+</script>
+</head>
+<body>
+<div id="cookieBanner" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+  <p style="font-size:13px; color:rgba(245,247,251,0.74); max-width:760px; line-height:1.6; margin:0;">เราใช้คุกกี้และเทคโนโลยีการติดตาม (Google Analytics และ Meta Pixel) เพื่อปรับปรุงเว็บไซต์นี้และวัดผลการดำเนินการของแคมเปญ <a href="#" onclick="document.cookie='cookie_consent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';location.reload();return false;" style="color:rgba(245,166,35,0.5);">การตั้งค่าคุกกี้</a> · <a href="/datenschutz.html" style="color:#f5a623;">เรียนรู้เพิ่มเติม</a></p>
+  <div style="display:flex; gap:10px; flex-shrink:0;">
+    <button onclick="rejectCookies()" style="padding:10px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background:transparent; color:rgba(245,247,251,0.72); font-size:13px; cursor:pointer; font-family:inherit;">ปฏิเสธ</button>
+    <button onclick="acceptCookies()" style="padding:10px 18px; border-radius:999px; border:none; background:#f5a623; color:#1a2744; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit;">ยอมรับ</button>
+  </div>
+</div>
+<script>
+  function setCookie(n,v,d){var e=new Date();e.setTime(e.getTime()+d*864e5);document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/';}
+  function getCookie(n){var v=document.cookie.match('(^|;) ?'+n+'=([^;]*)(;|$)');return v?v[2]:null;}
+  function loadTracking(){
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-25WZQPJ5F3';document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','G-25WZQPJ5F3',{linker:{accept_incoming:false}});
+    var u=new URL(window.location.href);['_gl','_ga','fbclid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(p){u.searchParams.delete(p);});if(u.href!==window.location.href){history.replaceState(null,'',u.href);}
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','584799746334676');fbq('track','PageView');
+  }
+  function acceptCookies(){setCookie('cookie_consent','accepted',365);document.getElementById('cookieBanner').style.display='none';loadTracking();}
+  function rejectCookies(){setCookie('cookie_consent','rejected',365);document.getElementById('cookieBanner').style.display='none';}
+  window.addEventListener('DOMContentLoaded',function(){
+    var c=getCookie('cookie_consent');
+    if(c){document.getElementById('cookieBanner').style.display='none';}
+    if(c==='accepted'){loadTracking();}
+  });
+</script>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="logo.svg" alt="LeoLan Digital"></a>
+  <ul class="nav-links">
+    <li><a href="#features">คุณสมบัติ</a></li>
+    <li><a href="#difference">ทำไมต้อง LeoLan</a></li>
+    <li><a href="#pricing">ราคา</a></li>
+    <li><a href="#faq">คำถามที่พบบ่อย</a></li>
+    <li><a href="/ueber-uns.html">เกี่ยวกับ</a></li>
+    <li><a href="/portal/" class="nav-cta" style="background:linear-gradient(135deg,#f5a623,#ffbf57);color:#1a2744;padding:8px 16px;border-radius:999px;font-weight:800;font-size:13px;">พอร์ทัลลูกค้า</a></li>
+  </ul>
+  <a href="/onboarding/enterprise/" class="nav-cta">เริ่มทดลองฟรี →</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="closeMenu()">คุณสมบัติ</a>
+  <a href="#difference" onclick="closeMenu()">ทำไมต้อง LeoLan</a>
+  <a href="#pricing" onclick="closeMenu()">ราคา</a>
+  <a href="#faq" onclick="closeMenu()">คำถามที่พบบ่อย</a>
+  <a href="/ueber-uns.html" onclick="closeMenu()">เกี่ยวกับ</a>
+  <a href="/portal/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">พอร์ทัลลูกค้า</a>
+  <a href="/onboarding/enterprise/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">เริ่มทดลองฟรี →</a>
+</div>
+
+
+<!-- SOCIAL PROOF -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div style="margin-bottom:20px;text-align:center;">
+  <div style="display:inline-flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;">
+    <span style="color:rgba(245,247,251,0.85);font-size:13px;"><strong style="color:#f5a623;font-size:17px;">18</strong> โรงแรมไว้วางใจ LeoLan</span>
+    <span style="color:rgba(255,255,255,0.25);">·</span>
+    <span style="color:rgba(245,247,251,0.85);font-size:13px;"><strong style="color:#34c759;font-size:17px;">€12,000+</strong> ประหยัดใน OTA</span>
+    <span style="color:rgba(255,255,255,0.25);">·</span>
+    <span style="color:rgba(245,247,251,0.85);font-size:13px;">⭐ <strong style="color:#ffd60a;font-size:17px;">4.9/5</strong> คะแนน</span>
+  </div>
+</div>
+<div class="eyebrow-pill reveal">สำหรับโรงแรมอิสระ & รีสอร์ทบูติก · 10+ ห้อง</div>
+      <h1 class="reveal reveal-delay-1">การจองโดยตรงมากขึ้น<br>ค่าคอมมิชชั่นน้อยลงให้กับ Booking.com</h1>
+      <p class="reveal reveal-delay-2">ผู้ช่วย AI ของคุณตอบคำขอของแขก ขายเพิ่มพิเศษ และปลดปล่อยแผนกต้อนรับของคุณ — 24 ชั่วโมงต่อวัน<br><br><br><br>💸 Booking.com รับค่าคอมมิชชั่น 15–20%<br>📵 ข้อความ WhatsApp ไม่ได้รับการตอบกลับ<br>⭐ การรีวิวไม่ได้รับการตอบกลับ ความไว้วางใจลดลง<br><br><strong>ทุกข้อความ WhatsApp ที่พลาด = การจองที่สูญเสียไปตรงไปยัง Booking.com<br><br>💡 <strong>เพียง 5 การจองโดยตรงเพิ่มเติมต่อเดือนสามารถประหยัดคุณได้ €500–2,000 ในค่าคอมมิชชั่น</strong> ซึ่งมากกว่า LeoLan ค่าใช้จ่าย — ทุกเดือนเดียว</strong><br><br>💰 โรงแรมที่มีการจองโดยตรง 10 ครั้ง/เดือนที่บันทึกผ่าน WhatsApp = <strong>€500–2,000 ในค่าคอมมิชชั่นกลับเข้ากระเป๋าของคุณ</strong> ทุกการรีวิวที่ไม่ได้รับคำตอบทำให้คุณสูญเสียความไว้วางใจ LeoLan แทนที่แผนกต้อนรับกลางคืนของคุณด้วย AI — จัดการการจอง ขายเพิ่มการอัพเกรดห้อง และตอบคำถามของแขกตลอด 24 ชั่วโมงทุกวัน ไม่มีพนักงานเพิ่มเติม ไม่มีค่าคอมมิชชั่น Booking.com ใช้งานได้ใน 5 วัน</p>
+      
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;" class="reveal reveal-delay-3">
+        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">🔒 DSGVO-konform</span>
+        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">💬 WhatsApp Business API</span>
+        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">⚡ ใช้งานได้ใน 5 วัน</span>
+        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">🇩🇪 การสนับสนุนจากเยอรมัน</span>
+      </div>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="/onboarding/enterprise/" class="btn btn-primary">รับการสาธิตฟรี →</a>
+        <a href="#features" class="btn btn-secondary">ดูการจองโดยตรงเพิ่มเติม ›</a>
+      </div>
+      <div class="hero-trust reveal reveal-delay-3">
+        <span>✓ ใช้งานได้ใน 5 วัน</span>
+        <span>✓ ไม่มีสัญญาระยะยาว</span>
+        <span>✓ การจองโดยตรงมากขึ้น — ไม่มีค่าธรรมเนียม Booking.com</span>
+      </div>
+    </div>
+    <div class="hero-card reveal reveal-delay-2">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80&auto=format&fit=crop" alt="ล็อบบี้โรงแรมบูติกหรู">
+      <div class="hero-card-content">
+        <div style="color:#fff; font-size:20px; font-weight:800;">หยุดจ่าย Booking.com 15-20% ในการจองทุกครั้ง</div>
+        <div style="color:var(--muted); line-height:1.7;">AI WhatsApp ของเราจับการจองโดยตรง — ก่อนที่แขกจะคิดถึงการเปิด Booking.com 80% ของนักท่องเที่ยวชอบการส่งข้อความ WhatsApp มากกว่าการโทรศัพท์ (Statista, 2024)</div>
+        <div class="hero-metrics">
+          <div class="metric"><strong>0%</strong><span>ค่าคอมมิชชั่น Booking.com ในการจองผ่าน WhatsApp</span></div>
+          <div class="metric"><strong>+30%</strong><span>รายได้จากการขายเพิ่มต่อการเข้าพัก</span></div>
+          <div class="metric"><strong>24/7</strong><span>แผนกต้อนรับดิจิทัล — ไม่ต้องมีพนักงานเพิ่มเติม</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brands">
+  <div class="section-shell">
+    <span class="section-tag reveal">ออกแบบสำหรับการต้อนรับระดับโลก</span>
+    <h2 class="section-title reveal reveal-delay-1">พนักงานต้อนรับ AI ที่จอง ขายเพิ่ม และตอบกลับ — ขณะที่คุณหลับ</h2>
+    <p class="section-sub reveal reveal-delay-2">จากจุดหมายปลายทางเขตร้อนไปจนถึงการพักผ่อนในเมืองบูติก แพลตฟอร์มนี้ออกแบบมาสำหรับการสื่อสารกับแขกหลายภาษา การวางตำแหน่งบริการระดับพรีเมียม และการดำเนินงานที่มีประสิทธิภาพ</p>
+    <div class="brands-grid">
+      <div class="brand-card reveal"><strong>บาหลี</strong><span>คอลเลกชันวิลล่า การพักผ่อนเพื่อสุขภาพ รีสอร์ทออกแบบ</span></div>
+      <div class="brand-card reveal reveal-delay-1"><strong>ประเทศไทย</strong><span>โรงแรมริมชายหาด ที่พักไลฟ์สไตล์ รีทรีต</span></div>
+      <div class="brand-card reveal reveal-delay-2"><strong>มัลดีฟส์</strong><span>วิลล่าหรู วิลล่าน้ำ แนวคิดเกาะส่วนตัว</span></div>
+      <div class="brand-card reveal reveal-delay-3"><strong>ยุโรป</strong><span>โรงแรมบูติกในเมือง ลอดจ์บนภูเขา การหลบหนีชายฝั่ง</span></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal"><strong>50+</strong><span>ภาษาที่เข้าใจสำหรับการสื่อสารกับแขก</span></div>
+      <div class="stat-card reveal reveal-delay-1"><strong>1 กล่องจดหมาย</strong><span>สำหรับคำขอบริการ การติดตามแขก และระบบอัตโนมัติ</span></div>
+      <div class="stat-card reveal reveal-delay-2"><strong>ตอบกลับเร็วขึ้น</strong><span>บน WhatsApp มากกว่าการทำงานของแผนกต้อนรับแบบดั้งเดิม</span></div>
+      <div class="stat-card reveal reveal-delay-3"><strong>พรีเมียม</strong><span>การนำเสนอแบรนด์ระดับพรีเมียมในทุกจุดสัมผัสของแขก</span></div>
+    </div>
+  </div>
+
+
+<!-- PAIN SECTION -->
+<section style="padding: 100px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 960px; margin: 0 auto;">
+    <p class="section-tag reveal">ความจริงในชีวิตประจำวัน</p>
+    <h2 class="section-title reveal reveal-delay-1">สิ่งที่เจ้าของโรงแรมทุกคน<br>รู้ดีเกินไป</h2>
+    <p class="section-sub reveal reveal-delay-2">ก่อนที่จะทำงานกับ LeoLan นี่คือปัญหาที่ลูกค้าของเราต้องเผชิญทุกวัน</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; padding: 2px;" class="reveal pain-mobile-grid">
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">📵</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">ข้อความที่พลาด = การจองที่พลาด</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">แขกส่ง WhatsApp ในตอนกลางคืน ไม่มีการตอบกลับ พวกเขาจองที่อื่น นั่นคือการจองที่สูญเสียที่คุณไม่เคยรู้มาก่อน</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">💸</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Booking.com รับ 15–20%</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">การจองทุกครั้งผ่าน OTA ทำให้คุณเสียรายได้หนึ่งในห้า โรงแรมที่มีการจอง 100 ครั้ง/เดือนสูญเสียค่าคอมมิชชั่นหลายพันทุกเดือน</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">⭐</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">รีวิวไม่ได้รับการตอบกลับ</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">94% ของแขกอ่านการตอบกลับรีวิวก่อนจอง โรงแรมที่ตอบกลับเห็นการจองเพิ่มขึ้น 12% คุณรู้เรื่องนี้ — แต่ใครมีเวลา?</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">🌍</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">อุปสรรคทางภาษา</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">แขกต่างชาติเขียนเป็นภาษาเยอรมัน ฝรั่งเศส อาหรับ หรือไทย ทีมของคุณไม่สามารถตอบกลับได้อย่างเหมาะสมเสมอไป — และแขกสังเกตเห็น</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">📱</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">ไม่มีการแสดงตัวตนในโซเชียลมีเดีย</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Instagram และ Google มีความสำคัญ — แต่การโพสต์ทุกวันขณะบริหารโรงแรมเป็นไปไม่ได้ โปรไฟล์ของคุณดูถูกละเลย แขกสังเกตเห็นเช่นกัน</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
+        <div style="font-size: 32px; margin-bottom: 16px;">🛎️</div>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">การขายเพิ่มที่เหลืออยู่บนโต๊ะ</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">การอัพเกรด อาหารเช้า สปา เช็คเอาท์ล่าช้า แขกจะซื้อ — หากมีคนถาม การทำเช่นนี้ด้วยตนเองเป็นไปไม่ได้ ดังนั้นรายได้จึงยังไม่ถูกจับ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding: 80px 24px; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;" class="stats-mobile-grid">
+    <div class="reveal">
+      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">15–20%</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">ค่าคอมมิชชั่น OTA ต่อการจอง</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">94%</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">ของแขกอ่านการตอบกลับรีวิวก่อนจอง</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">+30%</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">รายได้จากการขายเพิ่มมากขึ้นด้วยกระบวนการอัตโนมัติของแขก</div>
+    </div>
+    <div class="reveal reveal-delay-3">
+      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">5 วัน</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">จนกว่าผู้ช่วย AI ของคุณจะใช้งานได้</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="padding: 100px 24px; border-top: 1px solid rgba(255,255,255,0.07); text-align: center;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <p class="section-tag reveal">กระบวนการง่าย ๆ</p>
+    <h2 class="section-title reveal reveal-delay-1">ใช้งานได้ใน 5 วัน ไม่ต้องมีทักษะทางเทคนิค</h2>
+    <p class="section-sub reveal reveal-delay-2">เราจัดการทุกอย่าง คุณเพียงตอบคำถามสองสามข้อและอนุมัติการตั้งค่า</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px;" class="reveal ideal-mobile-grid">
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 36px 28px; text-align: left; position: relative;">
+        <div style="font-size: 48px; font-weight: 800; color: rgba(245,166,35,0.3); position: absolute; top: 16px; right: 20px;">01</div>
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">การปรึกษาฟรี</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.65;">30 นาที เราเรียนรู้เกี่ยวกับโรงแรมของคุณ แขกของคุณ และที่ที่คุณสูญเสียการจอง ฟรี ไม่มีข้อผูกมัด</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 36px 28px; text-align: left; position: relative;">
+        <div style="font-size: 48px; font-weight: 800; color: rgba(245,166,35,0.3); position: absolute; top: 16px; right: 20px;">02</div>
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">เราสร้างทุกอย่าง</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.65;">คุณส่งข้อมูลห้องพัก ราคา และคำถามที่พบบ่อยให้เรา เราตั้งค่าผู้ช่วย WhatsApp ของคุณ ระบบรีวิว และโซเชียลมีเดีย คุณอนุมัติ</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 36px 28px; text-align: left; position: relative;">
+        <div style="font-size: 48px; font-weight: 800; color: rgba(245,166,35,0.3); position: absolute; top: 16px; right: 20px;">03</div>
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">ใช้งาน & รับรายได้มากขึ้น</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.65;">ภายใน 5 วันทำการ ผู้ช่วย AI ของคุณจะใช้งานได้ การจองโดยตรงเริ่มเข้ามา การขายเพิ่มเกิดขึ้นโดยอัตโนมัติ รีวิวได้รับการตอบกลับ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 48px 24px; background: rgba(245,166,35,0.05); border-top: 1px solid rgba(245,166,35,0.2); border-bottom: 1px solid rgba(245,166,35,0.2); text-align: center;">
+  <div style="max-width: 700px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px;" class="reveal money-mobile-grid">
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.3); border-radius: 16px; padding: 24px;">
+        <div style="font-size: 36px; font-weight: 800; color: #f5a623;">20%</div>
+        <div style="font-size: 14px; color: rgba(245,247,251,0.65); margin-top: 6px;">ของรายได้ของคุณไปยังแพลตฟอร์ม OTA — ในการจองทุกครั้ง</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(52,199,89,0.3); border-radius: 16px; padding: 24px;">
+        <div style="font-size: 36px; font-weight: 800; color: #34c759;">0%</div>
+        <div style="font-size: 14px; color: rgba(245,247,251,0.65); margin-top: 6px;">ค่าคอมมิชชั่นในการจอง WhatsApp โดยตรงผ่าน LeoLan</div>
+      </div>
+    </div>
+    <p style="font-size: 16px; font-weight: 600; color: rgba(245,247,251,0.85);" class="reveal">รับการจองโดยตรงของคุณกลับคืนมา — และรักษากำไรเต็มที่</p>
+  </div>
+</section>
+
+<section style="padding: 60px 24px; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+    <h2 style="font-size: clamp(24px, 3vw, 36px); font-weight: 700; text-align: center; margin-bottom: 24px;" class="reveal">นี่คือสำหรับคุณถ้า…</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="reveal">
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.2); border-radius: 16px; padding: 24px;">
+        <p style="font-size: 13px; font-weight: 700; color: #f5a623; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">เหมาะกับโรงแรมของคุณ</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0;">
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">💸 การพึ่งพา Booking.com สูง</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">🌍 แขกต่างชาติ หลายภาษา</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">🛎️ คำถามซ้ำซากของแขกทุกวัน</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">📵 แผนกต้อนรับไม่พร้อมใช้งานตลอด 24 ชั่วโมง</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">💰 ศักยภาพการขายเพิ่มที่ยังไม่ได้รับการจับ</li>
+        </ul>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(52,199,89,0.2); border-radius: 16px; padding: 24px;">
+        <p style="font-size: 13px; font-weight: 700; color: #34c759; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">สิ่งที่คุณได้รับ</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0;">
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ การจองโดยตรงมากขึ้น ค่าคอมมิชชั่นน้อยลง</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ การขายเพิ่มอัตโนมัติ — อาหารเช้า สปา การอัพเกรด</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ การสื่อสารกับแขกตลอด 24 ชั่วโมง ไม่มีพนักงานเพิ่มเติม</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ รีวิวที่ดีขึ้น ความไว้วางใจมากขึ้น</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ ความเครียดของแผนกต้อนรับน้อยลง ทีมงานมีความสุขมากขึ้น</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- HOTEL WHATSAPP DEMO -->
+<section style="padding: 80px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.07);">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <p class="section-tag reveal">ตัวอย่างในโลกจริง</p>
+    <h2 class="section-title reveal reveal-delay-1">ผู้ช่วย AI ของคุณทำงาน — ขณะที่คุณหลับ</h2>
+    <p class="section-sub reveal reveal-delay-2">แขกส่งข้อความตอน 23.00 น. เพื่อสอบถามเกี่ยวกับการอัพเกรดห้อง ผู้ช่วย AI ของคุณจัดการทันที — และขายเพิ่มแพ็คเกจอาหารเช้า</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; text-align: left;" class="reveal hotel-demo-grid">
+      <!-- WhatsApp Mockup Hotel -->
+      <div style="background: #0a0f1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden;">
+        <div style="background: #075E54; padding: 14px 20px; display: flex; align-items: center; gap: 12px;">
+          <div style="width: 38px; height: 38px; background: #128C7E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">🏨</div>
+          <div>
+            <div style="color: #fff; font-weight: 600; font-size: 15px;">ผู้ช่วยโรงแรม</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 12px;">● ออนไลน์ · ตอบกลับทันที</div>
+          </div>
+        </div>
+        <div style="padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="align-self: flex-end; background: #DCF8C6; color: #000; padding: 10px 14px; border-radius: 12px 12px 0 12px; font-size: 14px; max-width: 80%;">
+            สวัสดีค่ะ สามารถอัพเกรดเป็นห้องวิวทะเลสำหรับพรุ่งนี้ได้ไหมคะ?
+            <div style="font-size: 11px; color: rgba(0,0,0,0.4); text-align: right; margin-top: 4px;">23:04 ✓✓</div>
+          </div>
+          <div style="align-self: flex-start; background: #fff; color: #000; padding: 10px 14px; border-radius: 12px 12px 12px 0; font-size: 14px; max-width: 85%;">
+            สวัสดีค่ะ! 😊 ข่าวดี — เรามีห้อง Sea View Deluxe สำหรับการเข้าพักของคุณ<br><br>
+            การอัพเกรดมีค่าใช้จ่าย €45/คืน ต้องการให้ฉันจัดการให้คุณไหมคะ?
+            <div style="font-size: 11px; color: rgba(0,0,0,0.4); text-align: right; margin-top: 4px;">23:04 · AI Concierge</div>
+          </div>
+          <div style="align-self: flex-end; background: #DCF8C6; color: #000; padding: 10px 14px; border-radius: 12px 12px 0 12px; font-size: 14px; max-width: 80%;">
+            ได้ค่ะ! และขอเพิ่มอาหารเช้าด้วยได้ไหมคะ?
+            <div style="font-size: 11px; color: rgba(0,0,0,0.4); text-align: right; margin-top: 4px;">23:05 ✓✓</div>
+          </div>
+          <div style="align-self: flex-start; background: #fff; color: #000; padding: 10px 14px; border-radius: 12px 12px 12px 0; font-size: 14px; max-width: 85%;">
+            ✅ สมบูรณ์แบบ! ฉันได้เพิ่ม:<br>
+            🌊 อัพเกรด Sea View Deluxe: €45/คืน<br>
+            🍳 อาหารเช้าสำหรับ 2 คน: €28/วัน<br><br>
+            รวมทั้งหมด: €73/วัน การยืนยันถูกส่งแล้ว! เจอกันพรุ่งนี้ค่ะ 🌅
+            <div style="font-size: 11px; color: rgba(0,0,0,0.4); text-align: right; margin-top: 4px;">23:05 · AI Concierge</div>
+          </div>
+        </div>
+      </div>
+      <!-- Results Hotel -->
+      <div style="display: flex; flex-direction: column; justify-content: center; gap: 24px;">
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.35); border-radius: 16px; padding: 24px;">
+          <div style="font-size: 36px; font-weight: 700; color: #f5a623;">23:04</div>
+          <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">แขกส่งข้อความตอนกลางคืน — ทีมของคุณกำลังหลับ</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(52,199,89,0.35); border-radius: 16px; padding: 24px;">
+          <div style="font-size: 36px; font-weight: 700; color: #34c759;">+€73</div>
+          <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">รายได้จากการขายเพิ่ม — อัพเกรด + อาหารเช้า ไม่มีการใช้แรงงานพนักงาน</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px;">
+          <div style="font-size: 36px; font-weight: 700; color: #f5a623;">0%</div>
+          <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">ค่าคอมมิชชั่น Booking.com — การจองโดยตรงผ่าน WhatsApp</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</section>
+
+<section class="features" id="features">
+  <div class="section-shell">
+    <span class="section-tag reveal">โมดูลหลัก</span>
+    <h2 class="section-title reveal reveal-delay-1">สี่ชั้นของระบบอัตโนมัติที่ยกระดับการบริการแขกและประหยัดเวลาพนักงาน</h2>
+    <p class="section-sub reveal reveal-delay-2">เลือกโมดูลเดียวหรือรวมบริการหลายอย่าง ทุกแพ็คเกจเป็นแบบโมดูลาร์ เป็นมิตรกับโรงแรม และออกแบบมาเพื่อสนับสนุนการดำเนินงานของแขกในโลกจริง</p>
+    <div class="feature-grid">
+      <article class="feature-card reveal">
+        <div class="feature-icon">💬</div>
+        <h3>บอทผู้ช่วย WhatsApp</h3>
+        <p>เสนอการสนับสนุนแขกหลายภาษาผ่านช่องทางที่นักท่องเที่ยวใช้แล้ว จัดการคำขอบริการทำความสะอาด คำถามเช็คอิน การแจ้งเตือนบริการห้องพัก และความต้องการของผู้ช่วยได้ทันที</p>
+        <ul class="feature-list">
+          <li>แชทหลายภาษาสำหรับแขกต่างชาติ</li>
+          <li>คำถามที่พบบ่อยอัตโนมัติ คำขอ และการแจ้งเตือนการขายเพิ่ม</li>
+          <li>เวิร์กโฟลว์บริการเฉพาะห้องสำหรับทีมของคุณ</li>
+          <li>โทนหรูหราที่ปรับให้เหมาะกับทรัพย์สินของคุณ</li>
+        </ul>
+      </article>
+      <article class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">📱</div>
+        <h3>โซเชียลมีเดียอัตโนมัติ</h3>
+        <p>รักษาแบรนด์ของคุณให้มีชีวิตชีวาบน Instagram และ Facebook โดยไม่ต้องไล่ล่าการผลิตเนื้อหาประจำวัน โปรโมทข้อเสนอ ประสบการณ์ ช่วงเวลา F&amp;B และการเล่าเรื่องปลายทางโดยอัตโนมัติ</p>
+        <ul class="feature-list">
+          <li>การสร้างเนื้อหาที่กำหนดเวลาไว้สำหรับแบรนด์โรงแรมของคุณ</li>
+          <li>ไอเดียโพสต์ที่เน้นฤดูกาลและปลายทาง</li>
+          <li>การวางตำแหน่งหรูหราที่สม่ำเสมอในทุกช่องทาง</li>
+          <li>การประสานงานด้วยตนเองน้อยลงสำหรับทีมของคุณ</li>
+        </ul>
+      </article>
+      <article class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">⭐</div>
+        <h3>การจัดการรีวิว</h3>
+        <p>ตอบกลับรีวิวได้เร็วขึ้นและเป็นมืออาชีพมากขึ้น สร้างความไว้วางใจกับแขกในอนาคตขณะปกป้องชื่อเสียงของคุณในแพลตฟอร์มรีวิวหลัก</p>
+        <ul class="feature-list">
+          <li>การตอบกลับที่ได้รับความช่วยเหลือจาก AI ที่ปรับให้เหมาะกับแต่ละรีวิว</li>
+          <li>การตอบกลับที่รวดเร็วขึ้นสำหรับข้อเสนอแนะเชิงบวกและเชิงวิจารณ์</li>
+          <li>ชื่อเสียงออนไลน์ที่แข็งแกร่งขึ้นในตลาด</li>
+          <li>การมองเห็นการจัดการที่สม่ำเสมอมากขึ้น</li>
+        </ul>
+      </article>
+      <article class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">✉️</div>
+        <h3>ระบบอัตโนมัติอีเมลแขก</h3>
+        <p>ทำให้วงจรชีวิตของแขกเป็นอัตโนมัติตั้งแต่ก่อนมาถึงจนถึงการติดตามหลังการเข้าพัก คงความเงางาม มีความกระตือรือร้น และตรงตามแบรนด์โดยไม่ต้องใช้เวลาทำงานเพิ่มเติม</p>
+        <ul class="feature-list">
+          <li>อีเมลก่อนมาถึงพร้อมโอกาสในการขายเพิ่ม</li>
+          <li>การสนับสนุนการเข้าพักและการติดตามแผนการเดินทาง</li>
+          <li>การไหลของรีวิวหลังการเข้าพักและแขกที่กลับมา</li>
+          <li>การสื่อสารหน้าสำนักงานที่ซ้ำซ้อนน้อยลง</li>
+        </ul>
+      </article>
+      <article class="feature-card reveal reveal-delay-4">
+        <div class="feature-icon">🔒</div>
+        <h3>DSGVO &amp; ความปลอดภัยของข้อมูล</h3>
+        <p>ปฏิบัติตาม GDPR 100% ข้อมูลแขกของคุณยังคงอยู่ในเยอรมนี การปกป้องข้อมูลไม่ใช่คุณสมบัติ — มาตรฐานของเรา การโฮสต์ในศูนย์ข้อมูลเยอรมัน</p>
+        <ul class="feature-list">
+          <li>การโฮสต์ในศูนย์ข้อมูลเยอรมัน</li>
+          <li>การปฏิบัติตาม GDPR อย่างเต็มรูปแบบ</li>
+          <li>ไม่มีการแบ่งปันข้อมูลกับบุคคลที่สาม</li>
+          <li>การสื่อสารกับแขกที่เข้ารหัส</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="difference" id="difference">
+  <div class="section-shell">
+    <span class="section-tag reveal">ก่อน vs. หลัง</span>
+    <h2 class="section-title reveal reveal-delay-1">สิ่งที่เปลี่ยนแปลงเมื่อการสื่อสารกับแขกไม่ขึ้นอยู่กับการตอบกลับด้วยตนเอง</h2>
+    <div class="difference

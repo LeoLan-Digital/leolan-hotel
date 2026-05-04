@@ -145,4 +145,12 @@
     <priority>0.5</priority>
   </url>
 
+  <url>
+    <loc>https://hotel.leolan.net/blog/whatsapp-concierge-hotel/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/blog/whatsapp-concierge-hotel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/whatsapp-concierge-hotel/"/>
+  </url>
+
 </urlset>

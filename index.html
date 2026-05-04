@@ -573,8 +573,7 @@
   .social-links a:hover { transform: scale(1.1); opacity: 0.9; }
   .social-links a svg { width: 56px; height: 56px; display: block; }
 </style>
-  <!-- ContentSquare / Hotjar Tracking -->
-  <script src="https://t.contentsquare.net/uxa/5b3e797417378.js" async></script>
+  <!-- ContentSquare loaded after cookie consent only -->
 
 <script>
   (function() {
@@ -601,6 +600,40 @@
     window.location.replace(target);
   }
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "LeoLan Digital",
+      "url": "https://hotel.leolan.net",
+      "logo": "https://hotel.leolan.net/logo.svg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+49-3521-788680",
+        "contactType": "sales",
+        "areaServed": "International",
+        "availableLanguage": ["German","English","Turkish","Russian","Indonesian","Thai"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "url": "https://hotel.leolan.net",
+      "name": "LeoLan Digital — AI Concierge for Hotels",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Service",
+      "name": "AI Concierge & WhatsApp Bot for Hotels",
+      "provider": {"@type": "Organization", "name": "LeoLan Digital"},
+      "description": "AI-powered WhatsApp concierge, review management, and guest communication automation for hotels. More direct bookings, zero OTA commission.",
+      "areaServed": "International",
+      "serviceType": "Hotel Automation Software"
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -1284,7 +1317,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
   </div>
   <div class="footer-logo"><img src="/logo.svg" alt="LeoLan Digital"></div>
   <div class="social-links">
-    <a href="https://instagram.com/leolan_digital" target="_blank" title="Instagram">
+    <a href="https://instagram.com/leolan_digital" target="_blank" rel="noopener noreferrer" title="Instagram">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <defs><radialGradient id="ig-grad2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs>
         <rect width="48" height="48" rx="12" fill="url(#ig-grad2)"/>
@@ -1293,7 +1326,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
         <circle cx="31.5" cy="16.5" r="1.5" fill="white"/>
       </svg>
     </a>
-    <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" title="Facebook">
+    <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" rel="noopener noreferrer" title="Facebook">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <rect width="48" height="48" rx="12" fill="#1877F2"/>
         <path d="M31 24h-4v14h-6V24h-3v-5h3v-3c0-4 2-6 6-6h4v5h-2c-1.5 0-2 .5-2 2v2h4l-0.5 5z" fill="white"/>
@@ -1379,7 +1412,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     msg.className='chatbot-message '+sender;
     var lc=text.toLowerCase();
     var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('suite')||lc.includes('modul')||lc.includes('starter')||lc.includes('pro')||lc.includes('enterprise')||lc.includes('buchen')||lc.includes('booking')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding'));
-    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/onboarding/?paket=starter" target="_blank" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Packages</a><a href="/onboarding/enterprise/" target="_blank" style="display:inline-block;background:#2695d3;color:#fff;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">🔧 Single Module</a></div>':'';
+    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/onboarding/?paket=starter" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Packages</a><a href="/onboarding/enterprise/" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#2695d3;color:#fff;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">🔧 Single Module</a></div>':'';
     msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;

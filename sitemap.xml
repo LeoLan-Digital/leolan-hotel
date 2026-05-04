@@ -1,7 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://hotel.leolan.net/</loc><lastmod>2026-04-29</lastmod><priority>1.0</priority></url>
-  <url><loc>https://hotel.leolan.net/blog/ki-fuer-hotels/</loc><lastmod>2026-04-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://hotel.leolan.net/blog/mehr-direktbuchungen-hotel/</loc><lastmod>2026-04-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://hotel.leolan.net/blog/check-in-whatsapp/</loc><lastmod>2026-04-30</lastmod><priority>0.8</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage (language redirect) -->
+  <url>
+    <loc>https://hotel.leolan.net/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/"/>
+  </url>
+
+  <!-- German -->
+  <url>
+    <loc>https://hotel.leolan.net/de/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/"/>
+  </url>
+
+  <!-- English -->
+  <url>
+    <loc>https://hotel.leolan.net/en/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/"/>
+  </url>
+
+  <!-- Turkish -->
+  <url>
+    <loc>https://hotel.leolan.net/tr/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/"/>
+  </url>
+
+  <!-- Russian -->
+  <url>
+    <loc>https://hotel.leolan.net/ru/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/"/>
+  </url>
+
+  <!-- Indonesian -->
+  <url>
+    <loc>https://hotel.leolan.net/id/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/"/>
+  </url>
+
+  <!-- Thai -->
+  <url>
+    <loc>https://hotel.leolan.net/th/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/"/>
+  </url>
+
+  <!-- Blog posts -->
+  <url>
+    <loc>https://hotel.leolan.net/blog/ki-fuer-hotels/</loc>
+    <lastmod>2026-04-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/blog/ki-fuer-hotels/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/ki-fuer-hotels/"/>
+  </url>
+  <url>
+    <loc>https://hotel.leolan.net/blog/mehr-direktbuchungen-hotel/</loc>
+    <lastmod>2026-04-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/blog/mehr-direktbuchungen-hotel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/mehr-direktbuchungen-hotel/"/>
+  </url>
+  <url>
+    <loc>https://hotel.leolan.net/blog/check-in-whatsapp/</loc>
+    <lastmod>2026-04-30</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/blog/check-in-whatsapp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/check-in-whatsapp/"/>
+  </url>
+
+  <!-- Legal pages (DE) -->
+  <url>
+    <loc>https://hotel.leolan.net/de/impressum/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hotel.leolan.net/de/datenschutz/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hotel.leolan.net/de/agb/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hotel.leolan.net/de/ueber-uns/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>

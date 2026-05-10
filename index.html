@@ -1407,7 +1407,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
         <div class="chatbot-avatar" style="padding:0;overflow:hidden"><img src="https://ki.leolan.net/leolan-logo.png" width="42" height="42" style="display:block;border-radius:50%;object-fit:cover" alt="LeoLan"></div>
         <div>
           <strong>LeoLan AI</strong>
-          <span>Hotel Guest Assistant Demo</span>
+          <span>Hotel-KI Assistent — Demo</span>
         </div>
       </div>
       <button class="chatbot-close" id="chatbotClose" aria-label="Schließen">✕</button>
@@ -1466,12 +1466,12 @@ document.getElementById('contactForm').addEventListener('submit', async function
       setTimeout(function(){ctrl.abort();},20000);
       var resp=await fetch('https://n8n.leolan.net/webhook/hotel-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:message,moduleKey:'hotel-demo',history:chatHistory}),signal:ctrl.signal});
       var data=await resp.json();
-      var reply=data.reply||data.message||'I am here to help! 🏨';
+      var reply=data.reply||data.message||'Hallo! Wie kann ich Ihnen helfen? 🏨';
       chatHistory.push({role:'user',content:message});
       chatHistory.push({role:'assistant',content:reply});
       if(chatHistory.length>16)chatHistory=chatHistory.slice(-16);
       return reply;
-    }catch(e){return 'Let me connect you with our team! Please visit hotel.leolan.net/onboarding';}
+    }catch(e){return 'Entschuldigung, kurze Verbindungsstörung. Bitte versuchen Sie es nochmal oder besuchen Sie hotel.leolan.net/onboarding';}
   }
   async function openChatbot(){
     document.getElementById('chatbotModal').classList.add('open');

@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /portal/
+Disallow: /onboarding/
 Sitemap: https://hotel.leolan.net/sitemap.xml
 
 # AI Search Bots — explicitly allowed for citation

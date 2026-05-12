@@ -153,4 +153,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/whatsapp-concierge-hotel/"/>
   </url>
 
+  <url>
+    <loc>https://hotel.leolan.net/blog/hotel-digitalisierung-2026/</loc>
+    <lastmod>2026-05-12</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/blog/hotel-digitalisierung-2026/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/hotel-digitalisierung-2026/"/>
+  </url>
+
 </urlset>

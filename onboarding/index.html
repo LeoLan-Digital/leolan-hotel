@@ -71,6 +71,8 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Skip to main content</a>
+
 <div style="background:#0d1117;border-bottom:1px solid #21262d;position:sticky;top:0;z-index:100;padding:12px 20px">
   <a href="https://hotel.leolan.net/" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;color:#8b949e;text-decoration:none;font-size:14px;font-weight:600">
     <span style="font-size:18px">←</span> Home
@@ -163,7 +165,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
       <div class="g2">
         <div class="field"><label>VAT ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input aria-label="DE123456789" type="text" id="vatId" placeholder="DE123456789"><div class="hint">With VAT ID → 0% VAT (Reverse Charge)</div></div>
         <div class="field"><label>Country *</label>
-          <select id="country" onchange="detectEU()" style="background:#0e1621;border:1px solid #2a3a4a;color:#e8eaed;border-radius:12px;padding:13px 16px;font-size:16px;outline:none;width:100%">
+          <select aria-label="Select option" id="country" onchange="detectEU()" style="background:#0e1621;border:1px solid #2a3a4a;color:#e8eaed;border-radius:12px;padding:13px 16px;font-size:16px;outline:none;width:100%">
             <option value="">Select country...</option>
             <optgroup label="EU"><option value="DE">Germany</option><option value="AT">Austria</option><option value="FR">France</option><option value="IT">Italy</option><option value="ES">Spain</option><option value="NL">Netherlands</option><option value="BE">Belgium</option><option value="SE">Sweden</option></optgroup>
             <optgroup label="Non-EU Europe"><option value="GB">United Kingdom</option><option value="CH">Switzerland</option><option value="TR">Turkey</option></optgroup>
@@ -387,5 +389,6 @@ function sseo(s){seo=s;['none','basic','pro'].forEach(function(x){var el=documen
 function updateTotal(){var base=pkg==='starter'?199:349;var seoPrice=seo==='basic'?99:seo==='pro'?199:0;var t=document.getElementById('total-price');if(t)t.textContent='€'+(base+seoPrice)+'/month';}
 
 </script>
+</main>
 </body>
 </html>

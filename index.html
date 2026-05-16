@@ -659,6 +659,8 @@
 </script>
 </head>
 <body>
+<a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Skip to main content</a>
+
 <div id="cookieBanner" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
   <p style="font-size:13px; color:rgba(245,247,251,0.74); max-width:760px; line-height:1.6; margin:0;">We use cookies and tracking technologies (Google Analytics and Meta Pixel) to improve this website and measure campaign performance. <a href="#" onclick="document.cookie='cookie_consent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';location.reload();return false;" style="color:rgba(245,166,35,0.5);">Cookie Settings</a> · <a href="/datenschutz.html" style="color:#f5a623;">Learn more</a></p>
   <div style="display:flex; gap:10px; flex-shrink:0;">
@@ -685,6 +687,7 @@
   });
 </script>
 
+<header role="banner">
 <nav>
   <a href="/" class="nav-logo"><img src="logo.svg" alt="LeoLan Digital"></a>
   <ul class="nav-links">
@@ -697,7 +700,8 @@
   </ul>
   <a href="/onboarding/enterprise/" class="nav-cta">Start Free Trial →</a>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
-</nav><main>
+</nav>
+</header><main id="main-content">
 <div class="mobile-menu" id="mobileMenu">
   <a href="#features" onclick="closeMenu()">Features</a>
   <a href="#difference" onclick="closeMenu()">Why LeoLan</a>

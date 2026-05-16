@@ -604,17 +604,7 @@
     });
   })();
 </script>
-<!-- language redirect -->
-<script>
-(function() {
-  var lang = (navigator.language || navigator.userLanguage || '').toLowerCase().split('-')[0];
-  var map = {'de': '/de/', 'tr': '/tr/', 'ru': '/ru/', 'id': '/id/', 'th': '/th/'};
-  var target = map[lang] || '/en/';
-  if (!window.location.pathname.match(/^\/(de|en|tr|ru|id|th)\//)) {
-    window.location.replace(target);
-  }
-})();
-</script>
+<!-- language redirect: replaced by server-side _redirects -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

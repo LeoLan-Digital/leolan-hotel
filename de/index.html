@@ -13,6 +13,10 @@
   <meta name="description" content="WhatsApp-Bot & KI für Hotels – Gästekommunikation, Zimmer-Upgrades, Direktbuchungs-Automatisierung. Booking.com-Provisionen um bis zu 20 % senken. Jetzt kostenlose Demo!">
   <meta name="keywords" content="Hotel WhatsApp Bot, KI Hotelmanagement, Gästekommunikation, Zimmer-Upgrade Automatisierung, Hotel Chatbot, Direktbuchungen, Hotel KI Concierge, Buchungssystem">
   <link rel="canonical" href="https://hotel.leolan.net/de/">
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://n8n.leolan.net">
+
   <link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/">
   <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/">
   <link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/">
@@ -341,6 +345,8 @@
   .social-links a { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; text-decoration: none; transition: transform 0.2s, opacity 0.2s; overflow: hidden; }
   .social-links a:hover { transform: scale(1.1); opacity: 0.9; }
   .social-links a svg { width: 56px; height: 56px; display: block; }
+.skip-nav:focus { top: 0 !important; }
+input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px solid #0a3d62 !important; outline-offset: 2px !important; }
 </style>
   <!-- ContentSquare loaded after cookie consent only -->
 
@@ -363,7 +369,7 @@
 <body>
 <a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Skip to main content</a>
 
-<div id="cookieBanner" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+<div id="cookieBanner" role="alertdialog" aria-label="Cookie-Einstellungen" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
   <p style="font-size:13px; color:rgba(245,247,251,0.87); max-width:760px; line-height:1.6; margin:0;">Wir verwenden Cookies und Tracking-Technologien (Google Analytics und Meta Pixel), um diese Website zu verbessern und Kampagnen zu messen. <a href="#" onclick="document.cookie='cookie_consent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';location.reload();return false;" style="color:rgba(245,166,35,0.9);">Cookie-Einstellungen</a> · <a href="de/datenschutz/" style="color:#f5a623;">Mehr erfahren</a></p>
   <div style="display:flex; gap:10px; flex-shrink:0;">
     <button onclick="rejectCookies()" style="padding:10px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background:transparent; color:rgba(245,247,251,0.72); font-size:13px; cursor:pointer; font-family:inherit;">Ablehnen</button>
@@ -401,9 +407,9 @@
     <li><a href="/portal/" class="nav-cta" style="background:linear-gradient(135deg,#f5a623,#ffbf57);color:#1a2744;padding:8px 16px;border-radius:999px;font-weight:800;font-size:13px;">Kundenportal</a></li>
   </ul>
   <a href="/onboarding/enterprise/" class="nav-cta">Kostenlos testen →</a>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
+  <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
 </nav>
-</header><main id="main-content">
+</header><main id="main-content" tabindex="-1">
 <div class="mobile-menu" id="mobileMenu">
   <a href="#features" onclick="closeMenu()">Funktionen</a>
   <a href="#difference" onclick="closeMenu()">Warum LeoLan</a>
@@ -821,11 +827,11 @@
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(245,166,35,0.25);border-radius:20px;padding:32px;margin-top:32px;" class="reveal">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
         <div>
-          <label style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">OTA-Buchungen / Monat</label>
+          <label for="hotelBookings" style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">OTA-Buchungen / Monat</label>
           <input type="number" id="hotelBookings" value="50" min="1" max="1000" oninput="calcHotelROI()" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:18px;font-weight:700;text-align:center;box-sizing:border-box;">
         </div>
         <div>
-          <label style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">Ø Buchungswert (€)</label>
+          <label for="hotelValue" style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">Ø Buchungswert (€)</label>
           <input type="number" id="hotelValue" value="150" min="50" max="2000" oninput="calcHotelROI()" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:18px;font-weight:700;text-align:center;box-sizing:border-box;">
         </div>
       </div>
@@ -915,30 +921,7 @@ calcHotelROI();
   </div>
 </section>
 
-<section class="testimonials">
-  <div class="section-shell">
-    <span class="section-tag reveal">Kundenstimmen</span>
-    <h2 class="section-title reveal reveal-delay-1">Was Hotels aus verschiedenen Märkten berichten.</h2>
-    <p class="section-sub reveal reveal-delay-2">Diese Platzhalter werden durch echte Kundenzitate ersetzt, sobald weitere Hotel-Fallstudien verfügbar sind.</p>
-    <div class="testimonial-grid">
-      <article class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <blockquote>„Unsere Gästekommunikation ist schneller, hochwertiger und für das Frontoffice-Team viel einfacher geworden. Wir würden nie mehr zurückwollen."</blockquote>
-        <cite><strong>Boutique-Resort, Bali</strong><br>Guest Experience Director</cite>
-      </article>
-      <article class="testimonial-card reveal reveal-delay-1">
-        <div class="stars">★★★★★</div>
-        <blockquote>„LeoLan Digital hat uns geholfen, Gästeanfragen zu optimieren und einen konsistenteren Markenauftritt zu pflegen. Die Einrichtung war unkompliziert."</blockquote>
-        <cite><strong>Design-Hotel, Thailand</strong><br>Operations Manager</cite>
-      </article>
-      <article class="testimonial-card reveal reveal-delay-2">
-        <div class="stars">★★★★★</div>
-        <blockquote>„Bewertungsantworten, E-Mail-Automatisierung und Concierge-Kommunikation wirken jetzt viel konsistenter. Unsere Gäste bemerken den Unterschied."</blockquote>
-        <cite><strong>Luxus-Boutique-Hotel, Europa</strong><br>General Manager</cite>
-      </article>
-    </div>
-  </div>
-</section>
+
 
 <section class="faq" id="faq">
   <div class="section-shell" style="text-align:center;">
@@ -1043,7 +1026,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
   </div>
   <div class="footer-logo"><img src="/logo.svg" alt="LeoLan Digital"></div>
   <div class="social-links">
-    <a href="https://instagram.com/leolan_digital" target="_blank" rel="noopener noreferrer" title="Instagram">
+    <a href="https://instagram.com/leolan_digital" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <defs><radialGradient id="ig-grad2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs>
         <rect width="48" height="48" rx="12" fill="url(#ig-grad2)"/>
@@ -1052,13 +1035,13 @@ document.getElementById('contactForm').addEventListener('submit', async function
         <circle cx="31.5" cy="16.5" r="1.5" fill="white"/>
       </svg>
     </a>
-    <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" rel="noopener noreferrer" title="Facebook">
+    <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <rect width="48" height="48" rx="12" fill="#1877F2"/>
         <path d="M31 24h-4v14h-6V24h-3v-5h3v-3c0-4 2-6 6-6h4v5h-2c-1.5 0-2 .5-2 2v2h4l-0.5 5z" fill="white"/>
       </svg>
     </a>
-    <a href="mailto:info@leolan.net" title="E-Mail">
+    <a href="mailto:info@leolan.net" title="E-Mail" aria-label="E-Mail">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <rect width="48" height="48" rx="12" fill="#444"/>
         <path d="M10 15h28v18H10z" fill="none" stroke="white" stroke-width="2"/>
@@ -1082,7 +1065,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
 </footer>
 
 <!-- Chatbot -->
-<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()">💬 Bot testen</button>
+<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Chat öffnen" aria-haspopup="dialog">💬 Bot testen</button>
 <div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
   <div class="chatbot-window">
     <div class="chatbot-header">
@@ -1157,13 +1140,13 @@ document.getElementById('contactForm').addEventListener('submit', async function
     }catch(e){return 'Ich verbinde Sie mit unserem Team! Besuchen Sie hotel.leolan.net/de/';}
   }
   async function openChatbot(){
-    document.getElementById('chatbotModal').classList.add('open');
+    document.getElementById('chatbotModal').classList.add('open');document.getElementById('chatbotModal').removeAttribute('aria-hidden');
     if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='none';
     if(!chatbotSeeded){chatbotSeeded=true;var g=await getBotReplyAsync('__start__');appendChatMessage(g,'bot');}
     setTimeout(function(){document.getElementById('chatbotInput').focus();},80);
   }
   function closeChatbot(){
-    document.getElementById('chatbotModal').classList.remove('open');
+    document.getElementById('chatbotModal').classList.remove('open');document.getElementById('chatbotModal').setAttribute('aria-hidden','true');
     if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='';
   }
   document.getElementById('chatbotClose').addEventListener('click',closeChatbot);

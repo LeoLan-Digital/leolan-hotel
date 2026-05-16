@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="theme-color" content="#0d1117">
@@ -11,6 +11,12 @@
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="description" content="LeoLan KI-Concierge: WhatsApp-Bot für Hotels — mehr Direktbuchungen, weniger Booking.com-Provision. Mehrsprachig, 24/7. Setup in 5 Tagen. Jetzt Demo buchen.">
   <link rel="canonical" href="https://hotel.leolan.net/">
+<link rel="preload" as="image" href="https://hotel.leolan.net/blog/images/hero/lobby.webp">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://n8n.leolan.net">
+
   <link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/">
   <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/">
   <link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/">
@@ -22,6 +28,14 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:title" content="AI Concierge for Hotels & Resorts | LeoLan Digital">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hotel.leolan.net/">
+<meta property="og:locale" content="de_DE">
+<meta property="og:description" content="KI-Concierge &amp; WhatsApp-Bot für Hotels. 30% mehr Direktbuchungen, 0% Booking.com-Provision. Jetzt kostenlos testen.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hotel KI-Assistent | LeoLan Digital">
+<meta name="twitter:description" content="KI-Concierge &amp; WhatsApp-Bot für Hotels. Mehr Direktbuchungen, weniger Provision.">
+
   <link rel="icon" type="image/png" href="/favicon-new.png">
   <script type="application/ld+json">
       {
@@ -29,13 +43,17 @@
         "@type": ["ProfessionalService", "LocalBusiness"],
         "name": "LeoLan Hotel AI Concierge",
         "description": "KI-gestützter WhatsApp-Concierge für Hotels — mehr Direktbuchungen, weniger OTA-Provision.",
-        "url": "https://hotel.leolan.net",
+        "url": "https://hotel.leolan.net/",
+        "logo": "https://hotel.leolan.net/leolan-logo-new.png",
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "Reicker Str. 132",
+          "addressLocality": "Dresden",
+          "postalCode": "01237",
           "addressCountry": "DE"
         },
         "priceRange": "€€",
-        "telephone": "+49 15678 483700"
+        "telephone": "+4935121788680"
       }
       </script>
 <style>
@@ -586,6 +604,8 @@
   .social-links a { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; text-decoration: none; transition: transform 0.2s, opacity 0.2s; overflow: hidden; }
   .social-links a:hover { transform: scale(1.1); opacity: 0.9; }
   .social-links a svg { width: 56px; height: 56px; display: block; }
+.skip-nav:focus { top: 0 !important; }
+input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px solid #0a3d62 !important; outline-offset: 2px !important; }
 </style>
   <!-- ContentSquare loaded after cookie consent only -->
 
@@ -661,7 +681,7 @@
 <body>
 <a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Skip to main content</a>
 
-<div id="cookieBanner" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+<div id="cookieBanner" role="alertdialog" aria-label="Cookie-Einstellungen" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
   <p style="font-size:13px; color:rgba(245,247,251,0.87); max-width:760px; line-height:1.6; margin:0;">We use cookies and tracking technologies (Google Analytics and Meta Pixel) to improve this website and measure campaign performance. <a href="#" onclick="document.cookie='cookie_consent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';location.reload();return false;" style="color:rgba(245,166,35,0.9);">Cookie Settings</a> · <a href="/datenschutz.html" style="color:#f5a623;">Learn more</a></p>
   <div style="display:flex; gap:10px; flex-shrink:0;">
     <button onclick="rejectCookies()" style="padding:10px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background:transparent; color:rgba(245,247,251,0.72); font-size:13px; cursor:pointer; font-family:inherit;">Decline</button>
@@ -699,9 +719,9 @@
     <li><a href="/portal/" class="nav-cta" style="background:linear-gradient(135deg,#f5a623,#ffbf57);color:#1a2744;padding:8px 16px;border-radius:999px;font-weight:800;font-size:13px;">Customer Portal</a></li>
   </ul>
   <a href="/onboarding/enterprise/" class="nav-cta">Start Free Trial →</a>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
-</header><main id="main-content">
+</header><main id="main-content" tabindex="-1">
 <div class="mobile-menu" id="mobileMenu">
   <a href="#features" onclick="closeMenu()">Features</a>
   <a href="#difference" onclick="closeMenu()">Why LeoLan</a>
@@ -751,7 +771,7 @@
       <p style="font-size:12px;color:rgba(245,247,251,0.5);margin-top:8px;text-align:center;">✓ First month free &nbsp;·&nbsp; ✓ First month free</p>
     </div>
     <div class="hero-card reveal reveal-delay-2">
-      <img class="hero-image" src="https://hotel.leolan.net/blog/images/hero/lobby.webp" alt="Luxury boutique hotel lobby">
+      <img class="hero-image" src="https://hotel.leolan.net/blog/images/hero/lobby.webp" alt="Luxury boutique hotel lobby" width="1200" height="800" fetchpriority="high">
       <div class="hero-card-content">
         <div style="color:#fff; font-size:20px; font-weight:800;">Stop paying Booking.com 15-20% on every reservation.</div>
         <div style="color:var(--muted); line-height:1.7;">Our WhatsApp AI captures direct bookings — before guests even think about opening Booking.com. 80% of travellers prefer WhatsApp messaging over phone calls (Statista, 2024).</div>
@@ -1134,11 +1154,11 @@
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(245,166,35,0.25);border-radius:20px;padding:32px;margin-top:32px;" class="reveal">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
         <div>
-          <label style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">OTA Bookings / month</label>
+          <label for="hotelBookings" style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">OTA Bookings / month</label>
           <input type="number" id="hotelBookings" value="50" min="1" max="1000" oninput="berechneHotelROI()" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:18px;font-weight:700;text-align:center;box-sizing:border-box;">
         </div>
         <div>
-          <label style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">Avg. booking value (€)</label>
+          <label for="hotelValue" style="display:block;font-size:13px;color:rgba(245,247,251,0.6);margin-bottom:8px;">Avg. booking value (€)</label>
           <input type="number" id="hotelValue" value="150" min="50" max="2000" oninput="berechneHotelROI()" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:18px;font-weight:700;text-align:center;box-sizing:border-box;">
         </div>
       </div>
@@ -1331,7 +1351,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
 </main>
 <footer>
   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:16px 0 24px;">
-    <a href="https://apps.apple.com/app/leolan-manager/id67620514722" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;padding:10px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+    <a href="https://apps.apple.com/app/leolan-manager/id6762051472" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;padding:10px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
       <span><span style="font-size:10px;display:block;opacity:0.7;line-height:1;">Download on the</span><span style="font-size:16px;font-weight:700;line-height:1.3;">App Store</span></span>
     </a>
@@ -1342,7 +1362,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
   </div>
   <div class="footer-logo"><img src="/logo.svg" alt="LeoLan Digital"></div>
   <div class="social-links">
-    <a href="https://instagram.com/leolan_digital" target="_blank" rel="noopener noreferrer" title="Instagram">
+    <a href="https://instagram.com/leolan_digital" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <defs><radialGradient id="ig-grad2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs>
         <rect width="48" height="48" rx="12" fill="url(#ig-grad2)"/>
@@ -1351,13 +1371,13 @@ document.getElementById('contactForm').addEventListener('submit', async function
         <circle cx="31.5" cy="16.5" r="1.5" fill="white"/>
       </svg>
     </a>
-    <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" rel="noopener noreferrer" title="Facebook">
+    <a href="https://www.facebook.com/profile.php?id=100083189805774" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <rect width="48" height="48" rx="12" fill="#1877F2"/>
         <path d="M31 24h-4v14h-6V24h-3v-5h3v-3c0-4 2-6 6-6h4v5h-2c-1.5 0-2 .5-2 2v2h4l-0.5 5z" fill="white"/>
       </svg>
     </a>
-    <a href="mailto:info@leolan.net" title="E-Mail">
+    <a href="mailto:info@leolan.net" title="E-Mail" aria-label="E-Mail">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <rect width="48" height="48" rx="12" fill="#444"/>
         <path d="M10 15h28v18H10z" fill="none" stroke="white" stroke-width="2"/>
@@ -1381,7 +1401,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
 </footer>
 
 <!-- Chatbot -->
-<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()">💬 Bot testen</button>
+<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Chat öffnen" aria-haspopup="dialog">💬 Bot testen</button>
 <div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
   <div class="chatbot-window">
     <div class="chatbot-header">
@@ -1468,13 +1488,13 @@ document.getElementById('contactForm').addEventListener('submit', async function
     }catch(e){return 'Entschuldigung, kurze Verbindungsstörung. Bitte versuchen Sie es nochmal oder besuchen Sie hotel.leolan.net/onboarding';}
   }
   async function openChatbot(){
-    document.getElementById('chatbotModal').classList.add('open');
+    document.getElementById('chatbotModal').classList.add('open');document.getElementById('chatbotModal').removeAttribute('aria-hidden');
     if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='none';
     if(!chatbotSeeded){chatbotSeeded=true;var g=await getBotReplyAsync('__start__');appendChatMessage(g,'bot');}
     setTimeout(function(){document.getElementById('chatbotInput').focus();},80);
   }
   function closeChatbot(){
-    document.getElementById('chatbotModal').classList.remove('open');
+    document.getElementById('chatbotModal').classList.remove('open');document.getElementById('chatbotModal').setAttribute('aria-hidden','true');
     if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='';
   }
   document.getElementById('chatbotClose').addEventListener('click',closeChatbot);

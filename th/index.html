@@ -12,6 +12,10 @@
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="description" content="AI Concierge for Hotels & Resorts — digital room service, multilingual WhatsApp integration. More direct bookings, less Booking.com commission. LeoLan Digital.">
   <link rel="canonical" href="https://hotel.leolan.net/th/">
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://n8n.leolan.net">
+
 <link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/">
   <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/">
   <link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/">
@@ -574,6 +578,8 @@
   .social-links a { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; text-decoration: none; transition: transform 0.2s, opacity 0.2s; overflow: hidden; }
   .social-links a:hover { transform: scale(1.1); opacity: 0.9; }
   .social-links a svg { width: 56px; height: 56px; display: block; }
+.skip-nav:focus { top: 0 !important; }
+input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px solid #0a3d62 !important; outline-offset: 2px !important; }
 </style>
   <!-- ContentSquare loaded after cookie consent only -->
 
@@ -596,7 +602,7 @@
 <body>
 <a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Skip to main content</a>
 
-<div id="cookieBanner" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+<div id="cookieBanner" role="alertdialog" aria-label="Cookie-Einstellungen" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
   <p style="font-size:13px; color:rgba(245,247,251,0.87); max-width:760px; line-height:1.6; margin:0;">เราใช้คุกกี้และเทคโนโลยีการติดตาม (Google Analytics และ Meta Pixel) เพื่อปรับปรุงเว็บไซต์นี้และวัดผลการดำเนินการของแคมเปญ <a href="#" onclick="document.cookie='cookie_consent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';location.reload();return false;" style="color:rgba(245,166,35,0.9);">การตั้งค่าคุกกี้</a> · <a href="/datenschutz.html" style="color:#f5a623;">เรียนรู้เพิ่มเติม</a></p>
   <div style="display:flex; gap:10px; flex-shrink:0;">
     <button onclick="rejectCookies()" style="padding:10px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background:transparent; color:rgba(245,247,251,0.72); font-size:13px; cursor:pointer; font-family:inherit;">ปฏิเสธ</button>
@@ -634,10 +640,10 @@
     <li><a href="/portal/" class="nav-cta" style="background:linear-gradient(135deg,#f5a623,#ffbf57);color:#1a2744;padding:8px 16px;border-radius:999px;font-weight:800;font-size:13px;">พอร์ทัลลูกค้า</a></li>
   </ul>
   <a href="/onboarding/enterprise/" class="nav-cta">เริ่มทดลองฟรี →</a>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 </header>
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 <div class="mobile-menu" id="mobileMenu">
   <a href="#features" onclick="closeMenu()">คุณสมบัติ</a>
   <a href="#difference" onclick="closeMenu()">ทำไมต้อง LeoLan</a>

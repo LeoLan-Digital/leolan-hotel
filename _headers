@@ -41,3 +41,6 @@
 /blog/*
   Cache-Control: public, max-age=3600, must-revalidate
 
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable

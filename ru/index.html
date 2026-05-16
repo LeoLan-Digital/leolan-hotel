@@ -1119,7 +1119,7 @@
       </div>
       <p id="hotelText" style="font-size:14px;color:rgba(245,247,251,0.65);margin-bottom:20px;">Вы теряете <strong style="color:#ff6b6b;">1 350 €</strong> ежемесячно на комиссиях OTA. LeoLan стоит 199 € и перехватывает прямые бронирования.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px;">
-        <input type="email" id="hotelEmail" placeholder="otel@email.com" style="padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2);border-radius:10px;color:#fff;font-size:15px;min-width:240px;outline:none;" />
+        <input aria-label="otel@email.com" type="email" id="hotelEmail" placeholder="otel@email.com" style="padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2);border-radius:10px;color:#fff;font-size:15px;min-width:240px;outline:none;" />
         <button onclick="sendeHotelReport()" style="background:#f5a623;color:#000;padding:12px 24px;border-radius:10px;border:none;font-size:15px;font-weight:600;cursor:pointer;">📊 Получить отчёт →</button>
       </div>
       <p style="font-size:12px;color:rgba(245,247,251,0.35);margin:0;">Бесплатно · Без спама · Одно письмо с вашим персональным отчётом по комиссиям</p>
@@ -1268,11 +1268,11 @@ berechneHotelROI();
       <p style="margin-bottom:32px;">Расскажите нам о вашем объекте, и мы вернемся с индивидуальным предложением в течение 24 часов.</p>
       <form id="contactForm" style="display:flex;flex-direction:column;gap:14px;text-align:left">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-          <input type="text" id="cf_name" placeholder="Ваше имя *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
-          <input type="email" id="cf_email" placeholder="Электронная почта *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+          <input aria-label="Ваше имя *" type="text" id="cf_name" placeholder="Ваше имя *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+          <input aria-label="Электронная почта *" type="email" id="cf_email" placeholder="Электронная почта *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         </div>
-        <input type="text" id="cf_hotel" placeholder="Название и местоположение отеля *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
-        <input type="tel" id="cf_phone" placeholder="WhatsApp / Номер телефона" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+        <input aria-label="Название и местоположение отеля *" type="text" id="cf_hotel" placeholder="Название и местоположение отеля *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
+        <input aria-label="WhatsApp / Номер телефона" type="tel" id="cf_phone" placeholder="WhatsApp / Номер телефона" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <textarea id="cf_msg" placeholder="Опишите ваши потребности (необязательно)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
         <button type="submit" class="btn btn-primary" style="font-size:16px">Отправить сообщение →</button>
         <p id="cf_status" style="color:#4cd97b;font-size:14px;margin:0;display:none">✓ Спасибо! Мы свяжемся с вами в течение 24 часов.</p>
@@ -1394,7 +1394,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     <div class="chatbot-messages" id="chatbotMessages"></div>
 ```    <div class="chatbot-input-wrap">
       <form class="chatbot-form" id="chatbotForm">
-        <input type="text" id="chatbotInput" placeholder="Mesajınız …" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
+        <input aria-label="Mesajınız …" type="text" id="chatbotInput" placeholder="Mesajınız …" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
         <button type="submit" id="chatbotSend"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </form>
     </div>

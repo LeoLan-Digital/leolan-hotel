@@ -1,0 +1,235 @@
+{
+  "name": "Hotel Dynamic Pricing Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "hotel-pricing",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "hotel-pricing"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse input from webhook\nconst body = $input.first().json.body || $input.first().json;\n\nconst city = body.city || body.stadt || 'Berlin';\nconst roomType = body.room_type || body.zimmertyp || 'Doppelzimmer';\nconst checkin = body.checkin || body.checkin_date || new Date().toISOString().split('T')[0];\nconst nights = parseInt(body.nights || body.naechte || 1);\nconst hotelId = body.hotel_id || 'unknown';\n\n// Calculate checkout date\nconst checkinDate = new Date(checkin);\nconst checkoutDate = new Date(checkinDate);\ncheckoutDate.setDate(checkoutDate.getDate() + nights);\nconst checkout = checkoutDate.toISOString().split('T')[0];\n\n// Determine day of week (0=Sun, 5=Fri, 6=Sat)\nconst dayOfWeek = checkinDate.getDay();\nconst isWeekend = dayOfWeek === 5 || dayOfWeek === 6; // Fri or Sat\nconst dayNames = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];\n\n// Determine season\nconst month = checkinDate.getMonth() + 1; // 1-12\nlet season;\nif (month >= 6 && month <= 8) season = 'Hochsaison (Sommer)';\nelse if (month >= 12 || month <= 2) season = 'Nebensaison (Winter)';\nelse season = 'Schulter-Saison';\n\n// Lead time in days\nconst today = new Date();\nconst leadTimeDays = Math.max(0, Math.round((checkinDate - today) / (1000*60*60*24)));\n\nreturn [{\n  json: {\n    city,\n    roomType,\n    checkin,\n    checkout,\n    nights,\n    hotelId,\n    dayOfWeek: dayNames[dayOfWeek],\n    isWeekend,\n    season,\n    leadTimeDays\n  }\n}];"
+      },
+      "id": "a1b2c3d4-0002-0002-0002-000000000002",
+      "name": "Parse Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://www.booking.com/searchresults.html?ss={{ encodeURIComponent($json.city) }}&checkin={{ $json.checkin }}&checkout={{ $json.checkout }}&group_adults=2&no_rooms=1&offset=0&rows=10",
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "responseFormat": "text"
+            }
+          },
+          "headers": {
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+              },
+              {
+                "name": "Accept-Language",
+                "value": "de-DE,de;q=0.9,en;q=0.8"
+              },
+              {
+                "name": "Accept",
+                "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "a1b2c3d4-0003-0003-0003-000000000003",
+      "name": "Scrape Booking.com",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 200],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract prices from Booking.com HTML\n// Falls blocked → use realistic mock data for German cities\n\nconst inputData = $('Parse Input').first().json;\nconst city = (inputData.city || 'Berlin').toLowerCase();\nconst roomType = (inputData.roomType || 'Doppelzimmer').toLowerCase();\n\n// Try to parse real prices from HTML\nlet prices = [];\ntry {\n  const html = $input.first().json || '';\n  if (typeof html === 'string' && html.length > 1000) {\n    // Look for price patterns in Booking.com HTML\n    const priceRegex = /€\\s*(\\d+)/g;\n    const altRegex = /(\\d{2,3})\\s*€/g;\n    let match;\n    while ((match = priceRegex.exec(html)) !== null) {\n      const p = parseInt(match[1]);\n      if (p >= 30 && p <= 800) prices.push(p);\n    }\n    while ((match = altRegex.exec(html)) !== null) {\n      const p = parseInt(match[1]);\n      if (p >= 30 && p <= 800) prices.push(p);\n    }\n    // Deduplicate and limit\n    prices = [...new Set(prices)].slice(0, 20);\n  }\n} catch(e) {\n  prices = [];\n}\n\n// Fallback: realistic mock prices for German cities\nif (prices.length < 3) {\n  const mockPrices = {\n    berlin:    { single: [65,75,85,90,95,110,125], double: [85,95,105,120,135,150,165,180], suite: [180,200,230,260,300] },\n    münchen:   { single: [80,90,100,115,125,140],   double: [105,120,135,150,170,190,210,220], suite: [220,250,290,340] },\n    munich:    { single: [80,90,100,115,125,140],   double: [105,120,135,150,170,190,210,220], suite: [220,250,290,340] },\n    hamburg:   { single: [70,80,90,100,115],        double: [90,105,115,130,145,160,175], suite: [175,200,230,260] },\n    köln:      { single: [65,75,85,95,110],         double: [85,100,110,125,140,155], suite: [155,180,210,240] },\n    cologne:   { single: [65,75,85,95,110],         double: [85,100,110,125,140,155], suite: [155,180,210,240] },\n    frankfurt: { single: [75,88,98,110,125,140],    double: [95,110,125,140,160,180,195], suite: [195,220,260,300] },\n    dresden:   { single: [55,65,72,80,90],          double: [65,75,85,95,110,120,130], suite: [130,150,170,200] },\n    leipzig:   { single: [55,62,70,80,88],          double: [68,78,88,98,110,122], suite: [122,140,165,185] },\n    düsseldorf:{ single: [70,82,92,102,115],        double: [88,100,115,130,145,160,172], suite: [172,195,225,255] },\n    stuttgart: { single: [72,82,95,108,120],        double: [92,108,122,138,155,170,188], suite: [188,215,248,280] },\n    default:   { single: [60,70,80,90,100],         double: [80,90,100,115,130,145], suite: [145,170,200,230] }\n  };\n\n  const cityKey = Object.keys(mockPrices).find(k => city.includes(k)) || 'default';\n  let typeKey = 'double';\n  if (roomType.includes('single') || roomType.includes('einzel')) typeKey = 'single';\n  else if (roomType.includes('suite')) typeKey = 'suite';\n  \n  prices = mockPrices[cityKey][typeKey];\n}\n\n// Calculate stats\nconst sorted = [...prices].sort((a,b) => a - b);\nconst min = sorted[0];\nconst max = sorted[sorted.length - 1];\nconst avg = Math.round(prices.reduce((s,p) => s+p, 0) / prices.length);\nconst median = sorted[Math.floor(sorted.length / 2)];\n\nreturn [{\n  json: {\n    ...inputData,\n    competitor_prices: prices,\n    competitor_min: min,\n    competitor_max: max,\n    competitor_avg: avg,\n    competitor_median: median,\n    data_source: prices.length >= 3 ? 'booking_com' : 'mock_data'\n  }\n}];"
+      },
+      "id": "a1b2c3d4-0004-0004-0004-000000000004",
+      "name": "Parse Competitor Prices",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "x-api-key",
+              "value": "YOUR_ANTHROPIC_API_KEY_HERE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-haiku-4-5\",\n  \"max_tokens\": 600,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Du bist ein erfahrener Hotel Revenue Manager. Analysiere die Marktlage und empfehle einen optimalen Zimmerpreis.\\n\\nDaten:\\n- Stadt: {{ $json.city }}\\n- Zimmertyp: {{ $json.roomType }}\\n- Check-in: {{ $json.checkin }} ({{ $json.dayOfWeek }})\\n- Nächte: {{ $json.nights }}\\n- Wochenende: {{ $json.isWeekend }}\\n- Saison: {{ $json.season }}\\n- Vorlaufzeit: {{ $json.leadTimeDays }} Tage\\n\\nKonkurrenz-Preise (EUR/Nacht):\\n- Minimum: {{ $json.competitor_min }}€\\n- Maximum: {{ $json.competitor_max }}€\\n- Durchschnitt: {{ $json.competitor_avg }}€\\n- Median: {{ $json.competitor_median }}€\\n\\nRegeln:\\n1. Wochenende (Fr/Sa): +10-15% Aufschlag\\n2. Hochsaison (Juni-Aug): +15-20% Aufschlag\\n3. Nebensaison (Dez-Feb): -10-15% Rabatt\\n4. Kurzfristig (<3 Tage): -5-10% (Zimmer füllen)\\n5. Weit voraus (>30 Tage): Normaler Preis, Frühbucherbonus möglich\\n6. Positionierung: Leicht unter Durchschnitt (5-10%) für gute Auslastung\\n\\nAntworte NUR mit diesem JSON (kein Text davor/danach):\\n{\\n  \\\"recommended_price\\\": [Ganzzahl EUR],\\n  \\\"min_price\\\": [Ganzzahl EUR],\\n  \\\"max_price\\\": [Ganzzahl EUR],\\n  \\\"confidence\\\": [\\\"hoch\\\" oder \\\"mittel\\\" oder \\\"niedrig\\\"],\\n  \\\"reasoning\\\": [Kurze Begründung auf Deutsch, max 80 Wörter]\\n}\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "a1b2c3d4-0005-0005-0005-000000000005",
+      "name": "Claude Haiku Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Claude's response and build final output\nconst claudeResponse = $input.first().json;\nconst pricingData = $('Parse Competitor Prices').first().json;\n\nlet aiResult = {\n  recommended_price: Math.round(pricingData.competitor_avg * 0.92),\n  min_price: pricingData.competitor_min,\n  max_price: pricingData.competitor_max,\n  confidence: 'mittel',\n  reasoning: 'Preis basiert auf Marktanalyse. Claude-Analyse nicht verfügbar.'\n};\n\ntry {\n  const content = claudeResponse.content?.[0]?.text || '';\n  // Extract JSON from response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    const parsed = JSON.parse(jsonMatch[0]);\n    aiResult = {\n      recommended_price: parseInt(parsed.recommended_price) || aiResult.recommended_price,\n      min_price: parseInt(parsed.min_price) || pricingData.competitor_min,\n      max_price: parseInt(parsed.max_price) || pricingData.competitor_max,\n      confidence: parsed.confidence || 'mittel',\n      reasoning: parsed.reasoning || aiResult.reasoning\n    };\n  }\n} catch(e) {\n  // Use fallback values\n}\n\nreturn [{\n  json: {\n    recommended_price: aiResult.recommended_price,\n    min_price: aiResult.min_price,\n    max_price: aiResult.max_price,\n    confidence: aiResult.confidence,\n    reasoning: aiResult.reasoning,\n    competitor_avg: pricingData.competitor_avg,\n    competitor_min: pricingData.competitor_min,\n    competitor_max: pricingData.competitor_max,\n    city: pricingData.city,\n    room_type: pricingData.roomType,\n    checkin: pricingData.checkin,\n    nights: pricingData.nights,\n    season: pricingData.season,\n    day_of_week: pricingData.dayOfWeek,\n    is_weekend: pricingData.isWeekend,\n    lead_time_days: pricingData.leadTimeDays,\n    data_source: pricingData.data_source,\n    generated_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "a1b2c3d4-0006-0006-0006-000000000006",
+      "name": "Build Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "a1b2c3d4-0007-0007-0007-000000000007",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1560, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Input": {
+      "main": [
+        [
+          {
+            "node": "Scrape Booking.com",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Booking.com": {
+      "main": [
+        [
+          {
+            "node": "Parse Competitor Prices",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Competitor Prices": {
+      "main": [
+        [
+          {
+            "node": "Claude Haiku Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Haiku Analysis": {
+      "main": [
+        [
+          {
+            "node": "Build Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "versionId": "1.0.0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "leolan-hotel-pricing"
+  },
+  "id": "hotel-pricing-engine-001",
+  "tags": [
+    { "name": "hotel" },
+    { "name": "pricing" },
+    { "name": "dynamic" }
+  ]
+}

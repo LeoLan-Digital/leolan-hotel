@@ -16,6 +16,9 @@
     .header-sub{font-size:12px;color:#8a9bb8}
     .btn-logout{background:transparent;border:1.5px solid #2a3a4a;color:#8a9bb8;border-radius:10px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s}
     .btn-logout:hover{border-color:#ef4444;color:#ef4444}
+    .header-nav{display:flex;align-items:center;gap:8px}
+    .btn-nav{background:transparent;border:1.5px solid #2a3a4a;color:#8a9bb8;border-radius:10px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
+    .btn-nav:hover{border-color:#34c759;color:#34c759}
 
     main{max-width:1100px;margin:0 auto;padding:24px 16px 48px}
 
@@ -106,7 +109,10 @@
       <div class="header-sub" id="header-code">LeoLan Digital</div>
     </div>
   </div>
-  <button class="btn-logout" onclick="logout()">Abmelden</button>
+  <div class="header-nav">
+    <a href="pricing.html" class="btn-nav">💰 Pricing</a>
+    <button class="btn-logout" onclick="logout()">Abmelden</button>
+  </div>
 </header>
 
 <main>

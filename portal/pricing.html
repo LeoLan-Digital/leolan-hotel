@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dynamic Pricing — LeoLan Digital</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0e1621;color:#e8eaed;min-height:100vh}
+
+    /* ─── Header ─────────────────────────────────────────── */
+    header{background:#17212b;border-bottom:1px solid #2a3a4a;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .header-left{display:flex;align-items:center;gap:12px}
+    .header-emoji{font-size:24px}
+    .header-title{font-size:16px;font-weight:700;color:#e8eaed}
+    .header-sub{font-size:12px;color:#8a9bb8}
+    .header-nav{display:flex;align-items:center;gap:8px}
+    .btn-nav{background:transparent;border:1.5px solid #2a3a4a;color:#8a9bb8;border-radius:10px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
+    .btn-nav:hover{border-color:#34c759;color:#34c759}
+    .btn-logout{background:transparent;border:1.5px solid #2a3a4a;color:#8a9bb8;border-radius:10px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s}
+    .btn-logout:hover{border-color:#ef4444;color:#ef4444}
+
+    /* ─── Layout ─────────────────────────────────────────── */
+    main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
+
+    /* ─── Page Header ────────────────────────────────────── */
+    .page-header{margin-bottom:28px}
+    .page-header-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .page-title{font-size:24px;font-weight:800}
+    .badge-beta{background:rgba(52,199,89,0.15);color:#34c759;border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;letter-spacing:0.5px}
+    .page-desc{margin-top:8px;font-size:14px;color:#8a9bb8;line-height:1.5}
+
+    /* ─── Form Card ──────────────────────────────────────── */
+    .card{background:#17212b;border-radius:16px;overflow:hidden}
+    .card-body{padding:24px}
+
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:500px){.form-grid{grid-template-columns:1fr}}
+
+    .form-group{display:flex;flex-direction:column;gap:7px}
+    .form-label{font-size:13px;font-weight:600;color:#8a9bb8;text-transform:uppercase;letter-spacing:0.5px}
+    .form-control{background:#0e1621;border:1.5px solid #2a3a4a;border-radius:10px;color:#e8eaed;font-size:15px;padding:10px 14px;width:100%;outline:none;transition:border-color 0.2s;appearance:none;-webkit-appearance:none}
+    .form-control:focus{border-color:#34c759}
+    .form-control option{background:#17212b}
+
+    .btn-calculate{width:100%;margin-top:20px;background:linear-gradient(135deg,#34c759,#28a745);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;padding:14px 20px;cursor:pointer;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;gap:10px}
+    .btn-calculate:hover{opacity:0.9}
+    .btn-calculate:disabled{opacity:0.5;cursor:not-allowed}
+
+    /* ─── Loading ────────────────────────────────────────── */
+    .loading-state{text-align:center;padding:40px 20px;display:none}
+    .spinner{width:40px;height:40px;border:3px solid #2a3a4a;border-top-color:#34c759;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loading-text{color:#8a9bb8;font-size:14px}
+
+    /* ─── Result Card ────────────────────────────────────── */
+    .result-section{margin-top:24px;display:none}
+
+    .result-top{padding:28px 24px;text-align:center;border-bottom:1px solid #1e2d3d}
+    .result-label{font-size:13px;font-weight:600;color:#8a9bb8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
+    .result-price{font-size:64px;font-weight:900;color:#34c759;line-height:1;letter-spacing:-1px}
+    .result-price-sub{font-size:14px;color:#8a9bb8;margin-top:6px}
+    .result-price-night{font-size:16px;color:#8a9bb8;font-weight:600;margin-top:4px}
+
+    .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid #1e2d3d}
+    .result-stat{padding:18px 16px;text-align:center;border-right:1px solid #1e2d3d}
+    .result-stat:last-child{border-right:none}
+    .result-stat-label{font-size:11px;font-weight:600;color:#8a9bb8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+    .result-stat-val{font-size:20px;font-weight:800;color:#e8eaed}
+    .result-stat-val.green{color:#34c759}
+    .result-stat-val.muted{color:#8a9bb8}
+
+    .result-reasoning{padding:20px 24px;border-bottom:1px solid #1e2d3d}
+    .reasoning-label{font-size:12px;font-weight:600;color:#8a9bb8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+    .reasoning-text{font-size:14px;color:#e8eaed;line-height:1.6}
+
+    .result-meta{padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .confidence-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:700}
+    .confidence-hoch{background:rgba(52,199,89,0.15);color:#34c759}
+    .confidence-mittel{background:rgba(251,191,36,0.15);color:#fbbf24}
+    .confidence-niedrig{background:rgba(239,68,68,0.15);color:#ef4444}
+    .meta-info{font-size:12px;color:#4a5a6a;display:flex;gap:16px;flex-wrap:wrap}
+
+    /* ─── Error ──────────────────────────────────────────── */
+    .error-state{margin-top:24px;display:none;background:#17212b;border-radius:16px;padding:24px;text-align:center;border:1.5px solid rgba(239,68,68,0.3)}
+    .error-icon{font-size:32px;margin-bottom:10px}
+    .error-text{color:#ef4444;font-size:14px;font-weight:600}
+    .error-sub{color:#8a9bb8;font-size:13px;margin-top:6px}
+
+    /* ─── Info Box ───────────────────────────────────────── */
+    .info-box{background:rgba(52,199,89,0.06);border:1.5px solid rgba(52,199,89,0.2);border-radius:12px;padding:14px 16px;margin-top:16px;font-size:13px;color:#8a9bb8;line-height:1.5}
+    .info-box strong{color:#34c759}
+
+    /* ─── Toast ──────────────────────────────────────────── */
+    .toast{position:fixed;bottom:24px;right:24px;background:#17212b;border:1.5px solid #2a3a4a;border-radius:12px;padding:12px 18px;font-size:14px;font-weight:600;color:#e8eaed;box-shadow:0 4px 16px rgba(0,0,0,0.4);transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:200;max-width:300px}
+    .toast.show{transform:translateY(0);opacity:1}
+    .toast.success{border-color:#34c759;color:#34c759}
+    .toast.error{border-color:#ef4444;color:#ef4444}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <span class="header-emoji">🏨</span>
+    <div>
+      <div class="header-title">Hotel Dashboard</div>
+      <div class="header-sub" id="header-code">LeoLan Digital</div>
+    </div>
+  </div>
+  <div class="header-nav">
+    <a href="dashboard.html" class="btn-nav">📊 Dashboard</a>
+    <button class="btn-logout" onclick="logout()">Abmelden</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-header-row">
+      <h1 class="page-title">💰 Dynamic Pricing</h1>
+      <span class="badge-beta">BETA</span>
+    </div>
+    <p class="page-desc">
+      KI-gestützte Preisstrategie basierend auf aktuellen Mitbewerber-Preisen,
+      Saisonalität, Wochentag und Vorlaufzeit.
+    </p>
+  </div>
+
+  <!-- Form Card -->
+  <div class="card">
+    <div class="card-body">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label class="form-label" for="roomType">Zimmertyp</label>
+          <select class="form-control" id="roomType">
+            <option value="Einzelzimmer">🛏️ Einzelzimmer</option>
+            <option value="Doppelzimmer" selected>🛏️🛏️ Doppelzimmer</option>
+            <option value="Suite">✨ Suite</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="city">Stadt / Ort</label>
+          <input type="text" class="form-control" id="city" placeholder="z.B. Berlin" value="Berlin">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="checkin">Check-in Datum</label>
+          <input type="date" class="form-control" id="checkin">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="nights">Anzahl Nächte</label>
+          <select class="form-control" id="nights">
+            <option value="1">1 Nacht</option>
+            <option value="2" selected>2 Nächte</option>
+            <option value="3">3 Nächte</option>
+            <option value="4">4 Nächte</option>
+            <option value="5">5 Nächte</option>
+            <option value="7">1 Woche</option>
+            <option value="14">2 Wochen</option>
+          </select>
+        </div>
+
+      </div>
+
+      <button class="btn-calculate" id="btn-calc" onclick="calculatePrice()">
+        <span id="btn-text">🔍 Preis berechnen</span>
+      </button>
+
+      <div class="info-box">
+        <strong>Wie es funktioniert:</strong> Wir analysieren aktuelle Hotelpreise in deiner Stadt,
+        berücksichtigen Wochentag, Saison und Vorlaufzeit — und empfehlen den optimalen Preis.
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-state" id="loading-state">
+      <div class="spinner"></div>
+      <div class="loading-text">Marktpreise werden analysiert…</div>
+    </div>
+  </div>
+
+  <!-- Result Card -->
+  <div class="result-section card" id="result-section">
+
+    <div class="result-top">
+      <div class="result-label">Empfohlener Preis</div>
+      <div class="result-price" id="res-price">—</div>
+      <div class="result-price-sub" id="res-nights-total"></div>
+      <div class="result-price-night">pro Nacht</div>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-stat">
+        <div class="result-stat-label">Minimum</div>
+        <div class="result-stat-val" id="res-min">—</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-label">Maximum</div>
+        <div class="result-stat-val" id="res-max">—</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-label">Konkurrenz-Ø</div>
+        <div class="result-stat-val muted" id="res-avg">—</div>
+      </div>
+    </div>
+
+    <div class="result-reasoning">
+      <div class="reasoning-label">Begründung</div>
+      <div class="reasoning-text" id="res-reasoning">—</div>
+    </div>
+
+    <div class="result-meta">
+      <div class="confidence-badge confidence-hoch" id="res-confidence">
+        <span>●</span>
+        <span id="res-confidence-text">Hohe Konfidenz</span>
+      </div>
+      <div class="meta-info" id="res-meta-info"></div>
+    </div>
+
+  </div>
+
+  <!-- Error State -->
+  <div class="error-state" id="error-state">
+    <div class="error-icon">⚠️</div>
+    <div class="error-text" id="error-text">Fehler bei der Preisberechnung</div>
+    <div class="error-sub" id="error-sub">Bitte versuche es erneut.</div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const PRICING_URL = 'https://n8n.leolan.net/webhook/hotel-pricing';
+
+  // Auth check
+  const token = sessionStorage.getItem('token');
+  const customerCode = sessionStorage.getItem('customerCode');
+  if (!token || !customerCode) {
+    window.location.href = 'index.html';
+  }
+  document.getElementById('header-code').textContent = customerCode || 'LeoLan Digital';
+
+  // Set default checkin to tomorrow
+  (function() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('checkin').value = tomorrow.toISOString().split('T')[0];
+    document.getElementById('checkin').min = new Date().toISOString().split('T')[0];
+  })();
+
+  function logout() {
+    sessionStorage.clear();
+    window.location.href = 'index.html';
+  }
+
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (type || '');
+    setTimeout(function() { t.className = 'toast'; }, 3000);
+  }
+
+  function setLoading(on) {
+    const btn = document.getElementById('btn-calc');
+    const loadingState = document.getElementById('loading-state');
+    btn.disabled = on;
+    document.getElementById('btn-text').textContent = on ? '⏳ Analysiere…' : '🔍 Preis berechnen';
+    loadingState.style.display = on ? 'block' : 'none';
+  }
+
+  function fmt(eur) {
+    return eur != null ? eur + ' €' : '—';
+  }
+
+  function renderResult(data) {
+    const nights = parseInt(document.getElementById('nights').value) || 1;
+
+    // Price
+    document.getElementById('res-price').textContent = fmt(data.recommended_price);
+
+    // Total for stay
+    if (nights > 1 && data.recommended_price) {
+      document.getElementById('res-nights-total').textContent =
+        'Gesamt ' + nights + ' Nächte: ' + (data.recommended_price * nights) + ' €';
+    } else {
+      document.getElementById('res-nights-total').textContent = '';
+    }
+
+    // Range & avg
+    document.getElementById('res-min').textContent = fmt(data.min_price);
+    document.getElementById('res-max').textContent = fmt(data.max_price);
+    document.getElementById('res-avg').textContent = fmt(data.competitor_avg);
+
+    // Reasoning
+    document.getElementById('res-reasoning').textContent = data.reasoning || '—';
+
+    // Confidence badge
+    const confEl = document.getElementById('res-confidence');
+    const confText = document.getElementById('res-confidence-text');
+    const confMap = { hoch: 'Hohe Konfidenz', mittel: 'Mittlere Konfidenz', niedrig: 'Niedrige Konfidenz' };
+    const confClass = { hoch: 'confidence-hoch', mittel: 'confidence-mittel', niedrig: 'confidence-niedrig' };
+    const conf = (data.confidence || 'mittel').toLowerCase();
+    confEl.className = 'confidence-badge ' + (confClass[conf] || 'confidence-mittel');
+    confText.textContent = confMap[conf] || 'Mittlere Konfidenz';
+
+    // Meta info
+    const metaParts = [];
+    if (data.day_of_week) metaParts.push(data.day_of_week);
+    if (data.season) metaParts.push(data.season);
+    if (data.lead_time_days != null) metaParts.push('Vorlauf: ' + data.lead_time_days + ' Tage');
+    if (data.data_source) metaParts.push(data.data_source === 'mock_data' ? '📦 Mock-Daten' : '🌐 Booking.com');
+    document.getElementById('res-meta-info').textContent = metaParts.join(' · ');
+
+    // Show / hide
+    document.getElementById('result-section').style.display = 'block';
+    document.getElementById('error-state').style.display = 'none';
+
+    // Scroll to result
+    document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function showError(msg, sub) {
+    document.getElementById('error-text').textContent = msg || 'Fehler bei der Preisberechnung';
+    document.getElementById('error-sub').textContent = sub || 'Bitte versuche es erneut.';
+    document.getElementById('error-state').style.display = 'block';
+    document.getElementById('result-section').style.display = 'none';
+  }
+
+  async function calculatePrice() {
+    const roomType = document.getElementById('roomType').value;
+    const city = document.getElementById('city').value.trim();
+    const checkin = document.getElementById('checkin').value;
+    const nights = document.getElementById('nights').value;
+
+    if (!city) {
+      showToast('Bitte Stadt eingeben', 'error');
+      document.getElementById('city').focus();
+      return;
+    }
+    if (!checkin) {
+      showToast('Bitte Datum wählen', 'error');
+      document.getElementById('checkin').focus();
+      return;
+    }
+
+    setLoading(true);
+    document.getElementById('result-section').style.display = 'none';
+    document.getElementById('error-state').style.display = 'none';
+
+    try {
+      const res = await fetch(PRICING_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          hotel_id: customerCode || 'portal',
+          city: city,
+          room_type: roomType,
+          checkin_date: checkin,
+          nights: parseInt(nights)
+        })
+      });
+
+      if (!res.ok) {
+        throw new Error('Server antwortet mit Status ' + res.status);
+      }
+
+      const data = await res.json();
+
+      if (data.error) {
+        showError('Fehler: ' + data.error);
+        return;
+      }
+
+      if (!data.recommended_price) {
+        showError('Ungültige Antwort vom Server', 'Der Server hat keine gültigen Preisdaten zurückgegeben.');
+        return;
+      }
+
+      renderResult(data);
+      showToast('Preisanalyse erfolgreich', 'success');
+
+    } catch(e) {
+      console.error('Pricing error:', e);
+      showError(
+        'Verbindungsfehler',
+        'Der Pricing-Webhook ist nicht erreichbar. Bitte n8n Workflow prüfen.'
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Allow Enter key in city field
+  document.getElementById('city').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') calculatePrice();
+  });
+</script>
+</body>
+</html>

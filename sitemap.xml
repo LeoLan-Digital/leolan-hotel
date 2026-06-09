@@ -161,4 +161,11 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/hotel-digitalisierung-2026/"/>
   </url>
 
+  <url>
+    <loc>https://hotel.leolan.net/blog/hotel-bewertungen-verbessern/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/blog/hotel-bewertungen-verbessern/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/hotel-bewertungen-verbessern/"/>
+  </url>
 </urlset>

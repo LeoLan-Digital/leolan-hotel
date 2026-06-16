@@ -1,4 +1,11 @@
 http://hotel.leolan.net/* https://hotel.leolan.net/:splat 301!
 
+# Flat .html → canonical folder URLs (301 permanent)
+/agb.html /agb/ 301!
+/datenschutz.html /datenschutz/ 301!
+/impressum.html /impressum/ 301!
+/ueber-uns.html /ueber-uns/ 301!
+/index.html / 301!
+
 # Language redirect: root → German (server-side, replaces JS redirect)
-/  /de/  302
+/  /de/  301

@@ -102,6 +102,9 @@
 
   <!-- Blog posts -->
   <url>
+    <loc>https://hotel.leolan.net/blog/hotel-whatsapp-check-in/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotel.leolan.net/blog/hotel-whatsapp-check-in/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotel.leolan.net/blog/hotel-whatsapp-check-in/"/>
     <loc>https://hotel.leolan.net/blog/ki-fuer-hotels/</loc>
     <lastmod>2026-04-29</lastmod>
     <priority>0.8</priority>

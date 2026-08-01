@@ -79,6 +79,10 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  @media (max-width: 480px) {
+    .roi-result-grid { grid-template-columns: 1fr 1fr !important; }
+    .roi-result-grid > div:last-child { grid-column: 1 / -1; }
+  }
   body {
     font-family: var(--font);
     color: var(--text);
@@ -831,7 +835,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
           <input type="number" id="hotelValue" value="150" min="50" max="2000" oninput="calcHotelROI()" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:18px;font-weight:700;text-align:center;box-sizing:border-box;">
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;" class="roi-result-grid">
         <div style="background:rgba(255,59,48,0.1);border:1px solid rgba(255,59,48,0.25);border-radius:14px;padding:16px;">
           <div style="font-size:11px;color:rgba(245,247,251,0.5);margin-bottom:6px;">PROVISIONSVERLUST</div>
           <div id="hotelCommission" style="font-size:24px;font-weight:800;color:#ff6b6b;">1.350 €</div>

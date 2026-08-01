@@ -411,10 +411,10 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
 </nav>
 </header><main id="main-content" tabindex="-1">
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#features" onclick="closeMenu()">Funktionen</a>
-  <a href="#difference" onclick="closeMenu()">Warum LeoLan</a>
-  <a href="#pricing" onclick="closeMenu()">Preise</a>
-  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#features" onclick="closeMenu('features');return false;">Funktionen</a>
+  <a href="#difference" onclick="closeMenu('difference');return false;">Warum LeoLan</a>
+  <a href="#pricing" onclick="closeMenu('pricing');return false;">Preise</a>
+  <a href="#faq" onclick="closeMenu('faq');return false;">FAQ</a>
   <a href="de/ueber-uns/" onclick="closeMenu()">Über uns</a>
   <a href="/portal/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Kundenportal</a>
   <a href="/onboarding/enterprise/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Kostenlos testen →</a>
@@ -1176,7 +1176,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
 <script>
   function toggleFaq(btn){var item=btn.parentElement;item.classList.toggle('open');}
   function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
-  function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+  function closeMenu(anchor){document.getElementById('mobileMenu').classList.remove('open');if(anchor){setTimeout(function(){var el=document.getElementById(anchor);if(el)el.scrollIntoView({behavior:'smooth'});},80);}}
   document.addEventListener('click',function(e){var m=document.getElementById('mobileMenu');if(m&&m.classList.contains('open')&&!m.contains(e.target)&&!e.target.closest('.hamburger')){m.classList.remove('open');}});
   var revealEls=document.querySelectorAll('.reveal');
   var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target);}});},{threshold:0.12});

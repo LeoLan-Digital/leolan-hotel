@@ -671,7 +671,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
   if(window.location.pathname !== '/' && window.location.pathname !== '/index.html') return;
   var lang=(navigator.language||navigator.userLanguage||'').toLowerCase().split('-')[0];
   var map={'de':'/de/','tr':'/tr/','ru':'/ru/','id':'/id/','th':'/th/'};
-  var target=map[lang]||'/en/';
+  var hash=window.location.hash||''; var target=(map[lang]||'/en/')+hash;
   window.location.replace(target);
 })();
 </script>

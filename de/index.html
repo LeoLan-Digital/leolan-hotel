@@ -412,7 +412,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
     <li><a href="de/ueber-uns/">Über uns</a></li>
     <li><a href="/portal/" class="nav-cta" style="background:linear-gradient(135deg,#f5a623,#ffbf57);color:#1a2744;padding:8px 16px;border-radius:999px;font-weight:800;font-size:13px;">Kundenportal</a></li>
   </ul>
-  <a href="/onboarding/enterprise/" class="nav-cta">Kostenlos testen →</a>
+  <a href="/onboarding/" class="nav-cta">Kostenlos testen →</a>
   <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
 </nav>
 </header><main id="main-content" tabindex="-1">
@@ -423,7 +423,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
   <a href="#faq" onclick="closeMenu('faq');return false;">FAQ</a>
   <a href="de/ueber-uns/" onclick="closeMenu()">Über uns</a>
   <a href="/portal/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Kundenportal</a>
-  <a href="/onboarding/enterprise/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Kostenlos testen →</a>
+  <a href="/onboarding/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Kostenlos testen →</a>
 </div>
 
 <!-- HERO -->
@@ -440,7 +440,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
         <span>Hotelwissen</span>
       </div>
       <div class="hero-actions reveal reveal-delay-3">
-        <a href="/onboarding/enterprise/" class="btn btn-primary">NOVA kennenlernen →</a>
+        <a href="/onboarding/" class="btn btn-primary">NOVA kennenlernen →</a>
         <a href="#nova-platform" class="btn btn-secondary">Plattform ansehen</a>
       </div>
       <div class="hero-trust reveal reveal-delay-3">
@@ -1076,7 +1076,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     </a>
   </div>
   <div class="footer-links">
-    <a href="/onboarding/enterprise/">Kostenlose Demo →</a>
+    <a href="/onboarding/">Kostenlose Demo →</a>
     <a href="/portal/">Kundenportal</a>
     <a href="https://ki.leolan.net">Restaurant-Lösungen</a>
     <a href="de/ueber-uns/">Über uns</a>
@@ -1146,8 +1146,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
     var msg=document.createElement('div');
     msg.className='chatbot-message '+sender;
     var lc=text.toLowerCase();
-    var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('suite')||lc.includes('modul')||lc.includes('starter')||lc.includes('pro')||lc.includes('enterprise')||lc.includes('buchen')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding'));
-    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/onboarding/?paket=starter" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Pakete ansehen</a><a href="/onboarding/enterprise/" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#2695d3;color:#fff;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">🔧 Einzelmodul</a></div>':'';
+    var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('suite')||lc.includes('modul')||lc.includes('starter')||lc.includes('pro')||lc.includes('buchen')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding'));
+    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/onboarding/?paket=starter" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Pakete ansehen</a></div>':'';
     msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;

@@ -14,7 +14,6 @@ LeoLan Digital provides AI-powered guest experience automation for boutique hote
 ## Pricing
 - Starter: €199/month + €349 setup (one-time), 12-month minimum
 - Pro: €349/month + €349 setup (one-time)
-- Enterprise: Custom pricing on request
 
 ## Target Audience
 Boutique hotels, resorts, and hospitality businesses in Europe and worldwide.

@@ -116,7 +116,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
         <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">START</div><div class="pkg-name">KI-Concierge Starter</div><div class="pkg-price" id="starter-price">199€ <span>/ Monat</span></div><div class="pkg-desc">WhatsApp AI, direct bookings, reviews, NOVA basic dashboard, 500 messages/month</div></div>
         <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-badge">RECOMMENDED</div><div class="pkg-name">Guest Experience Suite</div><div class="pkg-price" id="pro-price">349€ <span>/ Monat</span></div><div class="pkg-desc">Everything in Starter + email automation, offers, campaigns, reports, team tools, 2,000 messages/month</div></div>
       </div>
-      <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">Alle Preise zzgl. VAT: · 12 months minimum · + 349€ one-time setup fee</p>
+      <p id="legalNote" style="color:#8b949e;font-size:.78rem;margin-top:10px">Endpreise · Gemäß § 19 UStG wird keine Umsatzsteuer berechnet · 349€ einmalige Einrichtung</p>
     </div>
     <!-- Konto -->
     <!-- Dynamic Pricing Add-on -->
@@ -164,7 +164,7 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
         </div>
       </div>
       <div class="g2">
-        <div class="field"><label>VAT ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input aria-label="DE123456789" type="text" id="vatId" placeholder="DE123456789"><div class="hint">With VAT ID → 0% VAT (Reverse Charge)</div></div>
+        <div class="field"><label>VAT ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input aria-label="DE123456789" type="text" id="vatId" placeholder="DE123456789"><div class="hint">Optional for EU business customer identification</div></div>
         <div class="field"><label>Country *</label>
           <select aria-label="Select option" id="country" onchange="detectEU()" style="background:#0e1621;border:1px solid #2a3a4a;color:#e8eaed;border-radius:12px;padding:13px 16px;font-size:16px;outline:none;width:100%">
             <option value="">Select country...</option>
@@ -174,12 +174,6 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
             <optgroup label="Americas"><option value="US">United States</option><option value="CA">Canada</option></optgroup>
             <optgroup label="Other"><option value="AU">Australia</option><option value="other">Other...</option></optgroup>
           </select>
-        </div>
-        <div class="field">
-          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
-            <input type="checkbox" id="nonEU" onchange="updateSum()" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-            <span style="color:#8b949e;font-size:13px;line-height:1.5">My hotel is <strong style="color:#f0f6fc">outside the EU</strong> — <strong style="color:#4cd97b">0% VAT</strong></span>
-          </label>
         </div>
         <div class="field"><label>Website <span style="color:#484f58;font-weight:400">(optional)</span></label><input aria-label="https://..." type="url" id="website" placeholder="https://..."></div>
       </div>
@@ -248,7 +242,7 @@ function setBilling(cycle){
   document.getElementById('starter-price').innerHTML=billingCycle==='annual'?'1.990€ <span>/ Jahr</span>':'199€ <span>/ Monat</span>';
   document.getElementById('pro-price').innerHTML=billingCycle==='annual'?'3.490€ <span>/ Jahr</span>':'349€ <span>/ Monat</span>';
   document.getElementById('dynamic-price').innerHTML=billingCycle==='annual'?'+990€ <span>/ Jahr</span>':'+99€ <span>/ Monat</span>';
-  var note=document.getElementById('legalNote');if(note)note.textContent='Alle Preise zzgl. MwSt. · 349€ einmalige Einrichtung'+(billingCycle==='annual'?' · 2 Monate gratis':'');
+  var note=document.getElementById('legalNote');if(note)note.textContent='Endpreise · Keine Umsatzsteuer gemäß § 19 UStG · 349€ einmalige Einrichtung'+(billingCycle==='annual'?' · 2 Monate gratis':'');
 }
 function setErr(id,has){var f=document.getElementById('fe-'+id);if(f)f.classList.toggle('bad',has);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
@@ -283,12 +277,8 @@ function go1(){
     dynamicPricing:dp==='on',billingCycle:billingCycle
   };
   // Build summary
-  var vatId=fdata.vatId;
-  var nonEU=document.getElementById('nonEU')&&document.getElementById('nonEU').checked; var reverseCharge=nonEU||vatId&&vatId.length>4;
   var recurring=billingCycle==='annual'?(pkg==='starter'?1990:3490)+(dp==='on'?990:0):(pkg==='starter'?199:349)+(dp==='on'?99:0);
   var setup=349;
-  var vat=reverseCharge?0:Math.round(recurring*0.19*100)/100;
-  var vatSetup=reverseCharge?0:Math.round(setup*0.19*100)/100;
   var rows=[
     ['E-Mail',fdata.email],['Name',fdata.name],
     ['Hotel',fdata.companyName],
@@ -305,8 +295,9 @@ function go1(){
     '<div class="sum-total">'+
     '<div class="sum-total-row"><span style="color:#8b949e">'+(billingCycle==='annual'?'Annual subscription':'Monthly subscription')+'</span><span>'+recurring+'€ / '+(billingCycle==='annual'?'year':'month')+'</span></div>'+
     '<div class="sum-total-row"><span style="color:#8b949e">Setup Fee (one-time)</span><span>'+setup+'€</span></div>'+
-    '<div class="sum-total-row"><span style="color:#8b949e">VAT: '+(reverseCharge?'0% (Reverse Charge)':'19%')+'</span><span>'+vat.toFixed(2)+'€ / '+(reverseCharge?'0.00':vatSetup.toFixed(2))+'€</span></div>'+
-    '<div class="sum-total-row big"><span>Total today</span><span>'+(Math.round((recurring+vat+setup+vatSetup)*100)/100).toFixed(2)+'€</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">VAT</span><span>0.00€</span></div>'+
+    '<div class="sum-total-row big"><span>Total today</span><span>'+(recurring+setup).toFixed(2)+'€</span></div>'+
+    '<div class="note">Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</div>'+
     '</div>';
   show(2);
 }

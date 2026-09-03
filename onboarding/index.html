@@ -105,8 +105,8 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
     <div class="card">
       <h3>📦 Choose Package</h3>
       <div class="pkgs">
-        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">🔥 Popular</div><div class="pkg-name">Starter</div><div style="font-size:0.8rem;color:rgba(255,80,80,0.7);text-decoration:line-through;line-height:1;">249€</div><div class="pkg-price">199€ <span>/ month</span></div><div style="font-size:0.7rem;color:#34c759;margin-bottom:4px;">or €1,990/year (2 months free)</div><div class="pkg-desc">WhatsApp Bot, Guest Service, 500 messages/month</div></div>
-        <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-name">Pro</div><div class="pkg-price">349€ <span>/ month</span></div><div style="font-size:0.7rem;color:#34c759;margin-bottom:4px;">or €3,490/year (2 months free)</div><div class="pkg-desc">Everything in Starter + Google Business, Reviews, 2,000 messages/month</div></div>
+        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">START</div><div class="pkg-name">KI-Concierge Starter</div><div class="pkg-price">199€ <span>/ month</span></div><div style="font-size:0.7rem;color:#34c759;margin-bottom:4px;">or €1,990/year (2 months free)</div><div class="pkg-desc">WhatsApp AI, direct bookings, reviews, NOVA basic dashboard, 500 messages/month</div></div>
+        <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-badge">RECOMMENDED</div><div class="pkg-name">Guest Experience Suite</div><div class="pkg-price">349€ <span>/ month</span></div><div style="font-size:0.7rem;color:#34c759;margin-bottom:4px;">or €3,490/year (2 months free)</div><div class="pkg-desc">Everything in Starter + email automation, offers, campaigns, reports, team tools, 2,000 messages/month</div></div>
       </div>
       <p id="legalNote" style="color:#484f58;font-size:.78rem;margin-top:10px">Alle Preise zzgl. VAT: · 12 months minimum · + 349€ one-time setup fee</p>
     </div>
@@ -239,7 +239,6 @@ function go1(){
   var email=document.getElementById('email').value.trim();
   var name=document.getElementById('name').value.trim();
   var pw='auto_' + Math.random().toString(36).slice(2,10);
-  var pw2=document.getElementById('pw2').value;
   var company=document.getElementById('company').value.trim();
   var street=document.getElementById('street').value.trim();
   var zip=document.getElementById('zip').value.trim();
@@ -250,7 +249,6 @@ function go1(){
   setErr('email',!emailOk);if(!emailOk)ok=false;
   setErr('name',!name);if(!name)ok=false;
   setErr('pw',pw.length<8);if(pw.length<8)ok=false;
-  setErr('pw2',pw!==pw2);if(pw!==pw2)ok=false;
   setErr('company',!company);if(!company)ok=false;
   setErr('street',!street);if(!street)ok=false;
   setErr('zip',!zip);if(!zip)ok=false;
@@ -264,12 +262,14 @@ function go1(){
     address:street+', '+zip+' '+city,
     vatId:document.getElementById('vatId').value.trim(),
     website:document.getElementById('website').value.trim(),
-    whatsappNumber:wa,phone:wa
+    whatsappNumber:wa,phone:wa,
+    dynamicPricing:dp==='on'
   };
   // Build summary
   var vatId=fdata.vatId;
   var nonEU=document.getElementById('nonEU')&&document.getElementById('nonEU').checked; var reverseCharge=nonEU||vatId&&vatId.length>4;
-  var monthly=pkg==='starter'?199:349;
+  var baseMonthly=pkg==='starter'?199:349;
+  var monthly=baseMonthly+(dp==='on'?99:0);
   var setup=349;
   var vat=reverseCharge?0:Math.round(monthly*0.19*100)/100;
   var vatSetup=reverseCharge?0:Math.round(setup*0.19*100)/100;
@@ -280,7 +280,8 @@ function go1(){
     ['VAT ID',fdata.vatId||'Not provided'],
     ['Website',fdata.website||'—'],
     ['WhatsApp',fdata.whatsappNumber],
-    ['Package',(pkg==='starter'?'Starter':'Pro')]
+    ['Package',(pkg==='starter'?'KI-Concierge Starter':'Guest Experience Suite')],
+    ['Dynamic Pricing',dp==='on'?'Yes (+99€ / month)':'No']
   ];
   document.getElementById('sumDetails').innerHTML=rows.map(function(r){return '<div class="sum-row"><span class="sum-label">'+esc(r[0])+'</span><span class="sum-value">'+esc(r[1])+'</span></div>';}).join('');
   document.getElementById('sumPrice').innerHTML=
@@ -319,19 +320,21 @@ async function doCheckout(){
     // Add Stripe price IDs for the package
 var priceMap={'starter':{priceId:'price_1TL0yYLwGb6me8PhNJaI5B0d',amount:199},'pro':{priceId:'price_1TL0z0LwGb6me8PhRKNbQ3Qa',amount:349}};
 var pkgInfo=priceMap[fdata.package]||priceMap.starter;
+var addonAmount=fdata.dynamicPricing?99:0;
+var dynamicPricingPriceId='price_1UBiOCLwGb6me8PhNwuYHbhi';
 var nonEU=document.getElementById('nonEU')&&document.getElementById('nonEU').checked; var reverseCharge=nonEU||fdata.vatId&&fdata.vatId.length>4;
 var vatRate=19; // Stripe handles Reverse Charge via customer tax ID
 var vatAmount=reverseCharge?0:Math.round(pkgInfo.amount*0.19*100)/100;
 var chkPayload=Object.assign({},fdata,{
   customerEmail:fdata.email,
-  priceIds:[pkgInfo.priceId],
-  modules:[{key:fdata.package,name:fdata.package==='starter'?'Starter':'Pro',price:pkgInfo.amount,priceId:pkgInfo.priceId,desc:'LeoLan '+fdata.package}],
-  monthlyNetTotal:pkgInfo.amount,
+  priceIds:[pkgInfo.priceId].concat(fdata.dynamicPricing?[dynamicPricingPriceId]:[]),
+  modules:[{key:fdata.package,name:fdata.package==='starter'?'KI-Concierge Starter':'Guest Experience Suite',price:pkgInfo.amount,priceId:pkgInfo.priceId,desc:'NOVA '+fdata.package}].concat(fdata.dynamicPricing?[{key:'dynamicPricing',name:'NOVA Dynamic Pricing',price:addonAmount,desc:'Dynamic Pricing add-on'}]:[]),
+  monthlyNetTotal:pkgInfo.amount+addonAmount,
   setupFeeAmount:349,
-  netTotal:pkgInfo.amount+349,
+  netTotal:pkgInfo.amount+addonAmount+349,
   vatRate:vatRate,
   vatAmount:vatAmount,
-  grossTotal:Math.round((pkgInfo.amount+349+(reverseCharge?0:Math.round((pkgInfo.amount+349)*0.19*100)/100))*100)/100, reverseCharge:false,
+  grossTotal:Math.round((pkgInfo.amount+addonAmount+349+(reverseCharge?0:Math.round((pkgInfo.amount+addonAmount+349)*0.19*100)/100))*100)/100,
   reverseCharge:reverseCharge,
   selectedPackage:fdata.package,
   successUrl:'https://hotel.leolan.net/danke/',
@@ -377,7 +380,7 @@ function detectEU(){
   updateSum();
 }
 var dp='none';
-function sdp(d){dp=d;['none','on'].forEach(function(x){var el=document.getElementById('dp-'+x);if(el){el.style.borderColor=x===d?'#f5a623':'';el.style.background=x===d?'rgba(245,166,35,.07)':'';var chk=el.querySelector('.chk');if(chk)chk.style.display=x===d?'flex':'none';}});updateTotal();}
+function sdp(d){dp=d;['none','on'].forEach(function(x){var el=document.getElementById('dp-'+x);if(el){el.style.borderColor=x===d?'#f5a623':'';el.style.background=x===d?'rgba(245,166,35,.07)':'';var chk=el.querySelector('.chk');if(chk)chk.style.display=x===d?'flex':'none';}});}
 
 
 </script>

@@ -72,166 +72,210 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
 .sum-total{background:#0d1117;border-radius:10px;padding:16px;margin-top:12px}
 .sum-total-row{display:flex;justify-content:space-between;font-size:.88rem;padding:4px 0}
 .sum-total-row.big{font-size:1.1rem;font-weight:800;color:#f5a623;padding-top:10px;margin-top:6px;border-top:1px solid #21262d}
+.lang-select{position:absolute;right:20px;top:50%;transform:translateY(-50%);background:#161b22;border:1px solid #30363d;border-radius:8px;color:#e6edf3;padding:8px 10px;font-weight:700}
+@media(max-width:520px){.top-home-label{display:none}.lang-select{right:10px}.top-home{left:10px!important}}
 </style>
 </head>
 <body>
-<a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Skip to main content</a>
+<a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Zum Hauptinhalt</a>
 
 <div style="background:#0d1117;border-bottom:1px solid #21262d;position:sticky;top:0;z-index:100;padding:12px 20px">
-  <a href="https://hotel.leolan.net/" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;color:#8b949e;text-decoration:none;font-size:14px;font-weight:600">
-    <span style="font-size:18px">←</span> Home
+  <a class="top-home" href="https://hotel.leolan.net/de/" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;color:#8b949e;text-decoration:none;font-size:14px;font-weight:600">
+    <span style="font-size:18px">←</span> <span class="top-home-label">Startseite</span>
   </a>
   <div style="text-align:center">
     <a href="https://hotel.leolan.net/">
       <img src="/leolan-logo-new.png" width="56" height="56" style="border-radius:16px;border:0;display:inline-block" alt="LeoLan">
     </a>
   </div>
+  <select id="languageSelect" class="lang-select" aria-label="Sprache" onchange="setLanguage(this.value,true)">
+    <option value="de">DE</option><option value="en">EN</option><option value="tr">TR</option><option value="ru">RU</option><option value="id">ID</option><option value="th">TH</option>
+  </select>
 </div>
 
+<main id="main-content">
 <div class="hero">
   <div class="logo">LeoLan Digital</div>
-  <h1>AI System for Your Hotel</h1>
-  <p>Set up your AI system in 3 steps.</p>
+  <h1>KI-System für Ihr Hotel</h1>
+  <p>Richten Sie Ihr KI-System in drei Schritten ein.</p>
 </div>
 <div class="shell">
   <!-- Steps -->
   <div style="display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:24px">
-    <div class="swrap"><div class="sdot active" id="sd1">1</div><div class="slabel">Your Details</div></div>
+    <div class="swrap"><div class="sdot active" id="sd1">1</div><div class="slabel">Ihre Angaben</div></div>
     <div class="sline" id="sl1"></div>
-    <div class="swrap"><div class="sdot" id="sd2">2</div><div class="slabel">Review</div></div>
+    <div class="swrap"><div class="sdot" id="sd2">2</div><div class="slabel">Prüfen</div></div>
     <div class="sline" id="sl2"></div>
-    <div class="swrap"><div class="sdot" id="sd3">3</div><div class="slabel">Payment</div></div>
+    <div class="swrap"><div class="sdot" id="sd3">3</div><div class="slabel">Zahlung</div></div>
   </div>
 
   <!-- STEP 1 -->
   <div id="s1">
     <!-- Package -->
     <div class="card">
-      <h3>📦 Choose Package</h3>
+      <h3>📦 Paket auswählen</h3>
       <div class="billing-toggle" role="group" aria-label="Abrechnungszeitraum">
         <button type="button" id="billing-monthly" class="billing-option on" onclick="setBilling('monthly')">Monatlich</button>
         <button type="button" id="billing-annual" class="billing-option" onclick="setBilling('annual')">Jährlich <span class="billing-saving">2 Monate gratis</span></button>
       </div>
       <div class="pkgs">
-        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">START</div><div class="pkg-name">KI-Concierge Starter</div><div class="pkg-price" id="starter-price">199€ <span>/ Monat</span></div><div class="pkg-desc">WhatsApp AI, direct bookings, reviews, NOVA basic dashboard, 500 messages/month</div></div>
-        <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-badge">RECOMMENDED</div><div class="pkg-name">Guest Experience Suite</div><div class="pkg-price" id="pro-price">349€ <span>/ Monat</span></div><div class="pkg-desc">Everything in Starter + email automation, offers, campaigns, reports, team tools, 2,000 messages/month</div></div>
+        <div class="pkg on" data-pkg="starter" onclick="spkg('starter')"><div class="chk">✓</div><div class="pkg-badge">START</div><div class="pkg-name">KI-Concierge Starter</div><div class="pkg-price" id="starter-price">199€ <span>/ Monat</span></div><div class="pkg-desc">WhatsApp-KI, Direktbuchungen, Bewertungen, NOVA Basis-Dashboard und 500 Nachrichten pro Monat</div></div>
+        <div class="pkg" data-pkg="pro" onclick="spkg('pro')"><div class="chk">✓</div><div class="pkg-badge">EMPFOHLEN</div><div class="pkg-name">Guest Experience Suite</div><div class="pkg-price" id="pro-price">349€ <span>/ Monat</span></div><div class="pkg-desc">Alles aus Starter plus E-Mail-Automation, Angebote, Kampagnen, Berichte, Teamfunktionen und 2.000 Nachrichten pro Monat</div></div>
       </div>
       <p id="legalNote" style="color:#8b949e;font-size:.78rem;margin-top:10px">Endpreise · Gemäß § 19 UStG wird keine Umsatzsteuer berechnet · 349€ einmalige Einrichtung</p>
     </div>
     <!-- Konto -->
     <!-- Dynamic Pricing Add-on -->
     <div class="card">
-      <h3>💰 Dynamic Pricing <span style="font-size:.75rem;font-weight:400;color:#8b949e">(optional add-on)</span></h3>
-      <p style="color:#8b949e;font-size:.84rem;margin-bottom:12px">AI monitors competitor rates daily and recommends your optimal room price. +30% avg. revenue uplift.</p>
+      <h3>💰 Dynamische Preisgestaltung <span style="font-size:.75rem;font-weight:400;color:#8b949e">(optionale Erweiterung)</span></h3>
+      <p style="color:#8b949e;font-size:.84rem;margin-bottom:12px">Die KI beobachtet täglich Wettbewerberpreise und empfiehlt den optimalen Zimmerpreis.</p>
       <div class="pkgs">
         <div class="pkg" id="dp-none" onclick="sdp('none')" style="border-color:#f5a623;background:rgba(245,166,35,.07)">
           <div class="chk" style="display:flex">✓</div>
-          <div class="pkg-name">No Pricing</div>
+          <div class="pkg-name">Ohne Preisoptimierung</div>
           <div class="pkg-price" style="font-size:1rem">0€</div>
-          <div class="pkg-desc">Manual pricing only</div>
+          <div class="pkg-desc">Preise werden manuell gepflegt</div>
         </div>
         <div class="pkg" id="dp-on" onclick="sdp('on')">
           <div class="chk">✓</div>
           <div class="pkg-badge" style="background:#f5a623;color:#000">BETA</div>
-          <div class="pkg-name">Dynamic Pricing</div>
+          <div class="pkg-name">Dynamische Preisgestaltung</div>
           <div class="pkg-price" id="dynamic-price">+99€ <span>/ Monat</span></div>
-          <div class="pkg-desc">AI competitor monitoring, daily price recommendations, event &amp; season factors</div>
+          <div class="pkg-desc">KI-Wettbewerbsanalyse, tägliche Preisempfehlungen sowie Event- und Saisonfaktoren</div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <h3>👤 Account Details</h3>
+      <h3>👤 Kontaktdaten</h3>
       <div class="g2">
-        <div class="field" id="fe-email"><label>E-Mail *</label><input aria-label="name@hotel.com" type="email" id="email" placeholder="name@hotel.com" autocomplete="email"><div class="err">Please enter a valid email.</div></div>
-        <div class="field" id="fe-name"><label>Your Name *</label><input aria-label="John Smith" type="text" id="name" placeholder="John Smith" autocomplete="name"><div class="err">Please enter your name.</div></div>
+        <div class="field" id="fe-email"><label>E-Mail *</label><input aria-label="name@hotel.de" type="email" id="email" placeholder="name@hotel.de" autocomplete="email"><div class="err">Bitte geben Sie eine gültige E-Mail-Adresse ein.</div></div>
+        <div class="field" id="fe-name"><label>Ihr Name *</label><input aria-label="Max Mustermann" type="text" id="name" placeholder="Max Mustermann" autocomplete="name"><div class="err">Bitte geben Sie Ihren Namen ein.</div></div>
       </div>
       <div class="g2">
         <div style="background:rgba(52,199,89,0.08);border:1px solid rgba(52,199,89,0.2);border-radius:10px;padding:12px 14px;font-size:13px;color:rgba(245,247,251,0.7);">
-          🔐 We'll send your login password automatically to your email after setup.
+          🔐 Nach der Einrichtung senden wir Ihr Anmeldepasswort automatisch per E-Mail.
         </div>
       </div>
     </div>
     <!-- Kundendaten -->
     <div class="card">
-      <h3>🏢 Hotel & Billing Details</h3>
-      <div class="field" id="fe-company"><label>Hotel Name *</label><input aria-label="e.g. Grand Hotel Berlin" type="text" id="company" placeholder="e.g. Grand Hotel Berlin"><div class="err">Hotel Please enter your name.</div></div>
+      <h3>🏢 Hotel- und Rechnungsdaten</h3>
+      <div class="field" id="fe-company"><label>Hotelname *</label><input aria-label="z. B. Grand Hotel Berlin" type="text" id="company" placeholder="z. B. Grand Hotel Berlin"><div class="err">Bitte geben Sie den Hotelnamen ein.</div></div>
       <div class="g2">
-        <div class="field" id="fe-street"><label>Street & Number *</label><input aria-label="123 Main Street" type="text" id="street" placeholder="123 Main Street"><div class="err">Address eingeben.</div></div>
+        <div class="field" id="fe-street"><label>Straße und Hausnummer *</label><input aria-label="Musterstraße 12" type="text" id="street" placeholder="Musterstraße 12"><div class="err">Bitte geben Sie die Adresse ein.</div></div>
         <div class="g2" style="gap:8px">
-          <div class="field" id="fe-zip"><label>ZIP *</label><input aria-label="10001" type="text" id="zip" placeholder="10001" maxlength="10"><div class="err">Please enter ZIP.</div></div>
-          <div class="field" id="fe-city"><label>City *</label><input aria-label="New York" type="text" id="city" placeholder="New York"><div class="err">Please enter city.</div></div>
+          <div class="field" id="fe-zip"><label>PLZ *</label><input aria-label="10115" type="text" id="zip" placeholder="10115" maxlength="10"><div class="err">Bitte geben Sie die Postleitzahl ein.</div></div>
+          <div class="field" id="fe-city"><label>Ort *</label><input aria-label="Berlin" type="text" id="city" placeholder="Berlin"><div class="err">Bitte geben Sie den Ort ein.</div></div>
         </div>
       </div>
       <div class="g2">
-        <div class="field"><label>VAT ID <span style="color:#484f58;font-weight:400">(optional)</span></label><input aria-label="DE123456789" type="text" id="vatId" placeholder="DE123456789"><div class="hint">Optional for EU business customer identification</div></div>
-        <div class="field"><label>Country *</label>
+        <div class="field"><label>USt-IdNr. <span style="color:#484f58;font-weight:400">(optional)</span></label><input aria-label="DE123456789" type="text" id="vatId" placeholder="DE123456789"><div class="hint">Optional zur Identifikation von EU-Geschäftskunden</div></div>
+        <div class="field"><label>Land *</label>
           <select aria-label="Select option" id="country" onchange="detectEU()" style="background:#0e1621;border:1px solid #2a3a4a;color:#e8eaed;border-radius:12px;padding:13px 16px;font-size:16px;outline:none;width:100%">
-            <option value="">Select country...</option>
-            <optgroup label="EU"><option value="DE">Germany</option><option value="AT">Austria</option><option value="FR">France</option><option value="IT">Italy</option><option value="ES">Spain</option><option value="NL">Netherlands</option><option value="BE">Belgium</option><option value="SE">Sweden</option></optgroup>
-            <optgroup label="Non-EU Europe"><option value="GB">United Kingdom</option><option value="CH">Switzerland</option><option value="TR">Turkey</option></optgroup>
-            <optgroup label="Middle East & Asia"><option value="AE">UAE (Dubai)</option><option value="ID">Indonesia (Bali)</option><option value="TH">Thailand</option><option value="SG">Singapore</option><option value="JP">Japan</option><option value="IN">India</option></optgroup>
-            <optgroup label="Americas"><option value="US">United States</option><option value="CA">Canada</option></optgroup>
-            <optgroup label="Other"><option value="AU">Australia</option><option value="other">Other...</option></optgroup>
+            <option value="">Land auswählen …</option>
+            <optgroup label="EU"><option value="DE">Deutschland</option><option value="AT">Österreich</option><option value="FR">Frankreich</option><option value="IT">Italien</option><option value="ES">Spanien</option><option value="NL">Niederlande</option><option value="BE">Belgien</option><option value="SE">Schweden</option></optgroup>
+            <optgroup label="Europa außerhalb der EU"><option value="GB">Vereinigtes Königreich</option><option value="CH">Schweiz</option><option value="TR">Türkei</option></optgroup>
+            <optgroup label="Nahost und Asien"><option value="AE">VAE (Dubai)</option><option value="ID">Indonesien (Bali)</option><option value="TH">Thailand</option><option value="SG">Singapur</option><option value="JP">Japan</option><option value="IN">Indien</option></optgroup>
+            <optgroup label="Amerika"><option value="US">Vereinigte Staaten</option><option value="CA">Kanada</option></optgroup>
+            <optgroup label="Weitere"><option value="AU">Australien</option><option value="other">Anderes Land …</option></optgroup>
           </select>
         </div>
-        <div class="field"><label>Website <span style="color:#484f58;font-weight:400">(optional)</span></label><input aria-label="https://..." type="url" id="website" placeholder="https://..."></div>
+        <div class="field"><label>Webseite <span style="color:#484f58;font-weight:400">(optional)</span></label><input aria-label="https://..." type="url" id="website" placeholder="https://..."></div>
       </div>
       <div class="field" id="fe-whatsapp">
-        <label>WhatsApp Number *</label>
+        <label>WhatsApp-Nummer *</label>
         <input aria-label="+49 15678 483700" type="tel" id="whatsapp" placeholder="+49 15678 483700">
-        <div class="hint orange">📱 Required: We will set up your Hotel AI Bot on this number.</div>
+        <div class="hint orange">📱 Erforderlich: Auf dieser Nummer richten wir Ihren Hotel-KI-Bot ein.</div>
         <div class="err">WhatsApp-Nummer eingeben.</div>
       </div>
     </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:16px 0;padding:12px;background:rgba(52,199,89,0.05);border:1px solid rgba(52,199,89,0.15);border-radius:12px;">
-      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">🔒 SSL encrypted</span>
-      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">🇩🇪 GDPR compliant</span>
-      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">💳 Secured by Stripe</span>
-      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">📞 Support from Germany</span>
+      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">🔒 SSL-verschlüsselt</span>
+      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">🇩🇪 DSGVO-konform</span>
+      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">💳 Sicher bezahlen mit Stripe</span>
+      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">📞 Support aus Deutschland</span>
     </div>
-    <button class="btn btn-primary" onclick="go1()">Continue: Review Order →</button>
+    <button class="btn btn-primary" onclick="go1()">Weiter: Bestellung prüfen →</button>
   </div>
 
   <!-- STEP 2: Summary -->
   <div id="s2" style="display:none">
     <div class="card">
-      <h3>✅ Review Order</h3>
+      <h3>✅ Bestellung prüfen</h3>
       <div id="sumDetails"></div>
     </div>
     <div class="card">
-      <h3>💰 Price Summary</h3>
+      <h3>💰 Preisübersicht</h3>
       <div id="sumPrice"></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
         <input type="checkbox" id="chkAgb" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-        <span style="color:#8b949e;font-size:13px;line-height:1.5">I accept the <a href="https://ki.leolan.net/agb/" target="_blank" rel="noopener noreferrer" style="color:#f5a623">Terms & Conditions</a> *</span>
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">Ich akzeptiere die <a href="https://ki.leolan.net/agb/" target="_blank" rel="noopener noreferrer" style="color:#f5a623">Allgemeinen Geschäftsbedingungen</a> *</span>
       </label>
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
         <input type="checkbox" id="chkPrivacy" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-        <span style="color:#8b949e;font-size:13px;line-height:1.5">I have read the <a href="https://ki.leolan.net/datenschutz/" target="_blank" rel="noopener noreferrer" style="color:#f5a623">Privacy Policy</a> *</span>
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">Ich habe die <a href="https://ki.leolan.net/datenschutz/" target="_blank" rel="noopener noreferrer" style="color:#f5a623">Datenschutzerklärung</a> gelesen *</span>
       </label>
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
         <input type="checkbox" id="chkAbo" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-        <span style="color:#8b949e;font-size:13px;line-height:1.5">I agree to the subscription (cancel anytime) *</span>
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">Ich stimme dem Abonnement zu (jederzeit kündbar) *</span>
       </label>
     </div>
-    <button class="btn btn-primary" id="payBtn" onclick="doCheckout()">💳 Pay Now</button>
+    <button class="btn btn-primary" id="payBtn" onclick="doCheckout()">💳 Jetzt bezahlen</button>
     <div class="status" id="status"></div>
-    <div class="note">After payment you will receive your customer code by email.<br>Use this code to log in to the LeoLan Manager App.</div>
-    <button class="btn btn-back" onclick="show(1)" style="margin-top:8px">← Edit Details</button>
+    <div class="note">Nach der Zahlung erhalten Sie Ihren Kundencode per E-Mail.<br>Mit diesem Code melden Sie sich in der LeoLan Manager App an.</div>
+    <button class="btn btn-back" onclick="show(1)" style="margin-top:8px">← Angaben bearbeiten</button>
   </div>
 
   <!-- STEP 3: Redirect -->
   <div id="s3" style="display:none;text-align:center;padding:40px 0">
     <div style="font-size:3rem;margin-bottom:16px">🔄</div>
-    <h2 style="color:#f0f6fc;margin-bottom:8px">Weiterleitung zur Payment...</h2>
+    <h2 style="color:#f0f6fc;margin-bottom:8px">Weiterleitung zur Zahlung …</h2>
     <p style="color:#8b949e">Sie werden zu Stripe weitergeleitet.</p>
   </div>
 </div>
 <script>
-var _qs=new URLSearchParams(window.location.search);var urlPkg=_qs.get('paket');var urlAddon=_qs.get('addon');var pkg=urlPkg==='pro'?'pro':'starter';var billingCycle=_qs.get('billing')==='annual'?'annual':'monthly';document.addEventListener('DOMContentLoaded',function(){setBilling(billingCycle);spkg(pkg);if(urlAddon==='pricing'){sdp('on');}});
+var _qs=new URLSearchParams(window.location.search);var urlPkg=_qs.get('paket');var urlAddon=_qs.get('addon');var pkg=urlPkg==='pro'?'pro':'starter';var billingCycle=_qs.get('billing')==='annual'?'annual':'monthly';
+var currentLang='de',baseTexts=[];
+var supportedLanguages=['de','en','tr','ru','id','th'];
+var languageCountries={DE:'de',AT:'de',CH:'de',LI:'de',TR:'tr',RU:'ru',BY:'ru',KZ:'ru',ID:'id',TH:'th'};
+var translations={
+ en:{'Startseite':'Home','Zum Hauptinhalt':'Skip to main content','KI-System für Ihr Hotel':'AI System for Your Hotel','Richten Sie Ihr KI-System in drei Schritten ein.':'Set up your AI system in three steps.','Ihre Angaben':'Your details','Prüfen':'Review','Zahlung':'Payment','📦 Paket auswählen':'📦 Choose package','Monatlich':'Monthly','Jährlich':'Yearly','2 Monate gratis':'2 months free','EMPFOHLEN':'RECOMMENDED','WhatsApp-KI, Direktbuchungen, Bewertungen, NOVA Basis-Dashboard und 500 Nachrichten pro Monat':'WhatsApp AI, direct bookings, reviews, NOVA basic dashboard and 500 messages per month','Alles aus Starter plus E-Mail-Automation, Angebote, Kampagnen, Berichte, Teamfunktionen und 2.000 Nachrichten pro Monat':'Everything in Starter plus email automation, offers, campaigns, reports, team tools and 2,000 messages per month','💰 Dynamische Preisgestaltung':'💰 Dynamic pricing','(optionale Erweiterung)':'(optional add-on)','Die KI beobachtet täglich Wettbewerberpreise und empfiehlt den optimalen Zimmerpreis.':'AI monitors competitor rates daily and recommends the optimal room price.','Ohne Preisoptimierung':'No price optimization','Preise werden manuell gepflegt':'Manual pricing only','Dynamische Preisgestaltung':'Dynamic pricing','KI-Wettbewerbsanalyse, tägliche Preisempfehlungen sowie Event- und Saisonfaktoren':'AI competitor monitoring, daily price recommendations, event and season factors','👤 Kontaktdaten':'👤 Contact details','Ihr Name *':'Your name *','Bitte geben Sie eine gültige E-Mail-Adresse ein.':'Please enter a valid email address.','Bitte geben Sie Ihren Namen ein.':'Please enter your name.','🔐 Nach der Einrichtung senden wir Ihr Anmeldepasswort automatisch per E-Mail.':'🔐 We will automatically email your login password after setup.','🏢 Hotel- und Rechnungsdaten':'🏢 Hotel and billing details','Hotelname *':'Hotel name *','Bitte geben Sie den Hotelnamen ein.':'Please enter the hotel name.','Straße und Hausnummer *':'Street and number *','Bitte geben Sie die Adresse ein.':'Please enter the address.','PLZ *':'Postal code *','Bitte geben Sie die Postleitzahl ein.':'Please enter the postal code.','Ort *':'City *','Bitte geben Sie den Ort ein.':'Please enter the city.','USt-IdNr. ':'VAT ID ','Optional zur Identifikation von EU-Geschäftskunden':'Optional for EU business customer identification','Land *':'Country *','Webseite ':'Website ','WhatsApp-Nummer *':'WhatsApp number *','📱 Erforderlich: Auf dieser Nummer richten wir Ihren Hotel-KI-Bot ein.':'📱 Required: We will set up your hotel AI bot on this number.','🔒 SSL-verschlüsselt':'🔒 SSL encrypted','🇩🇪 DSGVO-konform':'🇪🇺 GDPR compliant','💳 Sicher bezahlen mit Stripe':'💳 Secured by Stripe','📞 Support aus Deutschland':'📞 Support from Germany','Weiter: Bestellung prüfen →':'Continue: review order →','✅ Bestellung prüfen':'✅ Review order','💰 Preisübersicht':'💰 Price summary','Ich akzeptiere die ':'I accept the ','Allgemeinen Geschäftsbedingungen':'Terms and Conditions','Ich habe die ':'I have read the ','Datenschutzerklärung':'Privacy Policy',' gelesen *':' *','Ich stimme dem Abonnement zu (jederzeit kündbar) *':'I agree to the subscription (cancel anytime) *','💳 Jetzt bezahlen':'💳 Pay now','Nach der Zahlung erhalten Sie Ihren Kundencode per E-Mail.':'After payment, you will receive your customer code by email.','Mit diesem Code melden Sie sich in der LeoLan Manager App an.':'Use this code to sign in to the LeoLan Manager App.','← Angaben bearbeiten':'← Edit details','Weiterleitung zur Zahlung …':'Redirecting to payment…','Sie werden zu Stripe weitergeleitet.':'You will be redirected to Stripe.'},
+ tr:{'Startseite':'Ana sayfa','KI-System für Ihr Hotel':'Oteliniz için yapay zekâ sistemi','Richten Sie Ihr KI-System in drei Schritten ein.':'Yapay zekâ sisteminizi üç adımda kurun.','Ihre Angaben':'Bilgileriniz','Prüfen':'Kontrol','Zahlung':'Ödeme','📦 Paket auswählen':'📦 Paket seçin','Monatlich':'Aylık','Jährlich':'Yıllık','2 Monate gratis':'2 ay ücretsiz','EMPFOHLEN':'ÖNERİLEN','💰 Dynamische Preisgestaltung':'💰 Dinamik fiyatlandırma','(optionale Erweiterung)':'(isteğe bağlı eklenti)','Ohne Preisoptimierung':'Fiyat optimizasyonu yok','Preise werden manuell gepflegt':'Yalnızca manuel fiyatlandırma','Dynamische Preisgestaltung':'Dinamik fiyatlandırma','👤 Kontaktdaten':'👤 İletişim bilgileri','Ihr Name *':'Adınız *','🏢 Hotel- und Rechnungsdaten':'🏢 Otel ve fatura bilgileri','Hotelname *':'Otel adı *','Straße und Hausnummer *':'Cadde ve kapı numarası *','PLZ *':'Posta kodu *','Ort *':'Şehir *','Land *':'Ülke *','Webseite ':'Web sitesi ','WhatsApp-Nummer *':'WhatsApp numarası *','Weiter: Bestellung prüfen →':'Devam: siparişi kontrol et →','✅ Bestellung prüfen':'✅ Siparişi kontrol et','💰 Preisübersicht':'💰 Fiyat özeti','💳 Jetzt bezahlen':'💳 Şimdi öde','← Angaben bearbeiten':'← Bilgileri düzenle','Weiterleitung zur Zahlung …':'Ödemeye yönlendiriliyor…'},
+ ru:{'Startseite':'Главная','KI-System für Ihr Hotel':'ИИ-система для вашего отеля','Richten Sie Ihr KI-System in drei Schritten ein.':'Настройте ИИ-систему за три шага.','Ihre Angaben':'Ваши данные','Prüfen':'Проверка','Zahlung':'Оплата','📦 Paket auswählen':'📦 Выберите пакет','Monatlich':'Ежемесячно','Jährlich':'Ежегодно','2 Monate gratis':'2 месяца бесплатно','EMPFOHLEN':'РЕКОМЕНДУЕМ','💰 Dynamische Preisgestaltung':'💰 Динамическое ценообразование','(optionale Erweiterung)':'(дополнительно)','Ohne Preisoptimierung':'Без оптимизации цен','Preise werden manuell gepflegt':'Ручное ценообразование','Dynamische Preisgestaltung':'Динамические цены','👤 Kontaktdaten':'👤 Контактные данные','Ihr Name *':'Ваше имя *','🏢 Hotel- und Rechnungsdaten':'🏢 Данные отеля и счёта','Hotelname *':'Название отеля *','Straße und Hausnummer *':'Улица и номер дома *','PLZ *':'Индекс *','Ort *':'Город *','Land *':'Страна *','Webseite ':'Сайт ','WhatsApp-Nummer *':'Номер WhatsApp *','Weiter: Bestellung prüfen →':'Далее: проверить заказ →','✅ Bestellung prüfen':'✅ Проверить заказ','💰 Preisübersicht':'💰 Итоговая цена','💳 Jetzt bezahlen':'💳 Оплатить','← Angaben bearbeiten':'← Изменить данные','Weiterleitung zur Zahlung …':'Переход к оплате…'},
+ id:{'Startseite':'Beranda','KI-System für Ihr Hotel':'Sistem AI untuk hotel Anda','Richten Sie Ihr KI-System in drei Schritten ein.':'Siapkan sistem AI Anda dalam tiga langkah.','Ihre Angaben':'Data Anda','Prüfen':'Tinjau','Zahlung':'Pembayaran','📦 Paket auswählen':'📦 Pilih paket','Monatlich':'Bulanan','Jährlich':'Tahunan','2 Monate gratis':'Gratis 2 bulan','EMPFOHLEN':'DIREKOMENDASIKAN','💰 Dynamische Preisgestaltung':'💰 Harga dinamis','(optionale Erweiterung)':'(tambahan opsional)','Ohne Preisoptimierung':'Tanpa optimasi harga','Preise werden manuell gepflegt':'Harga manual saja','Dynamische Preisgestaltung':'Harga dinamis','👤 Kontaktdaten':'👤 Detail kontak','Ihr Name *':'Nama Anda *','🏢 Hotel- und Rechnungsdaten':'🏢 Detail hotel dan tagihan','Hotelname *':'Nama hotel *','Straße und Hausnummer *':'Jalan dan nomor *','PLZ *':'Kode pos *','Ort *':'Kota *','Land *':'Negara *','Webseite ':'Situs web ','WhatsApp-Nummer *':'Nomor WhatsApp *','Weiter: Bestellung prüfen →':'Lanjut: tinjau pesanan →','✅ Bestellung prüfen':'✅ Tinjau pesanan','💰 Preisübersicht':'💰 Ringkasan harga','💳 Jetzt bezahlen':'💳 Bayar sekarang','← Angaben bearbeiten':'← Edit data','Weiterleitung zur Zahlung …':'Mengalihkan ke pembayaran…'},
+ th:{'Startseite':'หน้าแรก','KI-System für Ihr Hotel':'ระบบ AI สำหรับโรงแรมของคุณ','Richten Sie Ihr KI-System in drei Schritten ein.':'ตั้งค่าระบบ AI ในสามขั้นตอน','Ihre Angaben':'ข้อมูลของคุณ','Prüfen':'ตรวจสอบ','Zahlung':'ชำระเงิน','📦 Paket auswählen':'📦 เลือกแพ็กเกจ','Monatlich':'รายเดือน','Jährlich':'รายปี','2 Monate gratis':'ฟรี 2 เดือน','EMPFOHLEN':'แนะนำ','💰 Dynamische Preisgestaltung':'💰 การกำหนดราคาแบบไดนามิก','(optionale Erweiterung)':'(เสริม)','Ohne Preisoptimierung':'ไม่ปรับราคา','Preise werden manuell gepflegt':'กำหนดราคาด้วยตนเอง','Dynamische Preisgestaltung':'ราคาไดนามิก','👤 Kontaktdaten':'👤 ข้อมูลติดต่อ','Ihr Name *':'ชื่อของคุณ *','🏢 Hotel- und Rechnungsdaten':'🏢 ข้อมูลโรงแรมและการเรียกเก็บเงิน','Hotelname *':'ชื่อโรงแรม *','Straße und Hausnummer *':'ที่อยู่ *','PLZ *':'รหัสไปรษณีย์ *','Ort *':'เมือง *','Land *':'ประเทศ *','Webseite ':'เว็บไซต์ ','WhatsApp-Nummer *':'หมายเลข WhatsApp *','Weiter: Bestellung prüfen →':'ถัดไป: ตรวจสอบคำสั่งซื้อ →','✅ Bestellung prüfen':'✅ ตรวจสอบคำสั่งซื้อ','💰 Preisübersicht':'💰 สรุปราคา','💳 Jetzt bezahlen':'💳 ชำระเงิน','← Angaben bearbeiten':'← แก้ไขข้อมูล','Weiterleitung zur Zahlung …':'กำลังไปยังการชำระเงิน…'}
+};
+function detectLanguage(){
+  var explicit=(_qs.get('lang')||'').toLowerCase();if(supportedLanguages.includes(explicit))return explicit;
+  var ref=(document.referrer||'').match(/hotel\.leolan\.net\/(de|en|tr|ru|id|th)(?:\/|$)/i);if(ref)return ref[1].toLowerCase();
+  var saved=localStorage.getItem('novaOnboardingLang');if(supportedLanguages.includes(saved))return saved;
+  var raw=(navigator.languages&&navigator.languages[0])||navigator.language||'en';var parts=raw.toLowerCase().split('-');
+  if(supportedLanguages.includes(parts[0]))return parts[0];var region=(parts[1]||'').toUpperCase();return languageCountries[region]||'en';
+}
+function rememberBaseTexts(){
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);var n;while((n=w.nextNode())){var s=n.nodeValue.trim();if(s)baseTexts.push([n,s,n.nodeValue]);}
+}
+function translateStatic(){
+  var dict=translations[currentLang]||{};baseTexts.forEach(function(x){if(!x[0].isConnected)return;var value=dict[x[1]]||x[1];x[0].nodeValue=x[2].replace(x[1],value);});
+}
+function setLanguage(lang,persist){
+  currentLang=supportedLanguages.includes(lang)?lang:'en';document.documentElement.lang=currentLang;document.getElementById('languageSelect').value=currentLang;
+  if(persist)localStorage.setItem('novaOnboardingLang',currentLang);translateStatic();setBilling(billingCycle);buildCountries();
+  var home=document.querySelector('.top-home');if(home)home.href='https://hotel.leolan.net/'+currentLang+'/';
+  if(document.getElementById('s2').style.display!=='none'&&fdata.email)renderSummary();
+}
+function tr(de,en){return currentLang==='de'?de:((translations[currentLang]||{})[de]||en||de);}
+function buildCountries(){
+  var select=document.getElementById('country'),chosen=select.value,regions=[['EU',['DE','AT','FR','IT','ES','NL','BE','SE']],['Europa',['GB','CH','TR']],['Asien',['AE','ID','TH','SG','JP','IN']],['Amerika',['US','CA']],['Weitere',['AU']]];
+  var names;try{names=new Intl.DisplayNames([currentLang],{type:'region'});}catch(e){names=new Intl.DisplayNames(['en'],{type:'region'});}
+  select.innerHTML='<option value="">'+tr('Land auswählen …','Select country…')+'</option>';
+  regions.forEach(function(group){var og=document.createElement('optgroup');og.label=group[0];group[1].forEach(function(code){var o=document.createElement('option');o.value=code;o.textContent=names.of(code);og.appendChild(o);});select.appendChild(og);});
+  var other=document.createElement('option');other.value='other';other.textContent=tr('Anderes Land …','Other…');select.appendChild(other);select.value=chosen;
+}
+document.addEventListener('DOMContentLoaded',function(){rememberBaseTexts();setLanguage(detectLanguage(),false);spkg(pkg);if(urlAddon==='pricing'){sdp('on');}});
 var fdata={};
 function tpw(id,btn){var i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='Verbergen';}else{i.type='password';btn.textContent='Show';}}
 function spkg(p){pkg=p;document.querySelectorAll('.pkg[data-pkg]').forEach(function(c){c.classList.remove('on');});document.querySelector('[data-pkg="'+p+'"]').classList.add('on');}
@@ -239,10 +283,11 @@ function setBilling(cycle){
   billingCycle=cycle==='annual'?'annual':'monthly';
   document.getElementById('billing-monthly').classList.toggle('on',billingCycle==='monthly');
   document.getElementById('billing-annual').classList.toggle('on',billingCycle==='annual');
-  document.getElementById('starter-price').innerHTML=billingCycle==='annual'?'1.990€ <span>/ Jahr</span>':'199€ <span>/ Monat</span>';
-  document.getElementById('pro-price').innerHTML=billingCycle==='annual'?'3.490€ <span>/ Jahr</span>':'349€ <span>/ Monat</span>';
-  document.getElementById('dynamic-price').innerHTML=billingCycle==='annual'?'+990€ <span>/ Jahr</span>':'+99€ <span>/ Monat</span>';
-  var note=document.getElementById('legalNote');if(note)note.textContent='Endpreise · Keine Umsatzsteuer gemäß § 19 UStG · 349€ einmalige Einrichtung'+(billingCycle==='annual'?' · 2 Monate gratis':'');
+  var unit=billingCycle==='annual'?tr('Jahr','year'):tr('Monat','month');
+  document.getElementById('starter-price').innerHTML=(billingCycle==='annual'?'1.990€':'199€')+' <span>/ '+unit+'</span>';
+  document.getElementById('pro-price').innerHTML=(billingCycle==='annual'?'3.490€':'349€')+' <span>/ '+unit+'</span>';
+  document.getElementById('dynamic-price').innerHTML=(billingCycle==='annual'?'+990€':'+99€')+' <span>/ '+unit+'</span>';
+  var note=document.getElementById('legalNote');if(note)note.textContent=tr('Endpreise · Keine Umsatzsteuer gemäß § 19 UStG · 349€ einmalige Einrichtung','Final prices · No VAT charged under German § 19 UStG · €349 one-time setup')+(billingCycle==='annual'?' · '+tr('2 Monate gratis','2 months free'):'');
 }
 function setErr(id,has){var f=document.getElementById('fe-'+id);if(f)f.classList.toggle('bad',has);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
@@ -276,30 +321,32 @@ function go1(){
     whatsappNumber:wa,phone:wa,
     dynamicPricing:dp==='on',billingCycle:billingCycle
   };
-  // Build summary
+  renderSummary();
+  show(2);
+}
+function renderSummary(){
   var recurring=billingCycle==='annual'?(pkg==='starter'?1990:3490)+(dp==='on'?990:0):(pkg==='starter'?199:349)+(dp==='on'?99:0);
   var setup=349;
   var rows=[
-    ['E-Mail',fdata.email],['Name',fdata.name],
+    ['E-Mail',fdata.email],[tr('Name','Name'),fdata.name],
     ['Hotel',fdata.companyName],
-    ['Address',fdata.street+', '+fdata.zipCode+' '+fdata.city],
-    ['VAT ID',fdata.vatId||'Not provided'],
-    ['Website',fdata.website||'—'],
+    [tr('Adresse','Address'),fdata.street+', '+fdata.zipCode+' '+fdata.city],
+    [tr('USt-IdNr.','VAT ID'),fdata.vatId||tr('Nicht angegeben','Not provided')],
+    [tr('Webseite','Website'),fdata.website||'—'],
     ['WhatsApp',fdata.whatsappNumber],
-    ['Package',(pkg==='starter'?'KI-Concierge Starter':'Guest Experience Suite')],
-    ['Billing',billingCycle==='annual'?'Jährlich (2 Monate gratis)':'Monatlich'],
-    ['Dynamic Pricing',dp==='on'?(billingCycle==='annual'?'Yes (+990€ / year)':'Yes (+99€ / month)'):'No']
+    [tr('Paket','Package'),(pkg==='starter'?'KI-Concierge Starter':'Guest Experience Suite')],
+    [tr('Abrechnung','Billing'),billingCycle==='annual'?tr('Jährlich (2 Monate gratis)','Yearly (2 months free)'):tr('Monatlich','Monthly')],
+    [tr('Dynamische Preisgestaltung','Dynamic pricing'),dp==='on'?(tr('Ja','Yes')+' ('+(billingCycle==='annual'?'+990€ / '+tr('Jahr','year'):'+99€ / '+tr('Monat','month'))+')'):tr('Nein','No')]
   ];
   document.getElementById('sumDetails').innerHTML=rows.map(function(r){return '<div class="sum-row"><span class="sum-label">'+esc(r[0])+'</span><span class="sum-value">'+esc(r[1])+'</span></div>';}).join('');
   document.getElementById('sumPrice').innerHTML=
     '<div class="sum-total">'+
-    '<div class="sum-total-row"><span style="color:#8b949e">'+(billingCycle==='annual'?'Annual subscription':'Monthly subscription')+'</span><span>'+recurring+'€ / '+(billingCycle==='annual'?'year':'month')+'</span></div>'+
-    '<div class="sum-total-row"><span style="color:#8b949e">Setup Fee (one-time)</span><span>'+setup+'€</span></div>'+
-    '<div class="sum-total-row"><span style="color:#8b949e">VAT</span><span>0.00€</span></div>'+
-    '<div class="sum-total-row big"><span>Total today</span><span>'+(recurring+setup).toFixed(2)+'€</span></div>'+
-    '<div class="note">Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">'+(billingCycle==='annual'?tr('Jahresabonnement','Annual subscription'):tr('Monatsabonnement','Monthly subscription'))+'</span><span>'+recurring+'€ / '+(billingCycle==='annual'?tr('Jahr','year'):tr('Monat','month'))+'</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">'+tr('Einrichtungsgebühr (einmalig)','Setup fee (one-time)')+'</span><span>'+setup+'€</span></div>'+
+    '<div class="sum-total-row"><span style="color:#8b949e">'+tr('Umsatzsteuer','VAT')+'</span><span>0,00€</span></div>'+
+    '<div class="sum-total-row big"><span>'+tr('Heute fällig','Total today')+'</span><span>'+(recurring+setup).toFixed(2)+'€</span></div>'+
+    '<div class="note">'+tr('Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.','No VAT is charged under German § 19 UStG.')+'</div>'+
     '</div>';
-  show(2);
 }
 function show(n){
   document.getElementById('s1').style.display=n===1?'block':'none';
@@ -315,10 +362,10 @@ function show(n){
 }
 async function doCheckout(){
   if(!document.getElementById('chkAgb').checked||!document.getElementById('chkPrivacy').checked||!document.getElementById('chkAbo').checked){
-    alert('Please accept all terms to continue.');return;
+    alert(tr('Bitte akzeptieren Sie alle Bedingungen, um fortzufahren.','Please accept all terms to continue.'));return;
   }
   var btn=document.getElementById('payBtn');
-  btn.disabled=true;btn.textContent='Processing...';
+  btn.disabled=true;btn.textContent=tr('Wird verarbeitet …','Processing…');
   var s=document.getElementById('status');s.className='status';s.textContent='';
   try{
     // Save registration data for after payment
@@ -350,26 +397,11 @@ var chkRes=await fetch('https://app.leolan.net/api/integrations/stripe/checkout'
     }
   }catch(e){
     show(2);
-    s.className='status err';s.textContent='Error: '+e.message;
-    btn.disabled=false;btn.textContent='💳 Pay Now';
+    s.className='status err';s.textContent=tr('Fehler: ','Error: ')+e.message;
+    btn.disabled=false;btn.textContent=tr('💳 Jetzt bezahlen','💳 Pay now');
   }
 }
-spkg(pkg);
-function detectEU(){
-  var eu=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','PT','IE','GR','CZ','HU','RO','BG','LU','MT','CY'];
-  var v=(document.getElementById('country')||{value:''}).value;
-  var chk=document.getElementById('nonEU');
-  if(chk&&v){chk.checked=!eu.includes(v);}
-  updateSum();
-}
-
-function detectEU(){
-  var eu=['DE','AT','FR','IT','ES','NL','BE','PL','SE','DK','FI','PT','IE','GR','CZ','HU','RO','BG','LU','MT','CY'];
-  var v=document.getElementById('country').value;
-  var chk=document.getElementById('nonEU');
-  if(chk&&v){chk.checked=!eu.includes(v);}
-  updateSum();
-}
+function detectEU(){}
 var dp='none';
 function sdp(d){dp=d;['none','on'].forEach(function(x){var el=document.getElementById('dp-'+x);if(el){el.style.borderColor=x===d?'#f5a623':'';el.style.background=x===d?'rgba(245,166,35,.07)':'';var chk=el.querySelector('.chk');if(chk)chk.style.display=x===d?'flex':'none';}});}
 

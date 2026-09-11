@@ -1,105 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="index, follow">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#080f1f">
 <title>Tentang Kami | LeoLan Digital</title>
-<base href="https://hotel.leolan.net/">
+
 <link rel="canonical" href="https://hotel.leolan.net/id/ueber-uns/">
-<link rel="alternate" hreflang="de" href="https://hotel.leolan.net/de/ueber-uns/">
-<link rel="alternate" hreflang="en" href="https://hotel.leolan.net/en/ueber-uns/">
-<link rel="alternate" hreflang="tr" href="https://hotel.leolan.net/tr/ueber-uns/">
-<link rel="alternate" hreflang="ru" href="https://hotel.leolan.net/ru/ueber-uns/">
-<link rel="alternate" hreflang="id" href="https://hotel.leolan.net/id/ueber-uns/">
-<link rel="alternate" hreflang="th" href="https://hotel.leolan.net/th/ueber-uns/">
-<style>
-  :root {
-    --black: #000; --gray-1: #1c1c1e; --text-primary: #f5f5f7;
-    --text-secondary: rgba(245,245,247,0.6); --text-tertiary: rgba(245,245,247,0.35);
-    --accent: #0071e3; --accent-light: #2997ff; --gold: #f5c842;
-    --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: var(--font); background: var(--black); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
-  nav { position: fixed; top: 0; left: 0; right: 0; height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 100; }
-  .nav-logo img { width: 120px; height: auto; display: block; }
-  .nav-logo { text-decoration: none; }
-  .nav-back { font-size: 13px; color: var(--accent-light); text-decoration: none; }
-
-  .hero { padding: 140px 24px 80px; text-align: center; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,0.1), transparent); }
-  .hero-tag { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 20px; }
-  .hero h1 { font-size: clamp(44px, 7vw, 80px); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; background: linear-gradient(180deg, #f5f5f7 50%, rgba(245,245,247,0.25)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero p { font-size: 19px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.65; }
-
-  .founder { padding: 100px 24px; }
-  .founder-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 400px 1fr; gap: 80px; align-items: start; }
-  @media (max-width: 800px) { .founder-inner { grid-template-columns: 1fr; gap: 48px; } }
-  .founder-photo { border-radius: 20px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.7); }
-  .founder-photo img { width: 100%; display: block; }
-  .founder-tag { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 16px; }
-  .founder h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 24px; }
-  .founder p { font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 20px; }
-  .founder p strong { color: var(--text-primary); }
-  .founder-name { margin-top: 32px; }
-  .founder-name .name { font-size: 18px; font-weight: 600; color: var(--text-primary); }
-  .founder-name .role { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
-
-  .values { padding: 100px 24px; background: var(--gray-1); border-top: 1px solid rgba(255,255,255,0.07); }
-  .values-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
-  .values-header .tag { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 16px; }
-  .values-header h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; letter-spacing: -0.025em; }
-  .values-grid { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  @media (max-width: 700px) { .values-grid { grid-template-columns: 1fr; } }
-  .value-card { background: var(--black); padding: 40px 32px; }
-  .value-icon { font-size: 36px; margin-bottom: 20px; }
-  .value-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
-  .value-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.65; }
-
-  .mission { padding: 100px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.07); background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,113,227,0.08), transparent); }
-  .mission blockquote { font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; line-height: 1.25; letter-spacing: -0.025em; max-width: 800px; margin: 0 auto 32px; color: var(--text-primary); }
-  .mission p { font-size: 17px; color: var(--text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.65; }
-
-  .cta-strip { padding: 80px 24px; background: var(--gray-1); border-top: 1px solid rgba(255,255,255,0.07); }
-  .cta-strip-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; }
-  @media (max-width: 640px) { .cta-strip-inner { grid-template-columns: 1fr; } }
-  .cta-card { padding: 40px 36px; background: var(--black); }
-  .cta-card .tag { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
-  .cta-card.restaurant .tag { color: var(--accent-light); }
-  .cta-card.hotel .tag { color: var(--gold); }
-  .cta-card h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 10px; }
-  .cta-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 24px; }
-  .cta-card a { display: inline-block; padding: 12px 24px; border-radius: 980px; font-size: 14px; font-weight: 600; text-decoration: none; }
-  .cta-card.restaurant a { background: var(--accent); color: #fff; }
-  .cta-card.hotel a { background: var(--gold); color: #000; }
-
-  footer { padding: 40px 24px; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; }
-  .footer-logo { margin-bottom: 20px; }
-  .footer-logo img { width: 240px; height: auto; }
-  footer p { font-size: 12px; color: var(--text-tertiary); line-height: 1.9; }
-  footer a { color: var(--text-tertiary); text-decoration: none; }
-  footer a:hover { color: var(--text-secondary); }
-</style>
+<link rel="icon" href="/favicon-new.png">
+<link rel="stylesheet" href="/assets/nova-core.css?v=1">
+<link rel="stylesheet" href="/assets/nova-editorial.css?v=6">
+<link rel="stylesheet" href="/assets/nova-motion.css?v=7">
+<link rel="stylesheet" href="/assets/nova-pages.css?v=1">
 </head>
-<body>
-
-<nav>
-  <a href="id/" class="nav-logo"><img src="logo.svg" alt="LeoLan Digital"></a>
-  <a href="id/" class="nav-back">← Kembali</a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
+<body class="nova-page nova-about">
+<a class="skip-nav" href="#main-content">Lewati ke konten utama</a>
+<header role="banner"><nav aria-label="NOVA"><a class="nova-wordmark" href="/id/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><ul class="nav-links"><li><a href="/id/#product">Fitur</a></li><li><a href="/id/#workflow">Cara kerja NOVA</a></li><li><a href="/id/#pricing">Harga</a></li><li><a href="/id/#faq">FAQ</a></li></ul><div class="nav-actions"><a href="https://hotel.leolan.net/portal/" class="nav-login">Portal Pelanggan</a><a href="/id/#contact" class="btn btn-primary">Lihat demo</a><details class="language-menu"><summary aria-label="Pilih bahasa">ID</summary><div><a href="/de/ueber-uns/" lang="de">Deutsch</a><a href="/en/ueber-uns/" lang="en">English</a><a href="/tr/ueber-uns/" lang="tr">Türkçe</a><a href="/ru/ueber-uns/" lang="ru">Русский</a><a href="/id/ueber-uns/" lang="id" aria-current="page">Indonesia</a><a href="/th/ueber-uns/" lang="th">ไทย</a></div></details></div><button type="button" class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="mobileMenu" aria-label="Buka menu"><span></span><span></span><span></span></button></nav></header><div class="mobile-menu" id="mobileMenu" hidden><a href="/id/#product" onclick="closeMenu()">Fitur</a><a href="/id/#workflow" onclick="closeMenu()">Cara kerja NOVA</a><a href="/id/#pricing" onclick="closeMenu()">Harga</a><a href="/id/#faq" onclick="closeMenu()">FAQ</a><a href="/id/ueber-uns/" onclick="closeMenu()">Tentang Kami</a><a href="https://hotel.leolan.net/portal/" onclick="closeMenu()">Portal Pelanggan</a><a href="/id/#contact" onclick="closeMenu()">Lihat demo</a><a href="/blog/" onclick="closeMenu()">Wawasan hotel (DE)</a></div>
+<main id="main-content"><section class="hero">
   <p class="hero-tag">Tentang LeoLan Digital</p>
   <h1>Kami memecahkan masalah<br>nyata.</h1>
   <p>Bukan dengan alat yang rumit. Bukan dengan chatbot yang membosankan. Dengan solusi kecerdasan buatan yang benar-benar berfungsi karena kami telah mengalami masalah ini sendiri.</p>
 </section>
 
-<!-- FOUNDER -->
+
 <section class="founder">
   <div class="founder-inner">
     <div class="founder-photo">
-      <img src="leo-bw.jpg" alt="Kamaleddin Nazari – Pendiri LeoLan Digital">
+      <img src="/assets/people/leo-bw.jpg" alt="Kamaleddin Nazari – Pendiri LeoLan Digital" loading="lazy" width="800" height="1000">
     </div>
     <div>
       <p class="founder-tag">Pendiri</p>
@@ -116,13 +44,13 @@
   </div>
 </section>
 
-<!-- MISSION -->
+
 <section class="mission">
   <blockquote>"Teknologi harus mempermudah hidup — bukan membuatnya lebih sulit."</blockquote>
   <p>Kami percaya bahwa setiap pengelola restoran dan hotel dapat memanfaatkan kecerdasan buatan — terlepas dari ukuran, anggaran, atau pengetahuan teknis. Tugas kami adalah mewujudkannya.</p>
 </section>
 
-<!-- VALUES -->
+
 <section class="values">
   <div class="values-header">
     <p class="tag">Nilai Kami</p>
@@ -137,12 +65,12 @@
     <div class="value-card">
       <div class="value-icon">⚡</div>
       <h3>Peluncuran cepat</h3>
-      <p>Bukan 5 bulan, tetapi 5 hari kerja — pengelola restoran tidak punya waktu untuk proyek panjang. Kami juga tidak.</p>
+      <p>Kami merencanakan penyiapan bersama Anda, sesuai bisnis, data, dan modul yang Anda butuhkan.</p>
     </div>
     <div class="value-card">
       <div class="value-icon">🤝</div>
       <h3>Kejujuran</h3>
-      <p>Kami memberi tahu apa yang berhasil dan apa yang tidak. Tidak ada penjualan berlebihan. Tidak ada kunci ketergantungan. Pembatalan bulanan — karena kami ingin meyakinkan, bukan menjebak.</p>
+      <p>Kami membahas secara terbuka apa yang sesuai untuk bisnis Anda. Layanan, harga, dan ketentuan kontrak dijelaskan secara transparan sebelum Anda memulai.</p>
     </div>
     <div class="value-card">
       <div class="value-icon">🌍</div>
@@ -162,7 +90,7 @@
   </div>
 </section>
 
-<!-- CTA -->
+
 <section class="cta-strip">
   <div class="cta-strip-inner">
     <div class="cta-card restaurant">
@@ -174,19 +102,12 @@
     <div class="cta-card hotel">
       <p class="tag">Untuk Hotel & Resor</p>
       <h3>Concierge Kecerdasan Buatan</h3>
-      <p>Layanan kamar digital, multibahasa, unggah foto, komunikasi tamu 24/7 — mulai dari 249 € per bulan.</p>
-      <a href="https://hotel.leolan.net/id/">Pergi ke halaman hotel →</a>
+      <p>Komunikasi tamu multibahasa dan operasional hotel dalam satu antarmuka. Temukan paket NOVA terbaru.</p>
+      <a href="/id/">Pergi ke halaman hotel →</a>
     </div>
   </div>
-</section>
-
-<footer>
-  <div class="footer-logo"><img src="logo.svg" alt="LeoLan Digital"></div>
-  <p>
-    © 2026 LeoLan Digital · Kamaleddin Nazari · Reickerstr. 132, 01237 Dresden<br>
-    <a href="mailto:info@leolan.net">info@leolan.net</a> · <a href="tel:+493521788680">0351 21788680</a><br>
-    <a href="id/impressum/">Künye</a> · <a href="id/datenschutz/">Kebijakan Privasi</a> · <a href="id/agb/">Syarat Penggunaan</a>
-  </p>
-</footer>
+</section></main>
+<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/id/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Keramahtamahan yang terhubung cerdas.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Wawasan hotel (DE)</a><a href="/id/#product">Fitur</a><a href="/id/#workflow">Cara kerja NOVA</a><a href="/id/#pricing">Harga</a><a href="/id/#faq">FAQ</a></div><div><a href="/id/ueber-uns/">Tentang Kami</a><a href="https://hotel.leolan.net/portal/">Portal Pelanggan</a><a href="/id/#contact">Kontak</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/id/impressum/">Informasi hukum</a><a href="/id/datenschutz/">Privasi</a><a href="/id/agb/">Ketentuan</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Pilih bahasa"><a href="/de/ueber-uns/" lang="de">DE</a><a href="/en/ueber-uns/" lang="en">EN</a><a href="/tr/ueber-uns/" lang="tr">TR</a><a href="/ru/ueber-uns/" lang="ru">RU</a><a href="/id/ueber-uns/" lang="id" aria-current="page">ID</a><a href="/th/ueber-uns/" lang="th">TH</a></nav></div></div></footer>
+<script src="/assets/nova-editorial.js?v=20260908" defer></script>
 </body>
 </html>

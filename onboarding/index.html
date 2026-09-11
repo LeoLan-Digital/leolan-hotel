@@ -1,98 +1,15 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <link rel="canonical" href="https://hotel.leolan.net/onboarding/">
+<!doctype html><html lang="de"><head>
+  <link rel="canonical" href="https://nova-hotel-design.knazari2604.chatgpt.site/onboarding/">
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>LeoLan Digital – Jetzt starten</title>
   <!-- v2026-04-25-2225 -->
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
-.hero{background:linear-gradient(135deg,#1a2744 0%,#0d1117 100%);padding:40px 24px 28px;text-align:center;border-bottom:1px solid #21262d}
-.logo{font-size:26px;font-weight:800;color:#f5a623;margin-bottom:6px}
-.hero h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:800;margin-bottom:8px;color:#fff}
-.hero p{color:#8b949e;font-size:.95rem;max-width:500px;margin:0 auto;line-height:1.6}
-.shell{max-width:600px;margin:0 auto;padding:28px 20px 80px}
-.steps{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:28px}
-.sdot{width:32px;height:32px;border-radius:50%;border:2px solid #30363d;background:#0d1117;color:#8b949e;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
-.sdot.done{background:#238636;border-color:#238636;color:#fff}
-.sdot.active{background:#f5a623;border-color:#f5a623;color:#000}
-.sline{flex:1;height:2px;background:#21262d;max-width:70px;margin-top:15px;transition:background .3s}
-.sline.done{background:#238636}
-.swrap{display:flex;flex-direction:column;align-items:center;gap:4px}
-.slabel{font-size:.7rem;color:#8b949e;text-align:center;white-space:nowrap}
-.card{background:#161b22;border:1px solid #30363d;border-radius:14px;padding:24px;margin-bottom:14px}
-.card h3{font-size:.9rem;font-weight:700;color:#f5a623;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #21262d}
-.field{margin-bottom:13px}
-.field label{display:block;font-size:.82rem;font-weight:600;color:#8b949e;margin-bottom:5px}
-.field input{width:100%;background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:11px 13px;color:#e6edf3;font-size:.9rem;outline:none;transition:border-color .2s}
-.field input:focus{border-color:#f5a623}
-.field .err{color:#f85149;font-size:.78rem;margin-top:3px;display:none}
-.field.bad .err{display:block}
-.field.bad input{border-color:#f85149}
-.field .hint{color:#8b949e;font-size:.78rem;margin-top:3px;line-height:1.4}
-.field .hint.orange{color:#f5a623;font-weight:600}
-.pw-wrap{position:relative}
-.pw-wrap input{padding-right:70px}
-.pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#8b949e;cursor:pointer;font-size:.8rem;white-space:nowrap}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-@media(max-width:480px){.g2,.g3{grid-template-columns:1fr}}
-.pkgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:480px){.pkgs{grid-template-columns:1fr}}
-.pkg{border:2px solid #30363d;border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;background:#0d1117;position:relative}
-.pkg:hover{border-color:#f5a623}
-.pkg.on{border-color:#f5a623;background:rgba(245,166,35,.07)}
-.pkg-badge{display:inline-block;background:#f5a623;color:#000;font-size:.65rem;font-weight:800;padding:2px 7px;border-radius:999px;margin-bottom:6px}
-.pkg-name{font-weight:800;color:#f0f6fc;font-size:1rem;margin-bottom:3px}
-.pkg-price{font-size:1.3rem;font-weight:800;color:#f5a623}
-.pkg-price span{font-size:.8rem;font-weight:400;color:#8b949e}
-.pkg-desc{font-size:.78rem;color:#8b949e;margin-top:6px;line-height:1.4}
-.chk{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:#f5a623;display:none;align-items:center;justify-content:center;color:#000;font-size:.7rem;font-weight:800}
-.pkg.on .chk{display:flex}
-.billing-toggle{display:flex;gap:4px;background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:4px;margin-bottom:14px}
-.billing-option{flex:1;border:0;border-radius:7px;padding:9px 10px;background:transparent;color:#8b949e;font-weight:800;cursor:pointer}
-.billing-option.on{background:#f5a623;color:#000}
-.billing-saving{display:block;font-size:.68rem;font-weight:700;margin-top:2px}
-.btn{width:100%;padding:14px;border-radius:10px;border:none;font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s}
-.btn-primary{background:#f5a623;color:#000}
-.btn-primary:hover{opacity:.9}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed}
-.btn-back{background:#21262d;color:#8b949e;margin-bottom:8px}
-.status{text-align:center;padding:10px;border-radius:8px;font-size:.85rem;font-weight:600;display:none;margin-top:8px}
-.status.err{background:rgba(248,81,73,.15);color:#f85149;display:block}
-.note{color:#8b949e;font-size:.75rem;text-align:center;margin-top:10px;line-height:1.5}
-/* Summary */
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #21262d;font-size:.88rem}
-.sum-row:last-child{border-bottom:none}
-.sum-label{color:#8b949e}
-.sum-value{color:#f0f6fc;font-weight:600;text-align:right;max-width:60%}
-.sum-total{background:#0d1117;border-radius:10px;padding:16px;margin-top:12px}
-.sum-total-row{display:flex;justify-content:space-between;font-size:.88rem;padding:4px 0}
-.sum-total-row.big{font-size:1.1rem;font-weight:800;color:#f5a623;padding-top:10px;margin-top:6px;border-top:1px solid #21262d}
-.lang-select{position:absolute;right:20px;top:50%;transform:translateY(-50%);background:#161b22;border:1px solid #30363d;border-radius:8px;color:#e6edf3;padding:8px 10px;font-weight:700}
-@media(max-width:520px){.top-home-label{display:none}.lang-select{right:10px}.top-home{left:10px!important}}
-</style>
-</head>
-<body>
-<a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Zum Hauptinhalt</a>
 
-<div style="background:#0d1117;border-bottom:1px solid #21262d;position:sticky;top:0;z-index:100;padding:12px 20px">
-  <a class="top-home" href="https://hotel.leolan.net/de/" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;color:#8b949e;text-decoration:none;font-size:14px;font-weight:600">
-    <span style="font-size:18px">←</span> <span class="top-home-label">Startseite</span>
-  </a>
-  <div style="text-align:center">
-    <a href="https://hotel.leolan.net/">
-      <img src="/leolan-logo-new.png" width="56" height="56" style="border-radius:16px;border:0;display:inline-block" alt="LeoLan">
-    </a>
-  </div>
-  <select id="languageSelect" class="lang-select" aria-label="Sprache" onchange="setLanguage(this.value,true)">
-    <option value="de">DE</option><option value="en">EN</option><option value="tr">TR</option><option value="ru">RU</option><option value="id">ID</option><option value="th">TH</option>
-  </select>
-</div>
+<link rel="icon" href="/favicon-new.png"><link rel="stylesheet" href="/assets/nova-core.css?v=1"><link rel="stylesheet" href="/assets/nova-editorial.css?v=6"><link rel="stylesheet" href="/assets/nova-motion.css?v=7"><link rel="stylesheet" href="/assets/nova-checkout.css?v=1"></head><body class="nova-checkout">
+<a href="#main-content" class="skip-nav">Zum Hauptinhalt springen</a>
 
+<div class="checkout-topbar"><a class="top-home" href="/de/"><span aria-hidden="true">←</span><span>Startseite</span></a><a class="nova-wordmark" href="/de/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><select id="languageSelect" class="lang-select" aria-label="Sprache" onchange="setLanguage(this.value,true)"><option value="de">DE</option><option value="en">EN</option><option value="tr">TR</option><option value="ru">RU</option><option value="id">ID</option><option value="th">TH</option></select></div>
 <main id="main-content">
 <div class="hero">
   <div class="logo">LeoLan Digital</div>
@@ -190,12 +107,11 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
         <div class="err">WhatsApp-Nummer eingeben.</div>
       </div>
     </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:16px 0;padding:12px;background:rgba(52,199,89,0.05);border:1px solid rgba(52,199,89,0.15);border-radius:12px;">
+        <div class="checkout-proof">
       <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">🔒 SSL-verschlüsselt</span>
       <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">🇩🇪 DSGVO-konform</span>
       <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">💳 Sicher bezahlen mit Stripe</span>
-      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">📞 Support aus Deutschland</span>
-    </div>
+      <span style="font-size:12px;color:rgba(245,247,251,0.6);display:flex;align-items:center;gap:6px;">📞 Support aus Deutschland</span></div>
     <button class="btn btn-primary" onclick="go1()">Weiter: Bestellung prüfen →</button>
   </div>
 
@@ -212,11 +128,11 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFo
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
         <input type="checkbox" id="chkAgb" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-        <span style="color:#8b949e;font-size:13px;line-height:1.5">Ich akzeptiere die <a href="https://ki.leolan.net/agb/" target="_blank" rel="noopener noreferrer" style="color:#f5a623">Allgemeinen Geschäftsbedingungen</a> *</span>
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">Ich akzeptiere die <a href="/agb/" target="_blank" rel="noopener noreferrer" style="color:#f5a623">Allgemeinen Geschäftsbedingungen</a> *</span>
       </label>
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
         <input type="checkbox" id="chkPrivacy" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
-        <span style="color:#8b949e;font-size:13px;line-height:1.5">Ich habe die <a href="https://ki.leolan.net/datenschutz/" target="_blank" rel="noopener noreferrer" style="color:#f5a623">Datenschutzerklärung</a> gelesen *</span>
+        <span style="color:#8b949e;font-size:13px;line-height:1.5">Ich habe die <a href="/datenschutz/" target="_blank" rel="noopener noreferrer" style="color:#f5a623">Datenschutzerklärung</a> gelesen *</span>
       </label>
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
         <input type="checkbox" id="chkAbo" style="width:18px;height:18px;min-width:18px;accent-color:#f5a623;margin-top:2px">
@@ -264,7 +180,7 @@ function translateStatic(){
 function setLanguage(lang,persist){
   currentLang=supportedLanguages.includes(lang)?lang:'en';document.documentElement.lang=currentLang;document.getElementById('languageSelect').value=currentLang;
   if(persist)localStorage.setItem('novaOnboardingLang',currentLang);translateStatic();setBilling(billingCycle);buildCountries();
-  var home=document.querySelector('.top-home');if(home)home.href='https://hotel.leolan.net/'+currentLang+'/';
+  var home=document.querySelector('.top-home');if(home)home.href='/'+currentLang+'/';
   if(document.getElementById('s2').style.display!=='none'&&fdata.email)renderSummary();
 }
 function tr(de,en){return currentLang==='de'?de:((translations[currentLang]||{})[de]||en||de);}
@@ -408,5 +324,4 @@ function sdp(d){dp=d;['none','on'].forEach(function(x){var el=document.getElemen
 
 </script>
 </main>
-</body>
-</html>
+</body></html>

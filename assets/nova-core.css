@@ -1,0 +1,15 @@
+/* Shared structural primitives for the public NOVA subpages. */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{height:auto}strong{font-weight:650}
+header nav{display:flex;align-items:center;justify-content:space-between}
+.nav-links{display:flex;list-style:none}.nav-links a{text-decoration:none}
+.hamburger{display:none;flex-direction:column;gap:4px;padding:0;background:transparent}
+.hamburger span{display:block;height:2px;background:#fff}
+.mobile-menu{position:fixed;z-index:999}
+.language-switcher{display:flex;align-items:center;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.skip-nav{position:fixed;top:-100px;left:16px;z-index:2000;padding:12px 18px;background:#142038;border:1px solid #7894ff;border-radius:12px;color:white;text-decoration:none}
+.skip-nav:focus{top:12px}
+:focus-visible{outline:2px solid #ff985e;outline-offset:5px}

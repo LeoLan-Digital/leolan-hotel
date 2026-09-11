@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<base href="https://hotel.leolan.net/">
+
 <meta name="theme-color" content="#0d1117">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WhatsApp Bot & AI for Hotels | LeoLan Digital</title>
+<title>NOVA Hotel Intelligence – AI Assistant for Hotels | LeoLan Digital</title>
   <!-- cache-bust: 2026-04-28-en -->
   <meta http-equiv="Cache-Control" content="max-age=86400, public">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-  <meta name="description" content="WhatsApp bot & AI for hotels — guest communication, room upgrades, direct booking automation. Cut Booking.com commissions up to 20%. Get your free demo now!">
+
+  <meta name="description" content="NOVA Hotel Intelligence: the WhatsApp AI assistant for hotels by LeoLan Digital. Automate guest requests. Request your demo now.">
   <meta name="keywords" content="hotel WhatsApp bot, AI hotel management, guest communication, room upgrade automation, hotel chatbot, direct bookings, hotel AI concierge, booking system">
-  <link rel="canonical" href="https://hotel.leolan.net/">
+  <link rel="canonical" href="https://hotel.leolan.net/en/">
 <link rel="preconnect" href="https://www.google-analytics.com">
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://n8n.leolan.net">
@@ -27,14 +27,14 @@
   <meta property="og:image" content="https://hotel.leolan.net/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:title" content="WhatsApp Bot & AI for Hotels | LeoLan Digital">
+  <meta property="og:title" content="NOVA Hotel Intelligence – AI Assistant for Hotels | LeoLan Digital">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hotel.leolan.net/en/">
-  <meta property="og:description" content="WhatsApp bot & AI for hotels — guest communication, room upgrades, direct booking automation. Cut Booking.com commissions up to 20%.">
+  <meta property="og:description" content="Automate guest requests via WhatsApp with NOVA Hotel Intelligence by LeoLan Digital.">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="WhatsApp Bot & AI for Hotels | LeoLan Digital">
-  <meta name="twitter:description" content="WhatsApp bot & AI for hotels — guest communication, room upgrades, direct booking automation. Cut Booking.com commissions up to 20%.">
+  <meta name="twitter:title" content="NOVA Hotel Intelligence – AI Assistant for Hotels | LeoLan Digital">
+  <meta name="twitter:description" content="Automate guest requests via WhatsApp with NOVA Hotel Intelligence by LeoLan Digital.">
   <meta name="twitter:image" content="https://hotel.leolan.net/og-preview.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/favicon-new.png">
@@ -45,8 +45,8 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "LeoLan Digital — AI Concierge for Hotels",
-    "description": "AI-powered WhatsApp concierge, review management, and guest communication automation for hotels and resorts. More direct bookings, zero OTA commission.",
+    "name": "NOVA Hotel Intelligence",
+    "description": "WhatsApp AI assistant for automated hotel guest communication.",
     "serviceType": "Hotel Automation Software",
     "areaServed": "International",
     "url": "https://hotel.leolan.net/en/",
@@ -89,7 +89,7 @@
 
   a { color: inherit; }
 
-  nav {
+  header nav {
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 1000;
@@ -577,7 +577,7 @@
   }
   @media (max-width: 640px) {
     .pain-mobile-grid { grid-template-columns: 1fr !important; }
-    .stats-mobile-grid { grid-template-columns: 1fr 1fr !important; }
+    .stats-mobile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
     .ideal-mobile-grid { grid-template-columns: 1fr !important; }
     .money-mobile-grid { grid-template-columns: 1fr !important; }
     .upsell-mobile-grid { grid-template-columns: 1fr 1fr !important; }
@@ -586,9 +586,9 @@
     .hotel-demo-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
   }
 
-  @media (max-width: 768px) { .hero { padding-top: 80px !important; padding-bottom: 24px !important; } .hero-card { display: none !important; } .hero-grid { grid-template-columns: 1fr !important; } }
+  @media (max-width: 768px) { .hero { padding-top: 80px !important; padding-bottom: 24px !important; } .hero-card { display: block !important; } .hero-image { height: auto; } .hero-grid { grid-template-columns: 1fr !important; } }
   @media (max-width: 768px) {
-    nav { height: 64px; padding: 0 18px; }
+    header nav { height: 64px; padding: 0 18px; }
     .nav-links, .nav-cta { display: none; }
     .hamburger { display: flex; }
     .mobile-menu { top: 64px; }
@@ -607,30 +607,39 @@
   .social-links a:hover { transform: scale(1.1); opacity: 0.9; }
   .social-links a svg { width: 56px; height: 56px; display: block; }
 .skip-nav:focus { top: 0 !important; }
-input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px solid #0a3d62 !important; outline-offset: 2px !important; }
+input:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid #f5a623 !important; outline-offset: 3px !important; }
+.language-switcher { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:0 0 24px; }
+.language-switcher a { color:#e8eaed; min-width:44px; min-height:44px; display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.18); border-radius:999px; text-decoration:none; }
+.ideal-mobile-grid > div > div:first-child { color:#f5a623 !important; }
+[style*="color: rgba(0,0,0,0.4)"], [style*="color:rgba(0,0,0,0.4)"] { color:#000 !important; }
+[style*="color:rgba(245,247,251,0.35)"], [style*="color:rgba(245,247,251,0.4)"] { color:#e8eaed !important; }
+[style*="color:rgba(255,80,80,0.7)"] { color:#ff6b6b !important; }
+.section-sub + a[href^="https://wa.me/"] { color:#052e16 !important; }
+.section-sub + a[href^="https://wa.me/"] svg { fill:currentColor; }
+.hero-grid > *, .stats-grid > * { min-width:0; }
+.hero img { max-width:100%; height:auto; }
+.stat-card { overflow-wrap:anywhere; }
+main { overflow-wrap:anywhere; }
+.nova-overview-image { display:block; width:100%; height:auto; }
+.nova-module-showcase { padding:100px 0; border-top:1px solid var(--line); background:#070707; }
+.nova-module-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin-top:42px; }
+.nova-module-card { overflow:hidden; border:1px solid rgba(245,166,35,.3); border-radius:24px; background:rgba(255,255,255,.03); box-shadow:var(--shadow); }
+.nova-module-card img { display:block; width:100%; height:auto; border-bottom:1px solid var(--line); }
+.nova-module-card figcaption { display:grid; gap:8px; padding:22px 24px 24px; }
+.nova-module-card figcaption strong { font-size:20px; }
+.nova-module-card figcaption span { color:var(--muted); font-size:14px; line-height:1.65; }
+@media (max-width:768px) { .nova-module-grid { grid-template-columns:1fr; } .nova-module-showcase { padding:72px 0; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } .reveal { opacity:1 !important; transform:none !important; } }
 </style>
+<link rel="stylesheet" href="/assets/worldef-redesign.css?v=2">
   <!-- ContentSquare loaded after cookie consent only -->
 
-<script>
-  (function() {
-    var variant = localStorage.getItem('ab_hotel_hero');
-    if (!variant) { variant = Math.random() < 0.5 ? 'A' : 'B'; localStorage.setItem('ab_hotel_hero', variant); }
-    var headlines = {
-      A: 'More Direct Bookings.<br>Less Commission to Booking.com.',
-      B: 'Stop Paying Booking.com.<br>Own Your Guests.'
-    };
-    document.addEventListener('DOMContentLoaded', function() {
-      var h1 = document.querySelector('.hero h1');
-      if (h1 && variant === 'B') h1.innerHTML = headlines[variant];
-      if (typeof gtag !== 'undefined') gtag('event', 'ab_test_impression', {'test_name': 'hotel_headline', 'variant': variant});
-    });
-  })();
-</script>
+
 </head>
 <body>
-<a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Skip to main content</a>
+<a href="/en/#main-content" class="skip-nav" style="position:absolute;top:-40px;left:0;padding:8px;background:#0a3d62;color:#fff;font-size:14px;z-index:9999;border-radius:0 0 4px 0;transition:top 0.2s;text-decoration:none;">Skip to main content</a>
 
-<div id="cookieBanner" role="alertdialog" aria-label="Cookie-Einstellungen" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+<div id="cookieBanner" role="alertdialog" aria-label="Cookie settings" style="display:flex; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.1); padding:20px 24px; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
   <p style="font-size:13px; color:rgba(245,247,251,0.87); max-width:760px; line-height:1.6; margin:0;">We use cookies and tracking technologies (Google Analytics and Meta Pixel) to improve this website and measure campaign performance. <a href="#" onclick="document.cookie='cookie_consent=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';location.reload();return false;" style="color:rgba(245,166,35,0.9);">Cookie Settings</a> · <a href="/datenschutz.html" style="color:#f5a623;">Learn more</a></p>
   <div style="display:flex; gap:10px; flex-shrink:0;">
     <button onclick="rejectCookies()" style="padding:10px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background:transparent; color:rgba(245,247,251,0.72); font-size:13px; cursor:pointer; font-family:inherit;">Decline</button>
@@ -658,27 +667,27 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
 
 <header role="banner">
 <nav>
-  <a href="/" class="nav-logo"><img src="logo.svg" alt="LeoLan Digital"></a>
+  <a href="/" class="nav-logo"><img src="/logo.svg" alt="LeoLan Digital"></a>
   <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#difference">Why LeoLan</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="/ueber-uns.html">About</a></li>
+    <li><a href="/en/#features">Features</a></li>
+    <li><a href="/en/#difference">Why LeoLan</a></li>
+    <li><a href="/en/#pricing">Pricing</a></li>
+    <li><a href="/en/#faq">FAQ</a></li>
+    <li><a href="/en/ueber-uns/">About</a></li>
     <li><a href="/portal/" class="nav-cta" style="background:linear-gradient(135deg,#f5a623,#ffbf57);color:#1a2744;padding:8px 16px;border-radius:999px;font-weight:800;font-size:13px;">Customer Portal</a></li>
   </ul>
-  <a href="/onboarding/" class="nav-cta">Start Free Trial →</a>
-  <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <a href="/onboarding/" class="nav-cta">Request a Demo →</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 </header><main id="main-content" tabindex="-1">
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#features" onclick="closeMenu()">Features</a>
-  <a href="#difference" onclick="closeMenu()">Why LeoLan</a>
-  <a href="#pricing" onclick="closeMenu()">Pricing</a>
-  <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <a href="/ueber-uns.html" onclick="closeMenu()">About</a>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="/en/#features" onclick="closeMenu()">Features</a>
+  <a href="/en/#difference" onclick="closeMenu()">Why LeoLan</a>
+  <a href="/en/#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="/en/#faq" onclick="closeMenu()">FAQ</a>
+  <a href="/en/ueber-uns/" onclick="closeMenu()">About</a>
   <a href="/portal/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Customer Portal</a>
-  <a href="/onboarding/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Start Free Trial →</a>
+  <a href="/onboarding/" onclick="closeMenu()" style="color:#f5a623;font-weight:700;">Request a Demo →</a>
 </div>
 
 
@@ -686,58 +695,57 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
 <section class="hero">
   <div class="hero-grid">
     <div>
-      <div style="margin-bottom:20px;text-align:center;">
-  <div style="display:inline-flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;">
-    <span style="color:rgba(245,247,251,0.85);font-size:13px;"><strong style="color:#f5a623;font-size:17px;">18</strong> hotels trust LeoLan</span>
-    <span style="color:rgba(255,255,255,0.25);">·</span>
-    <span style="color:rgba(245,247,251,0.85);font-size:13px;"><strong style="color:#34c759;font-size:17px;">€12,000+</strong> saved in OTA fees</span>
-    <span style="color:rgba(255,255,255,0.25);">·</span>
-    <span style="color:rgba(245,247,251,0.85);font-size:13px;">⭐ <strong style="color:#ffd60a;font-size:17px;">4.9/5</strong> rating</span>
-  </div>
-</div>
-<div class="eyebrow-pill reveal">For independent hotels & boutique resorts · 10+ rooms</div>
-      <h1 class="reveal reveal-delay-1">More Direct Bookings.<br>Less Commission to Booking.com.</h1>
-<div style="background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.25);border-radius:12px;padding:20px 24px;margin:24px 0;max-width:700px;">
-  <strong style="color:#f5a623;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;">TL;DR</strong>
-  <p style="color:#f5f7fb;font-size:15px;line-height:1.6;margin-top:8px;">LeoLan’s AI WhatsApp concierge answers guests 24/7, captures direct bookings and automates upselling — saving hotels €500–2,000/month in Booking.com commissions. Live in 5 days, no tech skills needed.</p>
-</div>
-      <p class="reveal reveal-delay-2">Your AI concierge answers guest requests, upsells extras and frees up your reception — 24 hours a day.<br><br><br><br>💸 Booking.com takes 15–20% on every reservation<br>📵 WhatsApp messages go unanswered at night<br>⭐ Reviews left without replies cost you trust<br><br><strong>Every missed WhatsApp message is a booking lost directly to Booking.com.<br><br>💡 <strong>Just 5 extra direct bookings per month can save you €500–2,000 in commissions.</strong> That's more than LeoLan costs — every single month.</strong><br><br>💰 A hotel with 10 direct bookings/month via WhatsApp = <strong>€500–2,000 in commissions back in your pocket.</strong> Every unanswered review costs you trust. LeoLan replaces your night reception with AI — handling bookings, upselling room upgrades and answering guest questions 24/7. No extra staff. No Booking.com commissions. Live in 5 days.</p>
-      
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;" class="reveal reveal-delay-3">
-        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">🔒 GDPR Compliant</span>
-        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">💬 WhatsApp Business API</span>
-        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">⚡ Live in 5 days</span>
-        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(245,247,251,0.6);padding:6px 14px;border-radius:999px;font-size:12px;">🇩🇪 Germany-based support</span>
-      </div>
+      <div class="eyebrow-pill reveal">NOVA · Hotel Intelligence</div>
+      <h1 class="reveal reveal-delay-1">NOVA Hotel Intelligence: The AI Assistant for Your Hotel's Guest Service</h1>
+      <p class="reveal reveal-delay-2">Automate guest communication on WhatsApp with NOVA Hotel Intelligence by LeoLan Digital.</p>
       <div class="hero-actions reveal reveal-delay-3">
-        <a href="/onboarding/" class="btn btn-primary">Get Free Demo →</a>
-        <a href="#features" class="btn btn-secondary">See More Direct Bookings ›</a>
-      </div>
-      <div class="hero-trust reveal reveal-delay-3">
-        <span>✓ Live in 5 days</span>
-        <span>✓ No long-term contract</span>
-        <span>✓ More direct bookings — zero Booking.com fees</span>
+        <a href="/onboarding/" class="btn btn-primary">Request a Demo for Your Hotel</a>
+        <a href="/en/#features" class="btn btn-secondary">See Features in Detail</a>
       </div>
     </div>
-    <div class="hero-card reveal reveal-delay-2">
-      <img class="hero-image" src="https://hotel.leolan.net/blog/images/hero/lobby.webp" alt="Luxury boutique hotel lobby">
+    <figure class="hero-card reveal reveal-delay-2">
+      <img class="nova-overview-image" src="/assets/nova/nova-dashboard-overview-1440.webp" srcset="/assets/nova/nova-dashboard-overview-640.webp 640w, /assets/nova/nova-dashboard-overview-960.webp 960w, /assets/nova/nova-dashboard-overview-1440.webp 1440w" sizes="(max-width: 1040px) calc(100vw - 48px), 45vw" alt="NOVA demo overview showing occupancy, arrivals, departures, guest totals, calendar and alerts in a zero-data state." width="1440" height="900" fetchpriority="high" decoding="async">
       <div class="hero-card-content">
-        <div style="color:#fff; font-size:20px; font-weight:800;">Stop paying Booking.com 15–20% on every reservation.</div>
-        <div style="color:var(--muted); line-height:1.7;">Our WhatsApp AI captures direct bookings — before guests even think about opening Booking.com. 80% of travellers prefer WhatsApp messaging over phone calls (Statista, 2024).</div>
-        <div class="hero-metrics">
-          <div class="metric"><strong>0%</strong><span>Booking.com commission on WhatsApp bookings</span></div>
-          <div class="metric"><strong>+30%</strong><span>more upsell revenue per stay</span></div>
-          <div class="metric"><strong>24/7</strong><span>digital reception — no extra staff needed</span></div>
-        </div>
+        <figcaption style="color:var(--muted); line-height:1.7;">Example view with demo data — available areas may vary by hotel configuration.</figcaption>
       </div>
+    </figure>
+  </div>
+</section>
+
+<section class="nova-signal-band" aria-label="NOVA product scope"><div class="nova-signal-grid">
+  <div class="nova-signal reveal"><strong>05</strong><span>verified product views</span></div>
+  <div class="nova-signal reveal reveal-delay-1"><strong>08</strong><span>implemented product languages</span></div>
+  <div class="nova-signal reveal reveal-delay-2"><strong>01</strong><span>central demo entry</span></div>
+</div></section>
+
+<section class="nova-module-showcase" aria-labelledby="nova-module-title">
+  <div class="section-shell">
+    <span class="section-tag reveal">Inside NOVA</span>
+    <h2 class="section-title reveal reveal-delay-1" id="nova-module-title">Four areas in a controlled demo state</h2>
+    <p class="section-sub reveal reveal-delay-2">These views show the visible work areas with demo and empty states. Available functions may vary with the hotel configuration.</p>
+    <div class="nova-module-grid">
+      <figure class="nova-module-card reveal"><img src="/assets/nova/nova-guest-messages-1440.webp" srcset="/assets/nova/nova-guest-messages-640.webp 640w, /assets/nova/nova-guest-messages-960.webp 960w, /assets/nova/nova-guest-messages-1440.webp 1440w" sizes="(max-width: 768px) calc(100vw - 48px), 560px" alt="German-language NOVA demo view for guests and messages, with search and status filters in an empty inbox." width="1440" height="900" loading="lazy" decoding="async"><figcaption><strong>Guests &amp; messages</strong><span>Empty inbox with search and communication-status filters.</span></figcaption></figure>
+      <figure class="nova-module-card reveal reveal-delay-1"><img src="/assets/nova/nova-reservations-1440.webp" srcset="/assets/nova/nova-reservations-640.webp 640w, /assets/nova/nova-reservations-960.webp 960w, /assets/nova/nova-reservations-1440.webp 1440w" sizes="(max-width: 768px) calc(100vw - 48px), 560px" alt="German-language NOVA reservations demo view with search, status filters and an empty reservation list." width="1440" height="900" loading="lazy" decoding="async"><figcaption><strong>Reservations</strong><span>Reservations area with search, status filters and an empty results list.</span></figcaption></figure>
+      <figure class="nova-module-card reveal reveal-delay-2"><img src="/assets/nova/nova-dynamic-pricing-1480.webp" srcset="/assets/nova/nova-dynamic-pricing-640.webp 640w, /assets/nova/nova-dynamic-pricing-960.webp 960w, /assets/nova/nova-dynamic-pricing-1480.webp 1480w" sizes="(max-width: 768px) calc(100vw - 48px), 560px" alt="German-language NOVA Dynamic Pricing demo view with room categories, currency converter and no rate plan configured." width="1480" height="900" loading="lazy" decoding="async"><figcaption><strong>Dynamic Pricing</strong><span>Pricing area with room categories, currency converter and no rate plan configured.</span></figcaption></figure>
+      <figure class="nova-module-card reveal reveal-delay-3"><img src="/assets/nova/nova-housekeeping-1440.webp" srcset="/assets/nova/nova-housekeeping-640.webp 640w, /assets/nova/nova-housekeeping-960.webp 960w, /assets/nova/nova-housekeeping-1440.webp 1440w" sizes="(max-width: 768px) calc(100vw - 48px), 560px" alt="German-language NOVA tasks and housekeeping demo view with status filters and an empty task list." width="1440" height="900" loading="lazy" decoding="async"><figcaption><strong>Tasks &amp; housekeeping</strong><span>Task overview with status filters and an empty task list.</span></figcaption></figure>
     </div>
   </div>
 </section>
 
+<section class="nova-workflow" aria-labelledby="nova-workflow-title"><div class="nova-workflow-inner">
+  <span class="section-tag reveal">From hotel knowledge to an answer</span>
+  <h2 class="section-title reveal reveal-delay-1" id="nova-workflow-title">A clear path for recurring guest requests.</h2>
+  <div class="nova-workflow-grid">
+    <article class="nova-workflow-step reveal"><b>01</b><h3>Prepare hotel knowledge</h3><p>Approved information about stays, services and hotel processes provides the foundation.</p></article>
+    <article class="nova-workflow-step reveal reveal-delay-1"><b>02</b><h3>Handle the request</h3><p>NOVA processes recurring guest questions on WhatsApp using this knowledge.</p></article>
+    <article class="nova-workflow-step reveal reveal-delay-2"><b>03</b><h3>Hand over special cases</h3><p>Requests that require personal clarification can be passed to the hotel team.</p></article>
+  </div>
+</div></section>
+
 <section class="brands">
   <div class="section-shell">
     <span class="section-tag reveal">Designed for global hospitality</span>
-    <h2 class="section-title reveal reveal-delay-1">The AI receptionist that books, upsells and replies — while you sleep.</h2>
+    <h2 class="section-title reveal reveal-delay-1">The AI receptionist that answers guest questions, offers upsells and enables direct bookings — beyond front-desk hours.</h2>
     <p class="section-sub reveal reveal-delay-2">From tropical destinations to urban boutique stays, the platform is designed for multilingual guest communication, premium service positioning and lean operations.</p>
     <div class="brands-grid">
       <div class="brand-card reveal"><strong>Bali</strong><span>Villa collections, wellness stays, design resorts</span></div>
@@ -746,7 +754,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
       <div class="brand-card reveal reveal-delay-3"><strong>Europe</strong><span>Boutique city hotels, alpine lodges, coastal escapes</span></div>
     </div>
     <div class="stats-grid">
-      <div class="stat-card reveal"><strong>50+</strong><span>languages understood for guest communication</span></div>
+      <div class="stat-card reveal"><strong>Multilingual</strong><span>guest communication in numerous languages</span></div>
       <div class="stat-card reveal reveal-delay-1"><strong>1 inbox</strong><span>for service requests, guest follow-ups and automation</span></div>
       <div class="stat-card reveal reveal-delay-2"><strong>Faster</strong><span>responses on WhatsApp than traditional front-desk workflows</span></div>
       <div class="stat-card reveal reveal-delay-3"><strong>Premium</strong><span>brand presentation across all guest touchpoints</span></div>
@@ -759,7 +767,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
   <div style="max-width: 960px; margin: 0 auto;">
     <p class="section-tag reveal">The daily reality</p>
     <h2 class="section-title reveal reveal-delay-1">What every hotel owner<br>knows too well.</h2>
-    <p class="section-sub reveal reveal-delay-2">Before working with LeoLan, these are the problems our clients dealt with every single day.</p>
+    <p class="section-sub reveal reveal-delay-2">These are topics hotel operators typically deal with day to day.</p>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; padding: 2px;" class="reveal pain-mobile-grid">
       <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
         <div style="font-size: 32px; margin-bottom: 16px;">📵</div>
@@ -768,13 +776,13 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
       </div>
       <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
         <div style="font-size: 32px; margin-bottom: 16px;">💸</div>
-        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Booking.com takes 15–20%</h3>
-        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Every OTA reservation costs you a fifth of the revenue. A hotel with 100 bookings/month loses thousands in commissions every single month.</p>
+        <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Booking platforms charge commission</h3>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Every reservation through a booking platform reduces your margin by the applicable commission.</p>
       </div>
       <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 32px 24px; text-align: left;">
         <div style="font-size: 32px; margin-bottom: 16px;">⭐</div>
         <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Reviews go unanswered</h3>
-        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">94% of guests read review responses before booking. Hotels that reply see 12% more reservations. You know this — but who has the time?</p>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Replying to reviews takes time that is often unavailable during daily operations.</p>
       </div>
         <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Upselling left on the table</h3>
         <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.6;">Upgrades, breakfast, spa, late checkout — guests would buy if someone asked. Doing this manually is impossible, so the revenue stays uncaptured.</p>
@@ -787,19 +795,19 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
 <section style="padding: 80px 24px; border-top: 1px solid rgba(255,255,255,0.07);">
   <div style="max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;" class="stats-mobile-grid">
     <div class="reveal">
-      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">15–20%</div>
+      <div style="font-size: 32px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">Commission pressure</div>
       <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">OTA commission per booking</div>
     </div>
     <div class="reveal reveal-delay-1">
-      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">94%</div>
+      <div style="font-size: 32px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">Reviews matter</div>
       <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">of guests read review responses before booking</div>
     </div>
     <div class="reveal reveal-delay-2">
-      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">+30%</div>
-      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">more upsell revenue with automated guest flows</div>
+      <div style="font-size: 32px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">Upsell potential</div>
+      <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">present add-ons through automated guest flows</div>
     </div>
     <div class="reveal reveal-delay-3">
-      <div style="font-size: 48px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">5 days</div>
+      <div style="font-size: 32px; font-weight: 700; color: #f5a623; letter-spacing: -0.03em;">Quick setup</div>
       <div style="font-size: 14px; color: rgba(245,247,251,0.6); margin-top: 8px;">until your AI concierge is live</div>
     </div>
   </div>
@@ -809,7 +817,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
 <section style="padding: 100px 24px; border-top: 1px solid rgba(255,255,255,0.07); text-align: center;">
   <div style="max-width: 900px; margin: 0 auto;">
     <p class="section-tag reveal">Simple process</p>
-    <h2 class="section-title reveal reveal-delay-1">Live in 5 days. No tech skills needed.</h2>
+    <h2 class="section-title reveal reveal-delay-1">Live quickly. No technical experience required.</h2>
     <p class="section-sub reveal reveal-delay-2">We handle everything. You just answer a few questions and approve the setup.</p>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px;" class="reveal ideal-mobile-grid">
       <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 36px 28px; text-align: left; position: relative;">
@@ -825,7 +833,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
       <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 20px; padding: 36px 28px; text-align: left; position: relative;">
         <div style="font-size: 48px; font-weight: 800; color: rgba(245,166,35,0.3); position: absolute; top: 16px; right: 20px;">03</div>
         <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Go live &amp; earn more</h3>
-        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.65;">Within 5 working days your AI concierge is live. Direct bookings start coming in. Upsells happen automatically. Reviews get answered.</p>
+        <p style="font-size: 14px; color: rgba(245,247,251,0.6); line-height: 1.65;">After configuration and approval, your AI concierge is ready to use.</p>
       </div>
     </div>
   </div>
@@ -835,12 +843,12 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
   <div style="max-width: 700px; margin: 0 auto;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px;" class="reveal money-mobile-grid">
       <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.3); border-radius: 16px; padding: 24px;">
-        <div style="font-size: 36px; font-weight: 800; color: #f5a623;">20%</div>
-        <div style="font-size: 14px; color: rgba(245,247,251,0.65); margin-top: 6px;">of your revenue goes to OTA platforms — on every single booking</div>
+        <div style="font-size: 28px; font-weight: 800; color: #f5a623;">OTA commission</div>
+        <div style="font-size: 14px; color: rgba(245,247,251,0.65); margin-top: 6px;">reduces the margin on platform reservations</div>
       </div>
       <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(52,199,89,0.3); border-radius: 16px; padding: 24px;">
-        <div style="font-size: 36px; font-weight: 800; color: #34c759;">0%</div>
-        <div style="font-size: 14px; color: rgba(245,247,251,0.65); margin-top: 6px;">commission on direct WhatsApp bookings via LeoLan</div>
+        <div style="font-size: 28px; font-weight: 800; color: #34c759;">Direct channel</div>
+        <div style="font-size: 14px; color: rgba(245,247,251,0.65); margin-top: 6px;">booking requests handled through WhatsApp</div>
       </div>
     </div>
     <p style="font-size: 16px; font-weight: 600; color: rgba(245,247,251,0.85);" class="reveal">Get your direct bookings back — and keep the full margin.</p>
@@ -866,7 +874,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
         <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0;">
           <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ More direct bookings, less commission</li>
           <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Automated upselling — breakfast, spa, upgrades</li>
-          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ 24/7 guest communication, zero extra staff</li>
+          <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Guest communication support without adding routine workload</li>
           <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Better reviews, more trust</li>
           <li style="font-size: 14px; color: rgba(245,247,251,0.75);">✓ Less reception stress, happier team</li>
         </ul>
@@ -879,16 +887,16 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
 <section style="padding: 80px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.07);">
   <div style="max-width: 900px; margin: 0 auto;">
     <p class="section-tag reveal">Real-world example</p>
-    <h2 class="section-title reveal reveal-delay-1">Your AI concierge at work — while you sleep.</h2>
-    <p class="section-sub reveal reveal-delay-2">A guest messages at 11 pm asking about a room upgrade. Your AI concierge handles it instantly — and upsells a breakfast package on the spot.</p>
+    <h2 class="section-title reveal reveal-delay-1">Your AI concierge supporting guest service.</h2>
+    <p class="section-sub reveal reveal-delay-2">A guest asks about a room upgrade. Your AI concierge handles the request and can offer a breakfast package.</p>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; text-align: left;" class="reveal hotel-demo-grid">
       <!-- WhatsApp Mockup Hotel -->
       <div style="background: #0a0f1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden;">
         <div style="background: #075E54; padding: 14px 20px; display: flex; align-items: center; gap: 12px;">
-          <div style="width: 38px; height: 38px; background: #128C7E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">🏨</div>
+          <div aria-hidden="true" style="width: 38px; height: 38px; background: #128C7E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">🏨</div>
           <div>
             <div style="color: #fff; font-weight: 600; font-size: 15px;">Hotel Concierge</div>
-            <div style="color: rgba(255,255,255,0.7); font-size: 12px;">● Online · replies instantly</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 12px;">● Demo conversation</div>
           </div>
         </div>
         <div style="padding: 20px; display: flex; flex-direction: column; gap: 12px;">
@@ -921,11 +929,11 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
           <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">Guest messaged at night — your team was asleep</div>
         </div>
         <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(52,199,89,0.35); border-radius: 16px; padding: 24px;">
-          <div style="font-size: 36px; font-weight: 700; color: #34c759;">+€73</div>
-          <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">Upsell revenue — upgrade + breakfast, zero staff effort</div>
+          <div style="font-size: 28px; font-weight: 700; color: #34c759;">Demo example</div>
+          <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">Example offer — upgrade and breakfast in a demo conversation</div>
         </div>
         <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px;">
-          <div style="font-size: 36px; font-weight: 700; color: #f5a623;">0%</div>
+          <div style="font-size: 28px; font-weight: 700; color: #f5a623;">Direct request</div>
           <div style="color: rgba(245,247,251,0.7); font-size: 14px; margin-top: 4px;">Booking.com commission — direct booking via WhatsApp</div>
         </div>
       </div>
@@ -945,7 +953,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
       <article class="feature-card reveal">
         <div class="feature-icon">💬</div>
         <h3>WhatsApp Concierge Bot</h3>
-        <p>Offer multilingual guest support through the channel travellers already use. Handle housekeeping requests, check-in questions, room service prompts and concierge needs instantly.</p>
+        <p>Offer multilingual guest support through WhatsApp for housekeeping requests, check-in questions, room service prompts and concierge needs.</p>
         <ul class="feature-list">
           <li>Multilingual chat for international guests</li>
           <li>Automated FAQs, requests and upsell prompts</li>
@@ -978,23 +986,23 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
       <article class="feature-card reveal reveal-delay-4">
         <div class="feature-icon">🔒</div>
         <h3>GDPR &amp; Data Security</h3>
-        <p>100% GDPR-compliant. Your guest data stays in Germany. Data protection is not a feature — it is our standard. Hosting in German data centres.</p>
+        <p>NOVA is designed with GDPR requirements in mind. Processing, hosting and contractual details are clarified for each hotel during the demo.</p>
         <ul class="feature-list">
-          <li>Hosting in German data centres</li>
-          <li>Full GDPR compliance</li>
-          <li>No third-party data sharing</li>
-          <li>Encrypted guest communication</li>
+          <li>Clarify privacy requirements for each use case</li>
+          <li>Review data-processing terms before use</li>
+          <li>Discuss hosting and subprocessors transparently</li>
+          <li>Explain technical safeguards during the demo</li>
         </ul>
       </article>
       <article class="feature-card reveal reveal-delay-5">
         <div class="feature-icon">💰</div>
         <h3>Dynamic Pricing</h3>
-        <p>AI analyses competitor rates, occupancy trends, local events and seasonality daily — and recommends the optimal room price automatically. Earn more without any extra effort.</p>
+        <p>AI analyses competitor rates, occupancy trends, local events and seasonality and recommends a suitable room price.</p>
         <ul class="feature-list">
-          <li>Real-time competitor rate monitoring</li>
-          <li>AI pricing recommendations (daily)</li>
+          <li>Competitor-rate analysis</li>
+          <li>AI pricing recommendations</li>
           <li>Seasonality &amp; event-based adjustments</li>
-          <li>+30% average revenue uplift</li>
+          <li>Additional revenue potential</li>
         </ul>
         <span style="display:inline-block;background:rgba(245,166,35,0.15);color:#f5a623;border:1px solid rgba(245,166,35,0.4);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:4px;">Add-on · +€99/month</span>
       </article>
@@ -1052,7 +1060,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
       <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px; text-align: center;">
         <div style="font-size: 36px; margin-bottom: 12px;">🕐</div>
         <strong style="display:block;margin-bottom:6px;">Late Check-out</strong>
-        <span style="font-size:13px;color:rgba(245,247,251,0.55);">€25 extra revenue per guest</span>
+        <span style="font-size:13px;color:rgba(245,247,251,0.55);">Available as an optional add-on</span>
       </div>
       <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 24px; text-align: center;">
         <div style="font-size: 36px; margin-bottom: 12px;">✈️</div>
@@ -1071,7 +1079,7 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
       </div>
     </div>
     <div style="margin-top:32px;background:rgba(52,199,89,0.08);border:1px solid rgba(52,199,89,0.3);border-radius:16px;padding:20px 28px;display:inline-block;">
-      <strong style="color:#34c759;">Avg. +€73 upsell revenue per guest</strong> — automatically, zero staff effort
+      <strong style="color:#34c759;">Additional revenue per guest is possible</strong> — through automated upsell prompts
     </div>
   </div>
 </section>
@@ -1119,14 +1127,14 @@ input:focus, button:focus, select:focus, textarea:focus, a:focus { outline: 2px 
 </section>
 <script>
 function calcHotelROI(){var b=parseInt(document.getElementById("hotelBookings").value)||50;var v=parseInt(document.getElementById("hotelValue").value)||150;var comm=Math.round(b*v*0.18);var year=comm*12;var roi=Math.round(year/199/12*10)/10;document.getElementById("hotelCommission").textContent="€"+comm.toLocaleString("en");document.getElementById("hotelYear").textContent="€"+year.toLocaleString("en");document.getElementById("hotelROI").textContent=roi+"×";document.getElementById("hotelText").innerHTML="You lose <strong style='color:#ff6b6b;'>€"+comm.toLocaleString("en")+"/month</strong> in OTA commissions. LeoLan costs €199 and captures direct bookings.";}
-async function sendHotelReport(){var email=document.getElementById("hotelEmail").value;if(!email||!email.includes("@")){alert("Please enter a valid email address.");return;}try{await fetch("https://n8n.leolan.net/webhook/roi-report-hotel",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,bookings:document.getElementById("hotelBookings").value,value:document.getElementById("hotelValue").value,commission:document.getElementById("hotelCommission").textContent,year:document.getElementById("hotelYear").textContent})});}catch(e){}document.getElementById("hotelSuccess").style.display="block";document.getElementById("hotelEmail").value="";}
+async function sendHotelReport(){var input=document.getElementById("hotelEmail");var email=input.value;var status=document.getElementById("hotelSuccess");if(!email||!email.includes("@")){alert("Please enter a valid email address.");return;}status.style.display="none";try{var response=await fetch("https://n8n.leolan.net/webhook/roi-report-hotel",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,bookings:document.getElementById("hotelBookings").value,value:document.getElementById("hotelValue").value,commission:document.getElementById("hotelCommission").textContent,year:document.getElementById("hotelYear").textContent})});if(!response.ok)throw new Error("HTTP "+response.status);status.textContent="✅ Report sent! Check your inbox.";status.style.color="#34c759";status.style.display="block";input.value="";}catch(e){status.textContent="The report could not be sent. Please try again.";status.style.color="#ff6b6b";status.style.display="block";}}
 calcHotelROI();
 </script>
 <section class="pricing" id="pricing">
   <div class="section-shell">
     <span class="section-tag reveal">Modular pricing</span>
     <h2 class="section-title reveal reveal-delay-1">Start with one module. Expand as your hotel grows.</h2>
-    <p class="section-sub reveal reveal-delay-2">Hotels using LeoLan typically save €500–2,000/month in Booking.com commissions alone — before upsell revenue. Our system pays for itself within weeks.</p>
+    <p class="section-sub reveal reveal-delay-2">Choose the NOVA modules that fit your hotel and add further capabilities when needed.</p>
     <div class="pricing-grid">
       <article class="price-card reveal" id="single-card">
         <div class="price-tier">AI Concierge Starter</div>
@@ -1139,27 +1147,26 @@ calcHotelROI();
         <div class="price-period">/ month · or <strong style="color:#34c759;">€1,990/year</strong> (2 months free)</div>
         <p>For boutique hotels ready to capture direct bookings and reduce Booking.com dependency.</p>
         <ul class="price-list">
-          <li>WhatsApp booking assistant 24/7</li>
+          <li>WhatsApp booking assistant</li>
           <li>Automated review responses</li>
-          <li>Direct booking capture (0% commission)</li>
-          <li>Live in 5 days — zero tech skills needed</li>
+          <li>Direct booking request capture</li>
+          <li>Quick setup — no technical experience required</li>
         </ul>
-        <a href="/onboarding/?paket=starter" class="btn btn-secondary">Get Free Demo →</a>
+        <a href="/onboarding/?paket=starter" class="btn btn-secondary">Request a Demo →</a>
       </article>
       <article class="price-card featured reveal reveal-delay-1">
         <div class="price-badge">Most Popular</div>
         <div class="price-tier">Guest Experience Suite</div>
         <div class="price-amount">€349</div>
         <div class="price-period">/ month · or <strong style="color:#34c759;">€3,490/year</strong> (2 months free)</div>
-        <div style="background:rgba(52,199,89,0.12);border:1px solid rgba(52,199,89,0.3);color:#34c759;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;margin-bottom:12px;display:inline-block;">💰 ROI in 2–3 direct bookings</div>
-        <p>Our most popular package. Hotels typically recover the monthly fee within the first 2–3 direct bookings saved from Booking.com.</p>
+        <p>Combine guest communication and daily operations in one modular package.</p>
         <ul class="price-list">
           <li>WhatsApp Concierge Bot</li>
           <li>Review Management</li>
           <li>Guest Email Automation</li>
           <li>Priority onboarding assistance</li>
         </ul>
-        <a href="/onboarding/?paket=pro" class="btn btn-primary">Get Free Demo →</a>
+        <a href="/onboarding/?paket=pro" class="btn btn-primary">Request a Demo →</a>
       </article>
       
     </div>
@@ -1171,11 +1178,11 @@ calcHotelROI();
           <span style="background:#f5a623;color:#000;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;">ADD-ON</span>
         </div>
         <div style="font-size:20px;font-weight:800;color:#f0f6fc;margin-bottom:6px;">Dynamic Pricing — AI-powered revenue optimisation</div>
-        <div style="color:rgba(245,247,251,0.65);font-size:14px;line-height:1.6;max-width:520px;">Add AI pricing to any package. Our engine monitors competitor rates daily, factors in events and seasonality, and recommends the optimal price — automatically.</div>
+        <div style="color:rgba(245,247,251,0.65);font-size:14px;line-height:1.6;max-width:520px;">Add AI-based pricing optimization to any package. The engine factors in competitor rates, events and seasonality to recommend a suitable price.</div>
         <ul style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none;padding:0;">
-          <li style="color:#34c759;font-size:13px;font-weight:600;">✓ Daily competitor analysis</li>
+          <li style="color:#34c759;font-size:13px;font-weight:600;">✓ Competitor analysis</li>
           <li style="color:#34c759;font-size:13px;font-weight:600;">✓ AI price recommendations</li>
-          <li style="color:#34c759;font-size:13px;font-weight:600;">✓ +30% avg. revenue uplift</li>
+          <li style="color:#34c759;font-size:13px;font-weight:600;">✓ Additional revenue potential</li>
           <li style="color:#34c759;font-size:13px;font-weight:600;">✓ Works with all packages</li>
         </ul>
       </div>
@@ -1188,55 +1195,31 @@ calcHotelROI();
   </div>
 </section>
 
-<section class="testimonials">
-  <div class="section-shell">
-    <span class="section-tag reveal">Testimonials</span>
-    <h2 class="section-title reveal reveal-delay-1">Social proof ready for properties across different markets.</h2>
-    <p class="section-sub reveal reveal-delay-2">These placeholders will be replaced with real client quotes as new hotel case studies go live.</p>
-    <div class="testimonial-grid">
-      <article class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Our guest messaging became faster, more premium and much easier for the front office team. We couldn't imagine going back."</blockquote>
-        <cite><strong>Boutique Resort, Bali</strong><br>Guest Experience Director</cite>
-      </article>
-      <article class="testimonial-card reveal reveal-delay-1">
-        <div class="stars">★★★★★</div>
-        <blockquote>"LeoLan Digital helped us streamline guest requests and maintain a more polished brand presence online. Setup was effortless."</blockquote>
-        <cite><strong>Design Hotel, Thailand</strong><br>Operations Manager</cite>
-      </article>
-      <article class="testimonial-card reveal reveal-delay-2">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Review replies, email automation and concierge messaging all feel far more consistent now. Our guests notice the difference."</blockquote>
-        <cite><strong>Luxury Boutique Hotel, Europe</strong><br>General Manager</cite>
-      </article>
-    </div>
-  </div>
-</section>
-
+<!-- Testimonials hidden until verified customer quotes are available. -->
 <section class="faq" id="faq">
   <div class="section-shell" style="text-align:center;">
     <span class="section-tag reveal">FAQ</span>
     <h2 class="section-title reveal reveal-delay-1">Answers for hotel owners and operators.</h2>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">Can this work for international guests from different countries?<span>+</span></button>
+        <button class="faq-q" type="button" aria-expanded="false" onclick="toggleFaq(this)">Can this work for international guests from different countries?<span>+</span></button>
         <div class="faq-a"><p>Yes. The setup is designed for global hospitality and multilingual guest communication, making it a strong fit for international boutique hotels and destination properties.</p></div>
       </div>
       <div class="faq-item reveal reveal-delay-1">
-        <button class="faq-q" onclick="toggleFaq(this)">Do we need a large team or technical department?<span>+</span></button>
+        <button class="faq-q" type="button" aria-expanded="false" onclick="toggleFaq(this)">Do we need a large team or technical department?<span>+</span></button>
         <div class="faq-a"><p>No. LeoLan Digital is designed to reduce operational pressure, not create more complexity. We keep onboarding lean and the workflows hotel-friendly.</p></div>
       </div>
       <div class="faq-item reveal reveal-delay-2">
-        <button class="faq-q" onclick="toggleFaq(this)">Can we start with just one module?<span>+</span></button>
+        <button class="faq-q" type="button" aria-expanded="false" onclick="toggleFaq(this)">Can we start with just one module?<span>+</span></button>
         <div class="faq-a"><p>Absolutely. Many properties begin with WhatsApp concierge or review management, then add more modules once they see the traction and team relief.</p></div>
       </div>
       <div class="faq-item reveal reveal-delay-3">
-        <button class="faq-q" onclick="toggleFaq(this)">What is the main business impact?<span>+</span></button>
+        <button class="faq-q" type="button" aria-expanded="false" onclick="toggleFaq(this)">What is the main business impact?<span>+</span></button>
         <div class="faq-a"><p>Hotels usually benefit from faster response times, stronger reputation management, a smoother guest journey and more opportunities for automated upselling.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there a free trial?<span>+</span></button>
-        <div class="faq-a"><p>Yes! The first month is free. You can test the bot directly on this page — or message us on WhatsApp: <a href="https://wa.me/4915678483700" target="_blank" style="color:#2997ff;">+49 15678 483700</a></p></div>
+        <button class="faq-q" type="button" aria-expanded="false" onclick="toggleFaq(this)">Can I see NOVA before deciding?<span>+</span></button>
+        <div class="faq-a"><p>Yes. Request a demo or try the demo bot on this page.</p></div>
       </div>
     </div>
   </div>
@@ -1247,7 +1230,7 @@ calcHotelROI();
     <div class="cta-wrap reveal" style="max-width:620px">
       <span class="section-tag" style="margin-bottom:14px;">Talk to Sales</span>
       <h2 class="section-title" style="margin-bottom:12px;">Let's talk about your hotel.</h2>
-      <p style="margin-bottom:32px;">Tell us about your property and we'll get back to you within 24 hours with a custom proposal.</p>
+      <p style="margin-bottom:32px;">Tell us about your property and we'll get back to you with a custom proposal.</p>
       <form id="contactForm" style="display:flex;flex-direction:column;gap:14px;text-align:left">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
           <input aria-label="Your Name *" type="text" id="cf_name" placeholder="Your Name *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
@@ -1255,9 +1238,9 @@ calcHotelROI();
         </div>
         <input aria-label="Hotel Name &amp; Location *" type="text" id="cf_hotel" placeholder="Hotel Name &amp; Location *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <input aria-label="WhatsApp / Phone Number" type="tel" id="cf_phone" placeholder="WhatsApp / Phone Number" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
-        <textarea id="cf_msg" placeholder="Tell us about your needs (optional)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
+        <textarea aria-label="Tell us about your needs (optional)" id="cf_msg" placeholder="Tell us about your needs (optional)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
         <button type="submit" class="btn btn-primary" style="font-size:16px">Send Message →</button>
-        <p id="cf_status" style="color:#4cd97b;font-size:14px;margin:0;display:none">✓ Thank you! We'll be in touch within 24 hours.</p>
+        <p id="cf_status" role="status" aria-live="polite" data-success="✓ Thank you! We'll be in touch." data-error="Your message could not be sent. Please try again." style="font-size:14px;margin:0;display:none"></p>
       </form>
     </div>
   </div>
@@ -1265,6 +1248,8 @@ calcHotelROI();
 <script>
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
+  const status = document.getElementById('cf_status');
+  status.style.display = 'none';
   const data = {
     name: document.getElementById('cf_name').value,
     email: document.getElementById('cf_email').value,
@@ -1274,10 +1259,16 @@ document.getElementById('contactForm').addEventListener('submit', async function
     source: 'hotel.leolan.net/en'
   };
   try {
-    await fetch('https://n8n.leolan.net/webhook/hotel-contact', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-  } catch(e) {}
-  document.getElementById('cf_status').style.display = 'block';
-  this.reset();
+    const response = await fetch('https://n8n.leolan.net/webhook/hotel-contact', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    if (!response.ok) throw new Error('Request failed');
+    status.textContent = status.dataset.success;
+    status.style.color = '#4cd97b';
+    this.reset();
+  } catch(error) {
+    status.textContent = status.dataset.error;
+    status.style.color = '#ff8a8a';
+  }
+  status.style.display = 'block';
 });
 </script>
 
@@ -1298,16 +1289,17 @@ document.getElementById('contactForm').addEventListener('submit', async function
   <div style="max-width:600px;margin:0 auto;">
     <p class="section-tag reveal">Direct Contact</p>
     <h2 class="section-title reveal reveal-delay-1">Chat with us on WhatsApp</h2>
-    <p class="section-sub reveal reveal-delay-2">Questions? Booking? Just message us — we reply instantly.</p>
+    <p class="section-sub reveal reveal-delay-2">Questions or booking requests? Send us a message.</p>
     <a href="https://wa.me/4915678483700" target="_blank" rel="noopener" class="reveal reveal-delay-3" style="display:inline-flex;align-items:center;gap:14px;background:#25D366;color:#fff;padding:18px 36px;border-radius:980px;font-size:18px;font-weight:700;text-decoration:none;margin-top:24px;box-shadow:0 8px 32px rgba(37,211,102,0.35);">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
       Start WhatsApp Chat
     </a>
-    <p style="font-size:13px;color:rgba(245,247,251,0.4);margin-top:16px;">+49 15678 483700 · Reply within minutes</p>
+    <p style="font-size:13px;color:rgba(245,247,251,0.4);margin-top:16px;">+49 15678 483700</p>
   </div>
 </section>
 </main>
 <footer>
+  <nav class="language-switcher" aria-label="Language selection"><a href="/de/" lang="de">DE</a><a href="/en/" lang="en" aria-current="page">EN</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a></nav>
   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:16px 0 24px;">
     <a href="https://apps.apple.com/app/leolan-manager/id6762051472" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;padding:10px 18px;border-radius:12px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -1344,13 +1336,13 @@ document.getElementById('contactForm').addEventListener('submit', async function
     </a>
   </div>
   <div class="footer-links">
-    <a href="/onboarding/">Get Free Demo →</a>
+    <a href="/onboarding/">Request a Demo →</a>
     <a href="/portal/">Customer Portal</a>
     <a href="https://ki.leolan.net">Restaurant Solutions</a>
-    <a href="/ueber-uns.html">About</a>
-    <a href="/impressum.html">Imprint</a>
-    <a href="/datenschutz.html">Privacy</a>
-    <a href="/agb.html">Terms</a>
+    <a href="/en/ueber-uns/">About</a>
+    <a href="/en/impressum/">Imprint</a>
+    <a href="/en/datenschutz/">Privacy</a>
+    <a href="/en/agb/">Terms</a>
   </div>
   <p>
     © 2026 LeoLan Digital. All rights reserved. · Last updated: April 2026 · Reickerstr. 132, 01237 Dresden<br>
@@ -1359,14 +1351,14 @@ document.getElementById('contactForm').addEventListener('submit', async function
 </footer>
 
 <!-- Chatbot -->
-<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Chat öffnen" aria-haspopup="dialog">💬 Bot testen</button>
+<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Open demo chat" aria-haspopup="dialog">💬 Try the bot</button>
 <div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
-  <div class="chatbot-window">
+  <div class="chatbot-window" role="dialog" aria-modal="true" aria-label="NOVA Hotel Intelligence demo chat">
     <div class="chatbot-header">
       <div class="chatbot-title">
         <div class="chatbot-avatar" style="padding:0;overflow:hidden"><img src="/leolan-logo-new.png" width="42" height="42" style="display:block;border-radius:50%;object-fit:cover" alt="LeoLan"></div>
         <div>
-          <strong>LeoLan AI</strong>
+          <strong>NOVA Hotel Intelligence</strong>
           <span>Hotel Guest Assistant Demo</span>
         </div>
       </div>
@@ -1376,7 +1368,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     <div class="chatbot-input-wrap">
       <form class="chatbot-form" id="chatbotForm">
         <input aria-label="Message…" type="text" id="chatbotInput" placeholder="Message…" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
-        <button type="submit" id="chatbotSend"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="submit" id="chatbotSend" aria-label="Send message"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </form>
     </div>
   </div>
@@ -1448,15 +1440,17 @@ document.getElementById('contactForm').addEventListener('submit', async function
   async function openChatbot(){
     document.getElementById('chatbotModal').classList.add('open');document.getElementById('chatbotModal').removeAttribute('aria-hidden');
     if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='none';
+    document.getElementById('chatbotInput').focus();
     if(!chatbotSeeded){chatbotSeeded=true;var g=await getBotReplyAsync('__start__');appendChatMessage(g,'bot');}
-    setTimeout(function(){document.getElementById('chatbotInput').focus();},80);
   }
   function closeChatbot(){
-    document.getElementById('chatbotModal').classList.remove('open');document.getElementById('chatbotModal').setAttribute('aria-hidden','true');
-    if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='';
+    var modal=document.getElementById('chatbotModal');var toggle=document.getElementById('chatbotToggle');var wasOpen=modal.classList.contains('open');
+    modal.classList.remove('open');modal.setAttribute('aria-hidden','true');
+    if(toggle){toggle.style.display='';if(wasOpen)toggle.focus();}
   }
   document.getElementById('chatbotClose').addEventListener('click',closeChatbot);
   document.getElementById('chatbotModal').addEventListener('click',function(e){if(e.target===this)closeChatbot();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeChatbot();closeMenu();}});
   document.getElementById('chatbotForm').addEventListener('submit',async function(e){
     e.preventDefault();
     var value=document.getElementById('chatbotInput').value.trim();
@@ -1475,10 +1469,10 @@ document.getElementById('contactForm').addEventListener('submit', async function
 </script>
 
 <script>
-  function toggleFaq(btn){var item=btn.parentElement;item.classList.toggle('open');}
-  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
-  function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
-  document.addEventListener('click',function(e){var m=document.getElementById('mobileMenu');if(m&&m.classList.contains('open')&&!m.contains(e.target)&&!e.target.closest('.hamburger')){m.classList.remove('open');}});
+  function toggleFaq(btn){var item=btn.parentElement;var open=item.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));}
+  function toggleMenu(){var menu=document.getElementById('mobileMenu');var button=document.querySelector('.hamburger');var open=menu.classList.toggle('open');menu.setAttribute('aria-hidden',String(!open));button.setAttribute('aria-expanded',String(open));}
+  function closeMenu(){var menu=document.getElementById('mobileMenu');var button=document.querySelector('.hamburger');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');button.setAttribute('aria-expanded','false');}
+  document.addEventListener('click',function(e){var m=document.getElementById('mobileMenu');if(m&&m.classList.contains('open')&&!m.contains(e.target)&&!e.target.closest('.hamburger')){closeMenu();}});
   var revealEls=document.querySelectorAll('.reveal');
   var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target);}});},{threshold:0.12});
   revealEls.forEach(function(el){io.observe(el);});
@@ -1492,9 +1486,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
     <div style="font-size:36px;margin-bottom:12px;">💸</div>
     <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:10px;">Wait — before you leave</h3>
     <p style="font-size:15px;color:rgba(245,247,251,0.7);margin-bottom:8px;">Every Booking.com reservation costs you</p>
-    <p style="font-size:32px;font-weight:800;color:#f5a623;margin-bottom:20px;">15–20% commission</p>
-    <p style="font-size:14px;color:rgba(245,247,251,0.55);margin-bottom:24px;">LeoLan captures direct bookings via WhatsApp — zero commission. Free demo in 15 minutes.</p>
-    <a href="#contact" onclick="document.getElementById('exitPopup').style.display='none'" style="display:block;background:#f5a623;color:#000;padding:14px 28px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;margin-bottom:12px;">Get Free Demo →</a>
+    <p style="font-size:24px;font-weight:800;color:#f5a623;margin-bottom:20px;">Reduce platform dependency</p>
+    <p style="font-size:14px;color:rgba(245,247,251,0.55);margin-bottom:24px;">Request a demo of NOVA Hotel Intelligence for your hotel.</p>
+    <a href="/en/#contact" onclick="document.getElementById('exitPopup').style.display='none'" style="display:block;background:#f5a623;color:#000;padding:14px 28px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;margin-bottom:12px;">Request a Demo →</a>
     <button onclick="document.getElementById('exitPopup').style.display='none'" style="background:none;border:none;color:rgba(245,247,251,0.4);font-size:13px;cursor:pointer;">No thanks, I prefer paying Booking.com</button>
   </div>
 </div>

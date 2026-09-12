@@ -637,6 +637,21 @@ main { overflow-wrap:anywhere; }
 
 
 <link rel="stylesheet" href="/assets/nova-motion.css?v=7">
+<style id="nova-pricing-v2-style">
+#pricing[data-nova-pricing="v2"] .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+#pricing[data-nova-pricing="v2"] .price-card{display:flex;flex-direction:column;min-width:0;height:auto}
+#pricing[data-nova-pricing="v2"] .price-tier{padding-top:10px;overflow-wrap:anywhere}
+#pricing[data-nova-pricing="v2"] .price-amount{font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;white-space:nowrap}
+#pricing[data-nova-pricing="v2"] .nova-price-prefix{font-size:.4em;font-weight:500;margin-right:.35em}
+#pricing[data-nova-pricing="v2"] .nova-year-price,#pricing[data-nova-pricing="v2"] .nova-setup-price{margin-top:12px;font-size:.9rem;line-height:1.5}
+#pricing[data-nova-pricing="v2"] .nova-scope{margin-top:18px;font-size:.8rem;opacity:.8}
+#pricing[data-nova-pricing="v2"] .price-list{flex:1}
+#pricing[data-nova-pricing="v2"] .price-card>.btn{margin-top:auto;white-space:normal;text-align:center}
+#pricing[data-nova-pricing="v2"] .nova-revenue-box{margin-top:28px;padding:24px;border:1px solid currentColor;border-radius:16px;line-height:1.65}
+#pricing[data-nova-pricing="v2"] .nova-pricing-note{margin-top:18px;font-size:.9rem;line-height:1.65;overflow-wrap:anywhere}
+@media(max-width:1100px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:minmax(0,1fr)}}
+</style>
 </head>
 <body>
 
@@ -768,48 +783,31 @@ main { overflow-wrap:anywhere; }
       </div>
     </div>
   </div>
-</section><section class="pricing" id="pricing">
-  <div class="section-shell">
-    <span class="section-tag reveal">Modüler fiyatlandırma</span>
-    <h2 class="section-title reveal reveal-delay-1">Tek modülle başlayın. Oteliniz büyüdükçe genişletin.</h2>
-    <p class="section-sub reveal reveal-delay-2">Otelinize uygun NOVA modüllerini seçin ve gerektiğinde ek özellikler ekleyin.</p>
-    <div class="pricing-grid">
-      <article class="price-card reveal" id="single-card">
-        <div class="price-tier">AI Concierge Starter</div>
-        <div style="display:flex;gap:8px;margin-bottom:8px">
-          <span style="background:#f5a62322;color:#f5a623;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid #f5a62344">🔥 Sınırlı</span>
-          <span style="background:#ffffff11;color:#8b949e;font-size:11px;padding:3px 10px;border-radius:999px">12 ay minimum</span>
-        </div>
-        <div style="font-size:16px;color:rgba(255,80,80,0.7);text-decoration:line-through;margin-bottom:4px;font-weight:600;">249 €</div>
-        <div class="price-amount">199 €</div>
-        <div class="price-period">/ ay · veya <strong style="color:#34c759;">1.990 €/yıl</strong> (2 ay ücretsiz)</div>
-        <p>Doğrudan rezervasyonları yakalamaya ve Booking.com bağımlılığını azaltmaya hazır butik oteller için.</p>
-        <ul class="price-list">
-          <li>7/24 WhatsApp rezervasyon asistanı</li>
-          <li>Otomatik yorum yanıtları</li>
-          <li>Doğrudan rezervasyon taleplerini yakalama</li>
-          <li>Kısa kurulum süresi — teknik bilgi gerekmez</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=starter" class="btn btn-secondary">Demo Talep Edin →</a>
-      </article>
-      <article class="price-card featured reveal reveal-delay-1">
-        <div class="price-badge">En Popüler</div>
-        <div class="price-tier">Misafir Deneyimi Paketi</div>
-        <div class="price-amount">349 €</div>
-        <div class="price-period">/ ay · veya <strong style="color:#34c759;">3.490 €/yıl</strong> (2 ay ücretsiz)</div>
-        <p>Misafir iletişimini ve günlük operasyonları tek bir modüler pakette birleştirin.</p>
-        <ul class="price-list">
-          <li>WhatsApp Concierge Botu</li>
-          <li>Yorum Yönetimi</li>
-          <li>Misafir E-posta Otomasyonu</li>
-          <li>Öncelikli onboarding desteği</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=pro" class="btn btn-primary">Demo Talep Edin →</a>
-      </article>
-      
-    </div>
-  </div>
-</section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">Misafirleriniz dünyanın her yerinden gelir.</h2><p class="section-sub">Hizmetiniz onların dilini konuşur.</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">Çok dilli misafir iletişimi – dünya çapında bağlantı.</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="Küreyi sola döndür">←</button><button type="button" class="motion-button globe-right" aria-label="Küreyi sağa döndür">→</button><button type="button" class="motion-button globe-toggle" data-pause="Hareketi duraklat" data-play="Hareketi başlat" data-running="false" >Hareketi başlat</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>Uluslararası karşılama. Kişisel ilgi.</h3><p>NOVA çok dilli misafir iletişimini destekler. Otel bilgileriniz temel alınır; kişisel yardım gerektiğinde ekibiniz devralır.</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">Uluslararası iletişimi gösteren bir görseldir; mevcut müşterilerin veya canlı bağlantıların haritası değildir.</p></div></div></div></section><section class="faq" id="faq">
+</section><section class="pricing" id="pricing" data-nova-pricing="v2">
+<div class="section-shell">
+<span class="section-tag reveal">Oteliniz için NOVA</span>
+<h2 class="section-title reveal">Tek platform. Oteliniz için doğru paket.</h2>
+<p class="section-sub reveal">Oteliniz için planlanan NOVA paketiyle başlayın. Oda sayısı, entegrasyonlar ve kullanım kapsamı size özel teklifte belirlenir.</p>
+<div class="pricing-grid"><article class="price-card reveal" id="single-card" data-nova-plan="core">
+<div class="price-tier">NOVA Core</div>
+<p>Küçük oteller için: misafir iletişimini ve günlük operasyonları birleştirin.</p><div class="nova-scope">Planlanan paket kapsamı</div>
+<ul class="price-list"><li>Otel bilgi tabanı ve misafir iletişimi</li><li>Rezervasyon ve misafir genel görünümü</li><li>Temel görevler ve ekip erişimi</li></ul>
+<a href="#contact" class="btn btn-secondary">Teklif isteyin →</a>
+</article><article class="price-card featured reveal" data-nova-plan="pro">
+<div class="price-badge">Önerimiz</div><div class="price-tier">NOVA Pro</div>
+<p>Misafir deneyimini, ekibi ve operasyonel süreçleri bir araya getiren oteller için.</p><div class="nova-scope">Planlanan paket kapsamı</div>
+<ul class="price-list"><li>Planlanan NOVA Core kapsamı</li><li>Misafir süreçleri, teklifler ve kampanyalar</li><li>Gelişmiş görev ve ekip koordinasyonu</li><li>Uyumluluk incelemesinden sonra PMS entegrasyonu</li></ul>
+<a href="#contact" class="btn btn-primary">Teklif isteyin →</a>
+</article><article class="price-card reveal" data-nova-plan="intelligence">
+<div class="price-tier">NOVA Intelligence</div>
+<p>Gelişmiş otomasyon, raporlama ve veriye dayalı fiyat kararları için.</p><div class="nova-scope">Planlanan paket kapsamı</div>
+<ul class="price-list"><li>Planlanan NOVA Pro kapsamı</li><li>Gelişmiş NOVA otomasyonu</li><li>Kullanıma hazır olduğu onaylandıktan sonra Revenue Intelligence / Dynamic Pricing</li><li>Gelişmiş raporlama ve entegrasyon planlaması</li></ul>
+<a href="#contact" class="btn btn-secondary">Teklif isteyin →</a>
+</article></div>
+<div class="nova-revenue-box"><h3>Dynamic Pricing</h3><p>Core ve Pro için isteğe bağlıdır. Planlanan Intelligence kapsamına dahildir. Veri kaynakları, entegrasyonlar ve kullanılabilirlik etkinleştirmeden önce kontrol edilir. Ticari koşullar size özel teklifte belirtilir.</p></div>
+<p class="nova-pricing-note">Siparişten önce oteliniz için gerçekten kullanılabilir özellikleri ve başlangıç tarihini onaylarız. Geliştirilmekte olan özellikler otomatik olarak kullanılabilir veya hâlihazırda kullanılabilen bir pakete dahil değildir.</p>
+<p class="nova-pricing-note">Kurumsal müşteriler için EUR cinsinden gösterge fiyatlardır. Oda sayısı, kullanım sınırları, üçüncü taraf ücretleri, vergiler, sözleşme süresi ve entegrasyon çalışmaları size özel teklifte belirtilir. Büyük oteller ve otel grupları için özel teklif hazırlanır.</p>
+</div></section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">Misafirleriniz dünyanın her yerinden gelir.</h2><p class="section-sub">Hizmetiniz onların dilini konuşur.</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">Çok dilli misafir iletişimi – dünya çapında bağlantı.</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="Küreyi sola döndür">←</button><button type="button" class="motion-button globe-right" aria-label="Küreyi sağa döndür">→</button><button type="button" class="motion-button globe-toggle" data-pause="Hareketi duraklat" data-play="Hareketi başlat" data-running="false" >Hareketi başlat</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>Uluslararası karşılama. Kişisel ilgi.</h3><p>NOVA çok dilli misafir iletişimini destekler. Otel bilgileriniz temel alınır; kişisel yardım gerektiğinde ekibiniz devralır.</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">Uluslararası iletişimi gösteren bir görseldir; mevcut müşterilerin veya canlı bağlantıların haritası değildir.</p></div></div></div></section><section class="faq" id="faq">
   <div class="section-shell" style="text-align:center;">
     <span class="section-tag reveal">SSS</span>
     <h2 class="section-title reveal reveal-delay-1">Otel sahipleri ve işletmecileri için yanıtlar.</h2>
@@ -939,8 +937,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
     var msg=document.createElement('div');
     msg.className='chatbot-message '+sender;
     var lc=text.toLowerCase();
-    var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('suite')||lc.includes('modül')||lc.includes('starter')||lc.includes('pro')||lc.includes('rezervasyon')||lc.includes('booking')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding'));
-    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="https://hotel.leolan.net/onboarding/?paket=starter" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Paketler</a></div>':'';
+    var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('modül')||lc.includes('pro')||lc.includes('rezervasyon')||lc.includes('booking')||lc.includes('onboarding'));
+    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/tr/#pricing" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Paketler</a></div>':'';
     msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;

@@ -637,6 +637,21 @@ main { overflow-wrap:anywhere; }
 
 
 <link rel="stylesheet" href="/assets/nova-motion.css?v=7">
+<style id="nova-pricing-v2-style">
+#pricing[data-nova-pricing="v2"] .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+#pricing[data-nova-pricing="v2"] .price-card{display:flex;flex-direction:column;min-width:0;height:auto}
+#pricing[data-nova-pricing="v2"] .price-tier{padding-top:10px;overflow-wrap:anywhere}
+#pricing[data-nova-pricing="v2"] .price-amount{font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;white-space:nowrap}
+#pricing[data-nova-pricing="v2"] .nova-price-prefix{font-size:.4em;font-weight:500;margin-right:.35em}
+#pricing[data-nova-pricing="v2"] .nova-year-price,#pricing[data-nova-pricing="v2"] .nova-setup-price{margin-top:12px;font-size:.9rem;line-height:1.5}
+#pricing[data-nova-pricing="v2"] .nova-scope{margin-top:18px;font-size:.8rem;opacity:.8}
+#pricing[data-nova-pricing="v2"] .price-list{flex:1}
+#pricing[data-nova-pricing="v2"] .price-card>.btn{margin-top:auto;white-space:normal;text-align:center}
+#pricing[data-nova-pricing="v2"] .nova-revenue-box{margin-top:28px;padding:24px;border:1px solid currentColor;border-radius:16px;line-height:1.65}
+#pricing[data-nova-pricing="v2"] .nova-pricing-note{margin-top:18px;font-size:.9rem;line-height:1.65;overflow-wrap:anywhere}
+@media(max-width:1100px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:minmax(0,1fr)}}
+</style>
 </head>
 <body>
 
@@ -738,7 +753,7 @@ main { overflow-wrap:anywhere; }
           <li>Seasonality &amp; event-based adjustments</li>
           <li>Additional revenue potential</li>
         </ul>
-        <span style="display:inline-block;background:rgba(245,166,35,0.15);color:#f5a623;border:1px solid rgba(245,166,35,0.4);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:4px;">Add-on · +€99/month</span>
+        <span style="display:inline-block;background:rgba(245,166,35,0.15);color:#f5a623;border:1px solid rgba(245,166,35,0.4);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:4px;">Dynamic Pricing · optional · subject to availability</span>
       </article>
     </div>
   </div>
@@ -769,70 +784,31 @@ main { overflow-wrap:anywhere; }
       </div>
     </div>
   </div>
-</section><section class="pricing" id="pricing">
-  <div class="section-shell">
-    <span class="section-tag reveal">Modular pricing</span>
-    <h2 class="section-title reveal reveal-delay-1">Start with one module. Expand as your hotel grows.</h2>
-    <p class="section-sub reveal reveal-delay-2">Choose the NOVA modules that fit your hotel and add further capabilities when needed.</p>
-    <div class="pricing-grid">
-      <article class="price-card reveal" id="single-card">
-        <div class="price-tier">AI Concierge Starter</div>
-        <div style="display:flex;gap:8px;margin-bottom:8px">
-          <span style="background:#f5a62322;color:#f5a623;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid #f5a62344">🔥 Limited</span>
-          <span style="background:#ffffff11;color:#8b949e;font-size:11px;padding:3px 10px;border-radius:999px">12 months min.</span>
-        </div>
-        <div style="font-size:16px;color:rgba(255,80,80,0.7);text-decoration:line-through;margin-bottom:4px;font-weight:600;">€249</div>
-        <div class="price-amount">€199</div>
-        <div class="price-period">/ month · or <strong style="color:#34c759;">€1,990/year</strong> (2 months free)</div>
-        <p>For boutique hotels ready to capture direct bookings and reduce Booking.com dependency.</p>
-        <ul class="price-list">
-          <li>WhatsApp booking assistant</li>
-          <li>Automated review responses</li>
-          <li>Direct booking request capture</li>
-          <li>Quick setup — no technical experience required</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=starter" class="btn btn-secondary">Request a Demo →</a>
-      </article>
-      <article class="price-card featured reveal reveal-delay-1">
-        <div class="price-badge">Most Popular</div>
-        <div class="price-tier">Guest Experience Suite</div>
-        <div class="price-amount">€349</div>
-        <div class="price-period">/ month · or <strong style="color:#34c759;">€3,490/year</strong> (2 months free)</div>
-        <p>Combine guest communication and daily operations in one modular package.</p>
-        <ul class="price-list">
-          <li>WhatsApp Concierge Bot</li>
-          <li>Review Management</li>
-          <li>Guest Email Automation</li>
-          <li>Priority onboarding assistance</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=pro" class="btn btn-primary">Request a Demo →</a>
-      </article>
-      
-    </div>
-    <!-- Dynamic Pricing Add-on Banner -->
-    <div style="margin-top:28px;background:linear-gradient(135deg,rgba(245,166,35,0.12),rgba(52,199,89,0.08));border:1px solid rgba(245,166,35,0.35);border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;align-items:center;gap:20px;justify-content:space-between;">
-      <div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-          <span style="font-size:28px;">💰</span>
-          <span style="background:#f5a623;color:#000;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;">ADD-ON</span>
-        </div>
-        <div style="font-size:20px;font-weight:800;color:#f0f6fc;margin-bottom:6px;">Dynamic Pricing — AI-powered revenue optimisation</div>
-        <div style="color:rgba(245,247,251,0.65);font-size:14px;line-height:1.6;max-width:520px;">Add AI-based pricing optimization to any package. The engine factors in competitor rates, events and seasonality to recommend a suitable price.</div>
-        <ul style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none;padding:0;">
-          <li style="color:#34c759;font-size:13px;font-weight:600;">✓ Competitor analysis</li>
-          <li style="color:#34c759;font-size:13px;font-weight:600;">✓ AI price recommendations</li>
-          <li style="color:#34c759;font-size:13px;font-weight:600;">✓ Additional revenue potential</li>
-          <li style="color:#34c759;font-size:13px;font-weight:600;">✓ Works with all packages</li>
-        </ul>
-      </div>
-      <div style="text-align:center;flex-shrink:0;">
-        <div style="font-size:32px;font-weight:800;color:#f5a623;">+€99</div>
-        <div style="color:rgba(245,247,251,0.5);font-size:13px;">/month add-on</div>
-        <a href="https://hotel.leolan.net/onboarding/?addon=pricing" class="btn btn-primary" style="margin-top:14px;display:inline-block;padding:12px 24px;font-size:14px;font-weight:700;background:#f5a623;color:#000;border-radius:10px;text-decoration:none;">Add to Package →</a>
-      </div>
-    </div>
-  </div>
-</section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">Your guests come from around the world.</h2><p class="section-sub">Your service speaks their language.</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">Multilingual guest communication – connected worldwide.</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="Rotate globe left">←</button><button type="button" class="motion-button globe-right" aria-label="Rotate globe right">→</button><button type="button" class="motion-button globe-toggle" data-pause="Pause motion" data-play="Start motion" data-running="false" >Start motion</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>An international welcome. A personal touch.</h3><p>NOVA supports multilingual guest communication. Your hotel knowledge remains the foundation, and your team takes over when personal assistance is needed.</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">Illustration of international communication, not a map of existing customers or live connections.</p></div></div></div></section><section class="faq" id="faq">
+</section><section class="pricing" id="pricing" data-nova-pricing="v2">
+<div class="section-shell">
+<span class="section-tag reveal">NOVA for your hotel</span>
+<h2 class="section-title reveal">One platform. The right package for your hotel.</h2>
+<p class="section-sub reveal">Start with the proposed NOVA package for your property. Room count, integrations and usage are defined in your individual offer.</p>
+<div class="pricing-grid"><article class="price-card reveal" id="single-card" data-nova-plan="core">
+<div class="price-tier">NOVA Core</div>
+<p>An entry point for smaller hotels: connect guest communication and daily operations.</p><div class="nova-scope">Proposed package scope</div>
+<ul class="price-list"><li>Hotel knowledge and guest communication</li><li>Reservation and guest overview</li><li>Basic tasks and team access</li></ul>
+<a href="#contact" class="btn btn-secondary">Request an offer →</a>
+</article><article class="price-card featured reveal" data-nova-plan="pro">
+<div class="price-badge">Our recommendation</div><div class="price-tier">NOVA Pro</div>
+<p>For hotels bringing the guest journey, team and operational processes together.</p><div class="nova-scope">Proposed package scope</div>
+<ul class="price-list"><li>Proposed NOVA Core scope</li><li>Guest journeys, offers and campaigns</li><li>Advanced task and team coordination</li><li>PMS integration subject to compatibility review</li></ul>
+<a href="#contact" class="btn btn-primary">Request an offer →</a>
+</article><article class="price-card reveal" data-nova-plan="intelligence">
+<div class="price-tier">NOVA Intelligence</div>
+<p>For advanced automation, reporting and data-based pricing decisions.</p><div class="nova-scope">Proposed package scope</div>
+<ul class="price-list"><li>Proposed NOVA Pro scope</li><li>Advanced NOVA automation</li><li>Revenue Intelligence / Dynamic Pricing subject to release</li><li>Extended reporting and integration planning</li></ul>
+<a href="#contact" class="btn btn-secondary">Request an offer →</a>
+</article></div>
+<div class="nova-revenue-box"><h3>Dynamic Pricing</h3><p>Optional for Core and Pro. Included in the proposed Intelligence scope. Data sources, integrations and availability are reviewed before activation. Commercial terms are provided in your individual offer.</p></div>
+<p class="nova-pricing-note">Before booking, we confirm the features actually available and the start date for your property. Features in development are not automatically available or part of a currently usable package.</p>
+<p class="nova-pricing-note">Indicative EUR prices for business customers. Room count, usage limits, third-party fees, taxes, contract term and integration work are specified in your individual offer. Custom offers for larger properties and hotel groups.</p>
+</div></section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">Your guests come from around the world.</h2><p class="section-sub">Your service speaks their language.</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">Multilingual guest communication – connected worldwide.</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="Rotate globe left">←</button><button type="button" class="motion-button globe-right" aria-label="Rotate globe right">→</button><button type="button" class="motion-button globe-toggle" data-pause="Pause motion" data-play="Start motion" data-running="false" >Start motion</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>An international welcome. A personal touch.</h3><p>NOVA supports multilingual guest communication. Your hotel knowledge remains the foundation, and your team takes over when personal assistance is needed.</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">Illustration of international communication, not a map of existing customers or live connections.</p></div></div></div></section><section class="faq" id="faq">
   <div class="section-shell" style="text-align:center;">
     <span class="section-tag reveal">FAQ</span>
     <h2 class="section-title reveal reveal-delay-1">Answers for hotel owners and operators.</h2>
@@ -962,8 +938,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
     var msg=document.createElement('div');
     msg.className='chatbot-message '+sender;
     var lc=text.toLowerCase();
-    var hasPaket=sender==='bot'&&(lc.includes('suite')||lc.includes('module')||lc.includes('starter')||lc.includes('pro')||lc.includes('booking')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding')||lc.includes('plan')||lc.includes('package'));
-    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="https://hotel.leolan.net/onboarding/?paket=starter" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 View Packages</a></div>':'';
+    var hasPaket=sender==='bot'&&(lc.includes('module')||lc.includes('pro')||lc.includes('booking')||lc.includes('onboarding')||lc.includes('plan')||lc.includes('package'));
+    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/en/#pricing" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 View Packages</a></div>':'';
     msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;

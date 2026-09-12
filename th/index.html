@@ -630,6 +630,21 @@ main { overflow-wrap:anywhere; }
 
 
 <link rel="stylesheet" href="/assets/nova-motion.css?v=7">
+<style id="nova-pricing-v2-style">
+#pricing[data-nova-pricing="v2"] .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+#pricing[data-nova-pricing="v2"] .price-card{display:flex;flex-direction:column;min-width:0;height:auto}
+#pricing[data-nova-pricing="v2"] .price-tier{padding-top:10px;overflow-wrap:anywhere}
+#pricing[data-nova-pricing="v2"] .price-amount{font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;white-space:nowrap}
+#pricing[data-nova-pricing="v2"] .nova-price-prefix{font-size:.4em;font-weight:500;margin-right:.35em}
+#pricing[data-nova-pricing="v2"] .nova-year-price,#pricing[data-nova-pricing="v2"] .nova-setup-price{margin-top:12px;font-size:.9rem;line-height:1.5}
+#pricing[data-nova-pricing="v2"] .nova-scope{margin-top:18px;font-size:.8rem;opacity:.8}
+#pricing[data-nova-pricing="v2"] .price-list{flex:1}
+#pricing[data-nova-pricing="v2"] .price-card>.btn{margin-top:auto;white-space:normal;text-align:center}
+#pricing[data-nova-pricing="v2"] .nova-revenue-box{margin-top:28px;padding:24px;border:1px solid currentColor;border-radius:16px;line-height:1.65}
+#pricing[data-nova-pricing="v2"] .nova-pricing-note{margin-top:18px;font-size:.9rem;line-height:1.65;overflow-wrap:anywhere}
+@media(max-width:1100px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:minmax(0,1fr)}}
+</style>
 </head>
 <body>
 
@@ -759,42 +774,31 @@ main { overflow-wrap:anywhere; }
       </div>
     </div>
   </div>
-</section><section class="pricing" id="pricing">
-  <div class="section-shell">
-    <span class="section-tag reveal">ราคาแบบโมดูลาร์</span>
-    <h2 class="section-title reveal reveal-delay-1">แพ็กเกจ NOVA ที่เหมาะกับธุรกิจของคุณ</h2>
-    <p class="section-sub reveal reveal-delay-2">เลือกโมดูลที่เหมาะกับโรงแรมของคุณ และเพิ่มฟีเจอร์เมื่อจำเป็น</p>
-    <div class="pricing-grid">
-      <article class="price-card reveal" id="single-card">
-        <div class="price-tier">AI Concierge Starter</div>
-        <div class="price-amount">199 €</div>
-        <div class="price-period">/ เดือน · หรือ <strong>1,990 €/ปี</strong> (ฟรี 2 เดือน)</div>
-        <p>สำหรับโรงแรมที่ต้องการทำให้การตอบคำถามแขกเป็นอัตโนมัติและรองรับคำขอจองตรง</p>
-        <ul class="price-list">
-          <li>ผู้ช่วยจองห้องพักผ่าน WhatsApp</li>
-          <li>ตอบรีวิวโดยอัตโนมัติ</li>
-          <li>รองรับคำขอจองตรง</li>
-          <li>ติดตั้งได้รวดเร็ว ไม่ต้องมีความรู้ด้านเทคนิค</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=starter&amp;lang=th" class="btn btn-secondary">ขอชมเดโม →</a>
-      </article>
-      <article class="price-card featured reveal reveal-delay-1">
-        <div class="price-badge">แนะนำ</div>
-        <div class="price-tier">Guest Experience Suite</div>
-        <div class="price-amount">349 €</div>
-        <div class="price-period">/ เดือน · หรือ <strong>3,490 €/ปี</strong> (ฟรี 2 เดือน)</div>
-        <p>สำหรับโรงแรมที่ต้องการทำให้การสื่อสารกับแขกและงานประจำวันเป็นอัตโนมัติในอินเทอร์เฟซเดียว</p>
-        <ul class="price-list">
-          <li>WhatsApp Concierge Bot</li>
-          <li>ระบบจัดการรีวิว</li>
-          <li>ระบบอัตโนมัติอีเมลแขก</li>
-          <li>ความช่วยเหลือในการเริ่มต้นใช้งาน</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=pro&amp;lang=th" class="btn btn-primary">ขอชมเดโม →</a>
-      </article>
-    </div>
-  </div>
-</section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">แขกของคุณมาจากทั่วโลก</h2><p class="section-sub">บริการของคุณสื่อสารในภาษาของแขก</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">การสื่อสารกับแขกหลายภาษา เชื่อมต่อทั่วโลก</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="หมุนโลกไปทางซ้าย">←</button><button type="button" class="motion-button globe-right" aria-label="หมุนโลกไปทางขวา">→</button><button type="button" class="motion-button globe-toggle" data-pause="หยุดการเคลื่อนไหว" data-play="เริ่มการเคลื่อนไหว" data-running="false" >เริ่มการเคลื่อนไหว</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>ต้อนรับแขกจากทั่วโลก ดูแลอย่างใส่ใจ</h3><p>NOVA รองรับการสื่อสารกับแขกหลายภาษา โดยใช้ข้อมูลโรงแรมเป็นพื้นฐาน และให้ทีมงานรับช่วงเมื่อจำเป็นต้องช่วยเหลือเป็นการส่วนตัว</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">ภาพประกอบการสื่อสารระหว่างประเทศ ไม่ใช่แผนที่ลูกค้าหรือการเชื่อมต่อแบบเรียลไทม์</p></div></div></div></section><section class="faq" id="faq">
+</section><section class="pricing" id="pricing" data-nova-pricing="v2">
+<div class="section-shell">
+<span class="section-tag reveal">NOVA สำหรับโรงแรมของคุณ</span>
+<h2 class="section-title reveal">แพลตฟอร์มเดียว แพ็กเกจที่เหมาะกับโรงแรมของคุณ</h2>
+<p class="section-sub reveal">เริ่มต้นด้วยแพ็กเกจ NOVA ที่วางแผนไว้สำหรับโรงแรมของคุณ จำนวนห้อง การเชื่อมต่อระบบ และขอบเขตการใช้งานจะระบุในข้อเสนอเฉพาะของคุณ</p>
+<div class="pricing-grid"><article class="price-card reveal" id="single-card" data-nova-plan="core">
+<div class="price-tier">NOVA Core</div>
+<p>สำหรับโรงแรมขนาดเล็ก: เชื่อมการสื่อสารกับแขกและงานประจำวันเข้าด้วยกัน</p><div class="nova-scope">ขอบเขตแพ็กเกจที่วางแผนไว้</div>
+<ul class="price-list"><li>ฐานความรู้โรงแรมและการสื่อสารกับแขก</li><li>ภาพรวมการจองและแขก</li><li>งานพื้นฐานและสิทธิ์เข้าถึงสำหรับทีม</li></ul>
+<a href="#contact" class="btn btn-secondary">ขอข้อเสนอ →</a>
+</article><article class="price-card featured reveal" data-nova-plan="pro">
+<div class="price-badge">คำแนะนำของเรา</div><div class="price-tier">NOVA Pro</div>
+<p>สำหรับโรงแรมที่ต้องการเชื่อมประสบการณ์ของแขก ทีมงาน และกระบวนการดำเนินงาน</p><div class="nova-scope">ขอบเขตแพ็กเกจที่วางแผนไว้</div>
+<ul class="price-list"><li>ขอบเขต NOVA Core ที่วางแผนไว้</li><li>ขั้นตอนดูแลแขก ข้อเสนอ และแคมเปญ</li><li>การประสานงานและทีมขั้นสูง</li><li>การเชื่อมต่อ PMS หลังตรวจสอบความเข้ากันได้</li></ul>
+<a href="#contact" class="btn btn-primary">ขอข้อเสนอ →</a>
+</article><article class="price-card reveal" data-nova-plan="intelligence">
+<div class="price-tier">NOVA Intelligence</div>
+<p>สำหรับระบบอัตโนมัติขั้นสูง รายงาน และการตัดสินใจด้านราคาจากข้อมูล</p><div class="nova-scope">ขอบเขตแพ็กเกจที่วางแผนไว้</div>
+<ul class="price-list"><li>ขอบเขต NOVA Pro ที่วางแผนไว้</li><li>ระบบอัตโนมัติ NOVA ขั้นสูง</li><li>Revenue Intelligence / Dynamic Pricing หลังยืนยันความพร้อมใช้งาน</li><li>รายงานขั้นสูงและการวางแผนเชื่อมต่อระบบ</li></ul>
+<a href="#contact" class="btn btn-secondary">ขอข้อเสนอ →</a>
+</article></div>
+<div class="nova-revenue-box"><h3>Dynamic Pricing</h3><p>เป็นตัวเลือกเสริมสำหรับ Core และ Pro และรวมอยู่ในขอบเขต Intelligence ที่วางแผนไว้ แหล่งข้อมูล การเชื่อมต่อ และความพร้อมจะได้รับการตรวจสอบก่อนเปิดใช้งาน เงื่อนไขทางการค้าจะระบุในข้อเสนอเฉพาะสำหรับโรงแรมของคุณ</p></div>
+<p class="nova-pricing-note">ก่อนสั่งซื้อ เราจะยืนยันฟีเจอร์ที่ใช้งานได้จริงและวันเริ่มใช้งานสำหรับโรงแรมของคุณ ฟีเจอร์ที่กำลังพัฒนาไม่ได้พร้อมใช้งานหรือรวมอยู่ในแพ็กเกจที่ใช้งานได้แล้วโดยอัตโนมัติ</p>
+<p class="nova-pricing-note">ราคาโดยประมาณในสกุล EUR สำหรับลูกค้าธุรกิจ จำนวนห้อง ขีดจำกัดการใช้งาน ค่าบริการบุคคลที่สาม ภาษี ระยะสัญญา และงานเชื่อมต่อระบบจะระบุในข้อเสนอเฉพาะ โรงแรมขนาดใหญ่และกลุ่มโรงแรมใช้ข้อเสนอเฉพาะราย</p>
+</div></section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">แขกของคุณมาจากทั่วโลก</h2><p class="section-sub">บริการของคุณสื่อสารในภาษาของแขก</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">การสื่อสารกับแขกหลายภาษา เชื่อมต่อทั่วโลก</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="หมุนโลกไปทางซ้าย">←</button><button type="button" class="motion-button globe-right" aria-label="หมุนโลกไปทางขวา">→</button><button type="button" class="motion-button globe-toggle" data-pause="หยุดการเคลื่อนไหว" data-play="เริ่มการเคลื่อนไหว" data-running="false" >เริ่มการเคลื่อนไหว</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>ต้อนรับแขกจากทั่วโลก ดูแลอย่างใส่ใจ</h3><p>NOVA รองรับการสื่อสารกับแขกหลายภาษา โดยใช้ข้อมูลโรงแรมเป็นพื้นฐาน และให้ทีมงานรับช่วงเมื่อจำเป็นต้องช่วยเหลือเป็นการส่วนตัว</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">ภาพประกอบการสื่อสารระหว่างประเทศ ไม่ใช่แผนที่ลูกค้าหรือการเชื่อมต่อแบบเรียลไทม์</p></div></div></div></section><section class="faq" id="faq">
   <div class="section-shell" style="text-align:center;">
     <span class="section-tag reveal">คำถามที่พบบ่อย</span>
     <h2 class="section-title reveal reveal-delay-1">คำตอบสำหรับเจ้าของและผู้ดำเนินกิจการโรงแรม</h2>

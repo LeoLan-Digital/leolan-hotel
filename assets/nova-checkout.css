@@ -38,3 +38,34 @@ body.nova-checkout .module{border-color:#ffffff20;background:#0a1325}.nova-check
 @media(max-width:768px){body.nova-checkout .checkout-topbar{min-height:69px;padding:12px 20px}body.nova-checkout .checkout-topbar .top-home{left:20px;font-size:12px}.nova-checkout .checkout-topbar .lang-select{right:20px}.nova-checkout .shell{width:calc(100% - 40px);padding-top:33px}.nova-checkout .hero{padding:52px 22px 37px}.nova-checkout .card{padding:22px}.nova-checkout .steps{margin-bottom:27px}.nova-checkout .sline{max-width:65px}.nova-checkout .success-card{width:calc(100% - 40px);margin-top:45px;padding:34px 23px}.nova-checkout .success-card h1{font-size:41px}}
 @media(max-width:480px){body.nova-checkout .checkout-topbar{padding-inline:16px}.nova-checkout .checkout-topbar .top-home{left:16px}.nova-checkout .checkout-topbar .lang-select{right:16px;min-width:44px}.nova-checkout .checkout-topbar .top-home span:last-child{display:none}.nova-checkout .checkout-topbar .nova-wordmark .monogram{width:34px;height:34px;font-size:22px}.nova-checkout .checkout-topbar .nova-wordmark strong{font-size:20px}.nova-checkout .checkout-topbar .nova-wordmark small{font-size:7px}.nova-checkout .shell{width:calc(100% - 28px)}.nova-checkout .g2,.nova-checkout .g3,.nova-checkout .pkgs{grid-template-columns:1fr}.nova-checkout .card{padding:19px;border-radius:16px}.nova-checkout .hero h1{font-size:42px}.nova-checkout .slabel{font-size:9px}.nova-checkout .sline{max-width:38px}.nova-checkout .checkout-proof{align-items:flex-start;flex-direction:column}.nova-checkout .success-card{width:calc(100% - 28px);padding:30px 19px}.nova-checkout .success-card h1{font-size:37px}}
 @media(prefers-reduced-motion:reduce){body.nova-checkout *{scroll-behavior:auto;transition:none!important}}
+
+/* NOVA R10: Formulargrundlagen; Preise und Zahlungssperre bleiben unveraendert. */
+body.nova-checkout .g2,body.nova-checkout .g3,body.nova-checkout .pkgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+body.nova-checkout .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+body.nova-checkout .g2>p:only-child{grid-column:1/-1}
+body.nova-checkout .field,body.nova-checkout .pkg{min-width:0}
+body.nova-checkout .field .err{display:none;margin-top:6px;line-height:1.5}
+body.nova-checkout .field.bad .err{display:block}
+body.nova-checkout .field [aria-invalid="true"]{border-color:#ff9f9f}
+body.nova-checkout .billing-toggle{display:flex;flex-wrap:wrap;gap:5px;padding:5px;border-radius:14px;margin-bottom:20px}
+body.nova-checkout .billing-option{appearance:none;background:transparent;border:0;border-radius:10px;min-height:44px;padding:10px 16px;font:inherit;font-size:13px;cursor:pointer;flex:1;overflow-wrap:anywhere}
+body.nova-checkout .billing-option.on{background:#ff681f;color:#fff}
+body.nova-checkout button.pkg{appearance:none;width:100%;line-height:1.5;overflow-wrap:anywhere}
+body.nova-checkout .pkg-name{font-weight:600;line-height:1.35}
+body.nova-checkout .pkg-price{margin-top:9px;line-height:1.4}
+body.nova-checkout .pkg-desc{margin-top:9px;font-size:12px;line-height:1.5}
+body.nova-checkout .card>p{margin-top:16px;font-size:12px;line-height:1.7;color:#aeb9cc}
+body.nova-checkout .swrap{display:flex;flex-direction:column;align-items:center;gap:9px;flex:0 1 96px;min-width:0;text-align:center}
+body.nova-checkout .sdot{display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0}
+body.nova-checkout .sline{flex:1 1 40px;min-width:12px}
+body.nova-checkout .slabel{line-height:1.5;overflow-wrap:anywhere}
+body.nova-checkout .sum-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start;line-height:1.65}
+body.nova-checkout .sum-label,body.nova-checkout .sum-value{min-width:0;overflow-wrap:anywhere}
+body.nova-checkout .sum-value{text-align:right;font-weight:600}
+body.nova-checkout #sumPrice .sum-row:last-child{font-weight:700;border-top:1px solid #ff915c55;color:#ff9b66;margin-top:8px}
+body.nova-checkout .btn,body.nova-checkout #quoteLink{display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;line-height:1.5;padding:14px 22px;white-space:normal;overflow-wrap:anywhere;text-decoration:none}
+body.nova-checkout .note,body.nova-checkout .checkout-proof{line-height:1.7}
+body.nova-checkout :is(button,a,input,select):focus-visible{outline:2px solid #aebdff;outline-offset:4px}
+body.nova-checkout :is(input,select,#pricingMessage){scroll-margin-top:100px}
+body.nova-checkout .success-card h1{overflow-wrap:anywhere}
+@media(max-width:620px){body.nova-checkout .g2,body.nova-checkout .g3,body.nova-checkout .pkgs{grid-template-columns:minmax(0,1fr)}body.nova-checkout .sum-row{gap:10px}}

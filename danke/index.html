@@ -1,68 +1,8 @@
 <!doctype html><html lang="de"><head>
-  <link rel="canonical" href="https://nova-hotel-design.knazari2604.chatgpt.site/danke/">
+  <link rel="canonical" href="https://hotel.leolan.net/danke/">
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vielen Dank! – LeoLan Digital</title>
+<title>NOVA Anfrage · NOVA</title>
 
-<link rel="icon" href="/favicon-new.png"><link rel="stylesheet" href="/assets/nova-core.css?v=1"><link rel="stylesheet" href="/assets/nova-editorial.css?v=6"><link rel="stylesheet" href="/assets/nova-motion.css?v=7"><link rel="stylesheet" href="/assets/nova-checkout.css?v=1"></head><body class="nova-checkout">
-<a href="#main-content" class="skip-nav">Skip to main content</a>
-
-<main id="main-content"><div class="success-card">
-  <div class="icon">🎉</div>
-  <h1>Payment Successful!</h1>
-  <p class="sub">Welcome to LeoLan Digital. Your AI system is now being set up for you.</p>
-
-  <div class="code-box" id="codeBox" style="display:none">
-    <div class="code-label">Dein Kundencode</div>
-    <div style="color:#f0f6fc;font-size:1.15rem;font-weight:700;margin-bottom:10px">Dein Kundencode: <strong id="codeInline">—</strong></div>
-    <div class="code" id="codeDisplay">—</div>
-    <div class="code-hint">Notiere ihn dir — du brauchst ihn für die App.</div>
-  </div>
-
-  <div class="steps">
-    <div class="step-item">
-      <div class="step-num">1</div>
-      <div class="step-text"><strong>Email Confirmation</strong><span>You will receive an email with your customer code immediately.</span></div>
-    </div>
-    <div class="step-item">
-      <div class="step-num">2</div>
-      <div class="step-text"><strong>WhatsApp Contact within 24h</strong><span>Our team will contact you and set up your AI bot.</span></div>
-    </div>
-    <div class="step-item">
-      <div class="step-num">3</div>
-      <div class="step-text"><strong>Download the App</strong><span>Download the LeoLan Manager App from TestFlight and log in.</span></div>
-    </div>
-  </div>
-
-  <a href="/de/" class="btn">→ To Website</a>
-</div></main><div class="checkout-footer">© 2026 LeoLan Digital · business@leolan.net</div>
-
-<script>
-// Show customer code if available
-var params = new URLSearchParams(window.location.search);
-var code = params.get('code') || localStorage.getItem('leolan_hotel_code');
-var email = params.get('email') || localStorage.getItem('leolan_hotel_email');
-
-if(code) {
-  document.getElementById('codeDisplay').textContent = code;
-  document.getElementById('codeInline').textContent = code;
-  document.getElementById('codeBox').style.display = 'block';
-} else if(email) {
-  // Try to fetch code from backend using email
-  fetch('https://n8n.leolan.net/webhook/hotel-dashboard', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({action:'lookup-by-email', email: email})
-  }).then(function(r){return r.json();}).then(function(d){
-    var c2 = d && d.account && d.account.customerCode;
-    if(c2) {
-      document.getElementById('codeDisplay').textContent = c2;
-      document.getElementById('codeInline').textContent = c2;
-      document.getElementById('codeBox').style.display = 'block';
-    }
-  }).catch(function(){});
-}
-</script>
-</main>
-</body></html>
+<link rel="icon" href="/favicon-new.png"><link rel="stylesheet" href="/assets/nova-core.css?v=1"><link rel="stylesheet" href="/assets/nova-editorial.css?v=6"><link rel="stylesheet" href="/assets/nova-motion.css?v=7"><link rel="stylesheet" href="/assets/nova-checkout.css?v=1"></head><body class="nova-checkout" data-nova-stage="r8"><div class="checkout-topbar"><a class="top-home" href="/de/">← Startseite</a><a class="nova-wordmark" href="/de/"><strong>NOVA</strong></a></div><main id="main-content"><div class="success-card"><h1>NOVA Anfrage</h1><p class="sub">NOVA wird individuell für Ihr Hotel geplant. Für Fragen zu Ihrer Anfrage oder zum weiteren Ablauf erreichen Sie unser Team direkt per E-Mail.</p><a class="btn" href="mailto:business@leolan.net?subject=NOVA%20Anfrage">Kontakt aufnehmen</a><p><a href="/de/#contact">NOVA kennenlernen</a></p></div></main></body></html>

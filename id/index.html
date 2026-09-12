@@ -637,6 +637,21 @@ main { overflow-wrap:anywhere; }
 
 
 <link rel="stylesheet" href="/assets/nova-motion.css?v=7">
+<style id="nova-pricing-v2-style">
+#pricing[data-nova-pricing="v2"] .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+#pricing[data-nova-pricing="v2"] .price-card{display:flex;flex-direction:column;min-width:0;height:auto}
+#pricing[data-nova-pricing="v2"] .price-tier{padding-top:10px;overflow-wrap:anywhere}
+#pricing[data-nova-pricing="v2"] .price-amount{font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;white-space:nowrap}
+#pricing[data-nova-pricing="v2"] .nova-price-prefix{font-size:.4em;font-weight:500;margin-right:.35em}
+#pricing[data-nova-pricing="v2"] .nova-year-price,#pricing[data-nova-pricing="v2"] .nova-setup-price{margin-top:12px;font-size:.9rem;line-height:1.5}
+#pricing[data-nova-pricing="v2"] .nova-scope{margin-top:18px;font-size:.8rem;opacity:.8}
+#pricing[data-nova-pricing="v2"] .price-list{flex:1}
+#pricing[data-nova-pricing="v2"] .price-card>.btn{margin-top:auto;white-space:normal;text-align:center}
+#pricing[data-nova-pricing="v2"] .nova-revenue-box{margin-top:28px;padding:24px;border:1px solid currentColor;border-radius:16px;line-height:1.65}
+#pricing[data-nova-pricing="v2"] .nova-pricing-note{margin-top:18px;font-size:.9rem;line-height:1.65;overflow-wrap:anywhere}
+@media(max-width:1100px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:minmax(0,1fr)}}
+</style>
 </head>
 <body>
 
@@ -768,48 +783,31 @@ main { overflow-wrap:anywhere; }
       </div>
     </div>
   </div>
-</section><section class="pricing" id="pricing">
-  <div class="section-shell">
-    <span class="section-tag reveal">Harga Modular</span>
-    <h2 class="section-title reveal reveal-delay-1">Mulai dengan satu modul. Berkembang seiring pertumbuhan hotel Anda.</h2>
-    <p class="section-sub reveal reveal-delay-2">Pilih modul NOVA yang sesuai untuk hotel Anda dan tambahkan fitur bila diperlukan.</p>
-    <div class="pricing-grid">
-      <article class="price-card reveal" id="single-card">
-        <div class="price-tier">AI Concierge Starter</div>
-        <div style="display:flex;gap:8px;margin-bottom:8px">
-          <span style="background:#f5a62322;color:#f5a623;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid #f5a62344">🔥 Terbatas</span>
-          <span style="background:#ffffff11;color:#8b949e;font-size:11px;padding:3px 10px;border-radius:999px">12 bulan minimum</span>
-        </div>
-        <div style="font-size:16px;color:rgba(255,80,80,0.7);text-decoration:line-through;margin-bottom:4px;font-weight:600;">249 €</div>
-        <div class="price-amount">199 €</div>
-        <div class="price-period">/ bulan · atau <strong style="color:#34c759;">1.990 €/tahun</strong> (2 bulan gratis)</div>
-        <p>Untuk hotel butik yang siap menangkap reservasi langsung dan mengurangi ketergantungan pada Booking.com.</p>
-        <ul class="price-list">
-          <li>Asisten reservasi WhatsApp</li>
-          <li>Balasan ulasan otomatis</li>
-          <li>Menangkap permintaan reservasi langsung</li>
-          <li>Penyiapan cepat — tidak memerlukan pengetahuan teknis</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=starter" class="btn btn-secondary">Minta Demo →</a>
-      </article>
-      <article class="price-card featured reveal reveal-delay-1">
-        <div class="price-badge">Paling Populer</div>
-        <div class="price-tier">Paket Pengalaman Tamu</div>
-        <div class="price-amount">349 €</div>
-        <div class="price-period">/ bulan · atau <strong style="color:#34c759;">3.490 €/tahun</strong> (2 bulan gratis)</div>
-        <p>Gabungkan komunikasi tamu dan operasi harian dalam satu paket modular.</p>
-        <ul class="price-list">
-          <li>Bot Concierge WhatsApp</li>
-          <li>Manajemen Ulasan</li>
-          <li>Otomatisasi Email Tamu</li>
-          <li>Dukungan onboarding prioritas</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=pro" class="btn btn-primary">Minta Demo →</a>
-      </article>
-      
-    </div>
-  </div>
-</section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">Tamu Anda datang dari seluruh dunia.</h2><p class="section-sub">Layanan Anda berbicara dalam bahasa mereka.</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">Komunikasi tamu multibahasa – terhubung di seluruh dunia.</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="Putar globe ke kiri">←</button><button type="button" class="motion-button globe-right" aria-label="Putar globe ke kanan">→</button><button type="button" class="motion-button globe-toggle" data-pause="Jeda gerakan" data-play="Mulai gerakan" data-running="false" >Mulai gerakan</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>Sambutan internasional. Pelayanan personal.</h3><p>NOVA mendukung komunikasi tamu multibahasa. Pengetahuan hotel tetap menjadi dasar, dan tim Anda mengambil alih saat bantuan personal diperlukan.</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">Ilustrasi komunikasi internasional, bukan peta pelanggan yang ada atau koneksi langsung.</p></div></div></div></section><section class="faq" id="faq">
+</section><section class="pricing" id="pricing" data-nova-pricing="v2">
+<div class="section-shell">
+<span class="section-tag reveal">NOVA untuk hotel Anda</span>
+<h2 class="section-title reveal">Satu platform. Paket yang tepat untuk hotel Anda.</h2>
+<p class="section-sub reveal">Mulai dengan paket NOVA yang direncanakan untuk hotel Anda. Jumlah kamar, integrasi, dan penggunaan ditentukan dalam penawaran individual.</p>
+<div class="pricing-grid"><article class="price-card reveal" id="single-card" data-nova-plan="core">
+<div class="price-tier">NOVA Core</div>
+<p>Untuk hotel kecil: hubungkan komunikasi tamu dan operasional harian.</p><div class="nova-scope">Cakupan paket yang direncanakan</div>
+<ul class="price-list"><li>Pengetahuan hotel dan komunikasi tamu</li><li>Ikhtisar reservasi dan tamu</li><li>Tugas dasar dan akses tim</li></ul>
+<a href="#contact" class="btn btn-secondary">Minta penawaran →</a>
+</article><article class="price-card featured reveal" data-nova-plan="pro">
+<div class="price-badge">Rekomendasi kami</div><div class="price-tier">NOVA Pro</div>
+<p>Untuk hotel yang menyatukan perjalanan tamu, tim, dan proses operasional.</p><div class="nova-scope">Cakupan paket yang direncanakan</div>
+<ul class="price-list"><li>Cakupan NOVA Core yang direncanakan</li><li>Perjalanan tamu, penawaran, dan kampanye</li><li>Koordinasi tugas dan tim tingkat lanjut</li><li>Integrasi PMS setelah pemeriksaan kompatibilitas</li></ul>
+<a href="#contact" class="btn btn-primary">Minta penawaran →</a>
+</article><article class="price-card reveal" data-nova-plan="intelligence">
+<div class="price-tier">NOVA Intelligence</div>
+<p>Untuk otomatisasi lanjutan, laporan, dan keputusan harga berbasis data.</p><div class="nova-scope">Cakupan paket yang direncanakan</div>
+<ul class="price-list"><li>Cakupan NOVA Pro yang direncanakan</li><li>Otomatisasi NOVA tingkat lanjut</li><li>Revenue Intelligence / Dynamic Pricing setelah disetujui untuk digunakan</li><li>Laporan lanjutan dan perencanaan integrasi</li></ul>
+<a href="#contact" class="btn btn-secondary">Minta penawaran →</a>
+</article></div>
+<div class="nova-revenue-box"><h3>Dynamic Pricing</h3><p>Opsional untuk Core dan Pro. Termasuk dalam cakupan Intelligence yang direncanakan. Sumber data, integrasi, dan ketersediaan diperiksa sebelum aktivasi. Ketentuan komersial diberikan dalam penawaran individual.</p></div>
+<p class="nova-pricing-note">Sebelum pemesanan, kami mengonfirmasi fitur yang benar-benar tersedia dan tanggal mulai untuk hotel Anda. Fitur dalam pengembangan tidak otomatis tersedia atau menjadi bagian dari paket yang sudah dapat digunakan.</p>
+<p class="nova-pricing-note">Harga indikatif dalam EUR untuk pelanggan bisnis. Jumlah kamar, batas penggunaan, biaya pihak ketiga, pajak, masa kontrak, dan pekerjaan integrasi dicantumkan dalam penawaran individual. Penawaran khusus untuk hotel besar dan grup hotel.</p>
+</div></section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">Tamu Anda datang dari seluruh dunia.</h2><p class="section-sub">Layanan Anda berbicara dalam bahasa mereka.</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">Komunikasi tamu multibahasa – terhubung di seluruh dunia.</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="Putar globe ke kiri">←</button><button type="button" class="motion-button globe-right" aria-label="Putar globe ke kanan">→</button><button type="button" class="motion-button globe-toggle" data-pause="Jeda gerakan" data-play="Mulai gerakan" data-running="false" >Mulai gerakan</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>Sambutan internasional. Pelayanan personal.</h3><p>NOVA mendukung komunikasi tamu multibahasa. Pengetahuan hotel tetap menjadi dasar, dan tim Anda mengambil alih saat bantuan personal diperlukan.</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">Ilustrasi komunikasi internasional, bukan peta pelanggan yang ada atau koneksi langsung.</p></div></div></div></section><section class="faq" id="faq">
   <div class="section-shell" style="text-align:center;">
     <span class="section-tag reveal">FAQ</span>
     <h2 class="section-title reveal reveal-delay-1">Jawaban untuk pemilik dan operator hotel.</h2>
@@ -935,8 +933,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
     var msg=document.createElement('div');
     msg.className='chatbot-message '+sender;
     var lc=text.toLowerCase();
-    var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('suite')||lc.includes('modul')||lc.includes('starter')||lc.includes('pro')||lc.includes('reservasi')||lc.includes('booking')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding'));
-    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="https://hotel.leolan.net/onboarding/?paket=starter" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Paket</a></div>':'';
+    var hasPaket=sender==='bot'&&(lc.includes('paket')||lc.includes('modul')||lc.includes('pro')||lc.includes('reservasi')||lc.includes('booking')||lc.includes('onboarding'));
+    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/id/#pricing" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Paket</a></div>':'';
     msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;

@@ -637,6 +637,21 @@ main { overflow-wrap:anywhere; }
 
 
 <link rel="stylesheet" href="/assets/nova-motion.css?v=7">
+<style id="nova-pricing-v2-style">
+#pricing[data-nova-pricing="v2"] .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+#pricing[data-nova-pricing="v2"] .price-card{display:flex;flex-direction:column;min-width:0;height:auto}
+#pricing[data-nova-pricing="v2"] .price-tier{padding-top:10px;overflow-wrap:anywhere}
+#pricing[data-nova-pricing="v2"] .price-amount{font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;white-space:nowrap}
+#pricing[data-nova-pricing="v2"] .nova-price-prefix{font-size:.4em;font-weight:500;margin-right:.35em}
+#pricing[data-nova-pricing="v2"] .nova-year-price,#pricing[data-nova-pricing="v2"] .nova-setup-price{margin-top:12px;font-size:.9rem;line-height:1.5}
+#pricing[data-nova-pricing="v2"] .nova-scope{margin-top:18px;font-size:.8rem;opacity:.8}
+#pricing[data-nova-pricing="v2"] .price-list{flex:1}
+#pricing[data-nova-pricing="v2"] .price-card>.btn{margin-top:auto;white-space:normal;text-align:center}
+#pricing[data-nova-pricing="v2"] .nova-revenue-box{margin-top:28px;padding:24px;border:1px solid currentColor;border-radius:16px;line-height:1.65}
+#pricing[data-nova-pricing="v2"] .nova-pricing-note{margin-top:18px;font-size:.9rem;line-height:1.65;overflow-wrap:anywhere}
+@media(max-width:1100px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:minmax(0,1fr)}}
+</style>
 </head>
 <body>
 
@@ -757,49 +772,31 @@ main { overflow-wrap:anywhere; }
       </div>
     </div>
   </div>
-</section><section class="pricing" id="pricing">
-  <div class="section-shell">
-    <span class="section-tag reveal">Модульное ценообразование</span>
-    <h2 class="section-title reveal reveal-delay-1">Начните с одного модуля. Расширяйтесь по мере роста отеля.</h2>
-    <p class="section-sub reveal reveal-delay-2">Выберите модули NOVA для вашего отеля и добавляйте функции по мере необходимости.</p>
-    <div class="pricing-grid">
-      <article class="price-card reveal" id="single-card">
-        <div class="price-tier">AI Concierge Starter</div>
-        <div style="display:flex;gap:8px;margin-bottom:8px">
-          <span style="background:#f5a62322;color:#f5a623;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid #f5a62344">🔥 Ограничено</span>
-          <span style="background:#ffffff11;color:#8b949e;font-size:11px;padding:3px 10px;border-radius:999px">Минимум 12 месяцев</span>
-        </div>
-        <div style="font-size:16px;color:rgba(255,80,80,0.7);text-decoration:line-through;margin-bottom:4px;font-weight:600;">249 €</div>
-        <div class="price-amount">199 €</div>
-        <div class="price-period">/ месяц · или <strong style="color:#34c759;">1 990 €/год</strong> (2 месяца бесплатно)</div>
-        <p>Для бутиковых отелей, готовых к прямым бронированиям и снижению зависимости от Booking.com.</p>
-        <ul class="price-list">
-          <li>Круглосуточный помощник по бронированию в WhatsApp</li>
-          <li>Автоматические ответы на отзывы</li>
-          <li>Обработка запросов на прямое бронирование</li>
-          <li>Быстрая настройка — без технических знаний</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=starter" class="btn btn-secondary">Запросить демонстрацию →</a>
-      </article>
-      <article class="price-card featured reveal reveal-delay-1">
-        <div class="price-badge">Самый популярный</div>
-        <div class="price-tier">Пакет для гостевого опыта</div>
-        <div class="price-amount">349 €</div>
-        <div class="price-period">/ месяц · или <strong style="color:#34c759;">3 490 €/год</strong> (2 месяца бесплатно)</div>
-        <p>Объедините коммуникацию с гостями и ежедневные операции в одном модульном пакете.</p>
-
-        <ul class="price-list">
-          <li>Консьерж-бот в WhatsApp</li>
-          <li>Управление отзывами</li>
-          <li>Автоматизация электронной почты для гостей</li>
-          <li>Приоритетная поддержка при подключении</li>
-        </ul>
-        <a href="https://hotel.leolan.net/onboarding/?paket=pro" class="btn btn-primary">Запросить демонстрацию →</a>
-      </article>
-      
-    </div>
-  </div>
-</section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">Ваши гости приезжают со всего мира.</h2><p class="section-sub">Ваш сервис говорит на их языке.</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">Многоязычное общение с гостями по всему миру.</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="Повернуть глобус влево">←</button><button type="button" class="motion-button globe-right" aria-label="Повернуть глобус вправо">→</button><button type="button" class="motion-button globe-toggle" data-pause="Остановить движение" data-play="Включить движение" data-running="false" >Включить движение</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>Международное гостеприимство. Личный подход.</h3><p>NOVA поддерживает общение с гостями на нескольких языках. Знания об отеле остаются основой ответов, а команда подключается, когда нужна личная помощь.</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">Иллюстрация международного общения, а не карта клиентов или соединений в реальном времени.</p></div></div></div></section><section class="faq" id="faq">
+</section><section class="pricing" id="pricing" data-nova-pricing="v2">
+<div class="section-shell">
+<span class="section-tag reveal">NOVA для вашего отеля</span>
+<h2 class="section-title reveal">Одна платформа. Подходящий пакет для вашего отеля.</h2>
+<p class="section-sub reveal">Начните с планируемого пакета NOVA для вашего отеля. Количество номеров, интеграции и объём использования определяются в индивидуальном предложении.</p>
+<div class="pricing-grid"><article class="price-card reveal" id="single-card" data-nova-plan="core">
+<div class="price-tier">NOVA Core</div>
+<p>Для небольших отелей: объедините общение с гостями и ежедневные процессы.</p><div class="nova-scope">Планируемый состав пакета</div>
+<ul class="price-list"><li>База знаний отеля и общение с гостями</li><li>Обзор бронирований и гостей</li><li>Базовые задачи и доступ для команды</li></ul>
+<a href="#contact" class="btn btn-secondary">Запросить предложение →</a>
+</article><article class="price-card featured reveal" data-nova-plan="pro">
+<div class="price-badge">Наша рекомендация</div><div class="price-tier">NOVA Pro</div>
+<p>Для отелей, объединяющих гостевой опыт, команду и операционные процессы.</p><div class="nova-scope">Планируемый состав пакета</div>
+<ul class="price-list"><li>Планируемый состав NOVA Core</li><li>Гостевые сценарии, предложения и кампании</li><li>Расширенная координация задач и команды</li><li>Интеграция с PMS после проверки совместимости</li></ul>
+<a href="#contact" class="btn btn-primary">Запросить предложение →</a>
+</article><article class="price-card reveal" data-nova-plan="intelligence">
+<div class="price-tier">NOVA Intelligence</div>
+<p>Для расширенной автоматизации, отчётности и ценовых решений на основе данных.</p><div class="nova-scope">Планируемый состав пакета</div>
+<ul class="price-list"><li>Планируемый состав NOVA Pro</li><li>Расширенная автоматизация NOVA</li><li>Revenue Intelligence / Dynamic Pricing после подтверждения готовности</li><li>Расширенная отчётность и планирование интеграций</li></ul>
+<a href="#contact" class="btn btn-secondary">Запросить предложение →</a>
+</article></div>
+<div class="nova-revenue-box"><h3>Dynamic Pricing</h3><p>Опционально для Core и Pro. Предусмотрено в составе Intelligence. Источники данных, интеграции и доступность проверяются до активации. Коммерческие условия указываются в индивидуальном предложении.</p></div>
+<p class="nova-pricing-note">До оформления заказа мы подтверждаем фактически доступные функции и дату запуска для вашего отеля. Функции в разработке не становятся автоматически доступными или частью уже работающего пакета.</p>
+<p class="nova-pricing-note">Ориентировочные цены в EUR для бизнес-клиентов. Количество номеров, лимиты использования, платежи сторонним поставщикам, налоги, срок договора и работы по интеграции указываются в индивидуальном предложении. Для крупных отелей и гостиничных групп — индивидуальные условия.</p>
+</div></section><section class="nova-world-section" id="nova-world" aria-labelledby="world-title"><div class="section-shell"><div class="section-heading"><span class="section-tag">HOSPITALITY, CONNECTED.</span><h2 class="section-title" id="world-title">Ваши гости приезжают со всего мира.</h2><p class="section-sub">Ваш сервис говорит на их языке.</p></div><div class="world-layout"><div class="motion-stage globe-stage"><canvas class="globe-canvas" aria-hidden="true"></canvas><p class="world-fallback">Многоязычное общение с гостями по всему миру.</p><div class="motion-toolbar"><span>NOVA · WORLD</span><div class="globe-controls"><button type="button" class="motion-button globe-left" aria-label="Повернуть глобус влево">←</button><button type="button" class="motion-button globe-right" aria-label="Повернуть глобус вправо">→</button><button type="button" class="motion-button globe-toggle" data-pause="Остановить движение" data-play="Включить движение" data-running="false" >Включить движение</button></div></div><div class="globe-languages" aria-hidden="true"><span>DE</span><span>EN</span><span>TR</span><span>RU</span><span>ID</span><span>TH</span></div></div><div class="world-copy"><h3>Международное гостеприимство. Личный подход.</h3><p>NOVA поддерживает общение с гостями на нескольких языках. Знания об отеле остаются основой ответов, а команда подключается, когда нужна личная помощь.</p><div class="world-language-list"><span>Deutsch</span><span>English</span><span>Türkçe</span><span>Русский</span><span>Bahasa Indonesia</span><span>ภาษาไทย</span></div><p class="world-disclaimer">Иллюстрация международного общения, а не карта клиентов или соединений в реальном времени.</p></div></div></div></section><section class="faq" id="faq">
   <div class="section-shell" style="text-align:center;">
     <span class="section-tag reveal">Часто задаваемые вопросы</span>
     <h2 class="section-title reveal reveal-delay-1">Ответы для владельцев и управляющих отелями.</h2>
@@ -929,8 +926,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
     var msg=document.createElement('div');
     msg.className='chatbot-message '+sender;
     var lc=text.toLowerCase();
-    var hasPaket=sender==='bot'&&(lc.includes('пакет')||lc.includes('suite')||lc.includes('модул')||lc.includes('starter')||lc.includes('pro')||lc.includes('бронирован')||lc.includes('booking')||lc.includes('199')||lc.includes('349')||lc.includes('onboarding'));
-    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="https://hotel.leolan.net/onboarding/?paket=starter" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Пакеты</a></div>':'';
+    var hasPaket=sender==='bot'&&(lc.includes('пакет')||lc.includes('модул')||lc.includes('pro')||lc.includes('бронирован')||lc.includes('booking')||lc.includes('onboarding'));
+    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/ru/#pricing" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 Пакеты</a></div>':'';
     msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;

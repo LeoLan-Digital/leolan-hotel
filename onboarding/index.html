@@ -2024,5 +2024,147 @@
 </script>
 <!-- NOVA_PACKAGE_SUBMIT_AUTHORITY_V1_END -->
 
+
+<!-- NOVA_INTELLIGENCE_DYNAMIC_LOCK_V1_START -->
+<script>
+(() => {
+  'use strict';
+
+  const checkbox =
+    document.getElementById(
+      'dynamic-pricing'
+    );
+
+  if (!checkbox) {
+    return;
+  }
+
+  const description =
+    checkbox.closest('label')
+      ?.querySelector('span');
+
+  function currentPlan() {
+    return (
+      document.querySelector(
+        '[data-package][aria-pressed="true"]'
+      )?.dataset.package
+      || 'pro'
+    );
+  }
+
+  function syncDynamicPricingLock() {
+    const intelligence =
+      currentPlan() === 'intelligence';
+
+    if (intelligence) {
+
+      if (
+        checkbox.dataset.intelligenceLocked
+        !== 'true'
+      ) {
+        checkbox.dataset.previousChecked =
+          checkbox.checked
+            ? 'true'
+            : 'false';
+      }
+
+      checkbox.dataset.intelligenceLocked =
+        'true';
+
+      checkbox.checked = true;
+      checkbox.disabled = true;
+
+      if (description) {
+        description.innerHTML =
+          '<strong>Dynamic Pricing inklusive</strong><br>'
+          + 'In NOVA Intelligence automatisch aktiviert.';
+      }
+
+    } else {
+
+      if (
+        checkbox.dataset.intelligenceLocked
+        === 'true'
+      ) {
+        checkbox.checked =
+          checkbox.dataset.previousChecked
+          === 'true';
+      }
+
+      checkbox.disabled = false;
+
+      delete checkbox.dataset.intelligenceLocked;
+      delete checkbox.dataset.previousChecked;
+
+      if (description) {
+        description.innerHTML =
+          '<strong>Dynamic Pricing hinzufügen</strong><br>'
+          + 'Optional für NOVA Core und NOVA Pro.';
+      }
+    }
+
+    // Alle vorhandenen Preis-/Summenskripte neu rechnen lassen
+    checkbox.dispatchEvent(
+      new Event(
+        'change',
+        {
+          bubbles: true
+        }
+      )
+    );
+  }
+
+  document.addEventListener(
+    'click',
+    event => {
+      if (
+        event.target?.closest?.(
+          '[data-package]'
+        )
+      ) {
+        setTimeout(
+          syncDynamicPricingLock,
+          0
+        );
+      }
+    }
+  );
+
+  const observer =
+    new MutationObserver(
+      syncDynamicPricingLock
+    );
+
+  document
+    .querySelectorAll(
+      '[data-package]'
+    )
+    .forEach(el => {
+      observer.observe(
+        el,
+        {
+          attributes: true,
+          attributeFilter: [
+            'aria-pressed'
+          ]
+        }
+      );
+    });
+
+  window.addEventListener(
+    'pageshow',
+    syncDynamicPricingLock
+  );
+
+  window.addEventListener(
+    'load',
+    syncDynamicPricingLock
+  );
+
+  syncDynamicPricingLock();
+})();
+</script>
+<!-- NOVA_INTELLIGENCE_DYNAMIC_LOCK_V1_END -->
+
 </body>
 </html>

@@ -382,7 +382,8 @@
     Anschließend werden Sie zum sicheren Stripe Checkout weitergeleitet.
   </p>
 
-  <form id="offer-form"
+  <!-- NOVA_FORM_FIELDS_V4 -->
+<form id="offer-form"
         action="https://app.leolan.net/api/integrations/stripe/checkout/redirect"
         method="post"
         accept-charset="UTF-8">
@@ -403,12 +404,10 @@
 
     <input type="hidden"
            id="checkout-email"
-           name="email"
            value="">
 
     <input type="hidden"
            id="checkout-company"
-           name="hotel"
            value="">
 
     <input type="hidden"
@@ -613,8 +612,7 @@
             E-Mail *
           </label>
 
-          <input id="email"
-                 name="email"
+          <input id="email" name="email"
                  type="email"
                  autocomplete="email"
                  required>
@@ -626,8 +624,7 @@
             Hotelname *
           </label>
 
-          <input id="hotel"
-                 name="hotel"
+          <input id="hotel" name="hotel"
                  autocomplete="organization"
                  required>
         </div>

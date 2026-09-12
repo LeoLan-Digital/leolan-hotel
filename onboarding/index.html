@@ -387,15 +387,17 @@
         action="https://app.leolan.net/api/integrations/stripe/checkout/redirect"
         method="post"
         accept-charset="UTF-8">
+    <input type="hidden"
+           id="selected-package-input"
+           name="selectedPackage"
+           value="pro">
+
 
     <input type="hidden"
            name="pricingVersion"
            value="NOVA_2026_09_V2">
 
-    <input type="hidden"
-           id="checkout-package"
-           name="selectedPackage"
-           value="pro">
+
 
     <input type="hidden"
            id="checkout-dynamic"
@@ -1913,6 +1915,114 @@
 })();
 </script>
 <!-- NOVA_TOTAL_SOURCE_OF_TRUTH_V3_END -->
+
+
+<!-- NOVA_PACKAGE_SUBMIT_AUTHORITY_V1_START -->
+<script>
+(() => {
+  'use strict';
+
+  const form =
+    document.getElementById(
+      'offer-form'
+    );
+
+  if (!form) {
+    return;
+  }
+
+  function selectedPlanFromUI() {
+    const active =
+      document.querySelector(
+        '[data-package][aria-pressed="true"]'
+      );
+
+    const plan =
+      active?.dataset.package;
+
+    if (
+      plan === 'core'
+      || plan === 'pro'
+      || plan === 'intelligence'
+    ) {
+      return plan;
+    }
+
+    return null;
+  }
+
+  function syncSelectedPackage() {
+    const input =
+      document.getElementById(
+        'selected-package-input'
+      );
+
+    const plan =
+      selectedPlanFromUI();
+
+    if (!input || !plan) {
+      return false;
+    }
+
+    input.value = plan;
+
+    return true;
+  }
+
+  document.addEventListener(
+    'click',
+    event => {
+      if (
+        event.target?.closest?.(
+          '[data-package]'
+        )
+      ) {
+        setTimeout(
+          syncSelectedPackage,
+          0
+        );
+      }
+    }
+  );
+
+  form.addEventListener(
+    'submit',
+    event => {
+      const ok =
+        syncSelectedPackage();
+
+      if (!ok) {
+        event.preventDefault();
+
+        alert(
+          'Bitte wählen Sie ein NOVA-Paket aus.'
+        );
+
+        return;
+      }
+
+      const plan =
+        document.getElementById(
+          'selected-package-input'
+        )?.value;
+
+      console.log(
+        'NOVA_CHECKOUT_SELECTED_PACKAGE',
+        plan
+      );
+    },
+    true
+  );
+
+  window.addEventListener(
+    'pageshow',
+    syncSelectedPackage
+  );
+
+  syncSelectedPackage();
+})();
+</script>
+<!-- NOVA_PACKAGE_SUBMIT_AUTHORITY_V1_END -->
 
 </body>
 </html>

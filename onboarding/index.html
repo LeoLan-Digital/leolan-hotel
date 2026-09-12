@@ -680,7 +680,13 @@
 
       </div>
 
-      <button class="nova-submit"
+            <div class="nova-checkout-price-summary"
+           id="checkout-final-total"
+           aria-live="polite"
+           style="margin-top:24px;margin-bottom:18px;">
+      </div>
+
+<button class="nova-submit"
               type="submit"
               id="submit-button">
         Jetzt sicher buchen →
@@ -1467,6 +1473,82 @@
       + '<br><small>'
       + 'Keine Umsatzsteuer gemäß § 19 UStG.'
       + '</small>';
+
+
+    const finalBox =
+      document.getElementById(
+        'checkout-final-total'
+      );
+
+    if (finalBox) {
+
+      let dynamicLine = '';
+
+      if (intelligence) {
+        dynamicLine =
+          '<div>Dynamic Pricing: '
+          + '<strong>inklusive</strong></div>';
+      }
+      else if (dynamicSelected) {
+        dynamicLine =
+          '<div>Dynamic Pricing: <strong>'
+          + formatEuro(dynamicAmount)
+          + ' / '
+          + period
+          + '</strong></div>';
+      }
+      else {
+        dynamicLine =
+          '<div>Dynamic Pricing: '
+          + '<strong>nicht gewählt</strong></div>';
+      }
+
+      finalBox.innerHTML =
+        '<div style="font-size:13px;'
+        + 'text-transform:uppercase;'
+        + 'letter-spacing:.08em;'
+        + 'color:#9facbf;'
+        + 'margin-bottom:10px;">'
+        + 'Ihre Buchung'
+        + '</div>'
+
+        + '<div>'
+        + rates[plan].name
+        + ': <strong>'
+        + formatEuro(base)
+        + ' / '
+        + period
+        + '</strong></div>'
+
+        + dynamicLine
+
+        + '<div>'
+        + 'Einrichtung: <strong>'
+        + formatEuro(rates[plan].setup)
+        + '</strong></div>'
+
+        + '<hr style="border:0;'
+        + 'border-top:1px solid rgba(143,164,255,.25);'
+        + 'margin:14px 0;">'
+
+        + '<div style="font-size:18px;">'
+        + 'Gesamt heute: <strong>'
+        + formatEuro(initial)
+        + '</strong></div>'
+
+        + '<div style="margin-top:6px;">'
+        + 'Danach: <strong>'
+        + formatEuro(recurring)
+        + ' / '
+        + period
+        + '</strong></div>'
+
+        + '<div style="margin-top:8px;'
+        + 'font-size:12px;'
+        + 'color:#9facbf;">'
+        + 'Keine Umsatzsteuer gemäß § 19 UStG.'
+        + '</div>';
+    }
   }
 
 

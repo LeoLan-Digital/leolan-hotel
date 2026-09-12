@@ -345,12 +345,42 @@
 
   <p class="nova-intro"
      id="intro">
-    Wählen Sie den passenden NOVA-Umfang.
-    Die konkrete Konfiguration und die Konditionen
-    stimmen wir individuell auf Ihr Hotel ab.
+    Wählen Sie Ihr NOVA-Paket.
+    Anschließend werden Sie zum sicheren Stripe Checkout weitergeleitet.
   </p>
 
-  <form id="offer-form">
+  <form id="offer-form"
+        action="https://app.leolan.net/api/integrations/stripe/checkout/redirect"
+        method="post"
+        accept-charset="UTF-8">
+
+    <input type="hidden"
+           name="pricingVersion"
+           value="NOVA_2026_09_V2">
+
+    <input type="hidden"
+           id="checkout-package"
+           name="selectedPackage"
+           value="pro">
+
+    <input type="hidden"
+           id="checkout-dynamic"
+           name="dynamicPricing"
+           value="false">
+
+    <input type="hidden"
+           id="checkout-email"
+           name="customerEmail"
+           value="">
+
+    <input type="hidden"
+           id="checkout-company"
+           name="companyName"
+           value="">
+
+    <input type="hidden"
+           name="country"
+           value="DE">
 
     <section class="nova-card">
       <h2 id="package-title">
@@ -433,22 +463,59 @@
 
     <section class="nova-card">
       <h2>
+        Abrechnung
+      </h2>
+
+      <p class="nova-card-copy">
+        Wählen Sie monatliche oder jährliche Abrechnung.
+      </p>
+
+      <div class="nova-options">
+        <label class="nova-option">
+          <input type="radio"
+                 name="billingCycle"
+                 value="monthly"
+                 checked>
+
+          <span>
+            <strong>Monatlich</strong>
+            Flexible monatliche Abrechnung.
+          </span>
+        </label>
+
+        <label class="nova-option">
+          <input type="radio"
+                 name="billingCycle"
+                 value="annual">
+
+          <span>
+            <strong>Jährlich</strong>
+            Jährliche Vorauszahlung zum ausgewiesenen Jahrespreis.
+          </span>
+        </label>
+      </div>
+    </section>
+
+    <section class="nova-card">
+      <h2>
         Dynamic Pricing
       </h2>
 
       <label class="nova-option">
 
         <input type="checkbox"
-               id="dynamic-pricing">
+               id="dynamic-pricing"
+               name="dynamicPricing"
+               value="true">
 
         <span>
           <strong id="dp-title">
-            Interesse an Dynamic Pricing
+            Dynamic Pricing hinzufügen
           </strong>
 
           <span id="dp-copy">
-            Dynamic Pricing soll bei der individuellen
-            NOVA-Konfiguration berücksichtigt werden.
+            Für Core und Pro optional.
+            In NOVA Intelligence bereits enthalten.
           </span>
         </span>
 
@@ -558,13 +625,13 @@
       <button class="nova-submit"
               type="submit"
               id="submit-button">
-        Individuelles Angebot anfragen →
+        Jetzt sicher buchen →
       </button>
 
       <p class="nova-note"
          id="note">
-        Keine Online-Zahlung auf dieser Seite.
-        Ihre Anfrage öffnet Ihr E-Mail-Programm.
+        Sie werden zum sicheren Stripe Checkout weitergeleitet.
+        Keine Umsatzsteuer gemäß § 19 UStG.
       </p>
 
     </section>
@@ -612,7 +679,7 @@
       back: '← Zurück',
       title: 'NOVA für Ihr Hotel.',
       intro:
-        'Wählen Sie den passenden NOVA-Umfang. '
+        'Wählen Sie Ihr NOVA-Paket. '
         + 'Die konkrete Konfiguration und die Konditionen '
         + 'stimmen wir individuell auf Ihr Hotel ab.',
       packageTitle:
@@ -633,7 +700,7 @@
       selected:
         'Ausgewählt:',
       dpTitle:
-        'Interesse an Dynamic Pricing',
+        'Dynamic Pricing hinzufügen',
       dpCopy:
         'Dynamic Pricing soll bei der individuellen '
         + 'NOVA-Konfiguration berücksichtigt werden.',
@@ -657,10 +724,10 @@
       message:
         'Was möchten Sie mit NOVA lösen?',
       submit:
-        'Individuelles Angebot anfragen →',
+        'Sicher zu Stripe Checkout →',
       note:
-        'Keine Online-Zahlung auf dieser Seite. '
-        + 'Ihre Anfrage öffnet Ihr E-Mail-Programm.',
+        'Sie werden sicher zu Stripe Checkout weitergeleitet. '
+        + 'Es wird keine Umsatzsteuer berechnet (§ 19 UStG).',
       subject:
         'NOVA Anfrage',
       yes:
@@ -1174,80 +1241,27 @@
     )
     .addEventListener(
       'submit',
-      event => {
-        event.preventDefault();
+      () => {
+        const packageInput =
+          document.getElementById(
+            'selected-package-input'
+          );
 
-        const value =
-          id =>
-            document
-              .getElementById(id)
-              ?.value
-              ?.trim()
-            || '';
+        if (packageInput) {
+          packageInput.value =
+            selectedPackage;
+        }
 
-        const dynamicPricing =
-          document
-            .getElementById(
-              'dynamic-pricing'
-            )
-            .checked;
+        const button =
+          document.getElementById(
+            'submit-button'
+          );
 
-        const packageNames = {
-          core:
-            'NOVA Core',
-          pro:
-            'NOVA Pro',
-          intelligence:
-            'NOVA Intelligence'
-        };
-
-        const subject =
-          t.subject
-          + ' · '
-          + value('hotel');
-
-        const body = [
-          'NOVA',
-          '',
-          'Package: '
-            + packageNames[
-                selectedPackage
-              ],
-          'Dynamic Pricing: '
-            + (
-              dynamicPricing
-                ? t.yes
-                : t.no
-            ),
-          '',
-          'Name: '
-            + value('name'),
-          'Email: '
-            + value('email'),
-          'Hotel: '
-            + value('hotel'),
-          'Rooms: '
-            + value('rooms'),
-          'Website: '
-            + value('website'),
-          'Phone / WhatsApp: '
-            + value('phone'),
-          '',
-          'Message:',
-          value('message')
-        ].join('\n');
-
-        window.location.href =
-          'mailto:'
-          + CONTACT_EMAIL
-          + '?subject='
-          + encodeURIComponent(
-              subject
-            )
-          + '&body='
-          + encodeURIComponent(
-              body
-            );
+        if (button) {
+          button.disabled = true;
+          button.textContent =
+            'Stripe Checkout wird geöffnet …';
+        }
       }
     );
 

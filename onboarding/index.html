@@ -1454,7 +1454,11 @@
     }
     else if (dynamicSelected) {
       dynamicText =
-        '<br>✓ Dynamic Pricing enthalten';
+        '<br>+ Dynamic Pricing: <strong>'
+        + formatEuro(dynamicAmount)
+        + ' / '
+        + period
+        + '</strong>';
     }
 
     box.innerHTML =

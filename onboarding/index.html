@@ -1420,7 +1420,9 @@
 
     const dynamicSelected =
       !intelligence
-      && Boolean(dynamic?.checked);
+      && document.querySelector(
+        '#dynamic-pricing:checked'
+      ) !== null;
 
     const base =
       rates[plan][cycle];
@@ -1592,6 +1594,44 @@
       renderPrice
     );
 
+
+
+
+  // NOVA_DYNAMIC_SYNC_V2
+  const syncCheckoutPrice = () => {
+    renderPrice();
+  };
+
+  document
+    .getElementById('offer-form')
+    ?.addEventListener(
+      'input',
+      syncCheckoutPrice
+    );
+
+  document
+    .getElementById('offer-form')
+    ?.addEventListener(
+      'change',
+      syncCheckoutPrice
+    );
+
+  window.addEventListener(
+    'pageshow',
+    () => {
+      renderPrice();
+
+      setTimeout(
+        renderPrice,
+        100
+      );
+
+      setTimeout(
+        renderPrice,
+        500
+      );
+    }
+  );
 
   renderPrice();
 

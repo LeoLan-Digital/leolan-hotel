@@ -314,7 +314,40 @@
         font-size: clamp(42px, 14vw, 62px);
       }
     }
-  </style>
+
+    .nova-package-price{
+      display:block;
+      margin-top:10px;
+      color:#ffffff;
+      font-size:15px;
+      font-weight:800;
+      line-height:1.5;
+    }
+
+    .nova-package-price small{
+      display:block;
+      margin-top:3px;
+      color:#9facbf;
+      font-size:12px;
+      font-weight:500;
+    }
+
+    .nova-checkout-price-summary{
+      margin-top:18px;
+      padding:18px 20px;
+      border:1px solid rgba(143,164,255,.35);
+      border-radius:14px;
+      background:#101e3a;
+      color:#ffffff;
+      font-size:15px;
+      line-height:1.6;
+    }
+
+    .nova-checkout-price-summary strong{
+      font-size:19px;
+    }
+
+</style>
 </head>
 
 <body>
@@ -403,6 +436,10 @@
           <span class="nova-package-name">
             NOVA Core
           </span>
+          <span class="nova-package-price"
+                data-price-name="NOVA Core">
+            449 € / Monat · 4.850 € / Jahr<small>+ 990 € einmalige Einrichtung</small>
+          </span>
 
           <span class="nova-package-desc"
                 id="core-desc">
@@ -425,6 +462,10 @@
           <span class="nova-package-name">
             NOVA Pro
           </span>
+          <span class="nova-package-price"
+                data-price-name="NOVA Pro">
+            749 € / Monat · 8.090 € / Jahr<small>+ 1.990 € einmalige Einrichtung</small>
+          </span>
 
           <span class="nova-package-desc"
                 id="pro-desc">
@@ -442,6 +483,10 @@
           <span class="nova-package-name">
             NOVA Intelligence
           </span>
+          <span class="nova-package-price"
+                data-price-name="NOVA Intelligence">
+            1.090 € / Monat · 11.770 € / Jahr<small>+ 2.990 € Einrichtung · Dynamic Pricing inklusive</small>
+          </span>
 
           <span class="nova-package-desc"
                 id="intelligence-desc">
@@ -457,6 +502,11 @@
          id="selected-package"
          aria-live="polite">
       </p>
+
+      <div class="nova-checkout-price-summary"
+           id="checkout-price-summary"
+           aria-live="polite">
+      </div>
 
     </section>
 
@@ -500,6 +550,14 @@
       <h2>
         Dynamic Pricing
       </h2>
+
+      <p class="nova-card-copy"
+         id="dynamic-pricing-price">
+        <strong style="color:#fff">
+          249 € / Monat oder 2.690 € / Jahr
+        </strong><br>
+        Bei NOVA Intelligence bereits inklusive.
+      </p>
 
       <label class="nova-option">
 
@@ -1264,6 +1322,192 @@
         }
       }
     );
+
+})();
+</script>
+
+
+<script>
+(() => {
+  'use strict';
+
+  // NOVA_PRICE_UI_V1
+
+  const rates = {
+    core: {
+      monthly: 449,
+      annual: 4850,
+      setup: 990,
+      name: 'NOVA Core'
+    },
+
+    pro: {
+      monthly: 749,
+      annual: 8090,
+      setup: 1990,
+      name: 'NOVA Pro'
+    },
+
+    intelligence: {
+      monthly: 1090,
+      annual: 11770,
+      setup: 2990,
+      name: 'NOVA Intelligence'
+    }
+  };
+
+  const formatEuro = value =>
+    new Intl.NumberFormat(
+      'de-DE',
+      {
+        style: 'currency',
+        currency: 'EUR',
+        maximumFractionDigits: 0
+      }
+    ).format(value);
+
+
+  function currentPackage() {
+    return (
+      document.querySelector(
+        '[data-package][aria-pressed="true"]'
+      )?.dataset.package
+      || 'pro'
+    );
+  }
+
+
+  function currentCycle() {
+    return (
+      document.querySelector(
+        'input[name="billingCycle"]:checked'
+      )?.value
+      || 'monthly'
+    );
+  }
+
+
+  function renderPrice() {
+
+    const box =
+      document.getElementById(
+        'checkout-price-summary'
+      );
+
+    if (!box) {
+      return;
+    }
+
+    const plan =
+      currentPackage();
+
+    const cycle =
+      currentCycle();
+
+    const dynamic =
+      document.getElementById(
+        'dynamic-pricing'
+      );
+
+    const intelligence =
+      plan === 'intelligence';
+
+    const dynamicSelected =
+      !intelligence
+      && Boolean(dynamic?.checked);
+
+    const base =
+      rates[plan][cycle];
+
+    const addon =
+      dynamicSelected
+        ? (
+            cycle === 'annual'
+              ? 2690
+              : 249
+          )
+        : 0;
+
+    const recurring =
+      base + addon;
+
+    const initial =
+      recurring
+      + rates[plan].setup;
+
+    const period =
+      cycle === 'annual'
+        ? 'Jahr'
+        : 'Monat';
+
+    let dynamicText = '';
+
+    if (intelligence) {
+      dynamicText =
+        '<br>✓ Dynamic Pricing inklusive';
+    }
+    else if (dynamicSelected) {
+      dynamicText =
+        '<br>✓ Dynamic Pricing enthalten';
+    }
+
+    box.innerHTML =
+      '<strong>'
+      + rates[plan].name
+      + '</strong><br>'
+      + 'Heute bei Buchung: <strong>'
+      + formatEuro(initial)
+      + '</strong><br>'
+      + 'Danach: <strong>'
+      + formatEuro(recurring)
+      + ' / '
+      + period
+      + '</strong>'
+      + dynamicText
+      + '<br><small>'
+      + 'Keine Umsatzsteuer gemäß § 19 UStG.'
+      + '</small>';
+  }
+
+
+  document
+    .querySelectorAll(
+      '[data-package]'
+    )
+    .forEach(button => {
+      button.addEventListener(
+        'click',
+        () => setTimeout(
+          renderPrice,
+          0
+        )
+      );
+    });
+
+
+  document
+    .querySelectorAll(
+      'input[name="billingCycle"]'
+    )
+    .forEach(input => {
+      input.addEventListener(
+        'change',
+        renderPrice
+      );
+    });
+
+
+  document
+    .getElementById(
+      'dynamic-pricing'
+    )
+    ?.addEventListener(
+      'change',
+      renderPrice
+    );
+
+
+  renderPrice();
 
 })();
 </script>

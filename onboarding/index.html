@@ -1638,5 +1638,284 @@
 })();
 </script>
 
+
+<!-- NOVA_TOTAL_SOURCE_OF_TRUTH_V3_START -->
+<script>
+(() => {
+  'use strict';
+
+  const RATES = {
+    core: {
+      name: 'NOVA Core',
+      monthly: 449,
+      annual: 4850,
+      setup: 990
+    },
+    pro: {
+      name: 'NOVA Pro',
+      monthly: 749,
+      annual: 8090,
+      setup: 1990
+    },
+    intelligence: {
+      name: 'NOVA Intelligence',
+      monthly: 1090,
+      annual: 11770,
+      setup: 2990
+    }
+  };
+
+  const euro = value =>
+    new Intl.NumberFormat(
+      'de-DE',
+      {
+        style: 'currency',
+        currency: 'EUR',
+        maximumFractionDigits: 0
+      }
+    ).format(value);
+
+  function getState() {
+    const active =
+      document.querySelector(
+        '[data-package][aria-pressed="true"]'
+      );
+
+    const plan =
+      active?.dataset.package || 'pro';
+
+    const cycle =
+      document.querySelector(
+        'input[name="billingCycle"]:checked'
+      )?.value || 'monthly';
+
+    const dp =
+      document.getElementById(
+        'dynamic-pricing'
+      );
+
+    const dynamicChecked =
+      dp?.checked === true;
+
+    const dynamicIncluded =
+      plan === 'intelligence';
+
+    const dynamicAmount =
+      dynamicIncluded
+        ? 0
+        : dynamicChecked
+          ? (
+              cycle === 'annual'
+                ? 2690
+                : 249
+            )
+          : 0;
+
+    const base =
+      RATES[plan][cycle];
+
+    const recurring =
+      base + dynamicAmount;
+
+    const initial =
+      recurring + RATES[plan].setup;
+
+    return {
+      plan,
+      cycle,
+      dynamicChecked,
+      dynamicIncluded,
+      dynamicAmount,
+      base,
+      recurring,
+      initial
+    };
+  }
+
+  function render() {
+    const s = getState();
+
+    const period =
+      s.cycle === 'annual'
+        ? 'Jahr'
+        : 'Monat';
+
+    let dynamicLine;
+
+    if (s.dynamicIncluded) {
+      dynamicLine =
+        'Dynamic Pricing: <strong>inklusive</strong>';
+    }
+    else if (s.dynamicChecked) {
+      dynamicLine =
+        'Dynamic Pricing: <strong>'
+        + euro(s.dynamicAmount)
+        + ' / '
+        + period
+        + '</strong>';
+    }
+    else {
+      dynamicLine =
+        'Dynamic Pricing: <strong>nicht gewählt</strong>';
+    }
+
+    const upper =
+      document.getElementById(
+        'checkout-price-summary'
+      );
+
+    if (upper) {
+      upper.innerHTML =
+        '<strong>'
+        + RATES[s.plan].name
+        + '</strong><br>'
+        + 'Heute bei Buchung: <strong>'
+        + euro(s.initial)
+        + '</strong><br>'
+        + 'Danach: <strong>'
+        + euro(s.recurring)
+        + ' / '
+        + period
+        + '</strong><br>'
+        + dynamicLine
+        + '<br><small>'
+        + 'Keine Umsatzsteuer gemäß § 19 UStG.'
+        + '</small>';
+    }
+
+    const finalBox =
+      document.getElementById(
+        'checkout-final-total'
+      );
+
+    if (finalBox) {
+      finalBox.innerHTML =
+        '<div style="font-size:12px;'
+        + 'letter-spacing:.08em;'
+        + 'color:#9facbf;'
+        + 'margin-bottom:10px;">'
+        + 'IHRE BUCHUNG'
+        + '</div>'
+
+        + '<div>'
+        + RATES[s.plan].name
+        + ': <strong>'
+        + euro(s.base)
+        + ' / '
+        + period
+        + '</strong></div>'
+
+        + '<div>'
+        + dynamicLine
+        + '</div>'
+
+        + '<div>'
+        + 'Einrichtung: <strong>'
+        + euro(RATES[s.plan].setup)
+        + '</strong></div>'
+
+        + '<hr style="border:0;'
+        + 'border-top:1px solid rgba(143,164,255,.25);'
+        + 'margin:14px 0;">'
+
+        + '<div style="font-size:18px;">'
+        + 'Gesamt heute: <strong>'
+        + euro(s.initial)
+        + '</strong></div>'
+
+        + '<div style="margin-top:6px;">'
+        + 'Danach: <strong>'
+        + euro(s.recurring)
+        + ' / '
+        + period
+        + '</strong></div>'
+
+        + '<div style="margin-top:8px;'
+        + 'font-size:12px;'
+        + 'color:#9facbf;">'
+        + 'Keine Umsatzsteuer gemäß § 19 UStG.'
+        + '</div>';
+    }
+  }
+
+  function sync() {
+    render();
+
+    setTimeout(render, 0);
+    setTimeout(render, 100);
+    setTimeout(render, 600);
+  }
+
+  document.addEventListener(
+    'change',
+    event => {
+      if (
+        event.target?.id === 'dynamic-pricing'
+        ||
+        event.target?.name === 'billingCycle'
+      ) {
+        sync();
+      }
+    }
+  );
+
+  document.addEventListener(
+    'input',
+    event => {
+      if (
+        event.target?.id === 'dynamic-pricing'
+      ) {
+        sync();
+      }
+    }
+  );
+
+  document.addEventListener(
+    'click',
+    event => {
+      if (
+        event.target?.closest?.(
+          '[data-package]'
+        )
+      ) {
+        sync();
+      }
+    }
+  );
+
+  const observer =
+    new MutationObserver(sync);
+
+  document
+    .querySelectorAll(
+      '[data-package]'
+    )
+    .forEach(el => {
+      observer.observe(
+        el,
+        {
+          attributes: true,
+          attributeFilter: [
+            'aria-pressed'
+          ]
+        }
+      );
+    });
+
+  window.addEventListener(
+    'pageshow',
+    sync
+  );
+
+  window.addEventListener(
+    'load',
+    sync
+  );
+
+  sync();
+})();
+</script>
+<!-- NOVA_TOTAL_SOURCE_OF_TRUTH_V3_END -->
+
 </body>
 </html>

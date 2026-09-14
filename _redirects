@@ -7,4 +7,4 @@ http://hotel.leolan.net/* https://hotel.leolan.net/:splat 301!
 /ueber-uns.html /ueber-uns/ 301!
 /index.html / 301!
 
-# The root document is the x-default language router. Language URLs remain stable.
+# The root document is the English canonical and x-default URL. Language URLs remain stable.

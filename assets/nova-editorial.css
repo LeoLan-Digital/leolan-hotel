@@ -57,3 +57,12 @@ footer{border:0;background:var(--bg);padding:35px 32px 32px}.footer-inner{max-wi
 @media(min-width:481px) and (max-width:1000px){.feature-card:last-child:nth-child(odd){grid-column:span 2}}
 html[lang=th] .nova-hero h1{font-family:Tahoma,"Leelawadee UI",sans-serif;font-size:clamp(45px,6.5vw,90px);line-height:1.35}html[lang=th] .nova-hero h1 em{font-style:normal}html[lang=ru] .nova-hero h1{font-size:clamp(53px,7.5vw,106px)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-backdrop{animation:none}.motion-ready .reveal{opacity:1;transform:none;transition:none}.btn,.product-card{transition:none}.btn:hover,.product-card:hover{transform:none}}
+
+/* STEP224-D2-G6-STACKED-PRICE-PREFIX */
+html body #pricing[data-nova-pricing="v2"] .price-amount:has(.nova-price-prefix){display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:.12rem!important;font-size:clamp(1.65rem,2.6vw,2.25rem)!important;line-height:1.05!important;white-space:nowrap!important}
+html body #pricing[data-nova-pricing="v2"] .price-amount:has(.nova-price-prefix) .nova-price-prefix{display:block!important;font-size:1.2rem!important;font-weight:700!important;letter-spacing:.01em!important;margin:0 0 .08rem 0!important;line-height:1.1!important;vertical-align:baseline!important;white-space:nowrap!important;text-decoration:none!important;text-shadow:none!important;flex:none!important}
+
+/* STEP224-D2-G8-FEATURED-BADGE-TOP-RIGHT */
+html body #pricing[data-nova-pricing="v2"] .price-card.featured{position:relative!important}
+html body #pricing[data-nova-pricing="v2"] .price-card.featured .price-badge{position:absolute!important;top:18px!important;right:18px!important;margin:0!important;z-index:3!important;max-width:46%!important;text-align:right!important;white-space:normal!important;line-height:1.15!important}
+html body #pricing[data-nova-pricing="v2"] .price-card.featured .price-tier{padding-right:46%!important}

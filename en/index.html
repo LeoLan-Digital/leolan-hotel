@@ -652,7 +652,7 @@ main { overflow-wrap:anywhere; }
 @media(max-width:1100px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:minmax(0,1fr)}}
 </style>
-<link rel="stylesheet" href="/assets/nova-site-footer.css?v=20260915"><link rel="stylesheet" href="/assets/nova-site-header.css?v=20260915"><script src="/assets/nova-site-header.js?v=20260915" defer></script></head>
+<link rel="stylesheet" href="/assets/nova-site-footer.css?v=20260915"><link rel="stylesheet" href="/assets/nova-site-header.css?v=20260915"><script src="/assets/nova-site-header.js?v=20260915" defer></script><link rel="stylesheet" href="/assets/nova-site-chat.css?v=20260915"><script src="/assets/nova-site-chat.js?v=20260915" defer></script></head>
 <body>
 
 
@@ -907,52 +907,28 @@ main { overflow-wrap:anywhere; }
     </div>
   </div>
 </footer>
-<button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Open demo chat" aria-haspopup="dialog">💬 Try the bot</button>
-<div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
-  <div class="chatbot-window" role="dialog" aria-modal="true" aria-label="NOVA Hotel Intelligence demo chat">
-    <div class="chatbot-header">
-      <div class="chatbot-title">
-        <div class="chatbot-avatar" style="padding:0;overflow:hidden"><img src="/leolan-logo-new.png" width="42" height="42" style="display:block;border-radius:50%;object-fit:cover" alt="LeoLan"></div>
-        <div>
-          <strong>NOVA Hotel Intelligence</strong>
-          <span>Hotel Guest Assistant Demo</span>
-        </div>
+<button class="nova-site-chat__toggle" id="novaSiteChatToggle" type="button" aria-label="Open demo chat" aria-haspopup="dialog" aria-controls="novaSiteChatDialog" aria-expanded="false" data-nova-site-chat-toggle><span aria-hidden="true">💬</span><span>Try the bot</span></button>
+<div class="nova-site-chat" id="novaSiteChat" data-nova-site-chat data-chat-version="2026-09-15" data-chat-lang="en" data-default-reply="I’m here to help! 🏨" data-error-reply="Let me connect you with our team. Please visit hotel.leolan.net/en/." data-typing-label="NOVA is typing…" data-package-label="View packages" data-package-href="/#pricing" hidden aria-hidden="true">
+  <section class="nova-site-chat__window" id="novaSiteChatDialog" role="dialog" aria-modal="true" aria-labelledby="novaSiteChatTitle" aria-describedby="novaSiteChatNotice" tabindex="-1">
+    <div class="nova-site-chat__header">
+      <div class="nova-site-chat__title">
+        <span class="nova-site-chat__avatar" aria-hidden="true">N</span>
+        <span class="nova-site-chat__title-copy"><strong id="novaSiteChatTitle">NOVA Hotel Intelligence</strong><small>Hotel Guest Assistant Demo</small></span>
       </div>
-      <button class="chatbot-close" id="chatbotClose" aria-label="Close">✕</button>
+      <button class="nova-site-chat__close" id="novaSiteChatClose" type="button" aria-label="Close chat"><span aria-hidden="true">✕</span></button>
     </div>
-    <div class="chatbot-messages" id="chatbotMessages"></div>
-    <div class="chatbot-input-wrap">
-      <p class="chatbot-data-notice" style="font-size:11px;line-height:1.4;color:rgba(255,255,255,.58);margin:0 4px 8px">Demo messages may currently be processed by documented external AI providers. Do not enter special-category personal data. <a href="/en/data-processing-ai/">Details</a>.</p>
-      <form class="chatbot-form" id="chatbotForm">
-        <input aria-label="Message…" type="text" id="chatbotInput" placeholder="Message…" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
-        <button type="submit" id="chatbotSend" aria-label="Send message"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="nova-site-chat__messages" id="novaSiteChatMessages" role="log" aria-live="polite" aria-relevant="additions text"></div>
+    <div class="nova-site-chat__composer">
+      <p class="nova-site-chat__notice" id="novaSiteChatNotice">Demo messages may currently be processed by documented external AI providers. Do not enter special-category personal data. <a href="/en/data-processing-ai/">Details</a>.</p>
+      <form class="nova-site-chat__form" id="novaSiteChatForm">
+        <label class="nova-site-chat__sr-only" for="novaSiteChatInput">Message…</label>
+        <input type="text" id="novaSiteChatInput" placeholder="Message…" autocomplete="off" inputmode="text" enterkeyhint="send" maxlength="2000">
+        <button type="submit" id="novaSiteChatSend" aria-label="Send message"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M22 2 11 13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m22 2-7 20-4-9-9-4 20-7Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </form>
     </div>
-  </div>
+  </section>
 </div>
 
-<style>
-  .chatbot-toggle{position:fixed;right:24px;bottom:24px;z-index:1200;background:rgba(23,33,43,0.9);color:#f5a623;border:2px solid #f5a623;border-radius:999px;padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.3);backdrop-filter:blur(10px)}
-  .chatbot-modal{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:flex-end;padding:4px 8px 4px 8px;background:rgba(0,0,0,.55);z-index:1199}
-  .chatbot-modal.open{display:flex}
-  .chatbot-window{width:min(390px,100%);height:min(520px,calc(100dvh - 60px));background:linear-gradient(180deg,#17212b 0%,#0d1117 100%);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 90px rgba(0,0,0,.55)}
-  .chatbot-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08)}
-  .chatbot-title{display:flex;align-items:center;gap:12px}
-  .chatbot-avatar{width:42px;height:42px;border-radius:50%;background:#f5a623;color:#0d1117;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
-  .chatbot-header strong{display:block;color:#fff;font-size:15px}
-  .chatbot-header span{display:block;color:rgba(255,255,255,.6);font-size:12px;margin-top:2px}
-  .chatbot-close{border:0;background:rgba(255,255,255,.1);color:#fff;width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer}
-  .chatbot-messages{flex:1;padding:12px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
-  .chatbot-message{max-width:80%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.5;word-break:break-word}
-  .chatbot-message.bot{align-self:flex-start;background:#1e2e4a;color:#e8edf3;border-bottom-left-radius:4px}
-  .chatbot-message.user{align-self:flex-end;background:#2695d3;color:#fff;border-bottom-right-radius:4px}
-  .chatbot-message small{display:block;font-size:11px;opacity:.6;margin-top:4px}
-  .chatbot-input-wrap{padding:8px 12px 12px;background:#17212b}
-  .chatbot-form{display:flex;align-items:center;gap:8px}
-  .chatbot-form input{flex:1;background:#2b3847;border:none;color:#fff;border-radius:22px;padding:10px 16px;font-size:16px;outline:none;height:44px}
-  .chatbot-form input::placeholder{color:rgba(255,255,255,.4)}
-  .chatbot-form button{background:#2695d3;color:#fff;border:none;border-radius:50%;width:44px;height:44px;min-width:44px;cursor:pointer;display:flex!important;align-items:center;justify-content:center}
-</style>
 
 
 <script>
@@ -981,76 +957,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
   status.style.display = 'block';
 });
 </script>
-<script>
-  var chatHistory=[];
-  var chatbotSeeded=false;
 
-  function chatbotTime(){return new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});}
-  function appendChatMessage(text,sender){
-    var msg=document.createElement('div');
-    msg.className='chatbot-message '+sender;
-    var lc=text.toLowerCase();
-    var hasPaket=sender==='bot'&&(lc.includes('module')||lc.includes('pro')||lc.includes('booking')||lc.includes('onboarding')||lc.includes('plan')||lc.includes('package'));
-    var btnHtml=hasPaket?'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a href="/en/#pricing" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f5a623;color:#000;font-weight:800;font-size:12px;padding:9px 14px;border-radius:10px;text-decoration:none;">📦 View Packages</a></div>':'';
-    msg.innerHTML=text+btnHtml+'<small>'+chatbotTime()+'</small>';
-    document.getElementById('chatbotMessages').appendChild(msg);
-    document.getElementById('chatbotMessages').scrollTop=99999;
-  }
-
-  // Detect page language from URL
-  const pageLang = (function() {
-    const path = window.location.pathname;
-    if (path.startsWith('/tr')) return 'tr';
-    if (path.startsWith('/en')) return 'en';
-    if (path.startsWith('/ru')) return 'ru';
-    if (path.startsWith('/id')) return 'id';
-    if (path.startsWith('/th')) return 'th';
-    if (path.startsWith('/ar')) return 'ar';
-    return 'de';
-  })();
-  async function getBotReplyAsync(message){
-    try{
-      var ctrl=new AbortController();
-      setTimeout(function(){ctrl.abort();},20000);
-      var resp=await fetch('https://n8n.leolan.net/webhook/hotel-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:message,moduleKey:'hotel-demo',history:chatHistory,lang:pageLang}),signal:ctrl.signal});
-      var data=await resp.json();
-      var reply=data.reply||data.message||'I\'m here to help! 🏨';
-      chatHistory.push({role:'user',content:message});
-      chatHistory.push({role:'assistant',content:reply});
-      if(chatHistory.length>16)chatHistory=chatHistory.slice(-16);
-      return reply;
-    }catch(e){return 'Let me connect you with our team! Please visit hotel.leolan.net/en/';}
-  }
-  async function openChatbot(){
-    document.getElementById('chatbotModal').classList.add('open');document.getElementById('chatbotModal').removeAttribute('aria-hidden');
-    if(document.getElementById('chatbotToggle'))document.getElementById('chatbotToggle').style.display='none';
-    document.getElementById('chatbotInput').focus();
-    if(!chatbotSeeded){chatbotSeeded=true;var g=await getBotReplyAsync('__start__');appendChatMessage(g,'bot');}
-  }
-  function closeChatbot(){
-    var modal=document.getElementById('chatbotModal');var toggle=document.getElementById('chatbotToggle');var wasOpen=modal.classList.contains('open');
-    modal.classList.remove('open');modal.setAttribute('aria-hidden','true');
-    if(toggle){toggle.style.display='';if(wasOpen)toggle.focus();}
-  }
-  document.getElementById('chatbotClose').addEventListener('click',closeChatbot);
-  document.getElementById('chatbotModal').addEventListener('click',function(e){if(e.target===this)closeChatbot();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeChatbot();closeMenu();}});
-  document.getElementById('chatbotForm').addEventListener('submit',async function(e){
-    e.preventDefault();
-    var value=document.getElementById('chatbotInput').value.trim();
-    if(!value)return;
-    appendChatMessage(value.replace(/</g,'&lt;'),('user'));
-    document.getElementById('chatbotInput').value='';
-    var typing=document.createElement('div');typing.className='chatbot-message bot';typing.id='typing-ind';typing.innerHTML='<em>...</em>';
-    document.getElementById('chatbotMessages').appendChild(typing);
-    document.getElementById('chatbotMessages').scrollTop=99999;
-    var reply=await getBotReplyAsync(value);
-    var el=document.getElementById('typing-ind');if(el)el.remove();
-    appendChatMessage(reply,'bot');
-    document.getElementById('chatbotMessages').scrollTop=99999;
-    document.getElementById('chatbotInput').focus();
-  });
-</script>
 <script src="/assets/nova-editorial.js?v=20260908" defer></script>
 <script src="/assets/nova-motion.js?v=2" defer></script>
 </body>

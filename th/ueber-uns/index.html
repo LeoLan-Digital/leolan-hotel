@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/assets/nova-editorial.css?v=6">
 <link rel="stylesheet" href="/assets/nova-motion.css?v=7">
 <link rel="stylesheet" href="/assets/nova-pages.css?v=1">
-<link rel="stylesheet" href="/assets/nova-site-footer.css?v=20260915"><link rel="stylesheet" href="/assets/nova-site-header.css?v=20260915"><script src="/assets/nova-site-header.js?v=20260915" defer></script></head>
+<link rel="stylesheet" href="/assets/nova-site-footer.css?v=20260915"><link rel="stylesheet" href="/assets/nova-site-header.css?v=20260915"><script src="/assets/nova-site-header.js?v=20260915" defer></script><link rel="stylesheet" href="/assets/nova-site-chat.css?v=20260915"><script src="/assets/nova-site-chat.js?v=20260915" defer></script></head>
 <body class="nova-page nova-about">
 <a class="nova-site-skip-link" href="#main-content">ข้ามไปยังเนื้อหาหลัก</a>
 <header class="nova-site-header" role="banner" data-header-version="2026-09-15" data-nova-site-header>
@@ -147,6 +147,27 @@
     </div>
   </div>
 </footer>
+<button class="nova-site-chat__toggle" id="novaSiteChatToggle" type="button" aria-label="เปิดแชตทดลอง" aria-haspopup="dialog" aria-controls="novaSiteChatDialog" aria-expanded="false" data-nova-site-chat-toggle><span aria-hidden="true">💬</span><span>ทดลองใช้บอท</span></button>
+<div class="nova-site-chat" id="novaSiteChat" data-nova-site-chat data-chat-version="2026-09-15" data-chat-lang="th" data-default-reply="พร้อมช่วยคุณเสมอ! 🏨" data-error-reply="เรายินดีช่วยเชื่อมต่อคุณกับทีมงาน โปรดไปที่ hotel.leolan.net/th/." data-typing-label="NOVA กำลังพิมพ์…" data-package-label="ดูแพ็กเกจ" data-package-href="/th/#pricing" hidden aria-hidden="true">
+  <section class="nova-site-chat__window" id="novaSiteChatDialog" role="dialog" aria-modal="true" aria-labelledby="novaSiteChatTitle" aria-describedby="novaSiteChatNotice" tabindex="-1">
+    <div class="nova-site-chat__header">
+      <div class="nova-site-chat__title">
+        <span class="nova-site-chat__avatar" aria-hidden="true">N</span>
+        <span class="nova-site-chat__title-copy"><strong id="novaSiteChatTitle">NOVA Hotel Intelligence</strong><small>เดโมผู้ช่วยสำหรับแขกโรงแรม</small></span>
+      </div>
+      <button class="nova-site-chat__close" id="novaSiteChatClose" type="button" aria-label="ปิดแชต"><span aria-hidden="true">✕</span></button>
+    </div>
+    <div class="nova-site-chat__messages" id="novaSiteChatMessages" role="log" aria-live="polite" aria-relevant="additions text"></div>
+    <div class="nova-site-chat__composer">
+      <p class="nova-site-chat__notice" id="novaSiteChatNotice">ข้อความสาธิตปัจจุบันอาจประมวลผลโดยผู้ให้บริการ AI ภายนอกที่ระบุไว้ กรุณาอย่ากรอกข้อมูลส่วนบุคคลประเภทพิเศษ <a href="/en/data-processing-ai/">รายละเอียด (EN)</a>.</p>
+      <form class="nova-site-chat__form" id="novaSiteChatForm">
+        <label class="nova-site-chat__sr-only" for="novaSiteChatInput">ข้อความของคุณ …</label>
+        <input type="text" id="novaSiteChatInput" placeholder="ข้อความของคุณ …" autocomplete="off" inputmode="text" enterkeyhint="send" maxlength="2000">
+        <button type="submit" id="novaSiteChatSend" aria-label="ส่งข้อความ"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M22 2 11 13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m22 2-7 20-4-9-9-4 20-7Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+    </div>
+  </section>
+</div>
 <script src="/assets/nova-editorial.js?v=20260908" defer></script>
 </body>
 </html>

@@ -7,7 +7,9 @@ const NOVA_LOCAL_DEMO = {
       wifi: ['wifi', 'wi-fi', 'internet'], parking: ['parking', 'park'],
       reception: ['reception', 'human', 'staff', 'team', 'employee', 'contact'],
       booking: ['book', 'booking', 'reservation', 'availability', 'room'],
+      product: ['what is nova', 'who is nova', 'tell me about nova', 'about nova', 'nova hotel intelligence'],
       capabilities: ['what can you', 'how can you', 'help', 'capabilities'],
+      thanks: ['thanks', 'thank you', 'many thanks'],
     },
     responses: {
       greeting: 'Welcome to NOVA Demo Hotel. How may we assist you?',
@@ -17,8 +19,11 @@ const NOVA_LOCAL_DEMO = {
       parking: 'Parking is subject to availability. During a real hotel stay, reception can help check a reservation.',
       reception: 'During a real hotel stay, I would now prepare your request for reception. This website demo does not send a real request.',
       booking: 'This website demo does not check real availability or create bookings. During hotel operation, NOVA assists with the request and involves the hotel team when needed.',
+      product: 'NOVA is a digital guest service for hotels. It answers common questions about a stay, supports hotel teams with recurring requests and can prepare approved hotel workflows. This website demo uses sample information and does not make real bookings or forward requests.',
       capabilities: 'I answer typical questions about the stay and hotel services, such as breakfast, check-in, Wi-Fi or parking. This demo uses sample information only.',
+      thanks: 'You are welcome. Is there anything else I can help you with in this demo?',
       unknown: 'I do not have confirmed hotel information about that in this demo. I can show you how NOVA prepares a request for the hotel team.',
+      unknownAgain: 'I can currently answer demo questions about breakfast, check-in, Wi-Fi, parking, reception, bookings or NOVA itself. Which topic would you like to try?',
     },
   },
   de: {
@@ -28,7 +33,9 @@ const NOVA_LOCAL_DEMO = {
       wifi: ['wlan', 'wi-fi', 'wifi', 'internet'], parking: ['parkplatz', 'parken', 'garage'],
       reception: ['rezeption', 'mitarbeiter', 'mensch', 'team', 'kontakt', 'jemand'],
       booking: ['buchen', 'buchung', 'reservierung', 'verfugbar', 'verfügbar', 'zimmer'],
+      product: ['was ist nova', 'wer ist nova', 'erzahl mir von nova', 'erzähl mir von nova', 'uber nova', 'über nova', 'nova hotel intelligence'],
       capabilities: ['was kannst du', 'was können sie', 'helfen', 'funktionen'],
+      thanks: ['danke', 'vielen dank', 'dankeschon', 'dankeschön'],
     },
     responses: {
       greeting: 'Guten Tag und herzlich willkommen im NOVA Demo Hotel. Wie dürfen wir Ihnen behilflich sein?',
@@ -38,8 +45,11 @@ const NOVA_LOCAL_DEMO = {
       parking: 'Parkplätze sind nach Verfügbarkeit verfügbar. Im echten Hotelbetrieb prüft die Rezeption gern eine Reservierung.',
       reception: 'Im echten Hotelbetrieb würde ich Ihr Anliegen jetzt für die Rezeption vorbereiten. Diese Website-Demo versendet keine reale Anfrage.',
       booking: 'Diese Website-Demo prüft keine echte Verfügbarkeit und nimmt keine Buchung vor. Im Hotelbetrieb unterstützt NOVA bei der Anfrage und bezieht bei Bedarf das Hotelteam ein.',
+      product: 'NOVA ist der digitale Gästeservice für Hotels. NOVA beantwortet typische Fragen zum Aufenthalt, unterstützt Hotelteams bei wiederkehrenden Anliegen und kann freigegebene Hotelabläufe vorbereiten. Diese Website-Demo verwendet Beispieldaten und führt keine echte Buchung oder Weiterleitung aus.',
       capabilities: 'Ich beantworte typische Fragen zu Aufenthalt und Hotelservice, zum Beispiel zu Frühstück, Check-in, WLAN oder Parkplätzen. In dieser Demo verwende ich ausschließlich Beispieldaten.',
+      thanks: 'Sehr gern. Kann ich Ihnen in dieser Demo noch bei einem anderen Thema helfen?',
       unknown: 'Dazu liegen mir in dieser Demo keine bestätigten Hotelinformationen vor. Ich kann Ihnen zeigen, wie NOVA eine Anfrage für das Hotelteam vorbereitet.',
+      unknownAgain: 'In dieser Demo kann ich derzeit Fragen zu Frühstück, Check-in, WLAN, Parken, Rezeption, Buchungen oder zu NOVA selbst beantworten. Welches Thema möchten Sie ausprobieren?',
     },
   },
   tr: {
@@ -49,7 +59,9 @@ const NOVA_LOCAL_DEMO = {
       wifi: ['wifi', 'wi-fi', 'internet'], parking: ['otopark', 'park'],
       reception: ['resepsiyon', 'personel', 'ekip', 'insan', 'iletisim', 'iletişim'],
       booking: ['rezervasyon', 'musait', 'müsait', 'oda', 'ayirt', 'ayırt'],
+      product: ['nova nedir', 'nova ne', 'nova kim', 'nova hakkinda', 'nova hakkında', 'nova hotel intelligence'],
       capabilities: ['ne yapabilir', 'yardim', 'yardım'],
+      thanks: ['tesekkurler', 'teşekkürler', 'tesekkur ederim', 'teşekkür ederim', 'sag ol', 'sağ ol'],
     },
     responses: {
       greeting: 'NOVA Demo Hotel’e hoş geldiniz. Size nasıl yardımcı olabiliriz?',
@@ -59,8 +71,11 @@ const NOVA_LOCAL_DEMO = {
       parking: 'Otopark müsaitlik durumuna bağlıdır. Gerçek otel hizmetinde resepsiyon rezervasyon kontrolünde yardımcı olabilir.',
       reception: 'Gerçek otel hizmetinde talebinizi resepsiyon için hazırlardım. Bu web sitesi demosu gerçek bir talep göndermez.',
       booking: 'Bu web sitesi demosu gerçek müsaitlik kontrolü veya rezervasyon yapmaz. Otel hizmetinde NOVA talebe yardımcı olur ve gerektiğinde otel ekibini dahil eder.',
+      product: 'NOVA, oteller için dijital misafir hizmetidir. Konaklama hakkındaki sık sorulan soruları yanıtlar, otel ekiplerinin tekrarlayan taleplerini yönetmesine yardımcı olur ve onaylanmış otel iş akışlarını hazırlayabilir. Bu web demosu örnek bilgiler kullanır; gerçek rezervasyon veya talep aktarımı yapmaz.',
       capabilities: 'Kahvaltı, giriş, Wi-Fi veya otopark gibi konaklama ve otel hizmetleriyle ilgili tipik soruları yanıtlarım. Bu demo yalnızca örnek bilgiler kullanır.',
+      thanks: 'Rica ederim. Bu demoda başka bir konuda yardımcı olabilir miyim?',
       unknown: 'Bu demoda bu konuya ilişkin doğrulanmış otel bilgisi bulunmuyor. NOVA’nın otel ekibi için nasıl talep hazırladığını gösterebilirim.',
+      unknownAgain: 'Bu demoda şu anda kahvaltı, giriş, Wi-Fi, otopark, resepsiyon, rezervasyon veya NOVA hakkında soruları yanıtlayabilirim. Hangi konuyu denemek istersiniz?',
     },
   },
   ru: {
@@ -68,7 +83,8 @@ const NOVA_LOCAL_DEMO = {
       greeting: ['привет', 'здравствуйте', 'добрый день', 'доброе утро', 'добрый вечер'],
       breakfast: ['завтрак'], checkin: ['заезд', 'выезд', 'регистрация'], wifi: ['wifi', 'wi-fi', 'вайфай', 'интернет'],
       parking: ['парков'], reception: ['ресепш', 'стойк', 'сотрудник', 'человек', 'команд', 'контакт'],
-      booking: ['брони', 'номер', 'доступн', 'свободн'], capabilities: ['что ты умеешь', 'что вы умеете', 'помощ'],
+      booking: ['брони', 'номер', 'доступн', 'свободн'], product: ['что такое nova', 'кто такая nova', 'кто такой nova', 'о nova', 'nova hotel intelligence'],
+      capabilities: ['что ты умеешь', 'что вы умеете', 'помощ'], thanks: ['спасибо', 'благодарю', 'большое спасибо'],
     },
     responses: {
       greeting: 'Добро пожаловать в NOVA Demo Hotel. Чем мы можем вам помочь?',
@@ -78,8 +94,11 @@ const NOVA_LOCAL_DEMO = {
       parking: 'Парковка предоставляется при наличии мест. В реальном отеле стойка регистрации поможет проверить возможность бронирования.',
       reception: 'В реальном отеле я бы подготовила ваше обращение для стойки регистрации. Эта демонстрация на сайте не отправляет реальных запросов.',
       booking: 'Эта демонстрация не проверяет реальную доступность и не оформляет бронирования. В отеле NOVA помогает с запросом и при необходимости подключает сотрудников.',
+      product: 'NOVA — цифровой сервис для гостей отелей. Он отвечает на типичные вопросы о проживании, помогает сотрудникам с повторяющимися обращениями и может подготавливать утверждённые рабочие процессы отеля. Эта веб-демонстрация использует примерные данные и не оформляет реальные бронирования и обращения.',
       capabilities: 'Я отвечаю на типичные вопросы о проживании и услугах отеля, например о завтраке, заезде, Wi-Fi или парковке. В демо используются только примерные данные.',
+      thanks: 'Пожалуйста. Могу я помочь вам с другим вопросом в этой демонстрации?',
       unknown: 'В этой демонстрации у меня нет подтверждённой информации отеля по этому вопросу. Я могу показать, как NOVA готовит запрос для команды отеля.',
+      unknownAgain: 'Сейчас в этой демонстрации я могу ответить о завтраке, заезде, Wi-Fi, парковке, стойке регистрации, бронировании или о самой NOVA. Какую тему вы хотите проверить?',
     },
   },
   id: {
@@ -87,7 +106,8 @@ const NOVA_LOCAL_DEMO = {
       greeting: ['halo', 'hai', 'selamat pagi', 'selamat siang', 'selamat malam'], breakfast: ['sarapan'],
       checkin: ['check-in', 'check in', 'check-out', 'checkout', 'masuk', 'keluar'], wifi: ['wifi', 'wi-fi', 'internet'],
       parking: ['parkir'], reception: ['resepsionis', 'staf', 'petugas', 'tim', 'kontak', 'orang'],
-      booking: ['pesan', 'pemesanan', 'reservasi', 'kamar', 'tersedia'], capabilities: ['apa yang bisa', 'bantu', 'kemampuan'],
+      booking: ['pesan', 'pemesanan', 'reservasi', 'kamar', 'tersedia'], product: ['apa itu nova', 'siapa nova', 'tentang nova', 'nova hotel intelligence'],
+      capabilities: ['apa yang bisa', 'bantu', 'kemampuan'], thanks: ['terima kasih', 'makasih'],
     },
     responses: {
       greeting: 'Selamat datang di NOVA Demo Hotel. Ada yang dapat kami bantu?',
@@ -97,8 +117,11 @@ const NOVA_LOCAL_DEMO = {
       parking: 'Parkir tersedia tergantung ketersediaan. Dalam operasional hotel nyata, resepsionis dapat membantu memeriksa reservasi.',
       reception: 'Dalam operasional hotel nyata, saya akan menyiapkan permintaan Anda untuk resepsionis. Demo situs ini tidak mengirim permintaan nyata.',
       booking: 'Demo situs ini tidak memeriksa ketersediaan nyata atau membuat reservasi. Dalam operasional hotel, NOVA membantu permintaan dan melibatkan tim hotel bila diperlukan.',
+      product: 'NOVA adalah layanan tamu digital untuk hotel. NOVA menjawab pertanyaan umum tentang masa inap, membantu tim hotel menangani permintaan berulang, dan dapat menyiapkan alur kerja hotel yang telah disetujui. Demo situs ini menggunakan informasi contoh dan tidak membuat reservasi atau meneruskan permintaan nyata.',
       capabilities: 'Saya menjawab pertanyaan umum tentang masa inap dan layanan hotel, seperti sarapan, check-in, Wi-Fi, atau parkir. Demo ini hanya menggunakan informasi contoh.',
+      thanks: 'Sama-sama. Adakah topik lain yang dapat saya bantu dalam demo ini?',
       unknown: 'Dalam demo ini, saya tidak memiliki informasi hotel yang terverifikasi tentang hal tersebut. Saya dapat menunjukkan cara NOVA menyiapkan permintaan untuk tim hotel.',
+      unknownAgain: 'Saat ini saya dapat menjawab pertanyaan demo tentang sarapan, check-in, Wi-Fi, parkir, resepsionis, reservasi, atau NOVA. Topik mana yang ingin Anda coba?',
     },
   },
   th: {
@@ -106,7 +129,9 @@ const NOVA_LOCAL_DEMO = {
       greeting: ['สวัสดี', 'หวัดดี'], breakfast: ['อาหารเช้า'], checkin: ['เช็กอิน', 'เช็คอิน', 'เช็กเอาต์', 'เช็คเอาท์'],
       wifi: ['wifi', 'wi-fi', 'ไวไฟ', 'อินเทอร์เน็ต'], parking: ['ที่จอดรถ', 'จอดรถ'],
       reception: ['แผนกต้อนรับ', 'พนักงาน', 'เจ้าหน้าที่', 'ทีม', 'ติดต่อ'], booking: ['จอง', 'ห้อง', 'ว่าง'],
+      product: ['nova คืออะไร', 'โนวาคืออะไร', 'เกี่ยวกับ nova', 'nova hotel intelligence'],
       capabilities: ['ทำอะไรได้', 'ช่วย', 'ความสามารถ'],
+      thanks: ['ขอบคุณ', 'ขอบคุณค่ะ', 'ขอบคุณครับ'],
     },
     responses: {
       greeting: 'ยินดีต้อนรับสู่ NOVA Demo Hotel มีอะไรให้เราช่วยไหมคะ?',
@@ -116,15 +141,19 @@ const NOVA_LOCAL_DEMO = {
       parking: 'ที่จอดรถขึ้นอยู่กับจำนวนที่ว่าง ในการให้บริการจริง แผนกต้อนรับสามารถช่วยตรวจสอบการสำรองที่จอดรถได้',
       reception: 'ในการให้บริการจริง ฉันจะเตรียมคำขอของคุณให้แผนกต้อนรับ เว็บไซต์สาธิตนี้ไม่ได้ส่งคำขอจริง',
       booking: 'เว็บไซต์สาธิตนี้ไม่ได้ตรวจสอบห้องว่างจริงหรือทำการจอง ในการให้บริการของโรงแรม NOVA จะช่วยเรื่องคำขอและประสานทีมโรงแรมเมื่อจำเป็น',
+      product: 'NOVA คือบริการดิจิทัลสำหรับผู้เข้าพักในโรงแรม ตอบคำถามทั่วไปเกี่ยวกับการเข้าพัก ช่วยทีมโรงแรมจัดการคำขอที่เกิดขึ้นเป็นประจำ และสามารถเตรียมขั้นตอนงานของโรงแรมที่ได้รับอนุมัติแล้ว เดโมเว็บไซต์นี้ใช้ข้อมูลตัวอย่างและไม่มีการจองหรือส่งต่อคำขอจริง',
       capabilities: 'ฉันตอบคำถามทั่วไปเกี่ยวกับการเข้าพักและบริการของโรงแรม เช่น อาหารเช้า เช็กอิน Wi-Fi หรือที่จอดรถ การสาธิตนี้ใช้ข้อมูลตัวอย่างเท่านั้น',
+      thanks: 'ยินดีค่ะ มีเรื่องอื่นที่ให้ช่วยในเดโมนี้ไหมคะ?',
       unknown: 'การสาธิตนี้ไม่มีข้อมูลโรงแรมที่ยืนยันแล้วในเรื่องดังกล่าว ฉันสามารถแสดงวิธีที่ NOVA เตรียมคำขอสำหรับทีมโรงแรมได้',
+      unknownAgain: 'ขณะนี้เดโมตอบได้เกี่ยวกับอาหารเช้า เช็กอิน Wi-Fi ที่จอดรถ แผนกต้อนรับ การจอง หรือ NOVA คุณอยากลองหัวข้อใดคะ?',
     },
   },
   ban: {
     keywords: {
       greeting: ['halo', 'hai', 'rahajeng'], breakfast: ['sarapan'], checkin: ['check-in', 'check in', 'check-out', 'checkout'],
       wifi: ['wifi', 'wi-fi', 'internet'], parking: ['parkir'], reception: ['resepsionis', 'staf', 'tim', 'kontak'],
-      booking: ['pesan', 'reservasi', 'kamar'], capabilities: ['napi sane dados', 'tulung'],
+      booking: ['pesan', 'reservasi', 'kamar'], product: ['napi punika nova', 'nova punika napi', 'indik nova', 'nova hotel intelligence'],
+      capabilities: ['napi sane dados', 'tulung'], thanks: ['matur suksma', 'suksma'],
     },
     responses: {
       greeting: 'Rahajeng rauh ring NOVA Demo Hotel. Wenten sane prasida titiang bantu?',
@@ -134,8 +163,11 @@ const NOVA_LOCAL_DEMO = {
       parking: 'Parkir manut ketersediaan. Ring layanan hotel sane nyata, resepsionis prasida nulung mriksa reservasi.',
       reception: 'Ring layanan hotel sane nyata, titiang jagi nyiagayang panyuun ragane majeng resepsionis. Demo situs puniki nenten ngirim panyuun nyata.',
       booking: 'Demo situs puniki nenten mriksa ketersediaan nyata utawi makarya reservasi. Ring operasional hotel, NOVA nulung panyuun miwah ngelibatang tim hotel yening kaaptiang.',
+      product: 'NOVA inggih punika layanan digital majeng tamiu hotel. NOVA ngawales pitaken umum indik nginep, nulung tim hotel ring panyuun sane mawali-wali, miwah prasida nyiagayang alur kerja hotel sane sampun kasetujonin. Demo situs puniki nganggen informasi conto lan nenten makarya reservasi utawi ngirim panyuun nyata.',
       capabilities: 'Titiang ngawales pitaken umum indik nginep miwah layanan hotel, sakadi sarapan, check-in, Wi-Fi, utawi parkir. Demo puniki wantah nganggen informasi conto.',
+      thanks: 'Suksma mawali. Wenten topik lianan sane prasida titiang bantu ring demo puniki?',
       unknown: 'Ring demo puniki nenten wenten informasi hotel sane sampun kapastikayang indik punika. Titiang prasida nyihnayang cara NOVA nyiagayang panyuun majeng tim hotel.',
+      unknownAgain: 'Mangkin demo puniki prasida ngawales indik sarapan, check-in, Wi-Fi, parkir, resepsionis, reservasi, utawi NOVA. Topik napi sane jagi ragane coba?',
     },
   },
   ka: {
@@ -143,7 +175,8 @@ const NOVA_LOCAL_DEMO = {
       greeting: ['გამარჯობა', 'სალამი', 'დილა მშვიდობისა', 'საღამო მშვიდობისა'], breakfast: ['საუზმ'],
       checkin: ['check-in', 'check in', 'check-out', 'checkout', 'შესახლ', 'გასახლ'], wifi: ['wifi', 'wi-fi', 'ინტერნეტ'],
       parking: ['პარკინგ'], reception: ['რეცეფცია', 'თანამშრომელ', 'ადამიან', 'გუნდი', 'კონტაქტ'],
-      booking: ['დაჯავშ', 'ოთახ', 'ხელმისაწვდომ'], capabilities: ['რა შეგიძლია', 'დახმარ'],
+      booking: ['დაჯავშ', 'ოთახ', 'ხელმისაწვდომ'], product: ['რა არის nova', 'ვინ არის nova', 'nova-ს შესახებ', 'ნოვას შესახებ', 'nova hotel intelligence'],
+      capabilities: ['რა შეგიძლია', 'დახმარ'], thanks: ['მადლობა', 'დიდი მადლობა'],
     },
     responses: {
       greeting: 'კეთილი იყოს თქვენი მობრძანება NOVA Demo Hotel-ში. როგორ შეგვიძლია დაგეხმაროთ?',
@@ -153,8 +186,11 @@ const NOVA_LOCAL_DEMO = {
       parking: 'პარკინგი ხელმისაწვდომია თავისუფალი ადგილების მიხედვით. რეალურ სასტუმროში რეცეფცია დაჯავშნის შემოწმებაში დაგეხმარებათ.',
       reception: 'რეალურ სასტუმროში თქვენს მოთხოვნას რეცეფციისთვის მოვამზადებდი. ეს ვებდემო რეალურ მოთხოვნას არ აგზავნის.',
       booking: 'ეს ვებდემო რეალურ ხელმისაწვდომობას არ ამოწმებს და ჯავშანს არ ქმნის. სასტუმროში NOVA მოთხოვნაში გეხმარებათ და საჭიროებისას სასტუმროს გუნდს რთავს.',
+      product: 'NOVA სასტუმროებისთვის განკუთვნილი სტუმრების ციფრული მომსახურებაა. ის პასუხობს განთავსების შესახებ გავრცელებულ კითხვებს, ეხმარება სასტუმროს გუნდს განმეორებით მოთხოვნებში და შეუძლია დამტკიცებული სამუშაო პროცესების მომზადება. ეს ვებდემო იყენებს მაგალითის მონაცემებს და რეალურ ჯავშანს ან მოთხოვნის გადაგზავნას არ ასრულებს.',
       capabilities: 'მე ვპასუხობ ტიპურ კითხვებს განთავსებისა და სასტუმროს სერვისების შესახებ, მაგალითად საუზმეზე, შესახლებაზე, Wi-Fi-ზე ან პარკინგზე. ეს დემო მხოლოდ მაგალითის მონაცემებს იყენებს.',
+      thanks: 'არაფრის. შემიძლია ამ დემოში სხვა საკითხშიც დაგეხმაროთ?',
       unknown: 'ამ დემოში ამ საკითხზე სასტუმროს დადასტურებული ინფორმაცია არ მაქვს. შემიძლია გაჩვენოთ, როგორ ამზადებს NOVA მოთხოვნას სასტუმროს გუნდისთვის.',
+      unknownAgain: 'ამჟამად დემოში შემიძლია ვუპასუხო საუზმის, შესახლების, Wi-Fi-ის, პარკინგის, რეცეფციის, ჯავშნის ან თავად NOVA-ს შესახებ კითხვებს. რომელი თემის გამოცდა გსურთ?',
     },
   },
 };
@@ -172,7 +208,11 @@ const NOVA_LOCAL_DEMO = {
   const quickPrompts = Array.from(document.querySelectorAll('[data-nova-chat-prompt]'));
   if (!root || !toggle || !dialog || !close || !messages || !form || !input || !send || !status) return;
 
-  const endpoint = 'https://n8n.leolan.net/webhook/hotel-chat';
+  const endpoint = 'https://n8n.leolan.net/webhook/nova-demo-chat-v2';
+  const maxMessageChars = 800;
+  const maxHistoryItems = 8;
+  const maxHistoryItemChars = 800;
+  const maxHistoryTotalChars = 4800;
   const packageTerms = new Set(['package', 'packages', 'paket', 'pakete', 'paketen', 'modul', 'module', 'modules', 'book', 'booking', 'buchen', 'buchung', 'onboarding', 'пакет', 'пакеты', 'бронирование', 'reservasi', 'แพ็กเกจ', 'จอง', 'პაკეტ', 'დაჯავშნა']);
   const supportedLanguage = root.dataset.chatLang || 'en';
   const lang = Object.prototype.hasOwnProperty.call(NOVA_LOCAL_DEMO, supportedLanguage) ? supportedLanguage : 'en';
@@ -201,8 +241,11 @@ const NOVA_LOCAL_DEMO = {
     if (includesAny(normalized, copy.keywords.parking)) return copy.responses.parking;
     if (includesAny(normalized, copy.keywords.reception)) return copy.responses.reception;
     if (includesAny(normalized, copy.keywords.booking)) return copy.responses.booking;
+    if (includesAny(normalized, copy.keywords.product)) return copy.responses.product;
     if (includesAny(normalized, copy.keywords.capabilities)) return copy.responses.capabilities;
-    return copy.responses.unknown;
+    if (copy.keywords.thanks.some(term => compact === normalize(term))) return copy.responses.thanks;
+    const lastReply = [...history].reverse().find(item => item.role === 'assistant')?.content;
+    return lastReply === copy.responses.unknown ? copy.responses.unknownAgain : copy.responses.unknown;
   }
 
   const heroControl = document.querySelector('.hero-media-control');
@@ -317,8 +360,14 @@ const NOVA_LOCAL_DEMO = {
     status.textContent = label || '';
   };
   const remember = (message, reply) => {
-    history.push({role: 'user', content: message}, {role: 'assistant', content: reply});
-    if (history.length > 16) history = history.slice(-16);
+    history.push(
+      {role: 'user', content: message.slice(0, maxHistoryItemChars)},
+      {role: 'assistant', content: reply.slice(0, maxHistoryItemChars)},
+    );
+    if (history.length > maxHistoryItems) history = history.slice(-maxHistoryItems);
+    while (history.length > 2 && history.reduce((total, item) => total + item.content.length, 0) > maxHistoryTotalChars) {
+      history = history.slice(2);
+    }
   };
   const exampleResult = message => {
     const reply = localReply(message);
@@ -371,7 +420,7 @@ const NOVA_LOCAL_DEMO = {
     }
   };
   const submitValue = (value, restoreInputFocus = true) => {
-    const message = value.trim().slice(0, 2000);
+    const message = value.trim().slice(0, maxMessageChars);
     if (!message || busy) return;
     appendMessage(message, 'user', false);
     input.value = '';

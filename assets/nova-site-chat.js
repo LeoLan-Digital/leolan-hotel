@@ -18,9 +18,9 @@
   let previousFocus = null;
 
   const heroControl = document.querySelector('.hero-media-control');
+  const footerLanguages = document.querySelector('.nova-site-footer__languages');
+  const collisionTargets = [heroControl, footerLanguages].filter(Boolean);
   const positionToggle = () => {
-    if (!heroControl) return;
-    const control = heroControl.getBoundingClientRect();
     const width = toggle.offsetWidth;
     const height = toggle.offsetHeight;
     const edge = innerWidth <= 600 ? 16 : 20;
@@ -31,14 +31,19 @@
       top: innerHeight - edge - height,
       bottom: innerHeight - edge,
     };
-    const visible = control.bottom > 0 && control.top < innerHeight && control.right > 0 && control.left < innerWidth;
-    const overlaps = visible && candidate.left < control.right + gap && candidate.right > control.left - gap && candidate.top < control.bottom + gap && candidate.bottom > control.top - gap;
     toggle.style.removeProperty('--nova-site-chat-right');
     toggle.style.removeProperty('--nova-site-chat-bottom');
-    if (!overlaps) return;
-    toggle.style.setProperty('--nova-site-chat-bottom', `${Math.ceil(innerHeight - control.top + gap)}px`);
+    const collisions = collisionTargets
+      .map(target => target.getBoundingClientRect())
+      .filter(control => {
+        const visible = control.bottom > 0 && control.top < innerHeight && control.right > 0 && control.left < innerWidth;
+        return visible && candidate.left < control.right + gap && candidate.right > control.left - gap && candidate.top < control.bottom + gap && candidate.bottom > control.top - gap;
+      });
+    if (!collisions.length) return;
+    const firstTop = Math.min(...collisions.map(control => control.top));
+    toggle.style.setProperty('--nova-site-chat-bottom', `${Math.ceil(innerHeight - firstTop + gap)}px`);
   };
-  if (heroControl) {
+  if (collisionTargets.length) {
     let positioningFrame = 0;
     const schedulePosition = () => {
       cancelAnimationFrame(positioningFrame);
@@ -46,9 +51,14 @@
     };
     addEventListener('resize', schedulePosition);
     addEventListener('scroll', schedulePosition, {passive: true});
+    window.visualViewport?.addEventListener('resize', schedulePosition);
+    window.visualViewport?.addEventListener('scroll', schedulePosition, {passive: true});
     addEventListener('load', schedulePosition, {once: true});
-    if ('ResizeObserver' in window) new ResizeObserver(schedulePosition).observe(heroControl);
-    new MutationObserver(schedulePosition).observe(heroControl, {attributes: true, childList: true, characterData: true, subtree: true});
+    if ('ResizeObserver' in window) {
+      const observer = new ResizeObserver(schedulePosition);
+      collisionTargets.forEach(target => observer.observe(target));
+    }
+    if (heroControl) new MutationObserver(schedulePosition).observe(heroControl, {attributes: true, childList: true, characterData: true, subtree: true});
     document.fonts?.ready.then(schedulePosition);
     schedulePosition();
   }

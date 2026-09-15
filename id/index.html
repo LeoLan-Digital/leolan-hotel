@@ -658,7 +658,7 @@ main { overflow-wrap:anywhere; }
 @media(max-width:1100px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){#pricing[data-nova-pricing="v2"] .pricing-grid{grid-template-columns:minmax(0,1fr)}}
 </style>
-<link rel="stylesheet" href="/assets/nova-site-footer.css?v=20260915"><link rel="stylesheet" href="/assets/nova-site-header.css?v=20260915"><script src="/assets/nova-site-header.js?v=20260915-2" defer></script><link rel="stylesheet" href="/assets/nova-site-chat.css?v=20260915"><script src="/assets/nova-site-chat.js?v=20260915-2" defer></script></head>
+<link rel="stylesheet" href="/assets/nova-site-footer.css?v=20260915"><link rel="stylesheet" href="/assets/nova-site-header.css?v=20260915"><script src="/assets/nova-site-header.js?v=20260915-2" defer></script><link rel="stylesheet" href="/assets/nova-site-chat.css?v=20260915-2"><script src="/assets/nova-site-chat.js?v=20260915-3" defer></script></head>
 <body>
 
 
@@ -908,23 +908,25 @@ main { overflow-wrap:anywhere; }
     </div>
   </div>
 </footer>
-<button class="nova-site-chat__toggle" id="novaSiteChatToggle" type="button" aria-label="Buka chat demo" aria-haspopup="dialog" aria-controls="novaSiteChatDialog" aria-expanded="false" data-nova-site-chat-toggle><span aria-hidden="true">💬</span><span>Coba Bot</span></button>
-<div class="nova-site-chat" id="novaSiteChat" data-nova-site-chat data-chat-version="2026-09-15" data-chat-lang="id" data-default-reply="Saya siap membantu! 🏨" data-error-reply="Kami akan membantu menghubungkan Anda dengan tim kami. Kunjungi hotel.leolan.net/id/." data-typing-label="NOVA sedang mengetik…" data-package-label="Lihat paket" data-package-href="/id/#pricing" hidden aria-hidden="true">
-  <section class="nova-site-chat__window" id="novaSiteChatDialog" role="dialog" aria-modal="true" aria-labelledby="novaSiteChatTitle" aria-describedby="novaSiteChatNotice" tabindex="-1">
+<button class="nova-site-chat__toggle" id="novaSiteChatToggle" type="button" aria-label="Buka demo NOVA" aria-haspopup="dialog" aria-controls="novaSiteChatDialog" aria-expanded="false" data-nova-site-chat-toggle><span class="nova-site-chat__toggle-mark" aria-hidden="true">N</span><span>Coba NOVA</span></button>
+<div class="nova-site-chat" id="novaSiteChat" data-nova-site-chat data-chat-version="2026-09-15-v2" data-chat-lang="id" data-default-reply="Selamat datang di NOVA Demo Hotel. Ada yang dapat kami bantu?" data-typing-label="NOVA sedang mengetik…" data-package-label="Lihat paket" data-package-href="/id/#pricing" data-status-ready="Demo siap" data-status-live="Demo langsung" data-status-example="Mode contoh" hidden aria-hidden="true">
+  <section class="nova-site-chat__window" id="novaSiteChatDialog" role="dialog" aria-modal="true" aria-labelledby="novaSiteChatTitle" aria-describedby="novaSiteChatContext novaSiteChatNotice" tabindex="-1">
     <div class="nova-site-chat__header">
       <div class="nova-site-chat__title">
         <span class="nova-site-chat__avatar" aria-hidden="true">N</span>
-        <span class="nova-site-chat__title-copy"><strong id="novaSiteChatTitle">NOVA Hotel Intelligence</strong><small>Demo Asisten Tamu Hotel</small></span>
+        <span class="nova-site-chat__title-copy"><strong id="novaSiteChatTitle">NOVA Demo Hotel</strong><small>Layanan tamu digital · Demo</small><span class="nova-site-chat__status" id="novaSiteChatStatus" role="status">Demo siap</span></span>
       </div>
       <button class="nova-site-chat__close" id="novaSiteChatClose" type="button" aria-label="Tutup chat"><span aria-hidden="true">✕</span></button>
     </div>
     <div class="nova-site-chat__messages" id="novaSiteChatMessages" role="log" aria-live="polite" aria-relevant="additions text"></div>
+    <div class="nova-site-chat__quick" role="group" aria-label="Pertanyaan tamu umum"><button type="button" data-nova-chat-prompt="Jam sarapan">Jam sarapan</button><button type="button" data-nova-chat-prompt="Check-in">Check-in</button><button type="button" data-nova-chat-prompt="Wi-Fi">Wi-Fi</button><button type="button" data-nova-chat-prompt="Resepsionis">Resepsionis</button></div>
     <div class="nova-site-chat__composer">
-      <p class="nova-site-chat__notice" id="novaSiteChatNotice">Pesan demo saat ini dapat diproses oleh penyedia AI eksternal terdokumentasi. Jangan masukkan data pribadi kategori khusus. <a href="/en/data-processing-ai/">Detail (EN)</a>.</p>
+      <p class="nova-site-chat__context" id="novaSiteChatContext">Informasi contoh · tanpa pemesanan atau penerusan permintaan nyata</p>
+      <p class="nova-site-chat__notice" id="novaSiteChatNotice">Pesan demo dapat diproses oleh penyedia AI eksternal terdokumentasi. Jangan masukkan data pribadi atau pemesanan. <a href="/en/data-processing-ai/">Detail (EN)</a>.</p>
       <form class="nova-site-chat__form" id="novaSiteChatForm">
         <label class="nova-site-chat__sr-only" for="novaSiteChatInput">Pesan Anda …</label>
         <input type="text" id="novaSiteChatInput" placeholder="Pesan Anda …" autocomplete="off" inputmode="text" enterkeyhint="send" maxlength="2000">
-        <button type="submit" id="novaSiteChatSend" aria-label="Kirim pesan"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M22 2 11 13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m22 2-7 20-4-9-9-4 20-7Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="submit" id="novaSiteChatSend" aria-label="Kirim pesan" disabled><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M22 2 11 13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m22 2-7 20-4-9-9-4 20-7Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </form>
     </div>
   </section>

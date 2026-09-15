@@ -12,8 +12,6 @@
 
   <meta name="description" content="NOVA Hotel Intelligence: ผู้ช่วย AI ผ่าน WhatsApp สำหรับโรงแรม โดย LeoLan Digital ตอบคำถามแขกอัตโนมัติ ขอเดโมได้แล้ววันนี้">
   <link rel="canonical" href="https://hotel.leolan.net/th/">
-<link rel="preconnect" href="https://www.google-analytics.com">
-<link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://n8n.leolan.net">
 
 <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/">
@@ -556,7 +554,7 @@
     }
     .hero-grid { grid-template-columns: 1fr; }
   }
-  
+
   @media (max-width: 768px) {
     .hero-grid { text-align: center; }
     .hero-grid .eyebrow-pill { margin-left: auto; margin-right: auto; }
@@ -741,7 +739,7 @@ main { overflow-wrap:anywhere; }
       <article class="feature-card reveal reveal-delay-4">
         <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18M6 15l5-5 4 3 6-8m-5 0h5v5"/></svg></div>
         <h3>DSGVO &amp; ความปลอดภัยของข้อมูล</h3>
-        <p>NOVA ได้รับการพัฒนาโดยคำนึงถึงข้อกำหนด GDPR รายละเอียดการประมวลผล โฮสติ้ง และสัญญาจะชี้แจงสำหรับแต่ละโรงแรมระหว่างการสาธิต</p>
+        <p>ข้อมูลแอปพลิเคชันและสัญญา NOVA ขณะจัดเก็บจะอยู่หลักในเซิร์ฟเวอร์ภายในและ PostgreSQL ของ LeoLan ฟังก์ชันอีเมล ความปลอดภัย การชำระเงิน การสื่อสาร PMS และ AI ภายนอกที่เปิดใช้อาจส่งข้อมูลไปยังผู้ให้บริการที่ระบุไว้ มีแผนติดตั้งเซิร์ฟเวอร์ AI ภายในโดยเฉพาะ เป้าหมายอย่างน้อย 95% จะใช้หลังการติดตั้ง อนุมัติ และวัดผลที่บันทึกไว้เท่านั้น ปัจจุบันยังไม่ใช่อัตราที่วัดได้หรือการรับประกัน <a href="/en/data-processing-ai/">รายละเอียด (EN)</a></p>
         <ul class="feature-list">
           <li>ชี้แจงข้อกำหนดด้านความเป็นส่วนตัวสำหรับแต่ละการใช้งาน</li>
           <li>ตรวจสอบเงื่อนไขการประมวลผลข้อมูลก่อนใช้งาน</li>
@@ -845,13 +843,15 @@ main { overflow-wrap:anywhere; }
         <input aria-label="ชื่อและที่ตั้งโรงแรม *" type="text" id="cf_hotel" placeholder="ชื่อและที่ตั้งโรงแรม *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <input aria-label="WhatsApp / หมายเลขโทรศัพท์" type="tel" id="cf_phone" placeholder="WhatsApp / หมายเลขโทรศัพท์" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <textarea aria-label="บอกเราเกี่ยวกับความต้องการของคุณ (ไม่บังคับ)" id="cf_msg" placeholder="บอกเราเกี่ยวกับความต้องการของคุณ (ไม่บังคับ)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
+        <p class="data-use-notice" style="font-size:12px;line-height:1.55;color:rgba(255,255,255,.62);margin:0">เราใช้ข้อมูลนี้เพื่อตอบคำถาม โดยส่งผ่าน workflow ของเราบนโครงสร้างพื้นฐาน Hetzner <a href="/th/datenschutz/">ความเป็นส่วนตัว</a>.</p>
         <button type="submit" class="btn btn-primary" style="font-size:16px">ส่งข้อความ →</button>
         <p id="cf_status" role="status" aria-live="polite" role="status" aria-live="polite" data-success="✓ ขอบคุณ! เราจะติดต่อกลับโดยเร็ว" data-error="ไม่สามารถส่งข้อความได้ โปรดลองอีกครั้ง" style="font-size:14px;margin:0;display:none"></p>
       </form>
     </div>
   </div>
 </section></main>
-<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/th/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>เชื่อมงานบริการด้วยเทคโนโลยีอัจฉริยะ<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">บทความโรงแรม (DE)</a><a href="/th/#product">คุณสมบัติ</a><a href="/th/#workflow">NOVA ทำงานอย่างไร</a><a href="/th/#pricing">ราคา</a><a href="/th/#faq">คำถามที่พบบ่อย</a></div><div><a href="/th/ueber-uns/">เกี่ยวกับ</a><a href="https://hotel.leolan.net/portal/">พอร์ทัลลูกค้า</a><a href="/th/#contact">ติดต่อ</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/th/impressum/">ข้อมูลทางกฎหมาย</a><a href="/th/datenschutz/">ความเป็นส่วนตัว</a><a href="/th/agb/">ข้อกำหนด</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="เลือกภาษา"><a href="/" lang="en">EN</a><a href="/de/" lang="de">DE</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th" aria-current="page">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div></footer>
+<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/th/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>เชื่อมงานบริการด้วยเทคโนโลยีอัจฉริยะ<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">บทความโรงแรม (DE)</a><a href="/th/#product">คุณสมบัติ</a><a href="/th/#workflow">NOVA ทำงานอย่างไร</a><a href="/th/#pricing">ราคา</a><a href="/th/#faq">คำถามที่พบบ่อย</a></div><div><a href="/th/ueber-uns/">เกี่ยวกับ</a><a href="https://hotel.leolan.net/portal/">พอร์ทัลลูกค้า</a><a href="/th/#contact">ติดต่อ</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/th/impressum/">ข้อมูลทางกฎหมาย</a><a href="/th/datenschutz/">ความเป็นส่วนตัว</a><a href="/th/agb/">ข้อกำหนด</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="เลือกภาษา"><a href="/" lang="en">EN</a><a href="/de/" lang="de">DE</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th" aria-current="page">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div><div class="public-legal-links" style="max-width:1180px;margin:0 auto;padding:0 24px 24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:12px" aria-label="ข้อมูลสัญญาและการประมวลผล (EN)"><a href="/en/avv/">DPA (EN)</a><a href="/en/tom/">Security measures (EN)</a><a href="/en/subprocessors/">Subprocessors (EN)</a><a href="/en/data-processing-ai/">AI processing (EN)</a><a href="/legal-archive/2026-04/">Archive</a></div>
+</footer>
 <button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="เปิดแชตทดลอง" aria-haspopup="dialog">💬 ทดลองใช้บอท</button>
 <div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
   <div class="chatbot-window" role="dialog" aria-modal="true" aria-label="แชตทดลอง NOVA Hotel Intelligence">
@@ -867,6 +867,7 @@ main { overflow-wrap:anywhere; }
     </div>
     <div class="chatbot-messages" id="chatbotMessages"></div>
     <div class="chatbot-input-wrap">
+      <p class="chatbot-data-notice" style="font-size:11px;line-height:1.4;color:rgba(255,255,255,.58);margin:0 4px 8px">ข้อความสาธิตปัจจุบันอาจประมวลผลโดยผู้ให้บริการ AI ภายนอกที่ระบุไว้ กรุณาอย่ากรอกข้อมูลส่วนบุคคลประเภทพิเศษ <a href="/en/data-processing-ai/">รายละเอียด (EN)</a>.</p>
       <form class="chatbot-form" id="chatbotForm">
         <input aria-label="ข้อความของคุณ …" type="text" id="chatbotInput" placeholder="ข้อความของคุณ …" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
         <button type="submit" id="chatbotSend" aria-label="ส่งข้อความ"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>

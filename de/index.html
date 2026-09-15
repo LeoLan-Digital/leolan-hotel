@@ -13,8 +13,6 @@
   <meta name="description" content="NOVA Hotel Intelligence: Der WhatsApp-KI-Assistent für Hotels von LeoLan Digital. Gästefragen automatisiert beantworten. Jetzt Demo anfragen.">
   <meta name="keywords" content="Hotel WhatsApp Bot, KI Hotelmanagement, Gästekommunikation, Zimmer-Upgrade Automatisierung, Hotel Chatbot, Direktbuchungen, Hotel KI Concierge, Buchungssystem">
   <link rel="canonical" href="https://hotel.leolan.net/de/">
-<link rel="preconnect" href="https://www.google-analytics.com">
-<link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://n8n.leolan.net">
 
   <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/">
@@ -512,7 +510,7 @@ main { overflow-wrap:anywhere; }
       <article class="feature-card reveal reveal-delay-4">
         <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 12 3 3 5-6"/></svg></div>
         <h3>DSGVO &amp; Datensicherheit</h3>
-        <p>NOVA ist nach DSGVO-Vorgaben entwickelt. Konkrete Verarbeitung, Hosting und Vertragsgrundlagen werden für jedes Hotel im Rahmen der Demo geklärt.</p>
+        <p>Operative NOVA-Anwendungs- und Vertragsdaten werden im Ruhezustand primär in LeoLans eigener lokaler Server- und PostgreSQL-Umgebung gespeichert. Aktivierte externe E-Mail-, Transport-, Sicherheits-, Zahlungs-, Kommunikations-, PMS- und KI-Funktionen können Daten an die dokumentierten Anbieter übermitteln. Ein dedizierter lokaler KI-Server ist geplant; das Ziel von mindestens 95 % vollständig lokalen KI-Verarbeitungsfällen gilt erst nach dokumentierter Inbetriebnahme, Freigabe und Messung. Es ist derzeit weder gemessene Ist-Quote noch Garantie. <a href="/de/datenverarbeitung-ki/">Details zum Datenweg</a></p>
         <ul class="feature-list">
           <li>Datenschutzanforderungen je Einsatz klären</li>
           <li>Auftragsverarbeitung vor Nutzung prüfen</li>
@@ -633,13 +631,15 @@ main { overflow-wrap:anywhere; }
         <input aria-label="Hotelname &amp; Standort *" type="text" id="cf_hotel" placeholder="Hotelname &amp; Standort *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <input aria-label="WhatsApp / Telefonnummer" type="tel" id="cf_phone" placeholder="WhatsApp / Telefonnummer" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <textarea aria-label="Ihre Anfrage (optional)" id="cf_msg" placeholder="Ihre Anfrage (optional)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
+        <p class="data-use-notice" style="font-size:12px;line-height:1.55;color:rgba(255,255,255,.62);margin:0">Wir verarbeiten diese Angaben zur Beantwortung Ihrer Anfrage. Die Übermittlung läuft über unseren selbst betriebenen Workflow auf Hetzner-Infrastruktur. <a href="/de/datenschutz/">Datenschutzhinweise</a>.</p>
         <button type="submit" class="btn btn-primary" style="font-size:16px">Nachricht senden →</button>
         <p id="cf_status" role="status" aria-live="polite" role="status" aria-live="polite" data-success="✓ Vielen Dank! Wir melden uns bei Ihnen." data-error="Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut." style="font-size:14px;margin:0;display:none"></p>
       </form>
     </div>
   </div>
 </section></main>
-<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/de/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Gastfreundschaft, intelligent verbunden.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Hotelwissen</a><a href="/de/#product">Funktionen</a><a href="/de/#workflow">So funktioniert NOVA</a><a href="/de/#pricing">Preise</a><a href="/de/#faq">FAQ</a></div><div><a href="/de/ueber-uns/">Über uns</a><a href="https://hotel.leolan.net/portal/">Kundenportal</a><a href="/de/#contact">Kontakt</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/de/impressum/">Impressum</a><a href="/de/datenschutz/">Datenschutz</a><a href="/de/agb/">AGB</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Sprache wählen"><a href="/" lang="en">EN</a><a href="/de/" lang="de" aria-current="page">DE</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div></footer>
+<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/de/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Gastfreundschaft, intelligent verbunden.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Hotelwissen</a><a href="/de/#product">Funktionen</a><a href="/de/#workflow">So funktioniert NOVA</a><a href="/de/#pricing">Preise</a><a href="/de/#faq">FAQ</a></div><div><a href="/de/ueber-uns/">Über uns</a><a href="https://hotel.leolan.net/portal/">Kundenportal</a><a href="/de/#contact">Kontakt</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/de/impressum/">Impressum</a><a href="/de/datenschutz/">Datenschutz</a><a href="/de/agb/">AGB</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Sprache wählen"><a href="/" lang="en">EN</a><a href="/de/" lang="de" aria-current="page">DE</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div><div class="public-legal-links" style="max-width:1180px;margin:0 auto;padding:0 24px 24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:12px" aria-label="Vertrags- und Datenverarbeitungsinformationen"><a href="/de/avv/">AVV-Info</a><a href="/de/tom/">TOM</a><a href="/de/unterauftragsverarbeiter/">Unterauftragsverarbeiter</a><a href="/de/datenverarbeitung-ki/">KI-Datenverarbeitung</a><a href="/legal-archive/2026-04/">Archive</a></div>
+</footer>
 <button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Chat öffnen" aria-haspopup="dialog">💬 Bot testen</button>
 <div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
   <div class="chatbot-window" role="dialog" aria-modal="true" aria-label="NOVA Hotel Intelligence Demo-Chat">
@@ -655,6 +655,7 @@ main { overflow-wrap:anywhere; }
     </div>
     <div class="chatbot-messages" id="chatbotMessages"></div>
     <div class="chatbot-input-wrap">
+      <p class="chatbot-data-notice" style="font-size:11px;line-height:1.4;color:rgba(255,255,255,.58);margin:0 4px 8px">Demo-Nachrichten können derzeit durch dokumentierte externe KI-Anbieter verarbeitet werden. Bitte keine besonderen Kategorien personenbezogener Daten eingeben. <a href="/de/datenverarbeitung-ki/">Details</a>.</p>
       <form class="chatbot-form" id="chatbotForm">
         <input aria-label="Nachricht …" type="text" id="chatbotInput" placeholder="Nachricht …" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
         <button type="submit" id="chatbotSend" aria-label="Nachricht senden"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>

@@ -13,8 +13,6 @@
   <meta name="keywords" content="WhatsApp бот для отеля, ИИ управление отелем, общение с гостями, автоматизация отеля, прямые бронирования, чат-бот для отеля, ИИ консьерж, система бронирования">
 
   <link rel="canonical" href="https://hotel.leolan.net/ru/">
-<link rel="preconnect" href="https://www.google-analytics.com">
-<link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://n8n.leolan.net">
 
   <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/">
@@ -563,7 +561,7 @@
     }
     .hero-grid { grid-template-columns: 1fr; }
   }
-  
+
   @media (max-width: 768px) {
     .hero-grid { text-align: center; }
     .hero-grid .eyebrow-pill { margin-left: auto; margin-right: auto; }
@@ -737,7 +735,7 @@ main { overflow-wrap:anywhere; }
       <article class="feature-card reveal reveal-delay-4">
         <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 12 3 3 5-6"/></svg></div>
         <h3>GDPR &amp; Безопасность данных</h3>
-        <p>NOVA разработана с учетом требований GDPR. Детали обработки, размещения и договорных условий уточняются для каждого отеля во время демо.</p>
+        <p>Данные приложения и договоров NOVA в состоянии покоя преимущественно хранятся в локальной серверной среде PostgreSQL LeoLan. Активированные внешние функции почты, безопасности, оплаты, связи, PMS и ИИ могут передавать данные документированным поставщикам. Выделенный локальный ИИ-сервер запланирован; цель не менее 95% полностью локальных случаев ИИ действует только после документированного ввода, допуска и измерения. Сейчас это не измеренный показатель и не гарантия. <a href="/en/data-processing-ai/">Подробнее (EN)</a></p>
         <ul class="feature-list">
           <li>Уточнить требования к конфиденциальности для сценария</li>
           <li>Проверить условия обработки данных до начала работы</li>
@@ -851,13 +849,15 @@ main { overflow-wrap:anywhere; }
         <input aria-label="Название и местоположение отеля *" type="text" id="cf_hotel" placeholder="Название и местоположение отеля *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <input aria-label="WhatsApp / Номер телефона" type="tel" id="cf_phone" placeholder="WhatsApp / Номер телефона" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <textarea aria-label="Опишите ваши потребности (необязательно)" id="cf_msg" placeholder="Опишите ваши потребности (необязательно)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
+        <p class="data-use-notice" style="font-size:12px;line-height:1.55;color:rgba(255,255,255,.62);margin:0">Мы обрабатываем данные, чтобы ответить на запрос. Передача идет через наш workflow на инфраструктуре Hetzner. <a href="/ru/datenschutz/">Конфиденциальность</a>.</p>
         <button type="submit" class="btn btn-primary" style="font-size:16px">Отправить сообщение →</button>
         <p id="cf_status" role="status" aria-live="polite" role="status" aria-live="polite" data-success="✓ Спасибо! Мы свяжемся с вами." data-error="Не удалось отправить сообщение. Пожалуйста, попробуйте ещё раз." style="font-size:14px;margin:0;display:none"></p>
       </form>
     </div>
   </div>
 </section></main>
-<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/ru/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Гостеприимство и технологии вместе.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Для отельеров (DE)</a><a href="/ru/#product">Особенности</a><a href="/ru/#workflow">Как работает NOVA</a><a href="/ru/#pricing">Цены</a><a href="/ru/#faq">Часто задаваемые вопросы</a></div><div><a href="/ru/ueber-uns/">О нас</a><a href="https://hotel.leolan.net/portal/">Портал клиента</a><a href="/ru/#contact">Контакты</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/ru/impressum/">Правовая информация</a><a href="/ru/datenschutz/">Конфиденциальность</a><a href="/ru/agb/">Условия</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Выбрать язык"><a href="/" lang="en">EN</a><a href="/de/" lang="de">DE</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru" aria-current="page">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div></footer>
+<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/ru/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Гостеприимство и технологии вместе.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Для отельеров (DE)</a><a href="/ru/#product">Особенности</a><a href="/ru/#workflow">Как работает NOVA</a><a href="/ru/#pricing">Цены</a><a href="/ru/#faq">Часто задаваемые вопросы</a></div><div><a href="/ru/ueber-uns/">О нас</a><a href="https://hotel.leolan.net/portal/">Портал клиента</a><a href="/ru/#contact">Контакты</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/ru/impressum/">Правовая информация</a><a href="/ru/datenschutz/">Конфиденциальность</a><a href="/ru/agb/">Условия</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Выбрать язык"><a href="/" lang="en">EN</a><a href="/de/" lang="de">DE</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru" aria-current="page">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div><div class="public-legal-links" style="max-width:1180px;margin:0 auto;padding:0 24px 24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:12px" aria-label="Договорная информация и обработка данных (EN)"><a href="/en/avv/">DPA (EN)</a><a href="/en/tom/">Security measures (EN)</a><a href="/en/subprocessors/">Subprocessors (EN)</a><a href="/en/data-processing-ai/">AI processing (EN)</a><a href="/legal-archive/2026-04/">Archive</a></div>
+</footer>
 <button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Открыть чат" aria-haspopup="dialog">💬 Попробуйте бота</button>
 <div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
   <div class="chatbot-window" role="dialog" aria-modal="true" aria-label="Демонстрационный чат NOVA Hotel Intelligence">
@@ -873,6 +873,7 @@ main { overflow-wrap:anywhere; }
     </div>
     <div class="chatbot-messages" id="chatbotMessages"></div>
     <div class="chatbot-input-wrap">
+      <p class="chatbot-data-notice" style="font-size:11px;line-height:1.4;color:rgba(255,255,255,.58);margin:0 4px 8px">Сообщения демо-чата сейчас могут обрабатываться документированными внешними поставщиками ИИ. Не вводите особо чувствительные данные. <a href="/en/data-processing-ai/">Подробнее (EN)</a>.</p>
       <form class="chatbot-form" id="chatbotForm">
         <input aria-label="Ваше сообщение …" type="text" id="chatbotInput" placeholder="Ваше сообщение …" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
         <button type="submit" id="chatbotSend" aria-label="Отправить сообщение"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -946,7 +947,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;
   }
-  
+
   // Detect page language from URL
   const pageLang = (function() {
     const path = window.location.pathname;

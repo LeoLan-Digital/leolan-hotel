@@ -13,8 +13,6 @@
   <meta name="description" content="NOVA Hotel Intelligence: the WhatsApp AI assistant for hotels by LeoLan Digital. Automate guest requests. Request your demo now.">
   <meta name="keywords" content="hotel WhatsApp bot, AI hotel management, guest communication, room upgrade automation, hotel chatbot, direct bookings, hotel AI concierge, booking system">
   <link rel="canonical" href="https://hotel.leolan.net/">
-<link rel="preconnect" href="https://www.google-analytics.com">
-<link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://n8n.leolan.net">
 
   <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/">
@@ -563,7 +561,7 @@
     }
     .hero-grid { grid-template-columns: 1fr; }
   }
-  
+
   @media (max-width: 768px) {
     .hero-grid { text-align: center; }
     .hero-grid .eyebrow-pill { margin-left: auto; margin-right: auto; }
@@ -737,7 +735,7 @@ main { overflow-wrap:anywhere; }
       <article class="feature-card reveal reveal-delay-4">
         <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 12 3 3 5-6"/></svg></div>
         <h3>GDPR &amp; Data Security</h3>
-        <p>NOVA is designed with GDPR requirements in mind. Processing, hosting and contractual details are clarified for each hotel during the demo.</p>
+        <p>Operational NOVA application and contract data at rest are primarily stored in LeoLan's own local server and PostgreSQL environment. Activated external email, transport, security, payment, communication, PMS and AI functions may transmit data to the documented providers. A dedicated local AI server is planned; the target of at least 95% fully local AI processing cases applies only after documented commissioning, approval and measurement. It is currently neither a measured actual rate nor a guarantee. <a href="/en/data-processing-ai/">Data path details</a></p>
         <ul class="feature-list">
           <li>Clarify privacy requirements for each use case</li>
           <li>Review data-processing terms before use</li>
@@ -863,13 +861,15 @@ main { overflow-wrap:anywhere; }
         <input aria-label="Hotel Name &amp; Location *" type="text" id="cf_hotel" placeholder="Hotel Name &amp; Location *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <input aria-label="WhatsApp / Phone Number" type="tel" id="cf_phone" placeholder="WhatsApp / Phone Number" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <textarea aria-label="Tell us about your needs (optional)" id="cf_msg" placeholder="Tell us about your needs (optional)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
+        <p class="data-use-notice" style="font-size:12px;line-height:1.55;color:rgba(255,255,255,.62);margin:0">We process these details to answer your enquiry. They are transmitted through our self-hosted workflow on Hetzner infrastructure. <a href="/en/datenschutz/">Privacy details</a>.</p>
         <button type="submit" class="btn btn-primary" style="font-size:16px">Send Message →</button>
         <p id="cf_status" role="status" aria-live="polite" role="status" aria-live="polite" data-success="✓ Thank you! We'll be in touch." data-error="Your message could not be sent. Please try again." style="font-size:14px;margin:0;display:none"></p>
       </form>
     </div>
   </div>
 </section></main>
-<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/en/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Hospitality, intelligently connected.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Hotel insights (DE)</a><a href="/en/#product">Features</a><a href="/en/#workflow">How NOVA works</a><a href="/en/#pricing">Pricing</a><a href="/en/#faq">FAQ</a></div><div><a href="/en/ueber-uns/">About</a><a href="https://hotel.leolan.net/portal/">Customer Portal</a><a href="/en/#contact">Contact</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/en/impressum/">Legal notice</a><a href="/en/datenschutz/">Privacy</a><a href="/en/agb/">Terms</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Choose language"><a href="/" lang="en" aria-current="page">EN</a><a href="/de/" lang="de">DE</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div></footer>
+<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/en/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Hospitality, intelligently connected.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Hotel insights (DE)</a><a href="/en/#product">Features</a><a href="/en/#workflow">How NOVA works</a><a href="/en/#pricing">Pricing</a><a href="/en/#faq">FAQ</a></div><div><a href="/en/ueber-uns/">About</a><a href="https://hotel.leolan.net/portal/">Customer Portal</a><a href="/en/#contact">Contact</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/en/impressum/">Legal notice</a><a href="/en/datenschutz/">Privacy</a><a href="/en/agb/">Terms</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Choose language"><a href="/" lang="en" aria-current="page">EN</a><a href="/de/" lang="de">DE</a><a href="/tr/" lang="tr">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div><div class="public-legal-links" style="max-width:1180px;margin:0 auto;padding:0 24px 24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:12px" aria-label="Contract and data-processing information (EN)"><a href="/en/avv/">DPA (EN)</a><a href="/en/tom/">Security measures (EN)</a><a href="/en/subprocessors/">Subprocessors (EN)</a><a href="/en/data-processing-ai/">AI processing (EN)</a><a href="/legal-archive/2026-04/">Archive</a></div>
+</footer>
 <button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Open demo chat" aria-haspopup="dialog">💬 Try the bot</button>
 <div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
   <div class="chatbot-window" role="dialog" aria-modal="true" aria-label="NOVA Hotel Intelligence demo chat">
@@ -885,6 +885,7 @@ main { overflow-wrap:anywhere; }
     </div>
     <div class="chatbot-messages" id="chatbotMessages"></div>
     <div class="chatbot-input-wrap">
+      <p class="chatbot-data-notice" style="font-size:11px;line-height:1.4;color:rgba(255,255,255,.58);margin:0 4px 8px">Demo messages may currently be processed by documented external AI providers. Do not enter special-category personal data. <a href="/en/data-processing-ai/">Details</a>.</p>
       <form class="chatbot-form" id="chatbotForm">
         <input aria-label="Message…" type="text" id="chatbotInput" placeholder="Message…" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
         <button type="submit" id="chatbotSend" aria-label="Send message"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -958,7 +959,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;
   }
-  
+
   // Detect page language from URL
   const pageLang = (function() {
     const path = window.location.pathname;

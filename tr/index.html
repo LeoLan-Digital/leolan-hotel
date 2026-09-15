@@ -13,8 +13,6 @@
   <meta name="keywords" content="otel WhatsApp botu, yapay zeka otel yönetimi, misafir iletişimi, oda yükseltmesi, rezervasyon sistemi, doğrudan rezervasyon, otel chatbotu, YZ konsiyerj">
 
   <link rel="canonical" href="https://hotel.leolan.net/tr/">
-<link rel="preconnect" href="https://www.google-analytics.com">
-<link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://n8n.leolan.net">
 
   <link rel="alternate" hreflang="en" href="https://hotel.leolan.net/">
@@ -563,7 +561,7 @@
     }
     .hero-grid { grid-template-columns: 1fr; }
   }
-  
+
   @media (max-width: 768px) {
     .hero-grid { text-align: center; }
     .hero-grid .eyebrow-pill { margin-left: auto; margin-right: auto; }
@@ -748,7 +746,7 @@ main { overflow-wrap:anywhere; }
       <article class="feature-card reveal reveal-delay-4">
         <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18M6 15l5-5 4 3 6-8m-5 0h5v5"/></svg></div>
         <h3>GDPR &amp; Veri Güvenliği</h3>
-        <p>NOVA, GDPR gereklilikleri dikkate alınarak geliştirilmiştir. İşleme, barındırma ve sözleşme ayrıntıları demo sırasında her otel için açıklığa kavuşturulur.</p>
+        <p>NOVA uygulama ve sözleşme verileri bekleme hâlinde öncelikle LeoLan'ın yerel sunucu ve PostgreSQL ortamında saklanır. Etkin dış e-posta, güvenlik, ödeme, iletişim, PMS ve AI işlevleri belgelenen sağlayıcılara veri aktarabilir. Özel yerel AI sunucusu planlanmaktadır; en az %95 tamamen yerel AI işleme hedefi ancak belgeli devreye alma, onay ve ölçümden sonra geçerlidir. Şu anda ölçülmüş oran veya garanti değildir. <a href="/en/data-processing-ai/">Ayrıntılar (İngilizce)</a></p>
         <ul class="feature-list">
           <li>Her kullanım için veri koruma gereksinimlerini netleştirme</li>
           <li>Kullanımdan önce veri işleme şartlarını inceleme</li>
@@ -862,13 +860,15 @@ main { overflow-wrap:anywhere; }
         <input aria-label="Otel Adı ve Konumu *" type="text" id="cf_hotel" placeholder="Otel Adı ve Konumu *" required style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <input aria-label="WhatsApp / Telefon Numarası" type="tel" id="cf_phone" placeholder="WhatsApp / Telefon Numarası" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%">
         <textarea aria-label="İhtiyaçlarınızı anlatın (isteğe bağlı)" id="cf_msg" placeholder="İhtiyaçlarınızı anlatın (isteğe bağlı)" rows="3" style="background:#17212b;border:1px solid #2d3e60;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;width:100%;resize:vertical"></textarea>
+        <p class="data-use-notice" style="font-size:12px;line-height:1.55;color:rgba(255,255,255,.62);margin:0">Bilgilerinizi talebinizi yanıtlamak için işleriz. Aktarım, Hetzner altyapısındaki kendi iş akışımız üzerinden yapılır. <a href="/tr/datenschutz/">Gizlilik</a>.</p>
         <button type="submit" class="btn btn-primary" style="font-size:16px">Mesaj Gönder →</button>
         <p id="cf_status" role="status" aria-live="polite" role="status" aria-live="polite" data-success="✓ Teşekkürler! Sizinle iletişime geçeceğiz." data-error="Mesajınız gönderilemedi. Lütfen tekrar deneyin." style="font-size:14px;margin:0;display:none"></p>
       </form>
     </div>
   </div>
 </section></main>
-<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/tr/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Misafirperverlik, akıllı bağlantılarla.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Otel rehberi (DE)</a><a href="/tr/#product">Özellikler</a><a href="/tr/#workflow">NOVA nasıl çalışır</a><a href="/tr/#pricing">Fiyatlar</a><a href="/tr/#faq">SSS</a></div><div><a href="/tr/ueber-uns/">Hakkımızda</a><a href="https://hotel.leolan.net/portal/">Müşteri Portalı</a><a href="/tr/#contact">İletişim</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/tr/impressum/">Yasal bilgiler</a><a href="/tr/datenschutz/">Gizlilik</a><a href="/tr/agb/">Koşullar</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Dil seçin"><a href="/" lang="en">EN</a><a href="/de/" lang="de">DE</a><a href="/tr/" lang="tr" aria-current="page">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div></footer>
+<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a class="nova-wordmark" href="/tr/" aria-label="NOVA Hotel Intelligence — LeoLan Digital"><span class="monogram" aria-hidden="true">N</span><span class="wordmark-copy"><strong>NOVA</strong><small>BY LEOLAN DIGITAL</small></span></a><p>Misafirperverlik, akıllı bağlantılarla.<br>Dresden · Germany</p></div><div class="footer-nav"><div><a href="/blog/">Otel rehberi (DE)</a><a href="/tr/#product">Özellikler</a><a href="/tr/#workflow">NOVA nasıl çalışır</a><a href="/tr/#pricing">Fiyatlar</a><a href="/tr/#faq">SSS</a></div><div><a href="/tr/ueber-uns/">Hakkımızda</a><a href="https://hotel.leolan.net/portal/">Müşteri Portalı</a><a href="/tr/#contact">İletişim</a><a href="mailto:business@leolan.net">business@leolan.net</a><a href="tel:+4935121788680">+49 351 21788680</a></div><div><a href="/tr/impressum/">Yasal bilgiler</a><a href="/tr/datenschutz/">Gizlilik</a><a href="/tr/agb/">Koşullar</a></div></div></div><div class="footer-bottom"><span>© 2026 LeoLan Digital · NOVA Hotel Intelligence</span><nav class="language-switcher" aria-label="Dil seçin"><a href="/" lang="en">EN</a><a href="/de/" lang="de">DE</a><a href="/tr/" lang="tr" aria-current="page">TR</a><a href="/ru/" lang="ru">RU</a><a href="/id/" lang="id">ID</a><a href="/th/" lang="th">TH</a><a href="/ban/" lang="ban">BAN</a><a href="/ka/" lang="ka">KA</a></nav></div></div><div class="public-legal-links" style="max-width:1180px;margin:0 auto;padding:0 24px 24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:12px" aria-label="Sözleşme ve veri işleme bilgileri (EN)"><a href="/en/avv/">DPA (EN)</a><a href="/en/tom/">Security measures (EN)</a><a href="/en/subprocessors/">Subprocessors (EN)</a><a href="/en/data-processing-ai/">AI processing (EN)</a><a href="/legal-archive/2026-04/">Archive</a></div>
+</footer>
 <button class="chatbot-toggle" id="chatbotToggle" onclick="openChatbot()" aria-label="Sohbeti aç" aria-haspopup="dialog">💬 Botu Dene</button>
 <div class="chatbot-modal" id="chatbotModal" aria-hidden="true">
   <div class="chatbot-window" role="dialog" aria-modal="true" aria-label="NOVA Hotel Intelligence demo sohbeti">
@@ -884,6 +884,7 @@ main { overflow-wrap:anywhere; }
     </div>
     <div class="chatbot-messages" id="chatbotMessages"></div>
     <div class="chatbot-input-wrap">
+      <p class="chatbot-data-notice" style="font-size:11px;line-height:1.4;color:rgba(255,255,255,.58);margin:0 4px 8px">Demo mesajları şu anda belgelenen harici AI sağlayıcılarınca işlenebilir. Özel nitelikli kişisel veri girmeyin. <a href="/en/data-processing-ai/">Ayrıntılar (EN)</a>.</p>
       <form class="chatbot-form" id="chatbotForm">
         <input aria-label="Mesajınız …" type="text" id="chatbotInput" placeholder="Mesajınız …" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:16px" inputmode="text">
         <button type="submit" id="chatbotSend" aria-label="Mesaj gönder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -957,7 +958,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     document.getElementById('chatbotMessages').appendChild(msg);
     document.getElementById('chatbotMessages').scrollTop=99999;
   }
-  
+
   // Detect page language from URL
   const pageLang = (function() {
     const path = window.location.pathname;

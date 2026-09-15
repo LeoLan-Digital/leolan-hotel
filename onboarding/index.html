@@ -347,6 +347,22 @@
       font-size:19px;
     }
 
+    .nova-legal-panel{
+      margin-top:22px;
+      padding:20px;
+      border:1px solid rgba(143,164,255,.35);
+      border-radius:14px;
+      background:#0c172d;
+    }
+
+    .nova-legal-panel h3{margin:0 0 10px;color:#fff;font-size:18px}
+    .nova-legal-panel p{color:#b7c3d8;line-height:1.6}
+    .nova-legal-panel details{margin-top:10px;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;background:#0a1427}
+    .nova-legal-panel summary{cursor:pointer;color:#dce4ff;font-weight:700}
+    .nova-legal-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#c6d0e2;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:360px;overflow:auto}
+    .nova-legal-status{padding:12px 14px;border-radius:10px;background:#101e3a;color:#dce4ff;margin:12px 0}
+    .nova-legal-status.error{border:1px solid rgba(255,99,99,.45);background:rgba(120,22,22,.22);color:#ffd4d4}
+
 </style>
 </head>
 
@@ -423,8 +439,8 @@
 
       <p class="nova-card-copy"
          id="package-copy">
-        Wählen Sie den Umfang, über den Sie mit uns
-        sprechen möchten.
+        Wählen Sie das Paket, das Sie kostenpflichtig
+        bestellen möchten.
       </p>
 
       <div class="nova-packages">
@@ -564,17 +580,16 @@
 
         <input type="checkbox"
                id="dynamic-pricing"
-               name="dynamicPricing"
                value="true">
 
         <span>
           <strong id="dp-title">
-            Dynamic Pricing hinzufügen
+            Dynamic Pricing kostenpflichtig hinzufügen
           </strong>
 
           <span id="dp-copy">
-            Für Core und Pro optional.
-            In NOVA Intelligence bereits enthalten.
+            Für Core und Pro: 249 € pro Monat oder
+            2.690 € pro Jahr. In Intelligence enthalten.
           </span>
         </span>
 
@@ -590,8 +605,8 @@
 
       <p class="nova-card-copy"
          id="contact-copy">
-        Senden Sie uns die wichtigsten Angaben.
-        Wir melden uns mit einem individuellen Angebot.
+        Geben Sie die Daten für Ihre verbindliche
+        kostenpflichtige Bestellung ein.
       </p>
 
       <div class="nova-grid">
@@ -685,9 +700,37 @@
            style="margin-top:24px;margin-bottom:18px;">
       </div>
 
-<button class="nova-submit"
+<div class="nova-legal-panel" id="binding-legal-panel" aria-busy="true">
+        <h3>Verbindliche Vertragsunterlagen (Deutsch)</h3>
+        <p>Die öffentlichen Seiten zu <a href="/de/agb/" target="_blank" rel="noopener">AGB</a>, <a href="/de/datenschutz/" target="_blank" rel="noopener">Datenschutz</a>, <a href="/de/avv/" target="_blank" rel="noopener">AVV/TOM</a> und <a href="/de/datenverarbeitung-ki/" target="_blank" rel="noopener">KI-Datenwegen</a> dienen der Vorabinformation. Für die Bestellung werden die unten vom NOVA-System geladenen, versionierten Dokumente gebunden.</p>
+        <p class="nova-legal-status" id="legal-release-status" role="status">Vertragsunterlagen werden sicher geladen …</p>
+        <p id="binding-acceptance-text"></p>
+        <div id="binding-documents"></div>
+      </div>
+
+      <label class="nova-option" style="margin-top:18px;align-items:flex-start">
+        <input type="checkbox" id="b2b-confirmed" name="b2bConfirmed" value="yes" required disabled style="margin-top:4px">
+        <span>Ich bestelle NOVA ausschließlich als Unternehmer. *</span>
+      </label>
+      <label class="nova-option" style="margin-top:12px;align-items:flex-start">
+        <input type="checkbox" id="authority-confirmed" name="representativeAuthorityConfirmed" value="yes" required disabled style="margin-top:4px">
+        <span>Ich bin zum Vertragsschluss für das bezeichnete Unternehmen berechtigt. *</span>
+      </label>
+      <label class="nova-option" style="margin-top:12px;align-items:flex-start">
+        <input type="checkbox" id="documents-accepted" name="contractDocumentsAccepted" value="yes" required disabled style="margin-top:4px">
+        <span>Ich habe den angezeigten SaaS-Auftrag einschließlich AGB, Leistungsbeschreibung, Paket- und Funktionsmatrix, Preis- und Abrechnungsanlage, AVV, TOM sowie Unterauftragsverarbeiter-Anlage in den ausgewiesenen Versionen gelesen und akzeptiere sie. Mir ist bekannt, dass das 95-%-Ziel erst nach dokumentierter Inbetriebnahme, Freigabe und Messung gilt und derzeit keine Ist-Quote oder Garantie ist. *</span>
+      </label>
+
+      <input type="hidden" id="checkout-attempt-id" name="checkoutAttemptId" value="">
+      <input type="hidden" id="legal-package-version" name="legalPackageVersion" value="">
+      <input type="hidden" id="legal-snapshot-sha256" name="legalSnapshotSha256" value="">
+      <input type="hidden" id="acceptance-text-version" name="acceptanceTextVersion" value="">
+      <input type="hidden" id="accepted-by-name" name="acceptedByName" value="">
+
+      <button class="nova-submit"
               type="submit"
-              id="submit-button">
+              id="submit-button"
+              disabled>
         Jetzt sicher buchen →
       </button>
 
@@ -703,6 +746,160 @@
 
 </main>
 
+
+<script>
+(() => {
+  'use strict';
+
+  const endpoint =
+    'https://app.leolan.net/api/integrations/nova/legal/current';
+  const requiredDocumentKeys = [
+    'saasOrder',
+    'terms',
+    'featureMatrix',
+    'serviceDescription',
+    'pricing',
+    'dpa',
+    'tom',
+    'subprocessors'
+  ];
+  const legalCheckboxIds = [
+    'b2b-confirmed',
+    'authority-confirmed',
+    'documents-accepted'
+  ];
+  const button = document.getElementById('submit-button');
+  const status = document.getElementById('legal-release-status');
+  const panel = document.getElementById('binding-legal-panel');
+
+  window.novaLegalSnapshotReady = false;
+
+  function uuidV4() {
+    if (window.crypto?.randomUUID) {
+      return window.crypto.randomUUID();
+    }
+    const bytes = new Uint8Array(16);
+    window.crypto.getRandomValues(bytes);
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    const hex = Array.from(bytes, value =>
+      value.toString(16).padStart(2, '0')
+    ).join('');
+    return [
+      hex.slice(0, 8),
+      hex.slice(8, 12),
+      hex.slice(12, 16),
+      hex.slice(16, 20),
+      hex.slice(20)
+    ].join('-');
+  }
+
+  function syncButton() {
+    const allChecked = legalCheckboxIds.every(id =>
+      document.getElementById(id)?.checked === true
+    );
+    if (button) {
+      button.disabled =
+        !window.novaLegalSnapshotReady || !allChecked;
+    }
+  }
+
+  function failClosed() {
+    window.novaLegalSnapshotReady = false;
+    legalCheckboxIds.forEach(id => {
+      const checkbox = document.getElementById(id);
+      if (checkbox) {
+        checkbox.checked = false;
+        checkbox.disabled = true;
+      }
+    });
+    if (status) {
+      status.className = 'nova-legal-status error';
+      status.textContent =
+        'Die verbindlichen Vertragsunterlagen sind derzeit noch nicht für den Online-Abschluss freigegeben. Die Online-Buchung bleibt deshalb gesperrt. Bitte kontaktieren Sie business@leolan.net.';
+    }
+    if (panel) panel.setAttribute('aria-busy', 'false');
+    syncButton();
+  }
+
+  async function loadLegalSnapshot() {
+    try {
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        credentials: 'omit',
+        cache: 'no-store'
+      });
+      if (!response.ok) throw new Error('legal package unavailable');
+      const snapshot = await response.json();
+      const keys = Array.isArray(snapshot.documents)
+        ? snapshot.documents.map(document => document?.key)
+        : [];
+      const valid =
+        /^NOVA-LEGAL-[A-Z0-9_-]+$/.test(
+          snapshot.legalPackageVersion || ''
+        ) &&
+        /^[a-f0-9]{64}$/.test(
+          snapshot.legalSnapshotSha256 || ''
+        ) &&
+        /^NOVA-CHECKOUT-ACCEPTANCE-DE-[A-Z0-9_-]+$/.test(
+          snapshot.acceptanceTextVersion || ''
+        ) &&
+        typeof snapshot.acceptanceText === 'string' &&
+        snapshot.acceptanceText.length > 20 &&
+        requiredDocumentKeys.length === keys.length &&
+        requiredDocumentKeys.every(key => keys.includes(key));
+      if (!valid) throw new Error('legal package invalid');
+
+      document.getElementById('legal-package-version').value =
+        snapshot.legalPackageVersion;
+      document.getElementById('legal-snapshot-sha256').value =
+        snapshot.legalSnapshotSha256;
+      document.getElementById('acceptance-text-version').value =
+        snapshot.acceptanceTextVersion;
+      document.getElementById('checkout-attempt-id').value = uuidV4();
+      document.getElementById('binding-acceptance-text').textContent =
+        snapshot.acceptanceText;
+
+      const documentList = document.getElementById('binding-documents');
+      documentList.replaceChildren();
+      snapshot.documents.forEach(legalDocument => {
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        const body = document.createElement('pre');
+        summary.textContent =
+          legalDocument.id + ' · ' + legalDocument.version;
+        body.textContent = legalDocument.text;
+        details.append(summary, body);
+        documentList.appendChild(details);
+      });
+
+      legalCheckboxIds.forEach(id => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) checkbox.disabled = false;
+      });
+      window.novaLegalSnapshotReady = true;
+      status.className = 'nova-legal-status';
+      status.textContent =
+        'Die verbindlichen, versionierten Vertragsunterlagen sind vollständig geladen. Öffnen Sie die Dokumente und bestätigen Sie anschließend alle drei Punkte.';
+      panel.setAttribute('aria-busy', 'false');
+      syncButton();
+    }
+    catch (error) {
+      failClosed();
+    }
+  }
+
+  legalCheckboxIds.forEach(id =>
+    document.getElementById(id)?.addEventListener(
+      'change',
+      syncButton
+    )
+  );
+
+  loadLegalSnapshot();
+})();
+</script>
 
 <script>
 (() => {
@@ -742,13 +939,12 @@
       back: '← Zurück',
       title: 'NOVA für Ihr Hotel.',
       intro:
-        'Wählen Sie Ihr NOVA-Paket. '
-        + 'Die konkrete Konfiguration und die Konditionen '
-        + 'stimmen wir individuell auf Ihr Hotel ab.',
+        'Wählen Sie das kostenpflichtige NOVA-Paket und den Abrechnungszeitraum. '
+        + 'Die angezeigten Konditionen werden nach Ihrer Vertragsbestätigung sicher über Stripe bestellt.',
       packageTitle:
         'NOVA-Paket auswählen',
       packageCopy:
-        'Wählen Sie den Umfang, über den Sie mit uns sprechen möchten.',
+        'Wählen Sie das Paket, das Sie kostenpflichtig bestellen möchten.',
       recommended:
         'EMPFOHLEN',
       core:
@@ -763,15 +959,13 @@
       selected:
         'Ausgewählt:',
       dpTitle:
-        'Dynamic Pricing hinzufügen',
+        'Dynamic Pricing kostenpflichtig hinzufügen',
       dpCopy:
-        'Dynamic Pricing soll bei der individuellen '
-        + 'NOVA-Konfiguration berücksichtigt werden.',
+        'Für Core oder Pro: 249 € pro Monat oder 2.690 € pro Jahr zusätzlich. In Intelligence bereits enthalten.',
       contactTitle:
         'Ihr Hotel',
       contactCopy:
-        'Senden Sie uns die wichtigsten Angaben. '
-        + 'Wir melden uns mit einem individuellen Angebot.',
+        'Geben Sie die Daten für Ihre verbindliche kostenpflichtige Bestellung ein.',
       name:
         'Name *',
       email:
@@ -803,12 +997,12 @@
       back: '← Back',
       title: 'NOVA for your hotel.',
       intro:
-        'Choose the NOVA scope that fits your hotel. '
-        + 'Configuration and commercial terms are agreed individually.',
+        'Choose the paid NOVA package and billing period. '
+        + 'After you accept the contract documents, the displayed order is placed securely through Stripe.',
       packageTitle:
         'Choose a NOVA package',
       packageCopy:
-        'Select the scope you would like to discuss with us.',
+        'Select the paid package you want to order.',
       recommended:
         'RECOMMENDED',
       core:
@@ -823,15 +1017,13 @@
       selected:
         'Selected:',
       dpTitle:
-        'Interested in Dynamic Pricing',
+        'Add Dynamic Pricing for a fee',
       dpCopy:
-        'Include Dynamic Pricing when planning '
-        + 'your individual NOVA configuration.',
+        'For Core or Pro: add €249 per month or €2,690 per year. Included with Intelligence.',
       contactTitle:
         'Your hotel',
       contactCopy:
-        'Send us the key details and we will '
-        + 'prepare an individual proposal.',
+        'Enter the details for your binding paid order.',
       name:
         'Name *',
       email:
@@ -847,10 +1039,9 @@
       message:
         'What would you like to solve with NOVA?',
       submit:
-        'Request an individual proposal →',
+        'Continue securely to Stripe Checkout →',
       note:
-        'There is no online payment on this page. '
-        + 'Your request opens your email application.',
+        'You will be redirected securely to Stripe Checkout. No VAT is charged under section 19 UStG.',
       subject:
         'NOVA enquiry',
       yes:
@@ -863,12 +1054,12 @@
       back: '← Geri',
       title: 'Oteliniz için NOVA.',
       intro:
-        'Otelinize uygun NOVA kapsamını seçin. '
-        + 'Yapılandırma ve ticari koşullar size özel belirlenir.',
+        'Ücretli NOVA paketini ve fatura dönemini seçin. '
+        + 'Sözleşme belgelerini kabul ettikten sonra gösterilen sipariş Stripe üzerinden güvenle verilir.',
       packageTitle:
         'NOVA paketini seçin',
       packageCopy:
-        'Bizimle görüşmek istediğiniz kapsamı seçin.',
+        'Ücretli olarak sipariş etmek istediğiniz paketi seçin.',
       recommended:
         'ÖNERİLEN',
       core:
@@ -883,15 +1074,13 @@
       selected:
         'Seçildi:',
       dpTitle:
-        'Dynamic Pricing ile ilgileniyorum',
+        'Dynamic Pricing ücretli ekle',
       dpCopy:
-        'Dynamic Pricing bireysel NOVA '
-        + 'yapılandırmasında değerlendirilsin.',
+        'Core veya Pro için aylık 249 € ya da yıllık 2.690 € ek ücret. Intelligence paketine dahildir.',
       contactTitle:
         'Oteliniz',
       contactCopy:
-        'Temel bilgileri gönderin. '
-        + 'Size özel bir teklif hazırlayalım.',
+        'Bağlayıcı ücretli siparişiniz için bilgileri girin.',
       name:
         'Adınız *',
       email:
@@ -907,10 +1096,9 @@
       message:
         'NOVA ile neyi çözmek istiyorsunuz?',
       submit:
-        'Özel teklif isteyin →',
+        'Stripe Checkout ile güvenli devam edin →',
       note:
-        'Bu sayfada çevrimiçi ödeme yoktur. '
-        + 'Talebiniz e-posta uygulamanızı açar.',
+        'Stripe Checkout sayfasına güvenli biçimde yönlendirileceksiniz. § 19 UStG uyarınca KDV hesaplanmaz.',
       subject:
         'NOVA teklif talebi',
       yes:
@@ -923,13 +1111,12 @@
       back: '← Назад',
       title: 'NOVA для вашего отеля.',
       intro:
-        'Выберите подходящий формат NOVA. '
-        + 'Конфигурация и коммерческие условия '
-        + 'определяются индивидуально.',
+        'Выберите платный пакет NOVA и расчетный период. '
+        + 'После принятия договорных документов показанный заказ безопасно оформляется через Stripe.',
       packageTitle:
         'Выберите пакет NOVA',
       packageCopy:
-        'Выберите вариант, который хотите обсудить с нами.',
+        'Выберите платный пакет, который хотите заказать.',
       recommended:
         'РЕКОМЕНДУЕМ',
       core:
@@ -944,15 +1131,13 @@
       selected:
         'Выбрано:',
       dpTitle:
-        'Интересует Dynamic Pricing',
+        'Добавить Dynamic Pricing за плату',
       dpCopy:
-        'Учесть Dynamic Pricing при планировании '
-        + 'индивидуальной конфигурации NOVA.',
+        'Для Core или Pro: дополнительно 249 € в месяц или 2 690 € в год. В Intelligence уже включено.',
       contactTitle:
         'Ваш отель',
       contactCopy:
-        'Отправьте основные данные, и мы подготовим '
-        + 'индивидуальное предложение.',
+        'Введите данные для обязательного платного заказа.',
       name:
         'Имя *',
       email:
@@ -968,10 +1153,9 @@
       message:
         'Какие задачи вы хотите решить с NOVA?',
       submit:
-        'Запросить индивидуальное предложение →',
+        'Безопасно перейти к Stripe Checkout →',
       note:
-        'Онлайн-оплаты на этой странице нет. '
-        + 'Запрос откроет вашу почтовую программу.',
+        'Вы будете безопасно перенаправлены в Stripe Checkout. НДС не начисляется по § 19 UStG.',
       subject:
         'Запрос NOVA',
       yes:
@@ -984,12 +1168,12 @@
       back: '← Kembali',
       title: 'NOVA untuk hotel Anda.',
       intro:
-        'Pilih cakupan NOVA yang sesuai untuk hotel Anda. '
-        + 'Konfigurasi dan ketentuan komersial disusun secara individual.',
+        'Pilih paket NOVA berbayar dan periode penagihan. '
+        + 'Setelah Anda menerima dokumen kontrak, pesanan yang ditampilkan dibuat dengan aman melalui Stripe.',
       packageTitle:
         'Pilih paket NOVA',
       packageCopy:
-        'Pilih cakupan yang ingin Anda diskusikan bersama kami.',
+        'Pilih paket berbayar yang ingin Anda pesan.',
       recommended:
         'DIREKOMENDASIKAN',
       core:
@@ -1004,15 +1188,13 @@
       selected:
         'Dipilih:',
       dpTitle:
-        'Tertarik dengan Dynamic Pricing',
+        'Tambahkan Dynamic Pricing berbayar',
       dpCopy:
-        'Pertimbangkan Dynamic Pricing dalam '
-        + 'konfigurasi NOVA individual.',
+        'Untuk Core atau Pro: tambahan €249 per bulan atau €2.690 per tahun. Sudah termasuk dalam Intelligence.',
       contactTitle:
         'Hotel Anda',
       contactCopy:
-        'Kirim detail utama dan kami akan menyiapkan '
-        + 'penawaran individual.',
+        'Masukkan detail untuk pesanan berbayar yang mengikat.',
       name:
         'Nama *',
       email:
@@ -1028,10 +1210,9 @@
       message:
         'Apa yang ingin Anda selesaikan dengan NOVA?',
       submit:
-        'Minta penawaran individual →',
+        'Lanjutkan dengan aman ke Stripe Checkout →',
       note:
-        'Tidak ada pembayaran online di halaman ini. '
-        + 'Permintaan akan membuka aplikasi email Anda.',
+        'Anda akan diarahkan dengan aman ke Stripe Checkout. Tidak ada PPN menurut § 19 UStG.',
       subject:
         'Permintaan NOVA',
       yes:
@@ -1044,12 +1225,12 @@
       back: '← กลับ',
       title: 'NOVA สำหรับโรงแรมของคุณ',
       intro:
-        'เลือกขอบเขต NOVA ที่เหมาะกับโรงแรมของคุณ '
-        + 'การตั้งค่าและเงื่อนไขทางการค้าจะกำหนดเป็นรายโรงแรม',
+        'เลือกแพ็กเกจ NOVA แบบชำระเงินและรอบเรียกเก็บเงิน '
+        + 'หลังจากยอมรับเอกสารสัญญา คำสั่งซื้อที่แสดงจะดำเนินการอย่างปลอดภัยผ่าน Stripe',
       packageTitle:
         'เลือกแพ็กเกจ NOVA',
       packageCopy:
-        'เลือกขอบเขตที่คุณต้องการพูดคุยกับเรา',
+        'เลือกแพ็กเกจแบบชำระเงินที่คุณต้องการสั่งซื้อ',
       recommended:
         'แนะนำ',
       core:
@@ -1064,15 +1245,13 @@
       selected:
         'เลือก:',
       dpTitle:
-        'สนใจ Dynamic Pricing',
+        'เพิ่ม Dynamic Pricing แบบมีค่าใช้จ่าย',
       dpCopy:
-        'พิจารณา Dynamic Pricing '
-        + 'ในการวางแผน NOVA สำหรับโรงแรมของคุณ',
+        'สำหรับ Core หรือ Pro: เพิ่ม 249 ยูโรต่อเดือน หรือ 2,690 ยูโรต่อปี และรวมอยู่แล้วใน Intelligence',
       contactTitle:
         'โรงแรมของคุณ',
       contactCopy:
-        'ส่งข้อมูลสำคัญให้เรา '
-        + 'แล้วเราจะจัดทำข้อเสนอเฉพาะสำหรับคุณ',
+        'กรอกข้อมูลสำหรับคำสั่งซื้อแบบชำระเงินที่มีผลผูกพัน',
       name:
         'ชื่อ *',
       email:
@@ -1088,10 +1267,9 @@
       message:
         'คุณต้องการแก้ปัญหาอะไรด้วย NOVA?',
       submit:
-        'ขอข้อเสนอเฉพาะ →',
+        'ไปยัง Stripe Checkout อย่างปลอดภัย →',
       note:
-        'หน้านี้ไม่มีการชำระเงินออนไลน์ '
-        + 'คำขอจะเปิดโปรแกรมอีเมลของคุณ',
+        'ระบบจะนำคุณไปยัง Stripe Checkout อย่างปลอดภัย และไม่มีการเรียกเก็บ VAT ตาม § 19 UStG',
       subject:
         'คำขอ NOVA',
       yes:
@@ -1228,6 +1406,18 @@
   );
 
 
+
+  const legalCopy = {
+    de: 'Ich habe die <a href="/de/agb/" target="_blank" rel="noopener">AGB</a> und die <a href="/de/datenschutz/" target="_blank" rel="noopener">Datenschutzhinweise</a> gelesen und nehme die <a href="/de/avv/" target="_blank" rel="noopener">vorvertraglichen Informationen zu AVV, TOM, Unterauftragsverarbeitern und KI-Datenwegen</a> zur Kenntnis. Das 95-%-Ziel gilt erst nach dokumentierter Inbetriebnahme und Messung und ist derzeit keine Garantie. *',
+    en: 'I have read the <a href="/en/agb/" target="_blank" rel="noopener">Terms</a> and <a href="/en/datenschutz/" target="_blank" rel="noopener">Privacy Notice</a> and acknowledge the <a href="/en/avv/" target="_blank" rel="noopener">pre-contract information about the DPA, security measures, subprocessors and AI data paths</a>. The 95% target applies only after documented commissioning and measurement and is currently not a guarantee. *',
+    tr: '<a href="/tr/agb/" target="_blank" rel="noopener">Koşulları</a> ve <a href="/tr/datenschutz/" target="_blank" rel="noopener">gizlilik bildirimini</a> okudum; DPA, güvenlik, alt işleyenler ve AI veri yollarına ilişkin <a href="/en/avv/" target="_blank" rel="noopener">sözleşme öncesi bilgiyi (EN)</a> kabul ediyorum. %95 hedefi ancak belgeli devreye alma ve ölçümden sonra geçerlidir ve şu anda garanti değildir. *',
+    ru: 'Я прочитал(а) <a href="/ru/agb/" target="_blank" rel="noopener">условия</a> и <a href="/ru/datenschutz/" target="_blank" rel="noopener">уведомление о конфиденциальности</a> и ознакомился(-ась) с <a href="/en/avv/" target="_blank" rel="noopener">преддоговорной информацией (EN)</a> об обработке и ИИ. Цель 95% действует только после документированного ввода и измерения и сейчас не является гарантией. *',
+    id: 'Saya telah membaca <a href="/id/agb/" target="_blank" rel="noopener">Ketentuan</a> dan <a href="/id/datenschutz/" target="_blank" rel="noopener">Pemberitahuan Privasi</a> serta memahami <a href="/en/avv/" target="_blank" rel="noopener">informasi prakontrak (EN)</a> tentang pemrosesan dan AI. Target 95% baru berlaku setelah instalasi dan pengukuran terdokumentasi dan saat ini bukan jaminan. *',
+    th: 'ฉันได้อ่าน <a href="/th/agb/" target="_blank" rel="noopener">ข้อกำหนด</a> และ <a href="/th/datenschutz/" target="_blank" rel="noopener">ประกาศความเป็นส่วนตัว</a> และรับทราบ <a href="/en/avv/" target="_blank" rel="noopener">ข้อมูลก่อนทำสัญญา (EN)</a> เกี่ยวกับการประมวลผลและ AI เป้าหมาย 95% จะใช้หลังการติดตั้งและวัดผลที่บันทึกไว้เท่านั้น และปัจจุบันไม่ใช่การรับประกัน *'
+  };
+  const legalAcceptanceCopy = document.getElementById('legal-acceptance-copy');
+  if (legalAcceptanceCopy) legalAcceptanceCopy.innerHTML = legalCopy[lang] || legalCopy.de;
+
   const packages = [
     'core',
     'pro',
@@ -1304,7 +1494,28 @@
     )
     .addEventListener(
       'submit',
-      () => {
+      event => {
+        const legalCheckboxes = [
+          document.getElementById('b2b-confirmed'),
+          document.getElementById('authority-confirmed'),
+          document.getElementById('documents-accepted')
+        ];
+        const firstUnchecked = legalCheckboxes.find(
+          checkbox => !checkbox || !checkbox.checked
+        );
+        if (!window.novaLegalSnapshotReady || firstUnchecked) {
+          event.preventDefault();
+          if (firstUnchecked) firstUnchecked.focus();
+          return;
+        }
+
+        document.getElementById('accepted-by-name').value =
+          document.getElementById('name').value.trim();
+        document.getElementById('checkout-dynamic').value =
+          document.getElementById('dynamic-pricing').checked
+            ? 'true'
+            : 'false';
+
         const packageInput =
           document.getElementById(
             'selected-package-input'
@@ -1456,7 +1667,7 @@
     else if (dynamicSelected) {
       dynamicText =
         '<br>+ Dynamic Pricing: <strong>'
-        + formatEuro(dynamicAmount)
+        + formatEuro(addon)
         + ' / '
         + period
         + '</strong>';
@@ -1497,7 +1708,7 @@
       else if (dynamicSelected) {
         dynamicLine =
           '<div>Dynamic Pricing: <strong>'
-          + formatEuro(dynamicAmount)
+          + formatEuro(addon)
           + ' / '
           + period
           + '</strong></div>';

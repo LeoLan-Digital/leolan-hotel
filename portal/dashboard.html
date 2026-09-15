@@ -177,7 +177,6 @@
 
 <script>
   const DASHBOARD_URL = 'https://n8n.leolan.net/webhook/hotel-dashboard';
-  const ADMIN_KEY = 'LeoLan2026Admin!';
 
   const token = sessionStorage.getItem('token');
   const customerCode = sessionStorage.getItem('customerCode');
@@ -224,7 +223,7 @@
     const res = await fetch(DASHBOARD_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(Object.assign({ adminKey: ADMIN_KEY, action, customerCode, token }, extra || {}))
+      body: JSON.stringify(Object.assign({ action, customerCode, token }, extra || {}))
     });
     return res.json().catch(function(){ return {}; });
   }
